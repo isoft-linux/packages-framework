@@ -1,0 +1,24 @@
+From e8ee3b18d16e41b95148111b920a0c8beed3ac6c Mon Sep 17 00:00:00 2001
+From: Rex Dieter <rdieter@math.unl.edu>
+Date: Mon, 19 Jan 2015 05:37:34 -0600
+Subject: [PATCH 7/7] Add changelog for prior commit
+
+---
+ ChangeLog | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 627df21..9a01f82 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -2,6 +2,7 @@
+ 
+ 2015-01-19 Rex Dieter <rdieter@fedoraproject.org>
+    * xdg-open: better fix for command injection vulnerability (BR66670)
++   * xdg-open is extremely slow because get_key executes grep unnecessarily (BR88524)
+ 
+ 2015-01-15 Reuben Thomas <rrt@sc3d.org>
+    * xdg-mime: dereference symlinks when using mimetype or file (BR39923)
+-- 
+2.1.0
+

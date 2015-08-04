@@ -1,0 +1,45 @@
+--- src/cups-pdf.c.title	2013-03-19 13:51:28.699512894 +0100
++++ src/cups-pdf.c	2013-03-19 14:07:42.969010854 +0100
+@@ -426,12 +426,14 @@
+ 
+ static int preparetitle(char *title) {
+   char *cut;
+-  
+-  if (title != NULL) {
++
++  cut=strchr(title, '\r');
++  if (!cut)
++    cut=strchr(title, '\n');
++  if (cut) {
++    *cut = 0;
+     log_event(CPDEBUG, "removing trailing newlines from title", title);
+-    while (strlen(title) && ((title[strlen(title)-1] == '\n') || (title[strlen(title)-1] == '\r')))
+-      title[strlen(title)-1]='\0';
+-  }
++  }  
+   if (conf.decodehexstrings) {
+     log_event(CPSTATUS, "***Experimental Option: DecodeHexStrings", NULL);
+     log_event(CPDEBUG, "checking for hex strings", title);
+@@ -538,6 +542,7 @@
+   while (fgets2(buffer, BUFSIZE, fpsrc) != NULL) {
+     (void) fputs(buffer, fpdest);
+     if (!is_title && !rec_depth)
++      memset(title, 0, BUFSIZE);
+       if (sscanf(buffer, "%%%%Title: %"TBUFSIZE"c", title)==1) {
+         log_event(CPDEBUG, "found title in ps code", title);
+         is_title=1;
+@@ -883,12 +888,12 @@
+   free(groups);
+   free(dirname);
+   free(spoolfile);
+-  free(outfile);
+   free(gscall);
+   
+   log_event(CPDEBUG, "all memory has been freed", NULL);
+ 
+-  log_event(CPSTATUS, "PDF creation successfully finished", passwd->pw_name);
++  log_event(CPSTATUS, "PDF creation successfully finished", outfile);
++  free(outfile);
+ 
+   if (logfp!=NULL)
+     (void) fclose(logfp);

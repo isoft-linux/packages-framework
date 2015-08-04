@@ -1,0 +1,21 @@
+diff -Nur gsettings-desktop-schemas-3.13.1/schemas/org.gnome.desktop.wm.preferences.gschema.xml.in.in gsettings-desktop-schemas-3.13.1n/schemas/org.gnome.desktop.wm.preferences.gschema.xml.in.in
+--- gsettings-desktop-schemas-3.13.1/schemas/org.gnome.desktop.wm.preferences.gschema.xml.in.in	2013-08-12 22:41:25.000000000 +0800
++++ gsettings-desktop-schemas-3.13.1n/schemas/org.gnome.desktop.wm.preferences.gschema.xml.in.in	2014-05-16 15:07:45.632838787 +0800
+@@ -196,7 +196,7 @@
+       </_description>
+     </key>
+     <key name="titlebar-uses-system-font" type="b">
+-      <default>false</default>
++      <default>true</default>
+       <_summary>Use standard system font in window titles</_summary>
+       <_description>
+         If true, ignore the titlebar-font option, and use the standard
+@@ -204,7 +204,7 @@
+       </_description>
+     </key>
+     <key name="titlebar-font" type="s">
+-      <default>'Cantarell Bold 11'</default>
++      <default>'Cantarell Bold 10'</default>
+       <_summary>Window title font</_summary>
+       <_description>
+         A font description string describing a font for window titlebars.

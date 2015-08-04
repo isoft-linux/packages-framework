@@ -1,0 +1,29 @@
+From 703cfbc64e6d88f14ce84ba92384757e00f8693b Mon Sep 17 00:00:00 2001
+From: Peter Lemenkov <lemenkov@gmail.com>
+Date: Tue, 3 Sep 2013 16:26:20 +0400
+Subject: [PATCH 2/2] Hide flex-related symbols
+
+These symbols should be mangled or hidden, to avoid collisions with other DSOs
+and application programs. See this issue for further details:
+
+https://bugzilla.redhat.com/882178
+
+Signed-off-by: Peter Lemenkov <lemenkov@gmail.com>
+---
+ src/libcue/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/libcue/Makefile.am b/src/libcue/Makefile.am
+index 801a090..c69f2f5 100644
+--- a/src/libcue/Makefile.am
++++ b/src/libcue/Makefile.am
+@@ -27,5 +27,5 @@ libcueinclude_HEADERS	= 				\
+ 
+ lib_LTLIBRARIES		= libcue.la
+ 
+-libcue_la_LDFLAGS	= -version-info @LIBCUE_LIBTOOL_VERSION@
++libcue_la_LDFLAGS	= -version-info @LIBCUE_LIBTOOL_VERSION@ -export-symbols-regex '^([^y]|y[^y])'
+ libcueincludedir	= $(includedir)/@LIBCUE_LIBRARY_NAME@-@LIBCUE_API_VERSION@/@LIBCUE_LIBRARY_NAME@
+-- 
+1.8.3.1
+

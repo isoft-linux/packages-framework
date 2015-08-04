@@ -1,0 +1,48 @@
+From: Tero Marttila <terom@fixme.fi>
+Subject: Fix off-by-one error that makes procmail to segfault on certain .procmailrc files
+
+--- a/src/cstdio.c
++++ b/src/cstdio.c
+@@ -144,7 +144,7 @@
+       { case '\n':case EOF:*q='\0';
+ 	   return overflow?-1:p!=q;	     /* did we read anything at all? */
+       }
+-     if(q==end)	    /* check here so that a trailing backslash won't be lost */
++     if(q>=end)	    /* check here so that a trailing backslash won't be lost */
+ 	q=p,overflow=1;
+      *q++=i;
+    }
+@@ -199,7 +199,7 @@
+ 	   if(*(target=strchr(target,'\0')-1)=='\\')
+ 	    { if(chp2!=target)				  /* non-empty line? */
+ 		 target++;		      /* then preserve the backslash */
+-	      if(target>end-2)			  /* space enough for getbl? */
++	      if(target>=end-2)			  /* space enough for getbl? */
+ 		 target=end-linebuf,overflow=1;		/* toss what we have */
+ 	      continue;
+ 	    }
+From: Jan Darmochwal <jdarmochwal@gmx.de>
+Subject: formail memory corruption fixes
+
+--- a/src/formail.c
++++ b/src/formail.c
+@@ -219,7 +219,7 @@
+   if(i>=0&&(i!=maxindex(sest)||fldp==rdheader))		  /* found anything? */
+    { char*saddr;char*tmp;			     /* determine the weight */
+      nowm=areply&&headreply?headreply==1?sest[i].wrepl:sest[i].wrrepl:i;chp+=j;
+-     tmp=malloc(j=fldp->Tot_len-j);tmemmove(tmp,chp,j);(chp=tmp)[j-1]='\0';
++     tmp=malloc((j=fldp->Tot_len-j) + 1);tmemmove(tmp,chp,j);(chp=tmp)[j-1]='\0';
+      if(sest[i].head==From_)
+       { char*pastad;
+ 	if(strchr(saddr=chp,'\n'))		     /* multiple From_ lines */
+--- a/src/formisc.c
++++ b/src/formisc.c
+@@ -66,7 +66,7 @@
+ retz:	      *target='\0';
+ ret:	      return start;
+ 	    }
+-	   if(*start=='\\')
++	   if(*start=='\\' && *(start + 1))
+ 	      *target++='\\',start++;
+ 	   hitspc=2;
+ 	   goto normal;					      /* normal word */

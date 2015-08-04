@@ -1,0 +1,20 @@
+--- libglade-2.6.2/glade/glade-gtk.c.orig	2008-05-27 11:22:35.000000000 -0400
++++ libglade-2.6.2/glade/glade-gtk.c	2008-05-27 11:35:58.000000000 -0400
+@@ -919,7 +919,17 @@
+ 	    else
+ 		gtk_toolbar_append_widget (GTK_TOOLBAR (parent), child, NULL, NULL);
+ 	}
++
++	int j;
++	for (j = 0; j < childinfo->n_properties; j++) {
++	    if (! strcmp (childinfo->properties[j].name, "expand")) {
++		    gtk_tool_item_set_expand (child, BOOL (childinfo->properties[j].value));
++   	    } else if (! strcmp (childinfo->properties[j].name, "homogeneous")) {
++		    gtk_tool_item_set_homogeneous (child, BOOL (childinfo->properties[j].value));
++	    }
++	}
+     }
++    g_object_unref (G_OBJECT (parent));
+ }
+ 
+ static void

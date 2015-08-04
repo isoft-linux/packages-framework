@@ -1,0 +1,47 @@
+From ffa6e473fc95d1980b230195fecdafcd7193dca7 Mon Sep 17 00:00:00 2001
+From: Rex Dieter <rdieter@math.unl.edu>
+Date: Thu, 15 Jan 2015 09:16:38 -0600
+Subject: [PATCH 3/5] xdg-mime: dereference symlinks when using mimetype or
+ file (BR39923)
+
+---
+ ChangeLog           | 3 +++
+ scripts/xdg-mime.in | 8 ++++----
+ 2 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index e309517..3c7b095 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,8 @@
+ === xdg-utils 1.1.x ===
+ 
++2015-01-15 Reuben Thomas <rrt@sc3d.org>
++   * xdg-mime: dereference symlinks when using mimetype or file (BR39923)
++
+ 2015-01-05 Rex Dieter <rdieter@fedoraproject.org>
+    * xdg-open: command injection vulnerability (BR66670)
+ 
+diff --git a/scripts/xdg-mime.in b/scripts/xdg-mime.in
+index 0290d77..80781c8 100644
+--- a/scripts/xdg-mime.in
++++ b/scripts/xdg-mime.in
+@@ -98,11 +98,11 @@ info_gnome()
+ info_generic()
+ {
+     if mimetype --version >/dev/null 2>&1; then
+-        DEBUG 1 "Running mimetype -b \"$1\""
+-        mimetype -b "$1"
++        DEBUG 1 "Running mimetype --brief --dereference \"$1\""
++        mimetype --brief --dereference "$1"
+     else
+-        DEBUG 1 "Running file --mime-type \"$1\""
+-        /usr/bin/file -b --mime-type "$1" 2> /dev/null
++        DEBUG 1 "Running file --brief --dereference --mime-type \"$1\""
++        /usr/bin/file --brief --dereference --mime-type "$1" 2> /dev/null
+     fi
+ 
+     if [ $? -eq 0 ]; then
+-- 
+2.1.0
+

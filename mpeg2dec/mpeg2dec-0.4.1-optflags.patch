@@ -1,0 +1,26 @@
+--- configure.in.orig	2006-02-15 15:43:34.000000000 +0100
++++ configure.in	2006-09-25 22:14:43.723947370 +0200
+@@ -51,22 +51,11 @@
+ 	AC_TRY_CFLAGS([$TRY_CFLAGS $CFLAGS],[OPT_CFLAGS="$TRY_CFLAGS"])
+     fi
+ 
+-    dnl -fno-common
+-    TRY_CFLAGS="$OPT_CFLAGS -fno-common"
+-    AC_TRY_CFLAGS([$TRY_CFLAGS $CFLAGS],[OPT_CFLAGS="$TRY_CFLAGS"])
+-
+     dnl arch-specific flags
+     case "$host" in
+     i?86-* | k?-* | x86_64-* | amd64-*)
+ 	AC_DEFINE([ARCH_X86],,[x86 architecture])
+-	case "$host" in
+-	i386-*) TRY_CFLAGS="$OPT_CFLAGS -mcpu=i386";;
+-	i486-*) TRY_CFLAGS="$OPT_CFLAGS -mcpu=i486";;
+-	i586-*) TRY_CFLAGS="$OPT_CFLAGS -mcpu=pentium";;
+-	i686-*) TRY_CFLAGS="$OPT_CFLAGS -mcpu=pentiumpro";;
+-	k6-*)   TRY_CFLAGS="$OPT_CFLAGS -mcpu=k6";;
+-	esac
+-	AC_TRY_CFLAGS([$TRY_CFLAGS $CFLAGS],[OPT_CFLAGS="$TRY_CFLAGS"]);;
++	;;
+     ppc-* | powerpc-*)
+ 	have_altivec=no
+ 	for TRY_CFLAGS in "-mpim-altivec -force_cpusubtype_ALL" -faltivec -maltivec -fvec; do

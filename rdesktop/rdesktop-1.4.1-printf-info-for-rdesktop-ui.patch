@@ -1,0 +1,11 @@
+--- rdesktop-1.4.1/tcp.c	2005-03-31 18:49:59.000000000 +0800
++++ rdesktop-1.4.1-new/tcp.c	2005-08-25 09:44:51.369160920 +0800
+@@ -207,6 +207,8 @@
+ 		return False;
+ 	}
+ 
++	fprintf(stderr, "i am connected\n");
++	fflush(NULL);
+ #endif /* IPv6 */
+ 
+ 	setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (void *) &true_value, sizeof(true_value));

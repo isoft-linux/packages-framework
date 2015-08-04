@@ -1,0 +1,48 @@
+From 8e9fa9bcc85fd31d4548870aad27c0593f64c433 Mon Sep 17 00:00:00 2001
+From: Rex Dieter <rdieter@math.unl.edu>
+Date: Thu, 15 Jan 2015 10:09:43 -0600
+Subject: [PATCH 4/5] xdg-screensaver: Change screensaver_freedesktop's
+ interpretation of GetActive (BR29859)
+
+---
+ ChangeLog                  | 1 +
+ scripts/xdg-screensaver.in | 8 ++++----
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 3c7b095..fa90e70 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -2,6 +2,7 @@
+ 
+ 2015-01-15 Reuben Thomas <rrt@sc3d.org>
+    * xdg-mime: dereference symlinks when using mimetype or file (BR39923)
++   * xdg-screensaver: Change screensaver_freedesktop's interpretation of GetActive (BR29859)
+ 
+ 2015-01-05 Rex Dieter <rdieter@fedoraproject.org>
+    * xdg-open: command injection vulnerability (BR66670)
+diff --git a/scripts/xdg-screensaver.in b/scripts/xdg-screensaver.in
+index d9cb4d2..579b80e 100644
+--- a/scripts/xdg-screensaver.in
++++ b/scripts/xdg-screensaver.in
+@@ -300,13 +300,13 @@ screensaver_freedesktop()
+                           org.freedesktop.ScreenSaver.GetActive \
+                           | grep boolean | cut -d ' ' -f 5`
+         result=$?
+-        if [ x"$status" = "xtrue" ]; then
++        if [ x"$status" = "xtrue" -o x"$status" = "xfalse" ]; then
+             echo "enabled"
+-        elif [ x"$status" = "xfalse" ]; then
+-            echo "disabled"
+-        else
++        elif [ x"$result" != "x0" ]; then
+             echo "ERROR: dbus org.freedesktop.ScreenSaver.GetActive returned '$status'" >&2
+             return 1
++        else
++            echo "disabled"
+         fi
+         ;;
+ 
+-- 
+2.1.0
+

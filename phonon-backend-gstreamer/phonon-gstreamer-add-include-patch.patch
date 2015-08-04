@@ -1,0 +1,11 @@
+diff -Nur phonon-gstreamer/gstreamer/CMakeLists.txt phonon-gstreamern/gstreamer/CMakeLists.txt
+--- phonon-gstreamer/gstreamer/CMakeLists.txt	2015-06-27 01:17:23.000000000 +0000
++++ phonon-gstreamern/gstreamer/CMakeLists.txt	2015-06-27 01:27:39.662081284 +0000
+@@ -16,6 +16,7 @@
+ include_directories(
+       ${CMAKE_CURRENT_BINARY_DIR}
+       ${GSTREAMER_INCLUDE_DIR}
++      "/usr/lib/gstreamer-1.0/include"
+       ${GSTREAMER_PLUGIN_VIDEO_INCLUDE_DIR}
+       ${GSTREAMER_PLUGIN_AUDIO_INCLUDE_DIR}
+       ${GSTREAMER_PLUGIN_PBUTILS_INCLUDE_DIR}

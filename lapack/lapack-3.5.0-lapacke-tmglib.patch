@@ -1,0 +1,36 @@
+diff -up lapack-3.5.0/lapacke/Makefile.tmglib lapack-3.5.0/lapacke/Makefile
+--- lapack-3.5.0/lapacke/Makefile.tmglib	2014-06-18 14:21:50.057725467 -0400
++++ lapack-3.5.0/lapacke/Makefile	2014-06-18 14:22:29.360436295 -0400
+@@ -50,7 +50,7 @@ lapacke:
+ 	cd utils && $(MAKE)
+ 
+ shlib: lapacke
+-	$(CC) $(CFLAGS) -shared -Wl,-soname,$(SHLIB_LAPACKE).@SHORTVER@ -o $(SHLIB_LAPACKE).@LONGVER@ src/*.o utils/*.o $(LIBS) -lgfortran -lc
++	$(CC) $(CFLAGS) -shared -Wl,-soname,$(SHLIB_LAPACKE).@SHORTVER@ -o $(SHLIB_LAPACKE).@LONGVER@ src/*.o utils/*.o $(LIBS) -lgfortran -lc ../TESTING/MATGEN/*.o
+ 
+ lapacke_example:
+ 	cd example && $(MAKE)
+diff -up lapack-3.5.0/lapacke/src/Makefile.tmglib lapack-3.5.0/lapacke/src/Makefile
+--- lapack-3.5.0/lapacke/src/Makefile.tmglib	2014-06-18 14:21:50.056725474 -0400
++++ lapack-3.5.0/lapacke/src/Makefile	2014-06-18 14:21:50.057725467 -0400
+@@ -2073,7 +2073,7 @@ OBJ_FILES := $(C_FILES:.o=.o)
+ all: ../../$(LAPACKELIB)
+ 
+ ../../$(LAPACKELIB): $(ALLOBJ) $(ALLXOBJ)
+-	$(ARCH) $(ARCHFLAGS) ../../$(LAPACKELIB) $(ALLOBJ) $(ALLXOBJ)
++	$(ARCH) $(ARCHFLAGS) ../../$(LAPACKELIB) $(ALLOBJ) $(ALLXOBJ) ../../TESTING/MATGEN/*.o
+ 	$(RANLIB) ../../$(LAPACKELIB)
+ 
+ .c.o:
+diff -up lapack-3.5.0/Makefile.tmglib lapack-3.5.0/Makefile
+--- lapack-3.5.0/Makefile.tmglib	2012-04-13 14:22:32.000000000 -0400
++++ lapack-3.5.0/Makefile	2014-06-18 14:21:50.058725460 -0400
+@@ -23,7 +23,7 @@ blaslib:
+ lapacklib:	lapack_install
+ 	( cd SRC; $(MAKE) )
+ 
+-lapackelib: lapacklib
++lapackelib: tmglib lapacklib
+ 	( cd lapacke; $(MAKE) )
+ 
+ lapacke_example: lapackelib

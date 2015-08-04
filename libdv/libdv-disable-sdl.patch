@@ -1,0 +1,17 @@
+diff -Nur libdv-1.0.0/configure.ac libdv-1.0.0n/configure.ac
+--- libdv-1.0.0/configure.ac	2014-10-14 12:27:26.502284324 +0000
++++ libdv-1.0.0n/configure.ac	2014-10-14 12:28:18.092285099 +0000
+@@ -173,13 +173,6 @@
+ AC_SUBST(GTK_CFLAGS)
+ AC_SUBST(GTK_LIBS)
+ 
+-if $use_sdl; then
+-	AM_PATH_SDL(1.1.6,
+-	[
+-		AC_DEFINE(HAVE_SDL) 
+- 	])
+-fi
+-
+ if [ $use_gtk && $use_xv ]; then
+ 	AC_CHECK_LIB(Xv, XvQueryAdaptors,
+ 		[AC_DEFINE(HAVE_LIBXV)

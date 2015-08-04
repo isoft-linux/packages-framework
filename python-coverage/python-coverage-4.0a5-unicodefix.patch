@@ -1,0 +1,9 @@
+diff -up coverage-4.0a5/coverage/annotate.py.orig coverage-4.0a5/coverage/annotate.py
+--- coverage-4.0a5/coverage/annotate.py.orig	2015-03-25 10:33:54.569942923 -0400
++++ coverage-4.0a5/coverage/annotate.py	2015-03-25 10:34:22.775668752 -0400
+@@ -89,4 +89,4 @@ class AnnotateReporter(Reporter):
+                     dest.write('> ')
+                 else:
+                     dest.write('! ')
+-                dest.write(line)
++                dest.write(line.encode('utf-8'))

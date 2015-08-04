@@ -1,0 +1,18 @@
+diff -Nur libaccounts-glib-1.16/libaccounts-glib/ag-manager.c libaccounts-glib-1.16n/libaccounts-glib/ag-manager.c
+--- libaccounts-glib-1.16/libaccounts-glib/ag-manager.c	2014-01-04 00:27:22.000000000 -0800
++++ libaccounts-glib-1.16n/libaccounts-glib/ag-manager.c	2014-10-23 12:29:36.855450943 -0800
+@@ -468,12 +468,12 @@
+         _ag_manager_take_error (manager, NULL);
+         return;
+     case SQLITE_BUSY:
+-        code = AG_ACCOUNTS_ERROR_DB_LOCKED;
++        code = (AgError)AG_ACCOUNTS_ERROR_DB_LOCKED;
+         if (priv->abort_on_db_timeout)
+             g_error ("Accounts DB timeout: causing application to abort.");
+         break;
+     default:
+-        code = AG_ACCOUNTS_ERROR_DB;
++        code = (AgError)AG_ACCOUNTS_ERROR_DB;
+         break;
+     }
+ 

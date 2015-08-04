@@ -1,0 +1,23 @@
+diff -Nur qt-x11-free-3.3.8/src/tools/qvaluelist.h qt-x11-free-3.3.8n/src/tools/qvaluelist.h
+--- qt-x11-free-3.3.8/src/tools/qvaluelist.h	2007-02-02 22:01:04.000000000 +0800
++++ qt-x11-free-3.3.8n/src/tools/qvaluelist.h	2013-10-14 00:56:01.027948847 +0800
+@@ -49,6 +49,7 @@
+ #include <list>
+ #endif
+ 
++#include <stddef.h>
+ //#define QT_CHECK_VALUELIST_RANGE
+ 
+ #if defined(Q_CC_MSVC)
+diff -Nur qt-x11-free-3.3.8/src/tools/qvaluevector.h qt-x11-free-3.3.8.fix/src/tools/qvaluevector.h
+--- qt-x11-free-3.3.8/src/tools/qvaluevector.h	2007-02-02 22:01:05.000000000 +0800
++++ qt-x11-free-3.3.8.fix/src/tools/qvaluevector.h	2013-10-14 16:12:59.255898866 +0800
+@@ -42,6 +42,8 @@
+ #include "qdatastream.h"
+ #endif // QT_H
+ 
++#include <stddef.h>
++
+ #ifndef QT_NO_STL
+ #include <vector>
+ #endif

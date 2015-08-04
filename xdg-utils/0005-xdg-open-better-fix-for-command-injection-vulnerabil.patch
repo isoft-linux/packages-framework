@@ -1,0 +1,44 @@
+From ab071beaabb62ceda3028dd5efa85e8057c29006 Mon Sep 17 00:00:00 2001
+From: Rex Dieter <rdieter@math.unl.edu>
+Date: Mon, 19 Jan 2015 05:18:57 -0600
+Subject: [PATCH 5/5] xdg-open: better fix for command injection vulnerability
+ (BR66670)
+
+---
+ ChangeLog           | 3 +++
+ scripts/xdg-open.in | 4 ++--
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index fa90e70..627df21 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,8 @@
+ === xdg-utils 1.1.x ===
+ 
++2015-01-19 Rex Dieter <rdieter@fedoraproject.org>
++   * xdg-open: better fix for command injection vulnerability (BR66670)
++
+ 2015-01-15 Reuben Thomas <rrt@sc3d.org>
+    * xdg-mime: dereference symlinks when using mimetype or file (BR39923)
+    * xdg-screensaver: Change screensaver_freedesktop's interpretation of GetActive (BR29859)
+diff --git a/scripts/xdg-open.in b/scripts/xdg-open.in
+index 9f01747..b6045f8 100644
+--- a/scripts/xdg-open.in
++++ b/scripts/xdg-open.in
+@@ -193,10 +193,10 @@ search_desktop_file()
+         if [ -x "$command_exec" ] ; then
+             if echo "$arguments" | grep -iq '%[fFuU]' ; then
+                 echo START "$command_exec" "$arguments_exec"
+-                eval "$command_exec" '$arguments_exec'
++                eval "'$command_exec'" "'$arguments_exec'"
+             else
+                 echo START "$command_exec" "$arguments_exec" "$arg"
+-                eval "$command_exec" '$arguments_exec' '$arg'
++                eval "'$command_exec'" "'$arguments_exec'" "'$arg'"
+             fi
+ 
+             if [ $? -eq 0 ]; then
+-- 
+2.1.0
+

@@ -1,0 +1,30 @@
+--- libnotify-0.7.6/configure.ac	2012-03-27 02:01:25.000000000 +0000
++++ libnotify-0.7.6n/configure.ac	2014-10-13 15:08:48.819491312 +0000
+@@ -93,9 +93,6 @@
+ AC_SUBST([pkg_modules])
+ PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
+ 
+-tests_modules="gtk+-3.0 >= $REQ_GTK_VERSION"
+-PKG_CHECK_MODULES(TESTS, [$tests_modules])
+-
+ GLIB_GENMARSHAL=`pkg-config --variable=glib_genmarshal glib-2.0`
+ AC_SUBST(GLIB_GENMARSHAL)
+ 
+@@ -193,7 +190,6 @@
+ libnotify.pc
+ libnotify/Makefile
+ libnotify/notify-features.h
+-tests/Makefile
+ tools/Makefile
+ ])
+ 
+--- libnotify-0.7.6/Makefile.am	2011-08-16 11:52:04.000000000 +0000
++++ libnotify-0.7.6n/Makefile.am	2014-10-13 15:08:55.010491091 +0000
+@@ -1,6 +1,6 @@
+ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+ 
+-SUBDIRS = libnotify docs tools tests
++SUBDIRS = libnotify docs tools
+ 
+ pcdata_DATA = libnotify.pc
+ pcdatadir = $(libdir)/pkgconfig

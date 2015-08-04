@@ -1,0 +1,112 @@
+Name:	    qt5-qtdeclarative
+Version:	5.5.0
+Release:	1
+Summary:    QtDeclarative component
+
+Group:	    Extra/Runtime/Library	
+License:    LGPLv2 with exceptions or GPLv3 with exceptions	
+
+URL:	    http://qt-project.org	
+Source0:    qtdeclarative-opensource-src-%{version}.tar.xz	
+
+BuildRequires:  qt5-qtbase-devel qt5-qtxmlpatterns-devel
+Requires:   qt5-qtbase = %{version}-%{release}	
+Requires:   qt5-qtxmlpatterns = %{version}-%{release}	
+
+#for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
+#after qtbase build, then buld qttools, we can generate docs.
+#for qhelpgenerator
+BuildRequires:  qt5-qttools
+#for absolute path qdoc
+BuildRequires:  qt5-qtbase
+
+
+%description
+QtDeclarative component
+
+%package        devel
+Summary:        Development files for %{name}
+Group:          Extra/Development/Library
+Requires:       %{name} = %{version}-%{release}
+Requires:       qt5-qtbase-devel = %{version}-%{release}	
+
+%description    devel
+The %{name}-devel package contains libraries and header files for
+developing applications that use %{name}.
+
+%prep
+%setup -q -n qtdeclarative-opensource-src-%{version}
+
+%build
+qmake-qt5
+
+make %{?_smp_mflags}
+
+make docs
+
+%install
+rm -rf %{buildroot}
+
+make install INSTALL_ROOT=%{buildroot}
+make install_docs INSTALL_ROOT=%{buildroot}
+
+# hardlink files to %{_bindir}, add -qt5 postfix to not conflict
+mkdir %{buildroot}%{_bindir}
+pushd %{buildroot}%{_qt5_bindir}
+for i in * ; do
+  case "${i}" in
+    # qt4 conflicts
+    qmlplugindump|qmlprofiler)
+      ln -v  ${i} %{buildroot}%{_bindir}/${i}-qt5
+      ln -sv ${i} ${i}-qt5
+      ;;
+    # qtchooser stuff
+    qml|qmlbundle|qmlmin|qmlscene)
+      ln -v  ${i} %{buildroot}%{_bindir}/${i}
+      ln -v  ${i} %{buildroot}%{_bindir}/${i}-qt5
+      ln -sv ${i} ${i}-qt5
+      ;;
+    *)
+      ln -v  ${i} %{buildroot}%{_bindir}/${i}
+      ;;
+  esac
+done
+popd
+
+
+#fake debug library
+pushd %{buildroot}%{_qt5_libdir}
+for lib in libQt*.so ; do
+  ln -s $lib $(basename $lib .so)_debug.so
+done
+for lib in libQt*.a ; do
+  ln -s $lib $(basename $lib .a)_debug.a
+done
+popd
+
+
+if [ -d "examples/" ]; then
+    mkdir -p %{buildroot}%{_libdir}/qt5/examples
+    cp -r examples/* %{buildroot}%{_libdir}/qt5/examples/
+    rm -rf %{buildroot}%{_libdir}/qt5/examples/*.pro
+    rm -rf %{buildroot}%{_libdir}/qt5/examples/README
+fi
+
+
+%files
+%{_libdir}/lib*.so.*
+%{_libdir}/qt5/qml
+%{_libdir}/qt5/plugins/qmltooling/*.so
+
+%files devel
+%{_libdir}/qt5/bin/*
+%{_bindir}/*
+%{_libdir}/*.prl
+%{_libdir}/*.so
+%{_libdir}/*.a
+%{_libdir}/cmake/*
+%{_libdir}/pkgconfig/*.pc
+%{_libdir}/qt5/examples/*
+%{_libdir}/qt5/mkspecs/modules/*.pri
+%{_libdir}/qt5/include/*
+%{_docdir}/qt5/*

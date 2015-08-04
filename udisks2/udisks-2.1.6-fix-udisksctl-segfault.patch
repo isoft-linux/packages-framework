@@ -1,0 +1,12 @@
+diff -Nur udisks-2.1.6/tools/udisksctl.c udisks-2.1.6n/tools/udisksctl.c
+--- udisks-2.1.6/tools/udisksctl.c	2015-06-11 21:00:27.000000000 +0000
++++ udisks-2.1.6n/tools/udisksctl.c	2015-07-22 15:01:24.779509072 +0000
+@@ -3074,7 +3074,7 @@
+   gchar *program_name;
+ 
+   o = g_option_context_new ("COMMAND");
+-  g_option_context_set_help_enabled (o, FALSE);
++  /*g_option_context_set_help_enabled (o, FALSE);*/
+   /* Ignore parsing result */
+   g_option_context_parse (o, argc, argv, NULL);
+   program_name = g_path_get_basename ((*argv)[0]);

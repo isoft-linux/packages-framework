@@ -1,0 +1,35 @@
+--- src/cups-pdf.c.build	2013-03-19 14:08:17.573134743 +0100
++++ src/cups-pdf.c	2013-03-19 14:13:00.517147964 +0100
+@@ -160,10 +160,6 @@
+ 
+   (void) umask(0077);
+ 
+-  group=getgrnam(conf.grp);
+-  if (group)
+-    (void) setgid(group->gr_gid);
+-
+   if (strlen(conf.log)) {
+     if (stat(conf.log, &fstatus) || !S_ISDIR(fstatus.st_mode)) {
+       if (create_dir(conf.log, 1)) 
+@@ -176,12 +172,18 @@
+     logfp=fopen(logfile, "a");
+   }
+ 
+-  if (!group) {
++  group=getgrnam(conf.grp);
++  if (group) {
++    if (setgid(group->gr_gid)) {
++      log_event(CPERROR, "Can't switch to new gid", conf.grp);
++      return 1;
++    } else {
++      log_event(CPDEBUG, "switching to new gid", conf.grp);
++    }
++  } else {
+     log_event(CPERROR, "Grp not found", conf.grp);
+     return 1;
+   }
+-  else 
+-    log_event(CPDEBUG, "switching to new gid", conf.grp);
+ 
+   (void) umask(0022);
+ 

@@ -1,0 +1,13 @@
+diff -upr aspell-0.60.6.1.orig/prog/aspell.cpp aspell-0.60.6.1/prog/aspell.cpp
+--- aspell-0.60.6.1.orig/prog/aspell.cpp	2011-07-04 11:13:58.000000000 +0200
++++ aspell-0.60.6.1/prog/aspell.cpp	2012-07-19 15:16:43.204799622 +0200
+@@ -1570,7 +1570,8 @@ void personal () {
+ 
+     Config * config = options;
+     Dictionary * per = new_default_writable_dict();
+-    per->load(config->retrieve("personal-path"), *config);
++    PosibErr<void> pe = per->load(config->retrieve("personal-path"), *config);
++    if (pe.has_err()) {print_error(pe.get_err()->mesg); exit(1);}
+     StackPtr<WordEntryEnumeration> els(per->detailed_elements());
+     StackPtr<Convert> conv(setup_conv(per->lang(), config));
+ 

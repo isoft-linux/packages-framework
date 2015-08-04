@@ -1,0 +1,25 @@
+diff -Nur ppp-2.4.5/pppd/Makefile.linux ppp-2.4.5n/pppd/Makefile.linux
+--- ppp-2.4.5/pppd/Makefile.linux	2014-05-13 20:51:48.467882253 +0800
++++ ppp-2.4.5n/pppd/Makefile.linux	2014-05-13 20:52:56.521879821 +0800
+@@ -79,7 +79,7 @@
+ 
+ MAXOCTETS=y
+ 
+-INCLUDE_DIRS= -I../include
++INCLUDE_DIRS= -I../interbin/include -I../include
+ 
+ COMPILE_FLAGS= -DHAVE_PATHS_H -DIPX_CHANGE -DHAVE_MMAP
+ 
+@@ -182,11 +182,9 @@
+ endif
+ 
+ ifdef FILTER
+-ifneq ($(wildcard /usr/include/pcap-bpf.h),)
+-LIBS    += -lpcap
++LIBS    += -L../interbin/lib -lpcap -lpthread -ldbus-1 -lusb-1.0 -lnl-3 -lnl-genl-3
+ CFLAGS  += -DPPP_FILTER
+ endif
+-endif
+ 
+ ifdef HAVE_INET6
+      PPPDSRCS += ipv6cp.c eui64.c

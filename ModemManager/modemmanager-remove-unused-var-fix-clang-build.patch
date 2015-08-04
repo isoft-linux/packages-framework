@@ -1,0 +1,54 @@
+--- ModemManager-1.4.0/libwmc/tests/test-wmc-utils.c	2014-06-05 06:15:17.000000000 +0800
++++ ModemManager-1.4.0n/libwmc/tests/test-wmc-utils.c	2014-10-27 21:35:53.690042325 +0800
+@@ -111,12 +111,12 @@
+     0x04, 0x00, 0x01, 0x00, 0x07, 0x88
+ };
+ 
+-static const char uml290_encap_outbuf[] = {
++/*static const char uml290_encap_outbuf[] = {
+     0x41, 0x54, 0x2a, 0x57, 0x4d, 0x43, 0x3d, 0xc8, 0x7d, 0x2d, 0xda, 0x7d,
+     0x27, 0x7d, 0x2c, 0x7d, 0x20, 0x7d, 0x34, 0x7d, 0x20, 0x7d, 0x30, 0x7d,
+     0x20, 0x7d, 0x39, 0x7d, 0x20, 0x7d, 0x24, 0x7d, 0x20, 0x7d, 0x21, 0x7d,
+     0x20, 0x7d, 0x27, 0x88, 0x0d
+-};
++};*/
+ 
+ void
+ test_utils_encapsulate_uml290_wmc1 (void *f, void *data)
+--- ModemManager-1.4.0/plugins/cinterion/mm-broadband-modem-cinterion.c	2014-08-20 06:17:16.000000000 +0800
++++ ModemManager-1.4.0n/plugins/cinterion/mm-broadband-modem-cinterion.c	2014-10-27 21:37:13.055043515 +0800
+@@ -83,7 +83,7 @@
+  * Note that the modem's configuration is also based on a bitmask, but as we
+  * will just support some of the combinations, we just use strings for them.
+  */
+-static const CinterionBand2G bands_2g[] = {
++/*static const CinterionBand2G bands_2g[] = {
+     { "1",  1, { MM_MODEM_BAND_EGSM, 0, 0, 0 }},
+     { "2",  1, { MM_MODEM_BAND_DCS,  0, 0, 0 }},
+     { "4",  1, { MM_MODEM_BAND_PCS,  0, 0, 0 }},
+@@ -93,7 +93,7 @@
+     { "10", 2, { MM_MODEM_BAND_G850, MM_MODEM_BAND_DCS, 0, 0 }},
+     { "12", 2, { MM_MODEM_BAND_G850, MM_MODEM_BAND_PCS, 0, 0 }},
+     { "15", 4, { MM_MODEM_BAND_EGSM, MM_MODEM_BAND_DCS, MM_MODEM_BAND_PCS, MM_MODEM_BAND_G850 }}
+-};
++};*/
+ 
+ /*****************************************************************************/
+ /* Unsolicited events enabling */
+--- ModemManager-1.4.0/plugins/novatel/mm-plugin-novatel.c	2014-08-20 06:17:16.000000000 +0800
++++ ModemManager-1.4.0n/plugins/novatel/mm-plugin-novatel.c	2014-10-27 21:37:47.785044037 +0800
+@@ -47,12 +47,12 @@
+ /* We need to explicitly flip secondary ports to AT mode.
+  * We also use this command also for checking AT support in the current port.
+  */
+-static const MMPortProbeAtCommand custom_at_probe[] = {
++/*static const MMPortProbeAtCommand custom_at_probe[] = {
+     { "$NWDMAT=1", 3, mm_port_probe_response_processor_is_at },
+     { "$NWDMAT=1", 3, mm_port_probe_response_processor_is_at },
+     { "$NWDMAT=1", 3, mm_port_probe_response_processor_is_at },
+     { NULL }
+-};
++};*/
+ 
+ /*****************************************************************************/
+ /* Custom init */

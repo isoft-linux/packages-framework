@@ -1,0 +1,38 @@
+--- src/cups-pdf.c.old	2013-09-23 07:33:41.124582086 +0200
++++ src/cups-pdf.c	2013-09-23 07:45:21.649324590 +0200
+@@ -623,6 +623,7 @@
+   gid_t *groups;
+   int ngroups;
+   pid_t pid;
++  struct stat statout;
+ 
+   if (setuid(0)) {
+     (void) fputs("cups-pdf cannot be called without root privileges!\n", stderr);
+@@ -851,8 +852,12 @@
+      
+     (void) umask(0077);
+     size=system(gscall);
+-    (void) snprintf(title,BUFSIZE,"%d",size);
+-    log_event(CPDEBUG, "ghostscript has finished", title);
++    if (size) {
++      (void) snprintf(title,BUFSIZE,"%d",size);
++      log_event(CPERROR, "ghostscript reported an error", title);
++    } else
++      log_event(CPDEBUG, "ghostscript succeeded", NULL);
++
+     if (chmod(outfile, mode))
+       log_event(CPERROR, "failed to set file mode for PDF file (non fatal)", outfile);
+     else 
+@@ -892,7 +897,11 @@
+   
+   log_event(CPDEBUG, "all memory has been freed", NULL);
+ 
+-  log_event(CPSTATUS, "PDF creation successfully finished", outfile);
++  if (stat(outfile, &statout) || statout.st_size==0)
++    log_event(CPSTATUS, "PDF creation failed", NULL);
++  else
++    log_event(CPSTATUS, "PDF creation successfully finished", outfile);
++
+   free(outfile);
+ 
+   if (logfp!=NULL)

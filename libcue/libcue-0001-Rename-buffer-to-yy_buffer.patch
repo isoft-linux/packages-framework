@@ -1,0 +1,61 @@
+From 47dd16aabe16595a7555edda3fb5c7381011793d Mon Sep 17 00:00:00 2001
+From: Peter Lemenkov <lemenkov@gmail.com>
+Date: Mon, 2 Sep 2013 18:12:23 +0400
+Subject: [PATCH 1/2] Rename buffer to yy_buffer
+
+Signed-off-by: Peter Lemenkov <lemenkov@gmail.com>
+---
+ src/libcue/cue_scanner.l | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/src/libcue/cue_scanner.l b/src/libcue/cue_scanner.l
+index a1c15d4..380b529 100644
+--- a/src/libcue/cue_scanner.l
++++ b/src/libcue/cue_scanner.l
+@@ -13,7 +13,7 @@
+ #include "cd.h"
+ #include "cue_parser.h"
+ 
+-char buffer[PARSER_BUFFER];
++char yy_buffer[PARSER_BUFFER];
+ 
+ int yylex(void);
+ %}
+@@ -35,18 +35,18 @@ nonws		[^ \t\r\n]
+ 
+ \'([^\']|\\\')*\'	|
+ \"([^\"]|\\\")*\"	{
+-		yylval.sval = strncpy(	buffer,
++		yylval.sval = strncpy(	yy_buffer,
+ 					++yytext,
+-					(yyleng > sizeof(buffer) ? sizeof(buffer) : yyleng));
++					(yyleng > sizeof(yy_buffer) ? sizeof(yy_buffer) : yyleng));
+ 		yylval.sval[yyleng - 2] = '\0';
+ 		BEGIN(INITIAL);
+ 		return STRING;
+ 		}
+ 
+ <NAME>{nonws}+	{
+-		yylval.sval = strncpy(	buffer,
++		yylval.sval = strncpy(	yy_buffer,
+ 					yytext,
+-					(yyleng > sizeof(buffer) ? sizeof(buffer) : yyleng));
++					(yyleng > sizeof(yy_buffer) ? sizeof(yy_buffer) : yyleng));
+ 		yylval.sval[yyleng] = '\0';
+ 		BEGIN(INITIAL);
+ 		return STRING;
+@@ -115,9 +115,9 @@ REM		{ BEGIN(REM); /* exclusive rules for special exceptions */ }
+ <REM>\n		{ BEGIN(INITIAL); }
+ 
+ <RPG>{nonws}+	{
+-		yylval.sval = strncpy(	buffer,
++		yylval.sval = strncpy(	yy_buffer,
+ 					yytext,
+-					(yyleng > sizeof(buffer) ? sizeof(buffer) : yyleng));
++					(yyleng > sizeof(yy_buffer) ? sizeof(yy_buffer) : yyleng));
+ 		yylval.sval[yyleng] = '\0';
+ 		BEGIN(SKIP);
+ 		return STRING;
+-- 
+1.8.3.1
+

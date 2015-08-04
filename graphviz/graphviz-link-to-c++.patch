@@ -1,0 +1,150 @@
+diff -Nur graphviz-2.38.0/cmd/dot/Makefile.am graphviz-2.38.0n/cmd/dot/Makefile.am
+--- graphviz-2.38.0/cmd/dot/Makefile.am	2014-04-14 04:40:25.000000000 -0800
++++ graphviz-2.38.0n/cmd/dot/Makefile.am	2014-10-31 16:33:13.005810162 -0800
+@@ -120,13 +120,13 @@
+ endif
+ 
+ if WITH_LASI
+-dot_static_LDADD += $(top_builddir)/plugin/lasi/.libs/libgvplugin_lasi_C.a $(LASI_LIBS) -lstdc++
+-dot_builtins_LDADD += $(top_builddir)/plugin/lasi/libgvplugin_lasi.la $(LASI_LIBS) -lstdc++
++dot_static_LDADD += $(top_builddir)/plugin/lasi/.libs/libgvplugin_lasi_C.a $(LASI_LIBS) -lc++
++dot_builtins_LDADD += $(top_builddir)/plugin/lasi/libgvplugin_lasi.la $(LASI_LIBS) -lc++
+ endif
+ 
+ if WITH_LASI
+-dot_static_LDADD += $(top_builddir)/plugin/lasi/.libs/libgvplugin_lasi_C.a $(LASI_LIBS) -lstdc++
+-dot_builtins_LDADD += $(top_builddir)/plugin/lasi/libgvplugin_lasi.la $(LASI_LIBS) -lstdc++
++dot_static_LDADD += $(top_builddir)/plugin/lasi/.libs/libgvplugin_lasi_C.a $(LASI_LIBS) -lc++
++dot_builtins_LDADD += $(top_builddir)/plugin/lasi/libgvplugin_lasi.la $(LASI_LIBS) -lc++
+ endif
+ 
+ 
+diff -Nur graphviz-2.38.0/cmd/dot/Makefile.in graphviz-2.38.0n/cmd/dot/Makefile.in
+--- graphviz-2.38.0/cmd/dot/Makefile.in	2014-04-14 04:41:50.000000000 -0800
++++ graphviz-2.38.0n/cmd/dot/Makefile.in	2014-10-31 16:33:12.998810028 -0800
+@@ -74,13 +74,13 @@
+ @WITH_PANGOCAIRO_TRUE@@WITH_WEBP_TRUE@am__append_10 = $(top_builddir)/plugin/webp/.libs/libgvplugin_webp_C.a $(WEBP_LIBS)
+ @WITH_PANGOCAIRO_TRUE@@WITH_WEBP_TRUE@am__append_11 = $(top_builddir)/plugin/webp/libgvplugin_webp.la $(WEBP_LIBS)
+ @WITH_LASI_TRUE@am__append_12 = $(top_builddir)/plugin/lasi/.libs/libgvplugin_lasi_C.a \
+-@WITH_LASI_TRUE@	$(LASI_LIBS) -lstdc++ \
++@WITH_LASI_TRUE@	$(LASI_LIBS) -lc++ \
+ @WITH_LASI_TRUE@	$(top_builddir)/plugin/lasi/.libs/libgvplugin_lasi_C.a \
+-@WITH_LASI_TRUE@	$(LASI_LIBS) -lstdc++
++@WITH_LASI_TRUE@	$(LASI_LIBS) -lc++
+ @WITH_LASI_TRUE@am__append_13 = $(top_builddir)/plugin/lasi/libgvplugin_lasi.la \
+-@WITH_LASI_TRUE@	$(LASI_LIBS) -lstdc++ \
++@WITH_LASI_TRUE@	$(LASI_LIBS) -lc++ \
+ @WITH_LASI_TRUE@	$(top_builddir)/plugin/lasi/libgvplugin_lasi.la \
+-@WITH_LASI_TRUE@	$(LASI_LIBS) -lstdc++
++@WITH_LASI_TRUE@	$(LASI_LIBS) -lc++
+ subdir = cmd/dot
+ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+ 	$(top_srcdir)/config/depcomp
+diff -Nur graphviz-2.38.0/cmd/edgepaint/Makefile.am graphviz-2.38.0n/cmd/edgepaint/Makefile.am
+--- graphviz-2.38.0/cmd/edgepaint/Makefile.am	2014-04-14 04:40:25.000000000 -0800
++++ graphviz-2.38.0n/cmd/edgepaint/Makefile.am	2014-10-31 16:33:13.011810278 -0800
+@@ -29,7 +29,7 @@
+ 	$(top_builddir)/lib/common/libcommon_C.la \
+ 	$(top_builddir)/lib/cgraph/libcgraph.la \
+ 	$(top_builddir)/lib/cdt/libcdt.la \
+-	$(ANN_LIBS) -lstdc++ -lm
++	$(ANN_LIBS) -lc++ -lm
+ 
+ edgepaint.1.pdf: $(srcdir)/edgepaint.1
+ 	- @GROFF@ -e -Tps -man -t $(srcdir)/edgepaint.1 | @PS2PDF@ - - >edgepaint.1.pdf
+diff -Nur graphviz-2.38.0/cmd/edgepaint/Makefile.in graphviz-2.38.0n/cmd/edgepaint/Makefile.in
+--- graphviz-2.38.0/cmd/edgepaint/Makefile.in	2014-04-14 04:41:51.000000000 -0800
++++ graphviz-2.38.0n/cmd/edgepaint/Makefile.in	2014-10-31 16:33:13.010810258 -0800
+@@ -542,7 +542,7 @@
+ 	$(top_builddir)/lib/common/libcommon_C.la \
+ 	$(top_builddir)/lib/cgraph/libcgraph.la \
+ 	$(top_builddir)/lib/cdt/libcdt.la \
+-	$(ANN_LIBS) -lstdc++ -lm
++	$(ANN_LIBS) -lc++ -lm
+ 
+ EXTRA_DIST = $(man_MANS) $(pdf_DATA) edgepaint.vcproj
+ DISTCLEANFILES = $(pdf_DATA)
+diff -Nur graphviz-2.38.0/cmd/mingle/Makefile.am graphviz-2.38.0n/cmd/mingle/Makefile.am
+--- graphviz-2.38.0/cmd/mingle/Makefile.am	2014-04-14 04:40:25.000000000 -0800
++++ graphviz-2.38.0n/cmd/mingle/Makefile.am	2014-10-31 16:33:12.973809547 -0800
+@@ -31,7 +31,7 @@
+ 	$(top_builddir)/lib/common/libcommon_C.la \
+ 	$(top_builddir)/lib/cgraph/libcgraph.la \
+ 	$(top_builddir)/lib/cdt/libcdt.la \
+-	$(ANN_LIBS) -lstdc++ -lm
++	$(ANN_LIBS) -lc++ -lm
+ 
+ mingle.1.pdf: $(srcdir)/mingle.1
+ 	- @GROFF@ -e -Tps -man -t $(srcdir)/mingle.1 | @PS2PDF@ - - >mingle.1.pdf
+diff -Nur graphviz-2.38.0/cmd/mingle/Makefile.in graphviz-2.38.0n/cmd/mingle/Makefile.in
+--- graphviz-2.38.0/cmd/mingle/Makefile.in	2014-04-14 04:41:53.000000000 -0800
++++ graphviz-2.38.0n/cmd/mingle/Makefile.in	2014-10-31 16:33:12.971809509 -0800
+@@ -541,7 +541,7 @@
+ 	$(top_builddir)/lib/common/libcommon_C.la \
+ 	$(top_builddir)/lib/cgraph/libcgraph.la \
+ 	$(top_builddir)/lib/cdt/libcdt.la \
+-	$(ANN_LIBS) -lstdc++ -lm
++	$(ANN_LIBS) -lc++ -lm
+ 
+ EXTRA_DIST = $(man_MANS) $(pdf_DATA) mingle.vcproj
+ DISTCLEANFILES = $(pdf_DATA)
+diff -Nur graphviz-2.38.0/configure graphviz-2.38.0n/configure
+--- graphviz-2.38.0/configure	2014-04-14 04:41:48.000000000 -0800
++++ graphviz-2.38.0n/configure	2014-10-31 16:33:13.090811796 -0800
+@@ -27995,7 +27995,7 @@
+ _ACEOF
+ 
+     IPSEPCOLA_INCLUDES='-I$(top_srcdir)/lib/vpsc'
+-    IPSEPCOLA_LIBS='$(top_builddir)/lib/vpsc/libvpsc_C.la -lstdc++'
++    IPSEPCOLA_LIBS='$(top_builddir)/lib/vpsc/libvpsc_C.la -lc++'
+ 
+ 
+   fi
+diff -Nur graphviz-2.38.0/configure.ac graphviz-2.38.0n/configure.ac
+--- graphviz-2.38.0/configure.ac	2014-04-14 04:40:25.000000000 -0800
++++ graphviz-2.38.0n/configure.ac	2014-10-31 16:33:13.101812008 -0800
+@@ -3028,7 +3028,7 @@
+     use_ipsepcola="Yes"
+     AC_DEFINE_UNQUOTED(IPSEPCOLA,1,[Define if you want IPSEPCOLA])
+     IPSEPCOLA_INCLUDES='-I$(top_srcdir)/lib/vpsc'
+-    IPSEPCOLA_LIBS='$(top_builddir)/lib/vpsc/libvpsc_C.la -lstdc++'
++    IPSEPCOLA_LIBS='$(top_builddir)/lib/vpsc/libvpsc_C.la -lc++'
+     AC_SUBST([IPSEPCOLA_INCLUDES])
+     AC_SUBST([IPSEPCOLA_LIBS])
+   fi
+diff -Nur graphviz-2.38.0/debian/TODO graphviz-2.38.0n/debian/TODO
+--- graphviz-2.38.0/debian/TODO	2014-04-14 04:40:25.000000000 -0800
++++ graphviz-2.38.0n/debian/TODO	2014-10-31 16:33:13.103812046 -0800
+@@ -11,7 +11,7 @@
+     see debian/rules.
+   * Think about putting the configuration file into /var, see the discussion
+     with Alexander on the 10th of August.
+-  * Stop using -lstdc++ and use CXX (not trivial actually).
++  * Stop using -lc++ and use CXX (not trivial actually).
+   * Adjust --build and --host options to ./configure so as to support cross-
+     compilation correctly.
+   * The Conflicts between libgv-perl and older graphviz might go away since the
+diff -Nur graphviz-2.38.0/plugin/gdiplus/Makefile.am graphviz-2.38.0n/plugin/gdiplus/Makefile.am
+--- graphviz-2.38.0/plugin/gdiplus/Makefile.am	2014-04-14 04:40:25.000000000 -0800
++++ graphviz-2.38.0n/plugin/gdiplus/Makefile.am	2014-10-31 16:33:13.109812162 -0800
+@@ -36,7 +36,7 @@
+ libgvplugin_gdiplus_la_LDFLAGS = -version-info @GVPLUGIN_VERSION_INFO@ -Wl,"$(PLATFORMSDKLIB)\GdiPlus.lib"
+ nodist_libgvplugin_gdiplus_la_SOURCES = GdiPlus*.h
+ libgvplugin_gdiplus_la_SOURCES = $(libgvplugin_gdiplus_C_la_SOURCES)
+-libgvplugin_gdiplus_la_LIBADD = -lgdi32 -lole32 -lstdc++ -luuid $(top_builddir)/lib/gvc/libgvc.la
++libgvplugin_gdiplus_la_LIBADD = -lgdi32 -lole32 -lc++ -luuid $(top_builddir)/lib/gvc/libgvc.la
+ 
+ if WITH_WIN32
+ libgvplugin_gdiplus_la_LDFLAGS += -no-undefined
+diff -Nur graphviz-2.38.0/plugin/gdiplus/Makefile.in graphviz-2.38.0n/plugin/gdiplus/Makefile.in
+--- graphviz-2.38.0/plugin/gdiplus/Makefile.in	2014-04-14 04:41:58.000000000 -0800
++++ graphviz-2.38.0n/plugin/gdiplus/Makefile.in	2014-10-31 16:33:13.107812123 -0800
+@@ -582,7 +582,7 @@
+ 	$(am__append_2)
+ nodist_libgvplugin_gdiplus_la_SOURCES = GdiPlus*.h
+ libgvplugin_gdiplus_la_SOURCES = $(libgvplugin_gdiplus_C_la_SOURCES)
+-libgvplugin_gdiplus_la_LIBADD = -lgdi32 -lole32 -lstdc++ -luuid $(top_builddir)/lib/gvc/libgvc.la
++libgvplugin_gdiplus_la_LIBADD = -lgdi32 -lole32 -lc++ -luuid $(top_builddir)/lib/gvc/libgvc.la
+ EXTRA_DIST = $(PATCHES) gvplugin_gdiplus.vcproj gvplugin_gdiplus.def
+ all: all-am
+ 

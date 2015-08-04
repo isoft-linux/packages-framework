@@ -1,0 +1,19 @@
+%_qt4_prefix	%{_libdir}/qt4	
+%_qt4_bindir	%{_qt4_prefix}/bin
+%_qt4_datadir	%{_qt4_prefix}/share
+%_qt4_docdir	%{_qt4_prefix}/doc
+%_qt4_headerdir %{_includedir}
+%_qt4_libdir    %{_libdir}
+%_qt4_plugindir	%{_qt4_prefix}/plugins
+%_qt4_sysconfdir %{_sysconfdir}
+%_qt4_translationdir %{_qt4_prefix}/translations	
+%_qt4_qmake %{_qt4_bindir}/qmake
+
+%qmake_qt4 %{_qt4_qmake} \\\
+  QMAKE_CFLAGS_DEBUG="${CFLAGS:-%optflags}" \\\
+  QMAKE_CFLAGS_RELEASE="${CFLAGS:-%optflags}" \\\
+  QMAKE_CXXFLAGS_DEBUG="${CXXFLAGS:-%optflags}" \\\
+  QMAKE_CXXFLAGS_RELEASE="${CXXFLAGS:-%optflags}" \\\
+  QMAKE_LFLAGS_DEBUG="${LDFLAGS:-%{?__global_ldflags}}" \\\
+  QMAKE_LFLAGS_RELEASE="${LDFLAGS:-%{?__global_ldflags}}" \\\
+  QMAKE_STRIP=

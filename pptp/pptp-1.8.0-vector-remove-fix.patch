@@ -1,0 +1,34 @@
+From ca29b846ccb924df388a1d396a25325c32b2e346 Mon Sep 17 00:00:00 2001
+From: James Cameron <quozl@laptop.org>
+Date: Thu, 22 Jan 2015 10:36:45 +1100
+Subject: [PATCH] vector: remove clobbered heap
+
+While running vector_test.c under valgrind, observed read and writes
+beyond allocated memory.
+
+Cause was bad calculation of length to move when an item is being
+removed from a vector.
+
+Combined with a shortage of memory (a malloc fail in pptp_conn_open),
+may be a cause of
+https://bugzilla.redhat.com/show_bug.cgi?id=1183627
+---
+ vector.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vector.c b/vector.c
+index d0b5027..703e523 100644
+--- a/vector.c
++++ b/vector.c
+@@ -115,7 +115,7 @@ int  vector_remove(VECTOR *v, int key)
+     assert(v != NULL);
+     if ((tmp =binary_search(v,key)) == NULL) return FALSE;
+     assert(tmp >= v->item && tmp < v->item + v->size);
+-    memmove(tmp, tmp + 1, (v->size - (v->item - tmp) - 1) * sizeof(*(v->item)));
++    memmove(tmp, tmp + 1, (v->size - (tmp - v->item) - 1) * sizeof(*(v->item)));
+     v->size--;
+     return TRUE;
+ }
+-- 
+1.8.3.2
+

@@ -1,0 +1,200 @@
+From 4892c7a53bb0adec98c4540a0b127b209625f82a Mon Sep 17 00:00:00 2001
+From: Nikos Mavrogiannopoulos <nmav@redhat.com>
+Date: Wed, 4 Mar 2015 10:29:06 +0100
+Subject: [PATCH 2/2] when using gnutls enable only the DTLS ciphersuites that
+ were available during TLS
+
+Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+---
+ cstp.c                 |  3 ++
+ dtls.c                 | 79 ++++++++++++++++++++++++++++++++++++++++++++++----
+ gnutls.c               |  7 ++---
+ openconnect-internal.h |  2 ++
+ 4 files changed, 81 insertions(+), 10 deletions(-)
+
+diff --git a/cstp.c b/cstp.c
+index d0d7eff..a06ca34 100644
+--- a/cstp.c
++++ b/cstp.c
+@@ -202,6 +202,9 @@ static int start_cstp_connection(struct openconnect_info *vpninfo)
+ 	vpninfo->ip_info.domain = vpninfo->ip_info.proxy_pac = NULL;
+ 	vpninfo->banner = NULL;
+ 
++	if (!vpninfo->dtls_ciphers)
++		vpninfo->dtls_ciphers = dtls_ciphers_from_conn(vpninfo);
++
+ 	for (i = 0; i < 3; i++)
+ 		vpninfo->ip_info.dns[i] = vpninfo->ip_info.nbns[i] = NULL;
+ 	free_split_routes(vpninfo);
+diff --git a/dtls.c b/dtls.c
+index abffbf1..6ac537d 100644
+--- a/dtls.c
++++ b/dtls.c
+@@ -222,6 +222,11 @@ static SSL_SESSION *generate_dtls_session(struct openconnect_info *vpninfo,
+ }
+ #endif
+ 
++char *dtls_ciphers_from_conn(struct openconnect_info *vpninfo)
++{
++	return NULL;
++}
++
+ static int start_dtls_handshake(struct openconnect_info *vpninfo, int dtls_fd)
+ {
+ 	STACK_OF(SSL_CIPHER) *ciphers;
+@@ -438,27 +443,89 @@ void dtls_shutdown(struct openconnect_info *vpninfo)
+ #include <gnutls/dtls.h>
+ #include "gnutls.h"
+ 
++#define SSTR(x) x,sizeof(x)
+ struct {
+ 	const char *name;
++	unsigned name_len;
+ 	gnutls_protocol_t version;
+ 	gnutls_cipher_algorithm_t cipher;
+ 	gnutls_mac_algorithm_t mac;
+ 	const char *prio;
++	unsigned disabled;
+ } gnutls_dtls_ciphers[] = {
+-	{ "AES128-SHA", GNUTLS_DTLS0_9, GNUTLS_CIPHER_AES_128_CBC, GNUTLS_MAC_SHA1,
++	{ SSTR("AES128-SHA"), GNUTLS_DTLS0_9, GNUTLS_CIPHER_AES_128_CBC, GNUTLS_MAC_SHA1,
+ 	  "NONE:+VERS-DTLS0.9:+COMP-NULL:+AES-128-CBC:+SHA1:+RSA:%COMPAT" },
+-	{ "AES256-SHA", GNUTLS_DTLS0_9, GNUTLS_CIPHER_AES_256_CBC, GNUTLS_MAC_SHA1,
++	{ SSTR("AES256-SHA"), GNUTLS_DTLS0_9, GNUTLS_CIPHER_AES_256_CBC, GNUTLS_MAC_SHA1,
+ 	  "NONE:+VERS-DTLS0.9:+COMP-NULL:+AES-256-CBC:+SHA1:+RSA:%COMPAT" },
+-	{ "DES-CBC3-SHA", GNUTLS_DTLS0_9, GNUTLS_CIPHER_3DES_CBC, GNUTLS_MAC_SHA1,
++	{ SSTR("DES-CBC3-SHA"), GNUTLS_DTLS0_9, GNUTLS_CIPHER_3DES_CBC, GNUTLS_MAC_SHA1,
+ 	  "NONE:+VERS-DTLS0.9:+COMP-NULL:+3DES-CBC:+SHA1:+RSA:%COMPAT" },
+ #if GNUTLS_VERSION_NUMBER >= 0x030207 /* if DTLS 1.2 is supported (and a bug in gnutls is solved) */
+-	{ "OC-DTLS1_2-AES128-GCM", GNUTLS_DTLS1_2, GNUTLS_CIPHER_AES_128_GCM, GNUTLS_MAC_AEAD,
++	{ SSTR("OC-DTLS1_2-AES128-GCM"), GNUTLS_DTLS1_2, GNUTLS_CIPHER_AES_128_GCM, GNUTLS_MAC_AEAD,
+ 	  "NONE:+VERS-DTLS1.2:+COMP-NULL:+AES-128-GCM:+AEAD:+RSA:%COMPAT:+SIGN-ALL" },
+-	{ "OC-DTLS1_2-AES256-GCM", GNUTLS_DTLS1_2, GNUTLS_CIPHER_AES_256_GCM, GNUTLS_MAC_AEAD,
++	{ SSTR("OC-DTLS1_2-AES256-GCM"), GNUTLS_DTLS1_2, GNUTLS_CIPHER_AES_256_GCM, GNUTLS_MAC_AEAD,
+ 	  "NONE:+VERS-DTLS1.2:+COMP-NULL:+AES-256-GCM:+AEAD:+RSA:%COMPAT:+SIGN-ALL" },
+ #endif
+ };
+ 
++char *dtls_ciphers_from_conn(struct openconnect_info *vpninfo)
++{
++	/* only enable the ciphers that would have been negotiated in the TLS channel */
++	unsigned i, j;
++	int ret;
++	unsigned idx;
++	gnutls_cipher_algorithm_t cipher;
++	gnutls_mac_algorithm_t mac;
++	struct oc_text_buf *buf;
++	gnutls_priority_t cache;
++	char *p;
++
++	/* everything is disabled by default */
++	for (i = 0; i < sizeof(gnutls_dtls_ciphers)/sizeof(gnutls_dtls_ciphers[0]); i++) {
++		gnutls_dtls_ciphers[i].disabled = 1;
++	}
++
++	ret = gnutls_priority_init(&cache, vpninfo->gnutls_default_prio, NULL);
++	if (ret < 0)
++		return NULL;
++
++	for (j=0;;j++) {
++		ret = gnutls_priority_get_cipher_suite_index(cache, j, &idx);
++		if (ret == GNUTLS_E_UNKNOWN_CIPHER_SUITE)
++			continue;
++		else if (ret < 0)
++			break;
++
++		if (gnutls_cipher_suite_info(idx, NULL, NULL, &cipher, &mac, NULL) != NULL) {
++			for (i = 0; i < sizeof(gnutls_dtls_ciphers)/sizeof(gnutls_dtls_ciphers[0]); i++) {
++				if (gnutls_dtls_ciphers[i].mac == mac && gnutls_dtls_ciphers[i].cipher == cipher) {
++					gnutls_dtls_ciphers[i].disabled = 0;
++					break;
++				}
++			}
++		}
++	}
++
++	buf = buf_alloc();
++
++	for (i = 0; i < sizeof(gnutls_dtls_ciphers)/sizeof(gnutls_dtls_ciphers[0]); i++) {
++		if (!gnutls_dtls_ciphers[i].disabled) {
++			if (buf->buf_len == 0) {
++				buf_append(buf, "%s", gnutls_dtls_ciphers[i].name);
++			} else {
++				buf_append(buf, ":%s", gnutls_dtls_ciphers[i].name);
++			}
++		}
++	}
++
++	/* steal buffer */
++	p = buf->data;
++	buf->data = NULL;
++
++	buf_free(buf);
++ 	gnutls_priority_deinit(cache);
++	return p;
++}
++
+ #define DTLS_SEND gnutls_record_send
+ #define DTLS_RECV gnutls_record_recv
+ #define DTLS_FREE gnutls_deinit
+@@ -470,7 +537,7 @@ static int start_dtls_handshake(struct openconnect_info *vpninfo, int dtls_fd)
+ 	int cipher;
+ 
+ 	for (cipher = 0; cipher < sizeof(gnutls_dtls_ciphers)/sizeof(gnutls_dtls_ciphers[0]); cipher++) {
+-		if (!strcmp(vpninfo->dtls_cipher, gnutls_dtls_ciphers[cipher].name))
++		if (!strcmp(vpninfo->dtls_cipher, gnutls_dtls_ciphers[cipher].name) && !gnutls_dtls_ciphers[cipher].disabled)
+ 			goto found_cipher;
+ 	}
+ 	vpn_progress(vpninfo, PRG_ERR, _("Unknown DTLS parameters for requested CipherSuite '%s'\n"),
+diff --git a/gnutls.c b/gnutls.c
+index 34119da..e121842 100644
+--- a/gnutls.c
++++ b/gnutls.c
+@@ -2070,7 +2070,6 @@ int openconnect_open_https(struct openconnect_info *vpninfo)
+ {
+ 	int ssl_sock = -1;
+ 	int err;
+-	const char * prio;
+ 
+ 	if (vpninfo->https_sess)
+ 		return 0;
+@@ -2196,13 +2195,13 @@ int openconnect_open_https(struct openconnect_info *vpninfo)
+ 				       strlen(vpninfo->hostname));
+ 
+ 	if (vpninfo->pfs) {
+-		prio = DEFAULT_PRIO":-RSA";
++		vpninfo->gnutls_default_prio = DEFAULT_PRIO":-RSA";
+ 	} else {
+-		prio = DEFAULT_PRIO;
++		vpninfo->gnutls_default_prio = DEFAULT_PRIO;
+ 	}
+ 
+ 	err = gnutls_priority_set_direct(vpninfo->https_sess,
+-					prio, NULL);
++					vpninfo->gnutls_default_prio, NULL);
+ 	if (err) {
+ 		vpn_progress(vpninfo, PRG_ERR,
+ 			     _("Failed to set TLS priority string: %s\n"),
+diff --git a/openconnect-internal.h b/openconnect-internal.h
+index 04cb226..7b7161c 100644
+--- a/openconnect-internal.h
++++ b/openconnect-internal.h
+@@ -469,6 +469,7 @@ struct openconnect_info {
+ 	gnutls_session_t https_sess;
+ 	gnutls_certificate_credentials_t https_cred;
+ 	char local_cert_md5[MD5_SIZE * 2 + 1]; /* For CSD */
++	const char *gnutls_default_prio;
+ #ifdef HAVE_TROUSERS
+ 	TSS_HCONTEXT tpm_context;
+ 	TSS_HKEY srk;
+@@ -765,6 +766,7 @@ int dtls_setup(struct openconnect_info *vpninfo, int dtls_attempt_period);
+ int dtls_mainloop(struct openconnect_info *vpninfo, int *timeout);
+ void dtls_close(struct openconnect_info *vpninfo);
+ void dtls_shutdown(struct openconnect_info *vpninfo);
++char *dtls_ciphers_from_conn(struct openconnect_info *vpninfo);
+ 
+ /* cstp.c */
+ void cstp_common_headers(struct openconnect_info *vpninfo, struct oc_text_buf *buf);
+-- 
+2.1.0
+

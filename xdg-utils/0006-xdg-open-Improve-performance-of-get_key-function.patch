@@ -1,0 +1,30 @@
+From 46e8421a238640d0a18d3fe856466c1d22aeadbf Mon Sep 17 00:00:00 2001
+From: Alex Henrie <alexhenrie24@gmail.com>
+Date: Sat, 17 Jan 2015 01:15:19 -0700
+Subject: [PATCH 6/7] xdg-open: Improve performance of get_key function
+
+---
+ scripts/xdg-open.in | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/scripts/xdg-open.in b/scripts/xdg-open.in
+index b6045f8..ee2889e 100644
+--- a/scripts/xdg-open.in
++++ b/scripts/xdg-open.in
+@@ -57,11 +57,11 @@ get_key()
+             "["*)
+                 desktop_entry=""
+             ;;
+-            *)
++            "${key}="*)
+                 # Only match Desktop Entry group
+                 if [ -n "${desktop_entry}" ]
+                 then
+-                    echo "${line}" | grep -E "^${key}=" | cut -d= -f 2-
++                    echo "${line}" | cut -d= -f 2-
+                 fi
+         esac
+     done < "${file}"
+-- 
+2.1.0
+

@@ -1,0 +1,10 @@
+--- lib3ds-1.3.0.orig/lib3ds/file.h
++++ lib3ds-1.3.0/lib3ds/file.h
+@@ -98,6 +98,7 @@
+ extern LIB3DSAPI void lib3ds_file_bounding_box_of_objects(Lib3dsFile *file, Lib3dsBool include_meshes, Lib3dsBool include_cameras, Lib3dsBool include_lights, Lib3dsVector bmin, Lib3dsVector bmax);
+ extern LIB3DSAPI void lib3ds_file_bounding_box_of_nodes(Lib3dsFile *file, Lib3dsBool include_meshes, Lib3dsBool include_cameras, Lib3dsBool include_lights, Lib3dsVector bmin, Lib3dsVector bmax);
+ extern LIB3DSAPI void lib3ds_file_dump_nodes(Lib3dsFile *file);
++extern LIB3DSAPI void lib3ds_file_bounding_box(Lib3dsFile *file, Lib3dsVector min, Lib3dsVector max);
+ 
+ #ifdef __cplusplus
+ }

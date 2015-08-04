@@ -1,0 +1,36 @@
+diff -Nur XML-LibXML-2.0117/Makefile.PL XML-LibXML-2.0117n/Makefile.PL
+--- XML-LibXML-2.0117/Makefile.PL	2014-10-27 00:29:03.000000000 -0800
++++ XML-LibXML-2.0117n/Makefile.PL	2014-11-07 09:11:46.210005951 -0800
+@@ -416,31 +416,7 @@
+ }
+ 
+ print "Checking for ability to link against xml2...";
+-if ( _libxml_check_lib('xml2') ) {
+-    print "yes\n";
+-}
+-else {
+-    print "no\n";
+-    print "Checking for ability to link against libxml2...";
+-    if ( _libxml_check_lib('libxml2')) {
+-        print "yes\n";
+-    }
+-    else {
+-        print STDERR <<"DEATH";
+-libxml2, zlib, and/or the Math library (-lm) have not been found.
+-Try setting LIBS and INC values on the command line
+-Or get libxml2 from
+-  http://xmlsoft.org/
+-If you install via RPMs, make sure you also install the -devel
+-RPMs, as this is where the headers (.h files) are.
+-
+-Also, you may try to run perl Makefile.PL with the DEBUG=1 parameter
+-to see the exact reason why the detection of libxml2 installation
+-failed or why Makefile.PL was not able to compile a test program.
+-DEATH
+-        exit 0; # 0 recommended by http://cpantest.grango.org (Notes for CPAN Authors)
+-    }
+-}
++print "yes\n";
+ 
+ # -------------------------------------------------------------------------- #
+ # _NOW_ write the Makefile

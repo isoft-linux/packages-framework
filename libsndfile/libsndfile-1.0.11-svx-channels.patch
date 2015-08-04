@@ -1,0 +1,12 @@
+diff -Nur libsndfile-1.0.11-orig/src/svx.c libsndfile-1.0.11/src/svx.c
+--- libsndfile-1.0.11-orig/src/svx.c	2004-10-17 02:46:34.000000000 +0200
++++ libsndfile-1.0.11/src/svx.c	2005-03-05 02:08:14.094919120 +0100
+@@ -280,7 +280,7 @@
+ 
+ 					bytecount += psf_binheader_readf (psf, "E4", &channels) ;
+ 
+-					psf_log_printf (psf, "  Channels : %d => %d\n", channels) ;
++					psf_log_printf (psf, "  Channels : %d\n", channels) ;
+ 
+ 					psf_binheader_readf (psf, "j", dword - bytecount) ;
+ 					break ;

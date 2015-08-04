@@ -1,0 +1,12 @@
+diff -Nur gtk+-2.22.1/gtk/gtkitemfactory.h gtk+-2.22.1n/gtk/gtkitemfactory.h
+--- gtk+-2.22.1/gtk/gtkitemfactory.h	2010-11-15 20:13:10.000000000 +0800
++++ gtk+-2.22.1n/gtk/gtkitemfactory.h	2011-01-05 20:59:03.000000000 +0800
+@@ -44,7 +44,7 @@
+  * (Note that if we are included from a C++ program () will mean
+  * (void) so an explicit cast will be needed.)
+  */
+-typedef	void	(*GtkItemFactoryCallback)  ();
++typedef	void	(*GtkItemFactoryCallback)  (void);
+ typedef	void	(*GtkItemFactoryCallback1) (gpointer		 callback_data,
+ 					    guint		 callback_action,
+ 					    GtkWidget		*widget);

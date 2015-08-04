@@ -1,0 +1,14 @@
+[Unit]
+Description=Adaptive readahead daemon
+After=kdm.service
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/preload --verbose 1
+Restart=always
+RestartSec=1
+Nice=19
+IOSchedulingClass=3
+
+[Install]
+WantedBy=multi-user.target

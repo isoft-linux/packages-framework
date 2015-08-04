@@ -1,0 +1,12 @@
+diff -Nur desktop-file-utils-0.12/src/validate.c desktop-file-utils-0.12n/src/validate.c
+--- desktop-file-utils-0.12/src/validate.c	2006-11-07 12:26:17.000000000 -0500
++++ desktop-file-utils-0.12n/src/validate.c	2007-06-05 01:11:47.000000000 -0400
+@@ -171,7 +171,7 @@
+     "Emulator", "Engineering", "FileManager", "TerminalEmulator", \
+     "Filesystem", "Monitor", "Security", "Accessibility", "Calculator", \
+     "Clock", "TextEditor", "Core", "KDE", "GNOME", "GTK", "Qt", "Motif", \
+-    "Java", "ConsoleOnly"
++    "Java", "ConsoleOnly", "MonoDev", "GTKDev", "QTDev", "DevUtils", "DevEditor"
+ 
+   #define RESERVED_CATEGORIES \
+     "Screensaver", "TrayIcon", "Applet", "Shell"

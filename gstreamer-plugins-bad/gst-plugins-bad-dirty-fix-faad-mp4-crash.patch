@@ -1,0 +1,12 @@
+diff -Nur gst-plugins-bad-1.3.1/ext/faad/gstfaad.c gst-plugins-bad-1.3.1n/ext/faad/gstfaad.c
+--- gst-plugins-bad-1.3.1/ext/faad/gstfaad.c	2013-09-05 00:27:43.000000000 +0800
++++ gst-plugins-bad-1.3.1n/ext/faad/gstfaad.c	2014-05-17 10:36:07.127006683 +0800
+@@ -323,7 +323,7 @@
+     faad->channels = 0;
+ 
+     faad->init = TRUE;
+-    gst_buffer_unmap (buf, &map);
++    //gst_buffer_unmap (buf, &map);
+   } else if ((value = gst_structure_get_value (str, "framed")) &&
+       g_value_get_boolean (value) == TRUE) {
+     faad->packetised = TRUE;

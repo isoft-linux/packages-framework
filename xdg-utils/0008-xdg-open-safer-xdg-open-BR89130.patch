@@ -1,0 +1,114 @@
+From 13d9b0cac97e438bf7dc06452ee7fb3480907d88 Mon Sep 17 00:00:00 2001
+From: Rex Dieter <rdieter@math.unl.edu>
+Date: Fri, 20 Feb 2015 15:54:46 -0600
+Subject: [PATCH 8/8] xdg-open: safer xdg-open (BR89130)
+
+inspired by patch from Vincent Bernat <bernat@debian.org>
+---
+ ChangeLog           |  3 +++
+ scripts/xdg-open.in | 65 ++++++++++++++++++++++++++++++++---------------------
+ 2 files changed, 43 insertions(+), 25 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 9a01f82..0c0ab97 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,8 @@
+ === xdg-utils 1.1.x ===
+ 
++2015-02-20 Rex Dieter <rdieter@fedoraproject.org>
++   * xdg-open: safer xdg-open (BR89130), inspired by patch from Vincent Bernat <bernat@debian.org>
++
+ 2015-01-19 Rex Dieter <rdieter@fedoraproject.org>
+    * xdg-open: better fix for command injection vulnerability (BR66670)
+    * xdg-open is extremely slow because get_key executes grep unnecessarily (BR88524)
+diff --git a/scripts/xdg-open.in b/scripts/xdg-open.in
+index ee2889e..074ba6f 100644
+--- a/scripts/xdg-open.in
++++ b/scripts/xdg-open.in
+@@ -161,7 +161,7 @@ search_desktop_file()
+ {
+     local default="$1"
+     local dir="$2"
+-    local arg="$3"
++    local target="$3"
+ 
+     local file=""
+     # look for both vendor-app.desktop, vendor/app.desktop
+@@ -174,34 +174,49 @@ search_desktop_file()
+     if [ -r "$file" ] ; then
+         command="$(get_key "${file}" "Exec" | first_word)"
+         command_exec=`which $command 2>/dev/null`
+-        arguments="$(get_key "${file}" "Exec" | last_word)"
+-        arg_one="`echo "$arg" | sed 's/[&*\\]/\\\\&/g'`"
+         icon="$(get_key "${file}" "Icon")"
+-        if [ "${icon}" != "" ]
+-        then
+-            icon="--icon '${icon}'"
+-        else
+-            icon="''"
+-        fi
+         # FIXME: Actually LC_MESSAGES should be used as described in
+         # http://standards.freedesktop.org/desktop-entry-spec/latest/ar01s04.html
+-        localised_name="'$(get_key "${file}" "Name")'"
+-        arguments_exec="$(echo "$arguments" | sed -e 's*%[fFuU]*'"$arg_one"'*g' \
+-                                                  -e 's*%i*'"$icon"'*g' \
+-                                                  -e 's*%c*'"$localised_name"'*g')"
+-
+-        if [ -x "$command_exec" ] ; then
+-            if echo "$arguments" | grep -iq '%[fFuU]' ; then
+-                echo START "$command_exec" "$arguments_exec"
+-                eval "'$command_exec'" "'$arguments_exec'"
+-            else
+-                echo START "$command_exec" "$arguments_exec" "$arg"
+-                eval "'$command_exec'" "'$arguments_exec'" "'$arg'"
+-            fi
++        localised_name="$(get_key "${file}" "Name")"
++        set -- $(get_key "${file}" "Exec" | last_word)
++        # We need to replace any occurrence of "%f", "%F" and
++        # the like by the target file. We examine each
++        # argument and append the modified argument to the
++        # end then shift.
++        local args=$#
++        local replaced=0
++        while [ $args -gt 0 ]; do
++            case $1 in
++                %[c])
++                    replaced=1
++                    arg="${localised_name}"
++                    shift
++                    set -- "$@" "$arg"
++                    ;;
++                %[fFuU])
++                    replaced=1
++                    arg="$(echo $target | sed 's/[&*\\]/\\\\&/g')"
++                    shift
++                    set -- "$@" "$arg"
++                    ;;
++                %[i])
++                    replaced=1
++                    shift
++                    set -- "$@" "--icon" "$icon"
++                    ;;
++                *)
++                    arg="$1"
++                    shift
++                    set -- "$@" "$arg"
++                    ;;
++            esac
++            args=$(( $args - 1 ))
++        done
++        [ $replaced -eq 1 ] || set -- "$@" "$target"
++        "$command_exec" "$@"
+ 
+-            if [ $? -eq 0 ]; then
+-                exit_success
+-            fi
++        if [ $? -eq 0 ]; then
++            exit_success
+         fi
+     fi
+ 
+-- 
+1.9.3
+

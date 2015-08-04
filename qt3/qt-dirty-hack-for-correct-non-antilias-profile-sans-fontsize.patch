@@ -1,0 +1,13 @@
+diff -Nur qt-x11-free-3.3.8nf/src/kernel/qfont.cpp qt-x11-free-3.3.8new/src/kernel/qfont.cpp
+--- qt-x11-free-3.3.8nf/src/kernel/qfont.cpp	2007-02-02 22:01:11.000000000 +0800
++++ qt-x11-free-3.3.8new/src/kernel/qfont.cpp	2007-04-25 00:24:02.000000000 +0800
+@@ -1387,6 +1387,9 @@
+ 	"arial",        "helvetica",
+ 	"helv",         "helvetica",
+ 	"tms rmn",      "times",
++        "Sans",         "Helvetica",
++        //"Serif",         "Helvetica",
++        //"Monospace",         "Helvetica",
+ #elif defined(Q_WS_WIN)
+ 	"times",        "Times New Roman",
+ 	"courier",      "Courier New",

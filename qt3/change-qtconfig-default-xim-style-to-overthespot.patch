@@ -1,0 +1,27 @@
+--- qt-x11-free-3.3.4/tools/qtconfig/mainwindow.cpp.orig	2004-08-24 10:09:50.000000000 -0400
++++ qt-x11-free-3.3.4/tools/qtconfig/mainwindow.cpp	2005-03-31 09:15:27.000000000 -0500
+@@ -362,7 +362,7 @@
+     rtlExtensions->setChecked( settings.readBoolEntry( "/qt/useRtlExtensions", FALSE ) );
+ 
+ #ifdef Q_WS_X11
+-    inputStyle->setCurrentText( settings.readEntry( "/qt/XIMInputStyle", trUtf8( "On The Spot" ) ) );
++    inputStyle->setCurrentText( settings.readEntry( "/qt/XIMInputStyle", trUtf8( "Over The Spot" ) ) );
+ #else
+     inputStyle->hide();
+     inputStyleLabel->hide();
+@@ -436,9 +436,12 @@
+ 
+ #ifdef Q_WS_X11
+ 	QString style = inputStyle->currentText();
+-	QString str = "On The Spot";
+-	if ( style == trUtf8( "Over The Spot" ) )
+-	    str = "Over The Spot";
++	// QString str = "On The Spot";
++	QString str = "Over The Spot";
++	// if ( style == trUtf8( "Over The Spot" ) )
++	//     str = "Over The Spot";
++	if ( style == trUtf8( "On The Spot" ) )
++	    str = "On The Spot";
+ 	else if ( style == trUtf8( "Off The Spot" ) )
+ 	    str = "Off The Spot";
+ 	else if ( style == trUtf8( "Root" ) )

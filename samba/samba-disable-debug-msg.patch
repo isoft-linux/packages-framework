@@ -1,0 +1,16 @@
+for this msg when 'net usershare info'
+invalid ownership on directory /var/lib/samba/lck
+invalid ownership on directory /var/lib/samba/msg
+--- samba-4.2.3/lib/util/util.c	2014-12-20 15:07:55.000000000 +0000
++++ samba-4.2.3n/lib/util/util.c	2015-07-16 00:46:31.292853572 +0000
+@@ -275,8 +275,8 @@
+ 		return false;
+ 	}
+ 	if (st.st_uid != uid && !uid_wrapper_enabled()) {
+-		DEBUG(0, ("invalid ownership on directory "
+-			  "%s\n", dname));
++		/*DEBUG(0, ("invalid ownership on directory "
++			  "%s\n", dname));*/
+ 		return false;
+ 	}
+ 	if ((st.st_mode & 0777) != dir_perms) {

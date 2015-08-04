@@ -1,0 +1,12 @@
+diff -Nur wqy-zenhei/44-wqy-zenhei.conf wqy-zenheinew/44-wqy-zenhei.conf
+--- wqy-zenhei/44-wqy-zenhei.conf	2009-05-17 20:25:41.000000000 +0000
++++ wqy-zenheinew/44-wqy-zenhei.conf	2015-07-06 10:40:31.359054608 +0000
+@@ -6,8 +6,6 @@
+   <match target="font">
+         <test qual="any" name="family">
+                 <string>WenQuanYi Zen Hei</string>
+-                <string>文泉驿正黑</string>
+-                <string>文泉驛正黑</string>
+         </test> 
+         <edit name="globaladvance"><bool>false</bool></edit>
+         <edit name="spacing"><int>0</int></edit>

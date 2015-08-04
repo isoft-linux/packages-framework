@@ -1,0 +1,58 @@
+--- qt-x11-free-3.3.8.orig/plugins/src/inputmethods/xim/qximinputcontext_x11.cpp	2013-10-16 12:50:38.318136305 +0800
++++ qt-x11-free-3.3.8/plugins/src/inputmethods/xim/qximinputcontext_x11.cpp	2013-10-16 12:50:08.758135862 +0800
+@@ -61,6 +61,7 @@
+ #define XK_LATIN1
+ #include <X11/keysymdef.h>
+ 
++#include <locale.h>
+ // #define QT_XIM_DEBUG
+ 
+ // from qapplication_x11.cpp
+@@ -436,9 +437,10 @@
+ {
+ 
+ #if !defined(QT_NO_XIM)
+-    if (ic)
+-	XDestroyIC((XIC) ic);
+-
++ //A lot of IM framework use single IC for all applications.
++ //Destroy It will cause a crash.
++ /*   if (ic)
++	XDestroyIC((XIC) ic);*/
+     if ( --fontsetRefCount == 0 ) {
+ 	Display *dpy = QPaintDevice::x11AppDisplay();
+ 	for ( int i = 0; i < 8; i++ ) {
+@@ -760,7 +762,6 @@
+ 	QPoint p( x, y );
+ 	QPoint p2 = widget->mapTo( widget->topLevelWidget(), QPoint( 0, 0 ) );
+ 	p = widget->topLevelWidget()->mapFromGlobal( p );
+-	setXFontSet( f ? *f : widget->font() );
+ 	setComposePosition(p.x(), p.y() + h);
+ 	setComposeArea(p2.x(), p2.y(), widget->width(), widget->height());
+     }
+@@ -824,25 +825,6 @@
+ }
+ 
+ 
+-void QXIMInputContext::setXFontSet(const QFont &f)
+-{
+-#if !defined(QT_NO_XIM)
+-    if (font == f) return; // nothing to do
+-    font = f;
+-
+-    XFontSet fs = getFontSet(font);
+-    if (fontset == fs) return; // nothing to do
+-    fontset = fs;
+-
+-    XVaNestedList preedit_attr = XVaCreateNestedList(0, XNFontSet, fontset, (char *) 0);
+-    XSetICValues((XIC) ic, XNPreeditAttributes, preedit_attr, (char *) 0);
+-    XFree(preedit_attr);
+-#else
+-    Q_UNUSED( f );
+-#endif
+-}
+-
+-
+ int QXIMInputContext::lookupString(XKeyEvent *event, QCString &chars,
+ 				KeySym *key, Status *status) const
+ {

@@ -1,0 +1,29 @@
+diff -Nur gsettings-desktop-schemas-3.12.2/schemas/org.gnome.desktop.interface.gschema.xml.in.in gsettings-desktop-schemas-3.12.2n/schemas/org.gnome.desktop.interface.gschema.xml.in.in
+--- gsettings-desktop-schemas-3.12.2/schemas/org.gnome.desktop.interface.gschema.xml.in.in	2013-08-12 22:41:25.000000000 +0800
++++ gsettings-desktop-schemas-3.12.2n/schemas/org.gnome.desktop.interface.gschema.xml.in.in	2014-07-09 13:26:43.341374818 +0800
+@@ -104,7 +104,7 @@
+       </_description>
+     </key>
+     <key name="font-name" type="s">
+-      <default>'Cantarell 11'</default>
++      <default>'Cantarell 10'</default>
+       <_summary>Default font</_summary>
+       <_description>
+         Name of the default font used by gtk+.
+@@ -148,14 +148,14 @@
+       </_description>
+     </key>
+     <key name="document-font-name" type="s">
+-      <default>'Sans 11'</default>
++      <default>'Sans 10'</default>
+       <_summary>Document font</_summary>
+       <_description>
+         Name of the default font used for reading documents.
+       </_description>
+     </key>
+     <key name="monospace-font-name" type="s">
+-      <default>'Monospace 11'</default>
++      <default>'Monospace 10'</default>
+       <_summary>Monospace font</_summary>
+       <_description>
+         Name of a monospaced (fixed-width) font for use in locations like

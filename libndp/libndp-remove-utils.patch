@@ -1,0 +1,9 @@
+diff -Nur libndp-1.2/Makefile.am libndp-1.2n/Makefile.am
+--- libndp-1.2/Makefile.am	2013-10-15 12:24:03.000000000 +0000
++++ libndp-1.2n/Makefile.am	2014-09-24 09:17:18.670948169 +0000
+@@ -2,4 +2,4 @@
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-SUBDIRS = include libndp utils man
++SUBDIRS = include libndp

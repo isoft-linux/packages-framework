@@ -1,0 +1,12 @@
+diff -Nur qt-x11-free-3.3.8nf/src/kernel/qfontdatabase_x11.cpp qt-x11-free-3.3.8new/src/kernel/qfontdatabase_x11.cpp
+--- qt-x11-free-3.3.8nf/src/kernel/qfontdatabase_x11.cpp	2007-04-25 00:17:46.000000000 +0800
++++ qt-x11-free-3.3.8new/src/kernel/qfontdatabase_x11.cpp	2007-04-25 00:22:44.000000000 +0800
+@@ -1824,7 +1824,7 @@
+     // XftFontMatch calls the right ConfigSubstitute variants, but as we use
+     // FcFontMatch/Sort here we have to do it manually.
+     FcConfigSubstitute(0, pattern, FcMatchPattern);
+-    XftDefaultSubstitute(QPaintDevice::x11AppDisplay(), QPaintDevice::x11AppScreen(), pattern);
++    //XftDefaultSubstitute(QPaintDevice::x11AppDisplay(), QPaintDevice::x11AppScreen(), pattern);
+ 
+ //     qDebug("1: pattern contains:");
+ //     FcPatternPrint(pattern);

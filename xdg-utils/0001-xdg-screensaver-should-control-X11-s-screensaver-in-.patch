@@ -1,0 +1,42 @@
+From 0f06aadc8696f3e9234687bbc93b50a3f724b822 Mon Sep 17 00:00:00 2001
+From: Rex Dieter <rdieter@math.unl.edu>
+Date: Sun, 4 Jan 2015 16:21:09 -0600
+Subject: [PATCH 1/5] xdg-screensaver should control X11's screensaver in xfce
+ as fallback (BR80089)
+
+---
+ ChangeLog                  | 3 +++
+ scripts/xdg-screensaver.in | 4 ++++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 3399286..735fee7 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,8 @@
+ === xdg-utils 1.1.x ===
+ 
++2015-01-04 Rex Dieter <rdieter@fedoraproject.org>
++   * xdg-screensaver should control X11's screensaver in xfce as fallback (BR80089)
++
+ 2014-10-09 Rex Dieter <rdieter@fedoraproject.org>
+    * xdg-screensaver plasma5 support
+ 
+diff --git a/scripts/xdg-screensaver.in b/scripts/xdg-screensaver.in
+index 047d555..d9cb4d2 100644
+--- a/scripts/xdg-screensaver.in
++++ b/scripts/xdg-screensaver.in
+@@ -104,6 +104,10 @@ perform_action()
+       screensaver_xscreensaver "$1"
+       ;;
+ 
++    xfce)
++      [ -n "$DISPLAY" ] && screensaver_xserver "$1"
++      ;;
++
+     '')
+       [ -n "$DISPLAY" ] && screensaver_xserver "$1"
+       ;;
+-- 
+2.1.0
+

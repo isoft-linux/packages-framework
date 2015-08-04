@@ -1,0 +1,64 @@
+From db955eceff87ecc7994348c952029ae012fc5b6a Mon Sep 17 00:00:00 2001
+From: Nikos Mavrogiannopoulos <nmav@redhat.com>
+Date: Tue, 3 Mar 2015 16:57:51 +0100
+Subject: [PATCH 1/2] Allow overriding the default GnuTLS priority string
+
+Signed-off-by: Nikos Mavrogiannopoulos <nmav@redhat.com>
+---
+ configure.ac |  9 +++++++++
+ gnutls.c     | 18 ++++++++++--------
+ 2 files changed, 19 insertions(+), 8 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index e5b5e80..ddb5c48 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -417,6 +417,15 @@ if test "$with_gnutls" = "yes"; then
+     LIBS="$oldlibs"
+     CFLAGS="$oldcflags"
+ fi
++
++AC_ARG_WITH([default-gnutls-priority],
++	AS_HELP_STRING([--with-default-gnutls-priority=STRING],
++	[Provide a default string as GnuTLS priority string]),
++	default_gnutls_priority=$withval)
++if test -n "$default_gnutls_priority"; then
++   AC_DEFINE_UNQUOTED([DEFAULT_PRIO], ["$default_gnutls_priority"], [The GnuTLS priority string])
++fi
++
+ if test "$with_openssl" = "yes" || test "$with_openssl" = "" || test "$ssl_library" = "both"; then
+     PKG_CHECK_MODULES(OPENSSL, openssl, [],
+ 	[oldLIBS="$LIBS"
+diff --git a/gnutls.c b/gnutls.c
+index 3f79a22..34119da 100644
+--- a/gnutls.c
++++ b/gnutls.c
+@@ -2052,15 +2052,17 @@ static int verify_peer(gnutls_session_t session)
+  * >= 3.2.9 as there the %COMPAT keyword ensures that the client hello
+  * will be outside that range.
+  */
+-#if GNUTLS_VERSION_NUMBER >= 0x030209
+-# define DEFAULT_PRIO "NORMAL:-VERS-SSL3.0:%COMPAT"
+-#else
+-# define _DEFAULT_PRIO "NORMAL:-VERS-TLS-ALL:+VERS-TLS1.0:" \
++#ifndef DEFAULT_PRIO
++# if GNUTLS_VERSION_NUMBER >= 0x030209
++#  define DEFAULT_PRIO "NORMAL:-VERS-SSL3.0:%COMPAT"
++# else
++#  define _DEFAULT_PRIO "NORMAL:-VERS-TLS-ALL:+VERS-TLS1.0:" \
+ 	"%COMPAT:%DISABLE_SAFE_RENEGOTIATION:%LATEST_RECORD_VERSION"
+-# if GNUTLS_VERSION_MAJOR >= 3
+-#  define DEFAULT_PRIO _DEFAULT_PRIO":-CURVE-ALL:-ECDHE-RSA:-ECDHE-ECDSA"
+-#else
+-#  define DEFAULT_PRIO _DEFAULT_PRIO
++#  if GNUTLS_VERSION_MAJOR >= 3
++#   define DEFAULT_PRIO _DEFAULT_PRIO":-CURVE-ALL:-ECDHE-RSA:-ECDHE-ECDSA"
++# else
++#   define DEFAULT_PRIO _DEFAULT_PRIO
++#  endif
+ # endif
+ #endif
+ 
+-- 
+2.1.0
+

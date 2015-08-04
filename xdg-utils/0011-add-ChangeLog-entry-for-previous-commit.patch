@@ -1,0 +1,25 @@
+From bed791793af46ccb69107b95af87862335d4a702 Mon Sep 17 00:00:00 2001
+From: Rex Dieter <rdieter@gmail.com>
+Date: Tue, 24 Feb 2015 10:29:04 -0600
+Subject: [PATCH 11/11] add ChangeLog entry for previous commit
+
+---
+ ChangeLog | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 0c0ab97..6f6097a 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,8 @@
+ === xdg-utils 1.1.x ===
+ 
++2015-02-24 Lionel Orry <lionel.orry@gmail.com>
++   * xdg-mime: do not report multiple desktop files (BR60329)
++
+ 2015-02-20 Rex Dieter <rdieter@fedoraproject.org>
+    * xdg-open: safer xdg-open (BR89130), inspired by patch from Vincent Bernat <bernat@debian.org>
+ 
+-- 
+2.1.0
+

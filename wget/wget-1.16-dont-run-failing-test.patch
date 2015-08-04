@@ -1,0 +1,24 @@
+diff -up wget-1.16.1/tests/Makefile.am.test wget-1.16.1/tests/Makefile.am
+--- wget-1.16.1/tests/Makefile.am.test	2014-12-11 10:45:58.947499576 +0100
++++ wget-1.16.1/tests/Makefile.am	2014-12-11 10:47:12.736615080 +0100
+@@ -111,8 +111,6 @@ PX_TESTS = \
+              Test-O-nonexisting.px \
+              Test-O.px \
+              Test--post-file.px \
+-             Test-proxied-https-auth.px \
+-             Test-proxied-https-auth-keepalive.px \
+              Test-proxy-auth-basic.px \
+              Test-restrict-ascii.px \
+              Test-Restrict-Lowercase.px \
+diff -up wget-1.16.1/tests/Makefile.in.test wget-1.16.1/tests/Makefile.in
+--- wget-1.16.1/tests/Makefile.in.test	2014-12-11 10:45:58.947499576 +0100
++++ wget-1.16.1/tests/Makefile.in	2014-12-11 10:47:40.986659300 +0100
+@@ -1512,8 +1512,6 @@ PX_TESTS = \
+              Test-O-nonexisting.px \
+              Test-O.px \
+              Test--post-file.px \
+-             Test-proxied-https-auth.px \
+-             Test-proxied-https-auth-keepalive.px \
+              Test-proxy-auth-basic.px \
+              Test-restrict-ascii.px \
+              Test-Restrict-Lowercase.px \

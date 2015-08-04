@@ -1,0 +1,113 @@
+diff -Nur qt-x11-free-3.3.8/ChangeLog.immodule qt-x11-free-3.3.8n/ChangeLog.immodule
+--- qt-x11-free-3.3.8/ChangeLog.immodule	2013-10-16 12:01:18.231091889 +0800
++++ qt-x11-free-3.3.8n/ChangeLog.immodule	2013-10-16 12:03:08.485093543 +0800
+@@ -1,3 +1,6 @@
++2013-10-16  Cjacker Huang  <cjacker@gmail.com>
++	* Change QT_IM_MODULE and QT_IM_SWITCHER to QT3 prefix
++
+ 2007-11-16  Daisuke Kameda <daisuke@kde.gr.jp>
+ 
+ 	* Update to Qt 3.3.8
+diff -Nur qt-x11-free-3.3.8/changes.immodule qt-x11-free-3.3.8n/changes.immodule
+--- qt-x11-free-3.3.8/changes.immodule	2013-10-16 12:01:18.231091889 +0800
++++ qt-x11-free-3.3.8n/changes.immodule	2013-10-16 12:03:23.904093775 +0800
+@@ -41,7 +41,7 @@
+ 
+   http://freedesktop.org/pipermail/immodule-qt/2004-August/000416.html
+ 
+-- Added new environment variables QT_IM_SWITCHER and QT_IM_MODULE to
++- Added new environment variables QT3_IM_SWITCHER and QT3_IM_MODULE to
+   set user's favorite input method as default. See README.immodule for
+   examples.
+ 
+diff -Nur qt-x11-free-3.3.8/plugins/src/inputmethods/imsw-multi/qmultiinputcontext.cpp qt-x11-free-3.3.8n/plugins/src/inputmethods/imsw-multi/qmultiinputcontext.cpp
+--- qt-x11-free-3.3.8/plugins/src/inputmethods/imsw-multi/qmultiinputcontext.cpp	2013-10-16 12:01:18.267091890 +0800
++++ qt-x11-free-3.3.8n/plugins/src/inputmethods/imsw-multi/qmultiinputcontext.cpp	2013-10-16 12:03:54.881094240 +0800
+@@ -61,8 +61,8 @@
+     keyDict.setAutoDelete( true );
+     keyDict.clear();
+ 
+-    if ( getenv( "QT_IM_MODULE" ) ) {
+-        currentIMKey = getenv( "QT_IM_MODULE" );
++    if ( getenv( "QT3_IM_MODULE" ) ) {
++        currentIMKey = getenv( "QT3_IM_MODULE" );
+     } else {
+ #ifndef QT_NO_IM_EXTENSIONS
+ 	QSettings settings;
+diff -Nur qt-x11-free-3.3.8/plugins/src/inputmethods/imsw-none/qnoneinputcontextplugin.cpp qt-x11-free-3.3.8n/plugins/src/inputmethods/imsw-none/qnoneinputcontextplugin.cpp
+--- qt-x11-free-3.3.8/plugins/src/inputmethods/imsw-none/qnoneinputcontextplugin.cpp	2013-10-16 12:01:18.275091890 +0800
++++ qt-x11-free-3.3.8n/plugins/src/inputmethods/imsw-none/qnoneinputcontextplugin.cpp	2013-10-16 12:03:40.762094028 +0800
+@@ -69,8 +69,8 @@
+     if ( ! isIMSwitcher )
+ 	return 0;
+ 
+-    if ( getenv( "QT_IM_MODULE" ) ) {
+-        actuallySpecifiedKey = getenv( "QT_IM_MODULE" );
++    if ( getenv( "QT3_IM_MODULE" ) ) {
++        actuallySpecifiedKey = getenv( "QT3_IM_MODULE" );
+     } else {
+ 	QSettings settings;
+         actuallySpecifiedKey = settings.readEntry( "/qt/DefaultInputMethod", "xim" );
+diff -Nur qt-x11-free-3.3.8/README.immodule qt-x11-free-3.3.8n/README.immodule
+--- qt-x11-free-3.3.8/README.immodule	2013-10-16 12:01:18.231091889 +0800
++++ qt-x11-free-3.3.8n/README.immodule	2013-10-16 12:02:13.531092719 +0800
+@@ -75,26 +75,26 @@
+ 
+   - set "xim" input method as default
+ 
+-    export QT_IM_MODULE=xim
++    export QT3_IM_MODULE=xim
+ 
+ 
+   - set "simple" composing input method as default
+ 
+-    export QT_IM_MODULE=simple
++    export QT3_IM_MODULE=simple
+ 
+ 
+   - set "xim" input method as default, and disable input method
+     selection menu in the context menu
+ 
+-    export QT_IM_SWITCHER=imsw-none
+-    export QT_IM_MODULE=xim
++    export QT3_IM_SWITCHER=imsw-none
++    export QT3_IM_MODULE=xim
+ 
+ 
+   - set "xim" input method as default, and enable input method
+     selection menu in the context menu (default configuration)
+ 
+-    export QT_IM_SWITCHER=imsw-multi
+-    export QT_IM_MODULE=xim
++    export QT3_IM_SWITCHER=imsw-multi
++    export QT3_IM_MODULE=xim
+ 
+ 
+   - set "iiimqcf" that has its own input method switching framework as
+@@ -103,5 +103,5 @@
+     provide unified user interface for global input method switching
+     over the desktop
+ 
+-    export QT_IM_SWITCHER=imsw-none
+-    export QT_IM_MODULE=iiimqcf
++    export QT3_IM_SWITCHER=imsw-none
++    export QT3_IM_MODULE=iiimqcf
+diff -Nur qt-x11-free-3.3.8/src/kernel/qapplication_x11.cpp qt-x11-free-3.3.8n/src/kernel/qapplication_x11.cpp
+--- qt-x11-free-3.3.8/src/kernel/qapplication_x11.cpp	2013-10-16 12:01:18.293091890 +0800
++++ qt-x11-free-3.3.8n/src/kernel/qapplication_x11.cpp	2013-10-16 12:04:19.899094615 +0800
+@@ -1096,12 +1096,12 @@
+     /*
+ 	The identifier name of an input method is acquired from the
+ 	configuration file as a default. If a environment variable
+-	"QT_IM_SWITCHER" is not empty it will overwrite the
++	"QT3_IM_SWITCHER" is not empty it will overwrite the
+ 	configuration file. The "imsw-multi" becomes the default if the entry
+ 	is not configured.
+      */
+-    if ( getenv( "QT_IM_SWITCHER" ) )
+-        defaultIM = getenv( "QT_IM_SWITCHER" );
++    if ( getenv( "QT3_IM_SWITCHER" ) )
++        defaultIM = getenv( "QT3_IM_SWITCHER" );
+ #ifndef QT_NO_IM_EXTENSIONS
+     else
+         defaultIM = settings.readEntry( "/qt/DefaultInputMethodSwitcher", "imsw-multi" );

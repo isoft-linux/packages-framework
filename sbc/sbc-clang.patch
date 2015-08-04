@@ -1,0 +1,16 @@
+diff -Nur sbc-1.2/Makefile.am sbc-1.2n/Makefile.am
+--- sbc-1.2/Makefile.am	2014-01-23 21:13:57.000000000 +0800
++++ sbc-1.2n/Makefile.am	2014-10-28 13:53:36.390477083 +0800
+@@ -51,11 +51,7 @@
+ src_sbctester_LDADD = @SNDFILE_LIBS@ -lm
+ endif
+ 
+-AM_CFLAGS = @SNDFILE_CFLAGS@ -fvisibility=hidden \
+-				-finline-functions \
+-				-fgcse-after-reload \
+-				-funswitch-loops \
+-				-funroll-loops
++AM_CFLAGS = @SNDFILE_CFLAGS@ -fvisibility=hidden
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+ 

@@ -1,0 +1,48 @@
+diff -Nur ImageMagick-6.7.6-3/magick/module.c ImageMagick-6.7.6-3n/magick/module.c
+--- ImageMagick-6.7.6-3/magick/module.c	2011-12-19 09:54:26.000000000 +0800
++++ ImageMagick-6.7.6-3n/magick/module.c	2012-03-31 15:50:21.857274879 +0800
+@@ -72,7 +72,7 @@
+   Define declarations.
+ */
+ #if defined(MAGICKCORE_LTDL_DELEGATE)
+-#  define ModuleGlobExpression "*.la"
++#  define ModuleGlobExpression "*.so"
+ #else
+ #  if defined(_DEBUG)
+ #    define ModuleGlobExpression "IM_MOD_DB_*.dll"
+@@ -987,7 +987,7 @@
+   /*
+     Open the module.
+   */
+-  handle=(ModuleHandle) lt_dlopen(path);
++  handle=(ModuleHandle) lt_dlopenext(path);
+   if (handle == (ModuleHandle) NULL)
+     {
+       (void) ThrowMagickException(exception,GetMagickModule(),ModuleError,
+@@ -1272,7 +1272,7 @@
+   */
+   (void) LogMagickEvent(ModuleEvent,GetMagickModule(),
+     "Opening module at path \"%s\"",path);
+-  handle=(ModuleHandle) lt_dlopen(path);
++  handle=(ModuleHandle) lt_dlopenext(path);
+   if (handle == (ModuleHandle) NULL)
+     {
+       (void) ThrowMagickException(exception,GetMagickModule(),ModuleError,
+@@ -1454,7 +1454,7 @@
+   (void) LogMagickEvent(TraceEvent,GetMagickModule(),"%s",tag);
+   assert(name != (char *) NULL);
+ #if defined(MAGICKCORE_LTDL_DELEGATE)
+-  (void) FormatLocaleString(name,MaxTextExtent,"%s.la",tag);
++  (void) FormatLocaleString(name,MaxTextExtent,"%s.so",tag);
+   (void) LocaleLower(name);
+ #else
+ #if defined(MAGICKCORE_WINDOWS_SUPPORT)
+@@ -1505,7 +1505,7 @@
+ #if !defined(MAGICKCORE_LTDL_DELEGATE)
+   (void) FormatLocaleString(name,MaxTextExtent,"%s.dll",tag);
+ #else
+-  (void) FormatLocaleString(name,MaxTextExtent,"%s.la",tag);
++  (void) FormatLocaleString(name,MaxTextExtent,"%s.so",tag);
+ #endif
+ }
+ 

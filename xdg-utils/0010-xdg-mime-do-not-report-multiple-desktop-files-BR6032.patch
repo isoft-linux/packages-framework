@@ -1,0 +1,37 @@
+From e04f8065335e391f47b04513d395e02a7f13d56e Mon Sep 17 00:00:00 2001
+From: Lionel Orry <lionel.orry@gmail.com>
+Date: Wed, 13 Aug 2014 09:56:25 +0200
+Subject: [PATCH 10/11] xdg-mime: do not report multiple desktop files
+ (BR60329)
+
+since commit 050333e3, xdg-mime checks both defaults.list and
+mimeinfo.cache. When a result is present in both files, it returns both
+results separated by a space.
+
+When this is the case, the desktop file name is made of the duplicated
+filename and the following chain of executions does not work properly.
+
+This commit tries to select the first found line before extracting the
+desktop file name.
+
+Signed-off-by: Lionel Orry <lionel.orry@gmail.com>
+---
+ scripts/xdg-mime.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/xdg-mime.in b/scripts/xdg-mime.in
+index 80781c8..74cadfa 100644
+--- a/scripts/xdg-mime.in
++++ b/scripts/xdg-mime.in
+@@ -383,7 +383,7 @@ defapp_generic()
+     for x in `echo "$xdg_system_dirs" | sed 's/:/ /g'`; do
+        for prefix in "$XDG_MENU_PREFIX" ""; do
+           DEBUG 2 "Checking $x/applications/${prefix}defaults.list and $x/applications/${prefix}mimeinfo.cache"
+-          trader_result=`grep "$MIME=" $x/applications/${prefix}defaults.list $x/applications/${prefix}mimeinfo.cache 2> /dev/null | cut -d '=' -f 2 | cut -d ';' -f 1`
++          trader_result=`grep "$MIME=" $x/applications/${prefix}defaults.list $x/applications/${prefix}mimeinfo.cache 2> /dev/null | head -n 1 | cut -d '=' -f 2 | cut -d ';' -f 1`
+           if [ -n "$trader_result" ] ; then
+               echo $trader_result
+               exit_success
+-- 
+2.1.0
+

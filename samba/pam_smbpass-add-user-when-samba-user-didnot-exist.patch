@@ -1,0 +1,58 @@
+pam_smbpass support sync pass and migrate users between samba and unix pam,
+but the migration only happened when user logined in, 
+that's to say, for first time, a user created, when set password for this user, pam will fail since the user not exists in samba.
+this patch will add user at this time.
+
+--- samba-4.2.3/source3/pam_smbpass/pam_smb_auth.c	2015-02-24 18:59:51.000000000 +0000
++++ samba-4.2.3n/source3/pam_smbpass/pam_smb_auth.c	2015-07-16 00:40:11.936836422 +0000
+@@ -61,7 +61,7 @@
+ 	return retval;						\
+ } while (0)
+ 
+-static int _smb_add_user(pam_handle_t *pamh, unsigned int ctrl,
++int _smb_add_user(pam_handle_t *pamh, unsigned int ctrl,
+                          const char *name, struct samu *sampass, bool exist);
+ 
+ 
+@@ -197,7 +197,7 @@
+ }
+ 
+ /* Helper function for adding a user to the db. */
+-static int _smb_add_user(pam_handle_t *pamh, unsigned int ctrl,
++int _smb_add_user(pam_handle_t *pamh, unsigned int ctrl,
+                          const char *name, struct samu *sampass, bool exist)
+ {
+ 	char *err_str = NULL;
+@@ -226,7 +226,7 @@
+ 		if (!retval && err_str) {
+ 			make_remark(pamh, ctrl, PAM_ERROR_MSG, err_str );
+ 		} else if (msg_str) {
+-			make_remark(pamh, ctrl, PAM_TEXT_INFO, msg_str );
++			//make_remark(pamh, ctrl, PAM_TEXT_INFO, msg_str );
+ 		}
+ 		pass = NULL;
+ 
+--- samba-4.2.3/source3/pam_smbpass/pam_smb_passwd.c	2014-10-01 09:16:21.000000000 +0000
++++ samba-4.2.3n/source3/pam_smbpass/pam_smb_passwd.c	2015-07-16 00:40:11.936836422 +0000
+@@ -92,6 +92,9 @@
+  * SMB_PASSWD_FILE file (normally, $(LIBDIR)/smbpasswd).
+  */
+ 
++extern int _smb_add_user(pam_handle_t *pamh, unsigned int ctrl,
++                         const char *name, struct samu *sampass, bool exist);
++
+ int pam_sm_chauthtok(pam_handle_t *pamh, int flags,
+                      int argc, const char **argv)
+ {
+@@ -154,8 +157,9 @@
+     if (!pdb_getsampwnam(sampass,user)) {
+         _log_err(pamh, LOG_ALERT, "Failed to find entry for user %s.", user);
+         CatchSignal(SIGPIPE, oldsig_handler);
+-	TALLOC_FREE(frame);
+-	return PAM_USER_UNKNOWN;
++        retval = _smb_add_user(pamh, ctrl, user, sampass, 0);
++	//TALLOC_FREE(frame);
++	//return PAM_USER_UNKNOWN;
+     }
+     if (on( SMB_DEBUG, ctrl )) {
+         _log_err(pamh, LOG_DEBUG, "Located account for %s", user);

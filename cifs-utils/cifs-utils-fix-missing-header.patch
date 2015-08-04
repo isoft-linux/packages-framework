@@ -1,0 +1,36 @@
+diff -Nur cifs-utils-6.4/getcifsacl.c cifs-utils-6.4n/getcifsacl.c
+--- cifs-utils-6.4/getcifsacl.c	2014-07-11 23:14:06.000000000 -0800
++++ cifs-utils-6.4n/getcifsacl.c	2014-11-04 15:39:59.988320140 -0800
+@@ -35,6 +35,9 @@
+ #include <limits.h>
+ #include <ctype.h>
+ #include <sys/xattr.h>
++#include <linux/limits.h>
++#include <endian.h>
++
+ #include "cifsacl.h"
+ #include "idmap_plugin.h"
+ 
+diff -Nur cifs-utils-6.4/setcifsacl.c cifs-utils-6.4n/setcifsacl.c
+--- cifs-utils-6.4/setcifsacl.c	2014-07-11 23:14:06.000000000 -0800
++++ cifs-utils-6.4n/setcifsacl.c	2014-11-04 15:39:37.671871797 -0800
+@@ -35,6 +35,8 @@
+ #include <limits.h>
+ #include <ctype.h>
+ #include <sys/xattr.h>
++#include <linux/limits.h>
++#include <endian.h>
+ 
+ #include "cifsacl.h"
+ #include "idmap_plugin.h"
+--- cifs-utils-6.4/mount.h	2014-07-11 23:14:06.000000000 -0800
++++ cifs-utils-6.4n/mount.h	2014-11-04 15:41:12.047702911 -0800
+@@ -20,6 +20,8 @@
+ #ifndef _MOUNT_H_
+ #define _MOUNT_H_
+ 
++#include <paths.h>
++
+ /* exit status - bits below are ORed */
+ #define EX_USAGE	1	/* incorrect invocation or permission */
+ #define EX_SYSERR	2	/* out of memory, cannot fork, ... */
