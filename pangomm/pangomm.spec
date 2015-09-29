@@ -3,7 +3,7 @@
 %define release_version %(echo %{version} | awk -F. '{print $1"."$2}')
 
 Name:           pangomm
-Version:        2.36.0
+Version:        2.38.1
 Release:        1 
 Summary:        C++ interface for Pango
 
@@ -88,3 +88,6 @@ rpmclean
 %{_datadir}/devhelp/
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

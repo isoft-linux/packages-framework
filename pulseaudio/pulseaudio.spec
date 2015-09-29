@@ -1,19 +1,15 @@
 Name:           pulseaudio
 Summary:        Improved Linux Sound Server
-Version:        6.0 
+Version:        7.0 
 Release:        1
 License:        LGPLv2+
 Group:          System Environment/Daemons
-Source0:        http://0pointer.de/lennart/projects/pulseaudio/%{name}-%{version}.tar.xz
+
+Source0: http://freedesktop.org/software/pulseaudio/releases/pulseaudio-%{version}.tar.xz
 # revert upstream commit to rely solely on autospawn for autostart, instead
 # include a fallback to manual launch when autospawn fails, like when
 # user disables autospawn, or logging in as root
 Patch1: pulseaudio-autostart.patch
-
-## upstream patches
-Patch35: 0035-pstream-Don-t-split-non-SHM-memblocks.patch
-Patch37: 0037-pstream-Remove-unnecessary-if-condition.patch
-
 
 URL:            http://pulseaudio.org/
 BuildRequires:  json-c
@@ -40,6 +36,10 @@ BuildRequires:  xcb-util-devel
 BuildRequires:  sbc-devel 
 BuildRequires:  bluez-libs-devel
 BuildRequires:  libcap-devel
+BuildRequires:  avahi-devel
+BuildRequires:  libsamplerate-devel
+BuildRequires:  libspeex-devel
+
 Obsoletes:      pulseaudio-devel
 Obsoletes:      pulseaudio-core-libs
 Provides:       pulseaudio-core-libs
@@ -164,11 +164,9 @@ Requires:       %{name}-libs = %{version}-%{release}
 This package contains command line utilities for the PulseAudio sound server.
 
 %prep
-%setup -q 
+%setup -q
 
 %patch1 -p1 -b .autostart
-%patch35 -p1 -b .0035
-%patch37 -p1 -b .0037
 
 sed -i.no_consolekit -e \
   's/^load-module module-console-kit/#load-module module-console-kit/' \
@@ -176,18 +174,26 @@ sed -i.no_consolekit -e \
 
 
 %build
+if [ ! -f configure ]; then ./autogen.sh; fi
+
 %configure \
     --disable-static \
     --disable-rpath \
     --with-system-user=pulse \
     --with-system-group=pulse \
     --with-access-group=pulse-access \
-    --disable-hal-compat \
     --enable-bluez5 \
-    --disable-systemd-daemon \
-    --disable-avahi \
+    --enable-systemd-daemon \
+    --enable-systemd-logind \
+    --enable-systemd-journal \
+    --enable-samplerate \
+    --enable-avahi \
+    --enable-orc \
+    --enable-openssl \
+    --enable-ipv6 \
+    --with-speex \
+    --disable-hal-compat \
     --disable-tcpwrap \
-    --disable-samplerate \
     --disable-gconf \
     --disable-bluez4 \
     --disable-waveout \
@@ -196,26 +202,22 @@ sed -i.no_consolekit -e \
     --disable-asyncns \
     --disable-lirc \
     --disable-hal-compat \
-    --disable-ipv6 \
-    --disable-openssl \
-    --disable-orc \
     --without-fftw \
-    --without-speex \
     --with-caps 
 make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
+
+# Disable cork-request module, can result in e.g. media players unpausing
+# when there's a Skype call incoming
+sed -e 's|/usr/bin/pactl load-module module-x11-cork-request|#&|' -i %{buildroot}%{_bindir}/start-pulseaudio-x11
+
 rm -rf $RPM_BUILD_ROOT%{_libdir}/*.la $RPM_BUILD_ROOT%{_libdir}/pulse-%{version}/modules/*.la
-# configure --disable-static had no effect; delete manually.
 rm -rf $RPM_BUILD_ROOT%{_libdir}/*.a $RPM_BUILD_ROOT%{_libdir}/pulse-%{version}/modules/*.a
-#rm $RPM_BUILD_ROOT%{_libdir}/pulse-%{version}/modules/liboss-util.so
-#rm $RPM_BUILD_ROOT%{_libdir}/pulse-%{version}/modules/module-oss.so
 rm $RPM_BUILD_ROOT%{_libdir}/pulse-%{version}/modules/module-detect.so
-#rm $RPM_BUILD_ROOT%{_libdir}/pulse-%{version}/modules/module-pipe-sink.so
-#rm $RPM_BUILD_ROOT%{_libdir}/pulse-%{version}/modules/module-pipe-source.so
-# preserve time stamps, for multilib's sake
+
 touch -r src/daemon/daemon.conf.in $RPM_BUILD_ROOT%{_sysconfdir}/pulse/daemon.conf
 touch -r src/daemon/default.pa.in $RPM_BUILD_ROOT%{_sysconfdir}/pulse/default.pa
 touch -r man/pulseaudio.1.xml.in $RPM_BUILD_ROOT%{_mandir}/man1/pulseaudio.1
@@ -223,7 +225,6 @@ touch -r man/default.pa.5.xml.in $RPM_BUILD_ROOT%{_mandir}/man5/default.pa.5
 touch -r man/pulse-client.conf.5.xml.in $RPM_BUILD_ROOT%{_mandir}/man5/pulse-client.conf.5
 touch -r man/pulse-daemon.conf.5.xml.in $RPM_BUILD_ROOT%{_mandir}/man5/pulse-daemon.conf.5
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/lib/pulse
-
 
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/pulseaudio/*.a
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/pulseaudio/*.la
@@ -330,13 +331,13 @@ exit 0
 %{_libdir}/pulse-%{version}/modules/module-intended-roles.so
 %{_libdir}/pulse-%{version}/modules/module-rygel-media-server.so
 %{_libdir}/pulse-%{version}/modules/module-echo-cancel.so
-#%{_libdir}/pulse-%{version}/modules/libraop.so
+%{_libdir}/pulse-%{version}/modules/libraop.so
 %{_libdir}/pulse-%{version}/modules/module-combine-sink.so
 %{_libdir}/pulse-%{version}/modules/module-dbus-protocol.so
 %{_libdir}/pulse-%{version}/modules/module-filter-apply.so
 %{_libdir}/pulse-%{version}/modules/module-filter-heuristics.so
 %{_libdir}/pulse-%{version}/modules/module-null-source.so
-#%{_libdir}/pulse-%{version}/modules/module-raop-sink.so
+%{_libdir}/pulse-%{version}/modules/module-raop-sink.so
 %{_libdir}/pulse-%{version}/modules/module-switch-on-connect.so
 %{_libdir}/pulse-%{version}/modules/module-virtual-sink.so
 %{_libdir}/pulse-%{version}/modules/module-virtual-source.so
@@ -366,9 +367,9 @@ exit 0
 %{_mandir}/man5/pulse-cli-syntax.5.gz
 
 
-%{_sysconfdir}/bash_completion.d/*
-#%{_libdir}/systemd/user/pulseaudio.service
-#%{_libdir}/systemd/user/pulseaudio.socket
+%{_datadir}/bash-completion/completions/*
+%{_libdir}/systemd/user/pulseaudio.service
+%{_libdir}/systemd/user/pulseaudio.socket
 %{_datadir}/zsh/site-functions/_pulseaudio
 
 
@@ -387,13 +388,12 @@ exit 0
 %{_libdir}/pulse-%{version}/modules/module-x11-cork-request.so
 %{_mandir}/man1/start-pulseaudio-x11.1.gz
 
-#%files module-zeroconf
-#%defattr(-,root,root)
-#%{_libdir}/pulse-%{version}/modules/libavahi-wrap.so
-#%{_libdir}/pulse-%{version}/modules/module-equalizer-sink.so
-#%{_libdir}/pulse-%{version}/modules/module-raop-discover.so
-#%{_libdir}/pulse-%{version}/modules/module-zeroconf-discover.so
-#%{_libdir}/pulse-%{version}/modules/module-zeroconf-publish.so
+%files module-zeroconf
+%defattr(-,root,root)
+%{_libdir}/pulse-%{version}/modules/libavahi-wrap.so
+%{_libdir}/pulse-%{version}/modules/module-raop-discover.so
+%{_libdir}/pulse-%{version}/modules/module-zeroconf-discover.so
+%{_libdir}/pulse-%{version}/modules/module-zeroconf-publish.so
 
 %ifnarch s390 s390x
 %files module-bluetooth
@@ -460,6 +460,9 @@ exit 0
 %{_mandir}/man1/pasuspender.1.gz
 %{_mandir}/man1/padsp.1.gz
 %{_mandir}/man1/pax11publish.1.gz
+%{_mandir}/man1/pamon.1.gz
+%{_mandir}/man1/parec.1.gz
+%{_mandir}/man1/parecord.1.gz
 
 
 %changelog

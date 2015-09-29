@@ -1,0 +1,30 @@
+# 以下软件包是Koji相关的依赖，需要从这里移出：
+python-krbV #required by koji
+
+# 如果这里不需要dnf和yum, 这些软件包可以移走：
+python-cryptography-vectors 需要从1.0降级到0.8.2
+python-cryptography 需要从1.0降级到0.8.2
+
+## 以下请注意，是否需要移动到buildtool
+pyOpenSSL
+python-urllib3
+python-requests
+osbs
+python-bugzilla
+yum-utils
+python-backports
+python-backports-ssl_match_hostname
+dnf
+yum
+
+### 如果yum/dnf移动，则下面被其依赖的软件包可以同时移动
+python-iso8601
+python-kitchen
+python-urlgrabber
+createrepo
+createrepo_c
+yum-metadata-parser
+drpm
+librepo
+python-flask
+python-werkzeug

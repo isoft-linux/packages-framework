@@ -6,7 +6,10 @@ Summary:        Toolkit for fingerprint scanner
 Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.freedesktop.org/wiki/Software/fprint/libfprint
-Source0:        http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
+# git://anongit.freedesktop.org/libfprint/libfprint
+Source0: libfprint.tar.gz
+
+#Source0:        http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
 
 BuildRequires:  libusb-devel glib2-devel gtk2-devel nss-devel
 BuildRequires:  doxygen autoconf automake libtool
@@ -27,9 +30,10 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q
+%setup -q -n %{name} 
 
 %build
+if [ ! -f "configure" ]; then ./autogen.sh; fi
 %configure --disable-static 
 make %{?_smp_mflags}
 pushd doc

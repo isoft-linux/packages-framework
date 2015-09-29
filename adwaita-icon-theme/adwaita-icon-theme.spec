@@ -1,6 +1,6 @@
 Summary: Adwaita icon theme
 Name: adwaita-icon-theme
-Version: 3.16.2.1
+Version: 3.18.0
 Release: 2 
 Source0: %{name}-%{version}.tar.xz
 License: GPL
@@ -47,6 +47,9 @@ done
 %{_datadir}/pkgconfig/adwaita-icon-theme.pc
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

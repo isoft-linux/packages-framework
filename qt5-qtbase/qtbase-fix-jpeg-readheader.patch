@@ -1,0 +1,21 @@
+diff -Nur qtbase-opensource-src-5.5.0/src/gui/image/qjpeghandler.cpp qtbase-opensource-src-5.5.0n/src/gui/image/qjpeghandler.cpp
+--- qtbase-opensource-src-5.5.0/src/gui/image/qjpeghandler.cpp	2015-06-29 20:04:51.000000000 +0000
++++ qtbase-opensource-src-5.5.0n/src/gui/image/qjpeghandler.cpp	2015-08-13 20:41:32.187145848 +0000
+@@ -900,7 +900,8 @@
+             size = QSize(width, height);
+ 
+             format = QImage::Format_Invalid;
+-            read_jpeg_format(format, &info);
++            if(read_jpeg_format(format, &info))
++            	state = ReadHeader;
+ 
+             QByteArray exifData;
+ 
+@@ -935,7 +936,6 @@
+                     transformation = exif2Qt(exifOrientation);
+             }
+ 
+-            state = ReadHeader;
+             return true;
+         }
+         else

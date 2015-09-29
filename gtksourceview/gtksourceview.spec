@@ -5,7 +5,7 @@
 
 Summary: A library for viewing source files
 Name: gtksourceview
-Version: 3.16.1
+Version: 3.18.0
 Release: 1
 License: LGPLv2+ and GPLv2+
 Group: System Environment/Libraries
@@ -74,3 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/gtksourceview-3.0.vapi
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

@@ -3,10 +3,9 @@
 
 Name:           ibus
 Version:        1.5.10
-Release:        1 
+Release:        2 
 Summary:        Intelligent Input Bus for Linux OS
 License:        LGPLv2+
-Group:          System Environment/Libraries
 URL:            http://code.google.com/p/ibus/
 Source0:        https://github.com/ibus/ibus/releases/download/%{version}/%{name}-%{version}.tar.gz
 Source1:        %{name}-xinput
@@ -66,7 +65,6 @@ IBus means Intelligent Input Bus. It is an input framework for Linux OS.
 
 %package libs
 Summary:        IBus libraries
-Group:          System Environment/Libraries
 
 Requires:       dbus >= 1.2.4
 Requires:       glib2 >= %{glib_ver}
@@ -78,7 +76,6 @@ This package contains the libraries for IBus
 
 %package gtk2
 Summary:        IBus im module for gtk2
-Group:          System Environment/Libraries
 Requires:       %{name}%{?_isa}        = %{version}-%{release}
 Requires:       %{name}-libs%{?_isa}   = %{version}-%{release}
 Requires(post): glib2 >= %{glib_ver}
@@ -91,7 +88,6 @@ This package contains ibus im module for gtk2
 
 %package gtk3
 Summary:        IBus im module for gtk3
-Group:          System Environment/Libraries
 Requires:       %{name}%{?_isa}        = %{version}-%{release}
 Requires:       %{name}-libs%{?_isa}   = %{version}-%{release}
 Requires(post): glib2 >= %{glib_ver}
@@ -101,7 +97,6 @@ This package contains ibus im module for gtk3
 
 %package setup
 Summary:        IBus setup utility
-Group:          System Environment/Libraries
 Requires:       %{name} = %{version}-%{release}
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  pygobject3-devel
@@ -112,7 +107,6 @@ This is a setup utility for IBus.
 
 %package pygtk2
 Summary:        IBus pygtk2 library
-Group:          System Environment/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pygtk2
 BuildArch:      noarch
@@ -123,7 +117,6 @@ and this package will be deprecated.
 
 %package wayland
 Summary:        IBus im module for Wayland
-Group:          System Environment/Libraries
 Requires:       %{name}%{?_isa}        = %{version}-%{release}
 Requires:       %{name}-libs%{?_isa}   = %{version}-%{release}
 
@@ -132,7 +125,6 @@ This package contains IBus im module for Wayland
 
 %package devel
 Summary:        Development tools for ibus
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa}        = %{version}-%{release}
 Requires:       %{name}-libs%{?_isa}   = %{version}-%{release}
 Requires:       dbus-devel
@@ -143,6 +135,13 @@ Requires:       vala
 %description devel
 The ibus-devel package contains the header files for ibus.
 
+%package devel-docs
+Summary:        Developer documents for IBus
+Requires:       %{name}                = %{version}-%{release}
+BuildArch:      noarch
+
+%description devel-docs
+The ibus-devel-docs package contains developer documentation for IBus
 
 
 %prep
@@ -300,3 +299,9 @@ fi
 %{_datadir}/vala/vapi/ibus-1.0.vapi
 %{_datadir}/vala/vapi/ibus-1.0.deps
 
+%files devel-docs
+%{_datadir}/gtk-doc/html/ibus
+
+%changelog
+* Mon Aug 17 2015 Cjacker <cjacker@foxmail.com>
+- rebuild with older glib2. since we decrease glib2 for avoid filemonitor bug.

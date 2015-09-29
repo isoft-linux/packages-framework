@@ -1,0 +1,33 @@
+diff -Nur libxspf-1.2.0/examples/read/read.cpp libxspf-1.2.0n/examples/read/read.cpp
+--- libxspf-1.2.0/examples/read/read.cpp	2009-02-22 04:13:25.000000000 +0800
++++ libxspf-1.2.0n/examples/read/read.cpp	2015-08-21 23:25:55.402555355 +0800
+@@ -43,7 +43,7 @@
+ #include <cstdio>
+ #include <cstdlib> // MAX_PATH
+ #include <climits> // PATH_MAX
+-
++#include <unistd.h> //getcwd
+ 
+ #if defined(__WIN32__) || defined(WIN32)
+ # define DIR_SEPERATOR '\\'
+--- libxspf-1.2.0n/test/ProjectOpus/ProjectOpusSuite.cpp	2015-08-21 23:25:40.928689008 +0800
++++ libxspf-1.2.0/test/ProjectOpus/ProjectOpusSuite.cpp	2015-08-21 23:27:00.773063600 +0800
+@@ -28,6 +28,7 @@
+ #include <xspf/XspfExtensionReaderFactory.h>
+ #include <xspf/ProjectOpus/ProjectOpusPlaylistExtension.h>
+ #include <xspf/ProjectOpus/ProjectOpusPlaylistExtensionReader.h>
++#include <stdio.h>
+ using namespace Xspf;
+ using namespace Xspf::ProjectOpus;
+ 
+--- libxspf-1.2.0n/test/OfficialSuite.cpp	2015-08-21 23:25:40.929688999 +0800
++++ libxspf-1.2.0/test/OfficialSuite.cpp	2015-08-21 23:27:38.479851513 +0800
+@@ -23,6 +23,8 @@
+ 
+ #include "OfficialSuite.h"
+ #include <xspf/XspfReaderCallback.h>
++#include <stdio.h>
++
+ using namespace Xspf;
+ 
+ 

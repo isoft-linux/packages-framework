@@ -3,7 +3,7 @@
 %define gst_majorminor  1.0
 
 Name: 		%{gstreamer}-libav
-Version: 	1.5.2
+Version: 	1.6.0
 Release:	1	
 Summary: 	GStreamer Streaming-media framework plug-in using libav (FFmpeg).
 Group: 		Libraries/Multimedia
@@ -54,7 +54,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root, -)
 %{_libdir}/gstreamer-%{gst_majorminor}/*.so
 %{_datadir}/gtk-doc/html/*
+
 %changelog
+* Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.6.0
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

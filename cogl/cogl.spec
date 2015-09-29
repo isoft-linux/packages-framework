@@ -1,7 +1,7 @@
 %global with_wayland 1
 
 Name:          cogl
-Version:       1.20.0
+Version:       1.22.0
 Release:       1 
 Summary:       A library for using 3D graphics hardware to draw pretty pictures
 
@@ -80,7 +80,7 @@ CFLAGS="$RPM_OPT_FLAGS -fPIC"
   --enable-gdk-pixbuf=yes \
   --enable-glx \
   --enable-gl \
-  --enable-gles1 \
+  --enable-gles1=no \
   --enable-gles2 \
   --enable-cogl-gles2 \
   --enable-gtk-doc \
@@ -127,3 +127,6 @@ rpmclean
 %{_datadir}/gtk-doc/html/cogl-2.0-experimental
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

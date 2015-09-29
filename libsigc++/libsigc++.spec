@@ -2,7 +2,7 @@
 %define release_version %(echo %{version} | awk -F. '{print $1"."$2}')
 
 Name:           libsigc++
-Version:        2.4.1
+Version:        2.6.0
 Release:        1 
 Summary:        Typesafe signal framework for C++
 
@@ -66,7 +66,7 @@ rpmclean
 
 
 %files
-%doc AUTHORS COPYING README NEWS ChangeLog TODO
+%doc AUTHORS COPYING README NEWS ChangeLog
 %{_libdir}/*.so.*
 
 %files devel
@@ -84,3 +84,6 @@ rpmclean
 
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

@@ -1,7 +1,7 @@
 %global with_x11 1
 
 Name:           gdk-pixbuf2
-Version:        2.31.4
+Version:        2.32.0
 Release:        1
 Summary:        An image loading library
 
@@ -131,6 +131,9 @@ fi
 
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

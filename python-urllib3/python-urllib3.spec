@@ -11,7 +11,7 @@
 
 Name:           python-%{srcname}
 Version:        1.10.4
-Release:        4.%{checkout}%{?dist}
+Release:        5.%{checkout}%{?dist}
 Summary:        Python HTTP library with thread-safe connection pooling and file post
 
 License:        MIT
@@ -27,11 +27,30 @@ BuildArch:      noarch
 
 Requires:       ca-certificates
 
+# Previously bundled things:
+Requires:       python-six
+Requires:       python-backports-ssl_match_hostname
+
 BuildRequires:  python2-devel
+# For unittests
+BuildRequires:  python-nose
+BuildRequires:  python-mock
+BuildRequires:  python-six
+BuildRequires:  python-backports-ssl_match_hostname
 
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
+# For unittests
+BuildRequires:  python3-nose
+BuildRequires:  python3-mock
+BuildRequires:  python3-six
 %endif # with_python3
+
+
+BuildRequires:  pyOpenSSL
+BuildRequires:  python-pyasn1
+Requires:       pyOpenSSL
+Requires:       python-pyasn1
 
 
 %description
@@ -41,6 +60,7 @@ Python HTTP module with connection pooling and file POST abilities.
 %package -n python3-%{srcname}
 Requires:       ca-certificates
 Requires:       python3-six
+# Note: Will not run with python3 < 3.2 (unless python3-backports-ssl_match_hostname is created)
 Summary:        Python3 HTTP library with thread-safe connection pooling and file post
 %description -n python3-%{srcname}
 Python3 HTTP module with connection pooling and file POST abilities.
@@ -55,14 +75,14 @@ Python3 HTTP module with connection pooling and file POST abilities.
 # in scratch builds (weird).
 rm -rf test/with_dummyserver/
 
-%if 0%{?rhel} && 0%{?rhel} <= 6
-%patch100 -p1
-%endif
-
 %if 0%{?with_python3}
 rm -rf %{py3dir}
 cp -a . %{py3dir}
 %endif # with_python3
+
+%if 0%{?fedora} == 21
+%patch0 -p1
+%endif
 
 %build
 %{__python2} setup.py build
@@ -84,7 +104,11 @@ mkdir -p %{buildroot}/%{python2_sitelib}/urllib3/packages/
 ln -s ../../six.py %{buildroot}/%{python2_sitelib}/urllib3/packages/six.py
 ln -s ../../six.pyc %{buildroot}/%{python2_sitelib}/urllib3/packages/six.pyc
 ln -s ../../six.pyo %{buildroot}/%{python2_sitelib}/urllib3/packages/six.pyo
+ln -s ../../backports/ssl_match_hostname %{buildroot}/%{python2_sitelib}/urllib3/packages/ssl_match_hostname
 
+# Copy in six.py just for the test suite.
+cp %{python2_sitelib}/six.* %{buildroot}/%{python2_sitelib}/.
+cp -r %{python2_sitelib}/backports %{buildroot}/%{python2_sitelib}/.
 ls -alh %{buildroot}/%{python2_sitelib}/urllib3/packages/
 ls -alh %{buildroot}/%{python2_sitelib}
 
@@ -104,6 +128,8 @@ ln -s ../../six.pyc %{buildroot}/%{python3_sitelib}/urllib3/packages/six.pyc
 ln -s ../../six.pyo %{buildroot}/%{python3_sitelib}/urllib3/packages/six.pyo
 cp %{SOURCE1} %{buildroot}/%{python3_sitelib}/urllib3/packages/ssl_match_hostname.py
 
+# Copy in six.py just for the test suite.
+cp %{python3_sitelib}/six.* %{buildroot}/%{python3_sitelib}/.
 ls -alh %{buildroot}/%{python3_sitelib}
 
 # dummyserver is part of the unittest framework
@@ -112,15 +138,6 @@ popd
 %endif # with_python3
 
 %check
-#nosetests
-#
-#%if 0%{?with_python3}
-#pushd %{py3dir}
-#nosetests-%{python3_version}
-#popd
-#
-#rm -rf %{buildroot}/%{python3_sitelib}/__pycache__*
-#%endif # with_python3
 
 %files
 %{!?_licensedir:%global license %%doc}

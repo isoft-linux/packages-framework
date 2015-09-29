@@ -1,74 +1,61 @@
+%define update_version 60 
+%define build_number 24
+
 %global script 'use File::Spec; print File::Spec->abs2rel($ARGV[0], $ARGV[1])'
 %global abs2rel %{__perl} -e %{script}
 
-Name:	    openjdk	
-Version:    8u45b14	
-Release:	1
-Summary:	Oracle OpenJDK 7 via IcedTea
+Name: openjdk	
+Version: 8u%{update_version}b%{build_number}
+Release: 1
+Summary: Oracle OpenJDK via IcedTea
+License: ASL 1.1 and ASL 2.0 and GPL+ and GPLv2 and GPLv2 with exceptions and LGPL+ and LGPLv2 and MPLv1.0 and MPLv1.1 and Public Domain and W3C
+URL: http://openjdk.java.net/
 
-License:  ASL 1.1 and ASL 2.0 and GPL+ and GPLv2 and GPLv2 with exceptions and LGPL+ and LGPLv2 and MPLv1.0 and MPLv1.1 and Public Domain and W3C
-URL:      http://openjdk.java.net/
+#http://hg.openjdk.java.net/jdk8u/jdk8u60/archive/jdk8u60-b24.tar.bz2
+Source0: jdk8u%{update_version}-jdk8u%{update_version}-b%{build_number}.tar.bz2
 
-Source0:   http://hg.openjdk.java.net/jdk8u/jdk8u/archive/jdk8u-jdk8u45-b14.tar.bz2
+Source1: corba-jdk8u%{update_version}-b%{build_number}.tar.bz2
+Source2: hotspot-jdk8u%{update_version}-b%{build_number}.tar.bz2
+Source3: jaxp-jdk8u%{update_version}-b%{build_number}.tar.bz2
+Source4: jaxws-jdk8u%{update_version}-b%{build_number}.tar.bz2
+Source5: langtools-jdk8u%{update_version}-b%{build_number}.tar.bz2
+Source6: jdk-jdk8u%{update_version}-b%{build_number}.tar.bz2
+Source7: nashorn-jdk8u%{update_version}-b%{build_number}.tar.bz2
 
-Source1:    http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.45/corba.tar.xz
-Source2:    http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.45/hotspot.tar.xz
-Source3:    http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.45/jaxp.tar.xz
-Source4:    http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.45/jaxws.tar.xz
-Source5:    http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.45/langtools.tar.xz
-Source6:    http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.45/jdk.tar.xz
+#above sources downloaded by this script, NOTE: change version numbers when update.
+Source10: download-openjdk-sources.sh 
 
-Source7:    http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.45/nashorn.tar.xz
+Source100:  openjdk.sh
 
-BuildRequires: alsa-lib-devel
-BuildRequires: openjdk
-BuildRequires: cpio unzip which zip
-BuildRequires: cups-devel
-BuildRequires: libX11
-BuildRequires: giflib-devel
 
-Source100:  openjdk-path.sh
+Patch0:   adlc-parser.patch
+#this patch is important, otherwise icedteaWeb not work.
+Patch1:   applet-hole.patch
+Patch2:   autoconf-select.diff
+Patch3:   compare-pointer-with-literal.patch
+Patch4:   atk-wrapper-security.patch
+Patch5:   workaround_expand_exec_shield_cs_limit.diff
+Patch6:   multiple-pkcs11-library-init.patch
+Patch7:   java-1.8.0-openjdk-accessible-toolkit.patch
 
-Patch1: 8017773.diff
-Patch2: 8067231.diff
-Patch3:  8074312.diff
-Patch4:  adlc-parser.patch
-Patch5:  alpha-float-const.diff
-Patch6:  applet-hole.patch
-Patch7:  autoconf-select.diff
-Patch8:  autoconf-updates.diff
-Patch9:  compare-pointer-with-literal.patch
 Patch10:  disable-doclint-by-default.diff
 Patch11:  dnd-files.patch
 Patch12:  dont-strip-images.diff
-Patch13:  enumipv6-fix.patch
-Patch14:  hotspot-disable-werror.diff
-Patch15:  hotspot-set-compiler.diff
-Patch16:  hotspot-warn-no-errformat.diff
-Patch17:  icedtea-4953367.patch
-Patch18:  jdk-8067331.diff
-Patch19:  jdk-freeNativeStringArray-decl.diff
-Patch20:  jdk-freetypeScaler-crash.diff
-Patch21:  ld-symbolic-functions-default.diff
-Patch22:  libjpeg-fix.diff
-Patch23:  libpcsclite-dlopen.diff
-Patch24:  link-with-as-needed.diff
-Patch25:  make4-compatibility.diff
-Patch26:  nonreparenting-wm.diff
-Patch27:  no-pch-build.diff
-Patch28:  zero-missing-headers.diff
-Patch29:  isoft-jdk-fix-build-with-gcc5-avoid-overflow.patch
-Patch30:  giflib5-fix.patch
+Patch13:  hotspot-disable-werror.diff
+Patch14:  hotspot-set-compiler.diff
+Patch15:  icedtea-4953367.patch
+Patch16:  ld-symbolic-functions-default.diff
+Patch17:  libpcsclite-dlopen.diff
+Patch18:  make4-compatibility.diff
+Patch19:  nonreparenting-wm.diff
+Patch20:  zero-missing-headers.diff
 
 #from tuxjdk
 #https://code.google.com/p/tuxjdk/
+#this patch is rebased with 8u60b24.
 Patch40: add-fontconfig-support.diff 
-Patch41: fix-typographical-point-size.diff 
-Patch42: lcd-hrgb-by-default.diff
-
-#this patch is a modified version of patch20, should applied after tuxjdk
-Patch50: jdk-freetypeScaler-crash-with-tuxjdk.diff
-
+Patch41: lcd-hrgb-by-default.diff
+Patch42: jdk-freetypeScaler-crash.diff
 
 #this patch is force to enable on the spot input method style for fcitx.
 #Cursor follow issue still exists!!!!!!!!!!!
@@ -90,6 +77,14 @@ BuildRequires: libXt-devel libXp-devel libXtst-devel libXinerama-devel libXrende
 BuildRequires: libattr-devel zlib-devel alsa-lib-devel freetype-devel fontconfig-devel krb5-devel
 BuildRequires: gtk2-devel 
 
+BuildRequires: alsa-lib-devel
+BuildRequires: cpio unzip which zip
+BuildRequires: cups-devel
+BuildRequires: libX11-devel
+
+BuildRequires: openjdk
+
+
 #disable autorequires and provides
 AutoReqProv: no
 #at least
@@ -98,11 +93,24 @@ Requires: libgcc, libstdc++
 #for trust
 Requires: p11-kit-trust
 
+Provides: java
+Provides: java-devel
+
+
 %description
 %{summary}
 
 %prep
-%setup -q -n jdk8u-jdk8u45-b14 -a1 -a2 -a3 -a4 -a5 -a6 -a7 
+%setup -q -n jdk8u%{update_version}-jdk8u%{update_version}-b%{build_number} -a1 -a2 -a3 -a4 -a5 -a6 -a7
+mv corba-jdk8u%{update_version}-b%{build_number} corba
+mv hotspot-jdk8u%{update_version}-b%{build_number} hotspot
+mv jaxp-jdk8u%{update_version}-b%{build_number} jaxp
+mv jaxws-jdk8u%{update_version}-b%{build_number} jaxws
+mv langtools-jdk8u%{update_version}-b%{build_number} langtools
+mv jdk-jdk8u%{update_version}-b%{build_number} jdk
+mv nashorn-jdk8u%{update_version}-b%{build_number} nashorn
+
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -110,40 +118,24 @@ Requires: p11-kit-trust
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1
-%patch9 -p1
+
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
-#%patch13 -p1
+%patch13 -p1
 %patch14 -p1
 %patch15 -p1
-#%patch16 -p1
+%patch16 -p1
 %patch17 -p1
 %patch18 -p1
 %patch19 -p1
-%patch21 -p1
-#%patch22 -p1
-%patch23 -p1
-#%patch24 -p1
-%patch25 -p1
-%patch26 -p1
-#%patch27 -p1
-%patch28 -p1
-%patch29 -p1
-%patch30 -p1
+%patch20 -p1
 
 %patch40 -p1
-#this patch is wrong to use hardcode 72dpi
-#%patch41 -p1
+%patch41 -p1
 %patch42 -p1
 
-
-%patch50 -p1
-
-
 %patch60 -p1
-#%patch61 -p1
 
 
 %build
@@ -155,8 +147,9 @@ export CXX=g++
 unset JAVA_HOME
 
 sh ./configure \
-   --with-update-version=45 \
-   --with-build-number=b14 \
+   --with-milestone="isoft" \
+   --with-update-version=%{update_version} \
+   --with-build-number=b%{build_number} \
    --with-debug-level=release \
    --enable-unlimited-crypto  \
    --with-zlib=system \
@@ -179,12 +172,12 @@ mkdir -p $RPM_BUILD_ROOT%{_libdir}/jvm/openjdk8
 cp -RT $IMG_PATH $RPM_BUILD_ROOT%{_libdir}/jvm/openjdk8
 
 
-#fix perms, use ||: to avoid failed.
+#fix perms if needed, use ||: to avoid failed.
 pushd $RPM_BUILD_ROOT%{_libdir}/jvm/openjdk8
 find . -perm 600|xargs chmod 644 ||:
 popd
 
-install -Dm0755 %{SOURCE100} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/openjdk-path.sh
+install -Dm0755 %{SOURCE100} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/openjdk.sh
 
 
 # Install cacerts symlink.
@@ -198,9 +191,11 @@ popd
 %post
 
 %files
-%{_sysconfdir}/profile.d/openjdk-path.sh
+%{_sysconfdir}/profile.d/openjdk.sh
 %dir %{_libdir}/jvm/openjdk8
 %{_libdir}/jvm/openjdk8/*
 
 %changelog
+* Thu Aug 06 2015 Cjacker <cjacker@foxmail.com>
+- update openjdk to 8u60b24.
 

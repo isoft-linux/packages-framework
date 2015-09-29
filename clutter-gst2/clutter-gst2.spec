@@ -1,5 +1,5 @@
 Name:           clutter-gst2
-Version:        2.0.14
+Version:        2.0.16
 Release:        1
 Summary:        GStreamer integration for Clutter
 

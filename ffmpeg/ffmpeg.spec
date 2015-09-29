@@ -1,6 +1,6 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.7.1
+Version: 2.8
 Release: 4
 License: GPLv3
 Group: System Environment/Libraries

@@ -3,7 +3,7 @@
 
 Summary:          C++ API for the cairo graphics library
 Name:             cairomm
-Version:          1.11.2
+Version:          1.12.0
 Release:          1 
 URL:              http://www.cairographics.org
 License:          LGPLv2+
@@ -82,3 +82,6 @@ rpmclean
 %doc %{_datadir}/devhelp/
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.12.0
+

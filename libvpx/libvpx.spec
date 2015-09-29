@@ -1,16 +1,16 @@
-Name:			libvpx
-Summary:		VP8 Video Codec SDK
-Version:		1.4.0
-Release:		1
-License:		BSD
-Group:			System Environment/Libraries
-Source0:		http://webm.googlecode.com/files/%{name}-%{version}.tar.bz2
-Patch0:         libvpx-do-NOT-use-clang-integrated-as.patch
+Name: libvpx
+Summary: VP8 Video Codec SDK
+Version: 1.4.0
+Release: 2 
+License: BSD
+Source0: http://webm.googlecode.com/files/%{name}-%{version}.tar.bz2
+Patch0: libvpx-do-NOT-use-clang-integrated-as.patch
 
-URL:			http://www.webmproject.org/tools/vp8-sdk/
+URL: http://www.webmproject.org/tools/
 %ifarch %{ix86} x86_64
-BuildRequires:		yasm
+BuildRequires: yasm
 %endif
+BuildRequires: gcc
 
 %description
 libvpx provides the VP8 SDK, which allows you to integrate your applications 
@@ -18,18 +18,16 @@ with the VP8 video codec, a high quality, royalty free, open source codec
 deployed on millions of computers and devices worldwide. 
 
 %package devel
-Summary:		Development files for libvpx
-Group:			Development/Libraries
-Requires:		%{name}%{?_isa} = %{version}-%{release}
+Summary: Development files for libvpx
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Development libraries and headers for developing software against 
 libvpx.
 
 %package utils
-Summary:		VP8 utilities and tools
-Group:			Development/Tools
-Requires:		%{name}%{?_isa} = %{version}-%{release}
+Summary: VP8 utilities and tools
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description utils
 A selection of utilities and tools for VP8, including a sample encoder

@@ -1,20 +1,18 @@
-Index: jdk8u-tuxjdk/jdk/make/lib/Awt2dLibraries.gmk
-===================================================================
---- jdk8u-tuxjdk.orig/jdk/make/lib/Awt2dLibraries.gmk
-+++ jdk8u-tuxjdk/jdk/make/lib/Awt2dLibraries.gmk
-@@ -827,7 +827,7 @@ $(eval $(call SetupNativeCompilation,BUI
+diff -Nur jdk8u60-jdk8u60-b24/jdk/make/lib/Awt2dLibraries.gmk jdk8u60-jdk8u60-b24n/jdk/make/lib/Awt2dLibraries.gmk
+--- jdk8u60-jdk8u60-b24/jdk/make/lib/Awt2dLibraries.gmk	2015-07-13 17:50:59.000000000 +0000
++++ jdk8u60-jdk8u60-b24n/jdk/make/lib/Awt2dLibraries.gmk	2015-08-05 23:28:36.653346622 +0000
+@@ -824,7 +824,7 @@
      LDFLAGS := $(subst -Xlinker -z -Xlinker defs,,$(LDFLAGS_JDKLIB)) $(LDFLAGS_CXX_JDK) \
          $(call SET_SHARED_LIBRARY_ORIGIN), \
      LDFLAGS_SUFFIX := $(BUILD_LIBFONTMANAGER_FONTLIB), \
 -    LDFLAGS_SUFFIX_linux := -lawt $(LIBM) $(LIBCXX) -ljava -ljvm -lc, \
 +    LDFLAGS_SUFFIX_linux := -lawt $(LIBM) $(LIBCXX) -ljava -ljvm -lc -lfontconfig, \
-     LDFLAGS_SUFFIX_solaris := -lawt -lawt_xawt -lc $(LIBM) $(LIBCXX) -ljava -ljvm, \
-     LDFLAGS_SUFFIX_aix := -lawt -lawt_xawt $(LIBM) $(LIBCXX) -ljava -ljvm,\
+     LDFLAGS_SUFFIX_solaris := -lawt -lawt_headless -lc $(LIBM) $(LIBCXX) -ljava -ljvm, \
+     LDFLAGS_SUFFIX_aix := -lawt -lawt_headless $(LIBM) $(LIBCXX) -ljava -ljvm,\
      LDFLAGS_SUFFIX_macosx := -lawt $(LIBM) $(LIBCXX) -undefined dynamic_lookup \
-Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
-===================================================================
---- jdk8u-tuxjdk.orig/jdk/src/share/native/sun/font/freetypeScaler.c
-+++ jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
+diff -Nur jdk8u60-jdk8u60-b24/jdk/src/share/native/sun/font/freetypeScaler.c jdk8u60-jdk8u60-b24n/jdk/src/share/native/sun/font/freetypeScaler.c
+--- jdk8u60-jdk8u60-b24/jdk/src/share/native/sun/font/freetypeScaler.c	2015-07-13 17:50:59.000000000 +0000
++++ jdk8u60-jdk8u60-b24n/jdk/src/share/native/sun/font/freetypeScaler.c	2015-08-05 23:27:47.065347510 +0000
 @@ -38,6 +38,10 @@
  #include FT_SIZES_H
  #include FT_OUTLINE_H
@@ -41,7 +39,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
      /* Important note:
           JNI forbids sharing same env between different threads.
           We are safe, because pointer is overwritten every time we get into
-@@ -80,8 +92,147 @@ typedef struct FTScalerContext {
+@@ -80,8 +92,147 @@
      int        renderFlags;   /* configuration specific to particular engine */
      int        pathType;
      int        ptsz;          /* size in points */
@@ -189,7 +187,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
  #ifdef DEBUG
  /* These are referenced in the freetype sources if DEBUG macro is defined.
     To simplify work with debuging version of freetype we define
-@@ -395,6 +546,11 @@ static int setupFTContext(JNIEnv *env,
+@@ -381,6 +532,11 @@
      scalerInfo->font2D = font2D;
  
      if (context != NULL) {
@@ -201,7 +199,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
          FT_Set_Transform(scalerInfo->face, &context->transform, NULL);
  
          errCode = FT_Set_Char_Size(scalerInfo->face, 0, context->ptsz, 72, 72);
-@@ -402,6 +558,9 @@ static int setupFTContext(JNIEnv *env,
+@@ -388,6 +544,9 @@
          if (errCode == 0) {
              errCode = FT_Activate_Size(scalerInfo->face->size);
          }
@@ -211,7 +209,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
      }
  
      return errCode;
-@@ -687,12 +846,7 @@ Java_sun_font_FreetypeFontScaler_getGlyp
+@@ -667,12 +826,7 @@
          JNIEnv *env, jobject scaler, jobject font2D,
          jlong pScalerContext, jlong pScaler, jint glyphCode) {
  
@@ -225,7 +223,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
  
      FTScalerContext* context =
          (FTScalerContext*) jlong_to_ptr(pScalerContext);
-@@ -709,53 +863,45 @@ Java_sun_font_FreetypeFontScaler_getGlyp
+@@ -689,53 +843,45 @@
          return ptr_to_jlong(getNullGlyphImage());
      }
  

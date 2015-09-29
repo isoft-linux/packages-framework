@@ -53,6 +53,9 @@ Patch54: qtbase-opensource-src-5.4.1-QTBUG-46310.patch
 
 Patch55: socket-readyread-stop-firing-BUG46552.patch
 
+# cjacker fixed at 20150813, can not read some jpg image.
+Patch100: qtbase-fix-jpeg-readheader.patch
+
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
 %define qt5_prefix  %{_libdir}/qt5
@@ -63,7 +66,7 @@ Patch55: socket-readyread-stop-firing-BUG46552.patch
 %define qt5_libdir  %{_libdir}
 %define qt5_plugindir   %{qt5_prefix}/plugins
 %define qt5_sysconfdir  %{_sysconfdir}
-%define qt5_translationdir %{qt5_datadir}/translations
+%define qt5_translationdir %{_qt5_datadir}/translations
 
 
 BuildRequires:  mesa-libGL-devel libICE-devel libSM-devel libX11-devel libXext-devel
@@ -109,6 +112,7 @@ developing applications that use %{name}.
 %patch53 -p1
 %patch54 -p1
 %patch55 -p1
+%patch100 -p1
 
 %build
 %define platform linux-g++
@@ -244,5 +248,7 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Thu Aug 13 2015 Cjacker <cjacker@foxmail.com>
+- add patch100, fix jpg file reader.
 * Mon Jul 20 2015 Cjacker <cjacker@foxmail.com>
 - drop '-reduce-relocations'

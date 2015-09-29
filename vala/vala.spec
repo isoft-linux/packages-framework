@@ -1,5 +1,5 @@
 Name:           vala
-Version:        0.28.0
+Version:        0.30.0
 Release:        1
 Summary:        A modern programming language for GNOME
 
@@ -138,6 +138,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

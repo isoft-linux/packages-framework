@@ -4,7 +4,7 @@
 %define 	_glib2		2.32.0
 
 Name: 		%{gstreamer}
-Version: 	1.5.2
+Version: 	1.6.0
 Release: 	1
 Summary: 	GStreamer streaming media framework runtime
 
@@ -130,6 +130,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.6.0
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

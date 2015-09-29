@@ -2,18 +2,18 @@
 %define gstreamer   gstreamer
 %define gst_majorminor  1.0
 
-Name: 		%{gstreamer}-vaapi
-Version:    0.6.0
-Release:    2	
-Summary: 	VA-API support to GStreamer
-Group: 		Libraries/Multimedia
-License: 	LGPL
-URL:		http://gstreamer.net/
-Source:		gstreamer-vaapi-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Name: %{gstreamer}-vaapi
+Version: 0.6.0
+Release: 3 
+Summary: VA-API support to GStreamer
+Group: Libraries/Multimedia
+License: LGPL
+URL: http://freedesktop.org/wiki/Software/vaapi
+Source: http://www.freedesktop.org/software/vaapi/releases/gstreamer-vaapi/gstreamer-vaapi-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Requires:  	%{gstreamer} >= 0.9.7
-BuildRequires: 	%{gstreamer}-devel >= 0.9.7
+Requires: %{gstreamer} >= 0.9.7
+BuildRequires: %{gstreamer}-devel >= 0.9.7
 
 %description
 gstreamer-vaapi consists in a collection of VA-API based plugins for
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %changelog
+* Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
+- rebuild with libva-1.6.1 and gstreamer-1.6.0
+
 * Fri Jul 16 2015 Cjacker <cjacker@foxmail.com>
 - update to 0.6.0
 

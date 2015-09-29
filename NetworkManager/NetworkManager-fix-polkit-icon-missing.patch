@@ -1,0 +1,12 @@
+diff -Nur NetworkManager-0.9.8.10/policy/org.freedesktop.NetworkManager.policy.in.in NetworkManager-0.9.8.10n/policy/org.freedesktop.NetworkManager.policy.in.in
+--- NetworkManager-0.9.8.10/policy/org.freedesktop.NetworkManager.policy.in.in	2014-04-24 23:18:15.000000000 +0800
++++ NetworkManager-0.9.8.10n/policy/org.freedesktop.NetworkManager.policy.in.in	2014-05-24 12:55:00.269914670 +0800
+@@ -7,7 +7,7 @@
+ 
+   <vendor>NetworkManager</vendor>
+   <vendor_url>http://www.gnome.org/projects/NetworkManager</vendor_url>
+-  <icon_name>nm-icon</icon_name>
++  <icon_name>gtk-network</icon_name>
+ 
+   <action id="org.freedesktop.NetworkManager.enable-disable-network">
+     <_description>Enable or disable system networking</_description>

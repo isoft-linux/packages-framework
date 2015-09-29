@@ -1,0 +1,18 @@
+commit 54c9c5cf362ba3730ac8837c3bd88c87a6f7fa47
+Author: Tomas Mlcoch <tmlcoch@redhat.com>
+Date:   Tue Apr 8 11:08:38 2014 +0200
+
+    Fix memory leak in yum_db_index_primary_tables()
+
+diff --git a/db.c b/db.c
+index 0191b06..39c8953 100644
+--- a/db.c
++++ b/db.c
+@@ -493,6 +493,7 @@ yum_db_index_primary_tables (sqlite3 *db, GError **err)
+         if (i < 2) {
+             query = g_strdup_printf(nameindexsql, deps[i], deps[i]);
+             rc = sqlite3_exec (db, query, NULL, NULL, NULL);
++            g_free(query);
+             if (rc != SQLITE_OK) {
+                 g_set_error (err, YUM_DB_ERROR, YUM_DB_ERROR,
+                              "Can not create %sname index: %s",

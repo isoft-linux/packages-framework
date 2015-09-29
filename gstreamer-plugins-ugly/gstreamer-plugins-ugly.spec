@@ -4,7 +4,7 @@
 %define gst_minver  1.0 
 
 Name: 		%{gstreamer}-plugins-ugly
-Version: 	1.5.2
+Version: 	1.6.0
 Release: 	1
 Summary: 	GStreamer streaming media framework "ugly" plug-ins
 
@@ -90,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.6.0
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -2,10 +2,9 @@
 
 Name:           botan
 Version:        %{major_version}.9
-Release:        6%{?dist}
+Release:        8%{?dist}
 Summary:        Crypto library written in C++
 
-Group:          System Environment/Libraries
 License:        BSD
 URL:            http://botan.randombit.net/
 Source0:        http://botan.randombit.net/releases/Botan-%{version}.tgz
@@ -38,7 +37,6 @@ flavor of the library.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Requires:       pkgconfig
 Requires:       bzip2-devel
@@ -52,7 +50,6 @@ developing applications that use %{name}.
 
 %package        doc
 Summary:        Documentation for %{name}
-Group:          Documentation
 BuildArch:      noarch
 
 %description    doc
@@ -63,7 +60,6 @@ This package contains HTML documentation for %{name}.
 
 %package        python
 Summary:        Python bindings for %{name}
-Group:          System Environment/Libraries
 
 %description    python
 %{summary}
@@ -154,8 +150,6 @@ rm -r %{buildroot}%{_pkgdocdir}/manual/{.doctrees,.buildinfo}
 
 %files python
 %{_pkgdocdir}/python-examples
-%exclude %{_pkgdocdir}/python-examples/*.pyc
-%exclude %{_pkgdocdir}/python-examples/*.pyo
 %{python_sitearch}/%{name}
 
 
@@ -165,3 +159,6 @@ LD_LIBRARY_PATH=%{buildroot}%{_libdir} ./check --validate
 
 
 %changelog
+* Thu Sep 03 2015 Cjacker <cjacker@foxmail.com>
+- rebuilt with new boost
+

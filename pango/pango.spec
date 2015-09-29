@@ -1,5 +1,3 @@
-%global with_x11 1 
-
 %define glib2_base_version 2.10.0
 %define glib2_version %{glib2_base_version}-1
 %define pkgconfig_version 0.12
@@ -9,7 +7,7 @@
 
 Summary: System for layout and rendering of internationalized text
 Name: pango
-Version: 1.36.8
+Version: 1.38.0
 Release: 3
 License: LGPL
 Group: System Environment/Libraries
@@ -34,9 +32,7 @@ BuildRequires: harfbuzz-devel
 BuildRequires: cairo-devel >= %{cairo_version}
 BuildRequires: gobject-introspection
 
-%if %with_x11
 BuildRequires: libXft-devel
-%endif
 
 %description
 Pango is a system for layout and rendering of internationalized text.
@@ -59,121 +55,63 @@ and developer docs for the pango package.
 Install pango-devel if you want to develop programs which will use
 pango.
 
+%package tests
+Summary: Tests for the %{name} package
+Group: Development/Libraries
+Requires: %{name}%{?_isa} = %{version}-%{release}
+
+%description tests
+The %{name}-tests package contains tests that can be used to verify
+the functionality of the installed %{name} package.
+
 %prep
 %setup -q -n pango-%{version}
 
 %build
-%configure \
-    %if %with_x11
-    --with-xft
-    %else
-    --without-xft
-    %endif
-
-make %{?_smp_mflags}
+# We try hard to not link to libstdc++
+(if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
+ %configure $CONFIGFLAGS \
+          --enable-doc-cross-references \
+          --enable-installed-tests
+)
+make %{?_smp_mflags} V=1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-# Deriving /etc/pango/$host location
-# NOTE: Duplicated below
-#
-# autoconf changes linux to linux-gnu
-case "%{_host}" in
-  *linux) host="%{_host}-gnu"
-  ;;
-  *) host="%{_host}"
-  ;;
-esac
-
-# autoconf uses powerpc not ppc
-host=`echo $host | sed "s/^ppc/powerpc/"`
-
-# Make sure that the host value that is passed to the compile 
-# is the same as the host that we're using in the spec file
-#
-compile_host=`grep 'host_triplet =' pango/Makefile | sed "s/.* = //"`
-
-if test "x$compile_host" != "x$host" ; then
-  echo 1>&2 "Host mismatch: compile='$compile_host', spec file='$host'" && exit 1
-fi
-
-%makeinstall
+%make_install
 
 # Remove files that should not be packaged
-rm $RPM_BUILD_ROOT%{_libdir}/pango/*/modules/*.la
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/*.la
 
-# We need to have separate 32-bit and 64-bit pango-querymodules binaries
-# for places where we have two copies of the Pango libraries installed.
-# (we might have x86_64 and i686 packages on the same system, for example.)
-case "$host" in
-  alpha*|ia64*|powerpc64*|s390x*|x86_64*)
-   mv $RPM_BUILD_ROOT%{_bindir}/pango-querymodules $RPM_BUILD_ROOT%{_bindir}/pango-querymodules-64
-   ;;
-  *)
-   mv $RPM_BUILD_ROOT%{_bindir}/pango-querymodules $RPM_BUILD_ROOT%{_bindir}/pango-querymodules-32
-   ;;
-esac
+PANGOXFT_SO=$RPM_BUILD_ROOT%{_libdir}/libpangoxft-1.0.so
+if ! test -e $PANGOXFT_SO; then
+        echo "$PANGOXFT_SO not found; did not build with Xft support?"
+        ls $RPM_BUILD_ROOT%{_libdir}
+        exit 1
+fi
 
-rm $RPM_BUILD_ROOT%{_sysconfdir}/pango/pango.modules
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/pango/$host
-touch $RPM_BUILD_ROOT%{_sysconfdir}/pango/$host/pango.modules
-
-#
-# We need the substitution of $host so we use an external
-# file list
-#
-echo %dir %{_sysconfdir}/pango/$host > modules.files
-echo %ghost %{_sysconfdir}/pango/$host/pango.modules >> modules.files
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
 
-# Deriving /etc/pango/$host location
-#
-# autoconf changes linux to linux-gnu
-case "%{_host}" in
-  *linux) host="%{_host}-gnu"
-  ;;
-  *) host="%{_host}"
-  ;;
-esac
+%postun
+/sbin/ldconfig
 
-# autoconf uses powerpc not ppc
-host=`echo $host | sed "s/^ppc/powerpc/"`
-
-case "$host" in
-  alpha*|ia64*|powerpc64*|s390x*|x86_64*)
-   %{_bindir}/pango-querymodules-64 > %{_sysconfdir}/pango/pango.modules
-   ;;
-  *)
-   %{_bindir}/pango-querymodules-32 > %{_sysconfdir}/pango/pango.modules
-   ;;
-esac
-
-%postun -p /sbin/ldconfig
-
-%files -f modules.files
+%files
 %defattr(-, root, root)
 %{_libdir}/libpango-1.0.so.*
 %{_libdir}/libpangocairo-1.0.so.*
 %{_libdir}/libpangoft2-1.0.so.*
-%{_bindir}/pango-querymodules*
-%{_libdir}/pango
 %{_mandir}/man1/*
-%{_sysconfdir}/pango
 %{_libdir}/girepository-1.0/Pango-1.0.typelib
 %{_libdir}/girepository-1.0/PangoCairo-1.0.typelib
 %{_libdir}/girepository-1.0/PangoFT2-1.0.typelib
 
-%if %with_x11
 %{_libdir}/libpangoxft-1.0.so.*
 %{_libdir}/girepository-1.0/PangoXft-1.0.typelib
-%endif
 
 
 
@@ -223,15 +161,20 @@ esac
 %{_datadir}/gir-1.0/PangoCairo-1.0.gir
 %{_datadir}/gir-1.0/PangoFT2-1.0.gir
 
-%if %with_x11
 %{_includedir}/pango-1.0/pango/pangoxft-render.h
 %{_includedir}/pango-1.0/pango/pangoxft.h
 %{_libdir}/libpangoxft-1.0.so
 %{_libdir}/pkgconfig/pangoxft.pc
 %{_datadir}/gir-1.0/PangoXft-1.0.gir
-%endif
+
+%files tests
+%{_libexecdir}/installed-tests/%{name}
+%{_datadir}/installed-tests
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

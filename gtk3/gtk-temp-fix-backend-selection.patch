@@ -1,0 +1,18 @@
+diff -Nur gtk+-3.16.6/gdk/gdkdisplaymanager.c gtk+-3.16.6n/gdk/gdkdisplaymanager.c
+--- gtk+-3.16.6/gdk/gdkdisplaymanager.c	2015-07-18 09:06:51.000000000 +0800
++++ gtk+-3.16.6n/gdk/gdkdisplaymanager.c	2015-08-21 16:08:04.332502608 +0800
+@@ -434,8 +434,12 @@
+   gint i, j;
+   gboolean allow_any;
+ 
+-  if (allowed_backends == NULL)
+-    allowed_backends = "*";
++  if (allowed_backends == NULL) {
++    if(getenv("WAYLAND_DISPLAY"))
++    	allowed_backends = "wayland, x11, broadway";
++    else
++    	allowed_backends = "x11, wayland, broadway";
++  }
+   allow_any = strstr (allowed_backends, "*") != NULL;
+ 
+   backend_list = g_getenv ("GDK_BACKEND");

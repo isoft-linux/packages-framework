@@ -1,6 +1,6 @@
 Summary: Soup, an HTTP library implementation
 Name: libsoup
-Version: 2.50.0
+Version: 2.52.0
 Release: 2 
 License: LGPL
 Group:  Framework/Runtime/Library 
@@ -40,7 +40,7 @@ make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall
+make install DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT/%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT/%{_libdir}/*.a
@@ -57,7 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(-, root, root)
-%doc README COPYING ChangeLog NEWS AUTHORS INSTALL 
+%doc README COPYING NEWS AUTHORS 
 %{_libdir}/lib*.so.*
 %{_libdir}/girepository-?.?/*.typelib
 
@@ -68,8 +68,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/*.pc
 %{_datadir}/gtk-doc/html/libsoup*
 %{_datadir}/gir-?.?/*.gir
+%{_datadir}/vala/vapi/libsoup-*.vapi
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,11 +1,13 @@
 Summary: An encoder/decoder for the Free Lossless Audio Codec.
 Name:    libflac
 Version: 1.3.1
-Release: 1
+Release: 2 
 License: LGPL/GPL
 Group:   System Environment/Libraries
 Source: https://svn.xiph.org/releases/flac/flac-%{version}.tar.xz
 URL:    http://flac.sourceforge.net/
+
+Provides: flac = %{version}-%{release}
 BuildRequires: glib2-devel, libogg-devel, nasm
 BuildRequires: libtool, gettext-devel
 Obsoletes: flac-libs
@@ -23,6 +25,7 @@ various music players.
 Summary: Static libraries and header files from FLAC.
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
+Provides: flac-devel = %{version}-%{release}
 
 %description devel
 This package contains all the files needed to develop applications that

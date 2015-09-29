@@ -3,7 +3,7 @@
 %define release_version %(echo %{version} | awk -F. '{print $1"."$2}')
 
 Name:           gtkmm
-Version:        3.16.0
+Version:        3.18.0
 Release:        1
 Summary:        C++ interface for the GTK+ library
 
@@ -100,3 +100,6 @@ make check %{?_smp_mflags}
 
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

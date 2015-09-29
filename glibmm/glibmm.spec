@@ -2,7 +2,7 @@
 %define release_version %(echo %{version} | awk -F. '{print $1"."$2}')
 
 Name:           glibmm
-Version:        2.44.0
+Version:        2.46.1
 Release:        1
 Summary:        C++ interface for the GLib library
 
@@ -86,3 +86,6 @@ rpmclean
 
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

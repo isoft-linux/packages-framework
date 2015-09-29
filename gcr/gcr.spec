@@ -1,5 +1,5 @@
 Name:           gcr
-Version:        3.16.0
+Version:        3.17.4
 Release:        1
 Summary:        A library for bits of crypto UI and parsing
 
@@ -124,3 +124,6 @@ fi
 
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

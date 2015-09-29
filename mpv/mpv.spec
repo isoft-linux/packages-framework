@@ -1,11 +1,11 @@
-Name:	    mpv	
-Version:    0.9.2	
-Release:	1
-Summary:	a free, open source, and cross-platform media player
+Name: mpv	
+Version: 0.11.0
+Release: 1
+Summary: a free, open source, and cross-platform media player
 
-License:	GPLv2
-URL:		http://mpv.io/
-Source0:	%{name}-%{version}.tar.gz
+License: GPLv2
+URL: http://mpv.io/
+Source0: %{name}-%{version}.tar.gz
 
 BuildRequires: waf
 BuildRequires: libX11-devel, libXt-devel, libXext-devel, libXScrnSaver-devel
@@ -59,7 +59,6 @@ waf configure \
     --disable-openal \
     --disable-egl-x11 \
     --disable-jpeg \
-    --disable-ladspa \
     --disable-libavresample \
     --enable-lua \
     --lua=luajit \
@@ -124,5 +123,8 @@ waf install --destdir=%{buildroot}
 %{_libdir}/pkgconfig/mpv.pc
 
 %changelog
-* Sat Jul 19 2015 Cjacker <cjacker@foxmail.com>
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to 0.11.0
+
+* Sun Jul 19 2015 Cjacker <cjacker@foxmail.com>
 - add shared library and development package.

@@ -10,7 +10,7 @@ diff -up wpa_supplicant-0.7.3/wpa_supplicant/wpa_supplicant.c.assoc-timeout wpa_
  		} else if (wpa_s->conf->ap_scan == 1) {
  			/* give IBSS a bit more time */
 -			timeout = ssid->mode == WPAS_MODE_IBSS ? 20 : 10;
-+			timeout = ssid->mode == WPAS_MODE_IBSS ? 20 : 20;
++			timeout = ssid->mode == WPAS_MODE_IBSS ? 20 : 15;
  		}
  		wpa_supplicant_req_auth_timeout(wpa_s, timeout, 0);
  	}

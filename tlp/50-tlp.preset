@@ -1,0 +1,3 @@
+
+enable tlp.service
+enable tlp-sleep.service

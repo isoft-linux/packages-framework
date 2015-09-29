@@ -7,7 +7,7 @@
 %define gst_minver  0.11.0
 
 Name: 		%{gstreamer}-plugins-base
-Version: 	1.5.2
+Version: 	1.6.0
 Release: 	1
 Summary: 	GStreamer streaming media framework plug-ins
 
@@ -125,6 +125,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/gst-plugins-base/%{majorminor}/license-translations.dict
 
 %changelog
+* Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.6.0
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

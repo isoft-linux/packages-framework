@@ -12,7 +12,7 @@
 %_qt5_qmake %{_qt5_bindir}/qmake
 %_qt5_sysconfdir	%{_sysconfdir}
 %_qt5_settingsdir %{_sysconfdir}
-%_qt5_translationdir	%{qt5_datadir}/translations
+%_qt5_translationdir %{_qt5_datadir}/translations
 
 %qmake_qt5 \
   %{_qt5_qmake} \\\

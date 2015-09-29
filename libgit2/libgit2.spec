@@ -1,5 +1,5 @@
 Name: libgit2
-Version: 0.22.3
+Version: 0.23.2
 Release: 4
 Summary: A C implementation of the Git core methods as a library
 
@@ -69,3 +69,5 @@ rpmclean
 
 
 %changelog
+* Fri Sep 25 2015 Cjacker <cjacker@foxmail.com>
+- update to 0.23.2

@@ -1,11 +1,10 @@
-Summary:	A sophisticated file transfer program
-Name:		lftp
-Version:	4.6.0
-Release:    1	
-License:	GPLv3+
-Group:		Applications/Internet
-URL:		http://lftp.yar.ru/
-Source0:	ftp://ftp.yar.ru/lftp/lftp-%{version}.tar.xz
+Summary: A sophisticated file transfer program
+Name: lftp
+Version: 4.6.4
+Release: 1	
+License: GPLv3+
+URL: http://lftp.yar.ru/
+Source0: ftp://ftp.yar.ru/lftp/lftp-%{version}.tar.xz
 BuildRequires:	ncurses-devel, gnutls-devel, pkgconfig, readline-devel, gettext
 
 %description
@@ -18,14 +17,11 @@ reliability in mind.
 %setup -q
 
 %build
-export CC=clang
-export CXX=clang++
 %configure \
     --with-modules \
     --disable-static \
-    --with-gnutls \
-    --without-openssl \
-    --disable-nls
+    --without-gnutls \
+    --with-openssl
 
 make %{?_smp_mflags}
 
@@ -35,15 +31,17 @@ make DESTDIR=$RPM_BUILD_ROOT INSTALL='install -p' install
 chmod 0755 $RPM_BUILD_ROOT%{_libdir}/lftp/*
 chmod 0755 $RPM_BUILD_ROOT%{_libdir}/lftp/%{version}/*.so
 
-rpmclean
+rm -rf $RPM_BUILD_ROOT%{_libdir}/*.so
+
+%find_lang lftp
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
-
 %postun -p /sbin/ldconfig
 
-%files
+%files -f lftp.lang
 %defattr(-,root,root,-)
 %config(noreplace) %{_sysconfdir}/lftp.conf
 %{_bindir}/*
@@ -56,3 +54,5 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Aug 25 2015 Cjacker <cjacker@foxmail.com>
+- update to 4.6.4

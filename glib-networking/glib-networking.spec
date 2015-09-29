@@ -1,7 +1,7 @@
 %define glib2_version 2.42
 
 Name:           glib-networking
-Version:        2.44.0
+Version:        2.46.0
 Release:        1
 Summary:        Networking support for GLib
 
@@ -60,4 +60,8 @@ gio-querymodules %{_libdir}/gio/modules
 %{_libdir}/gio/modules/libgiolibproxy.so
 %{_libexecdir}/glib-pacrunner
 %{_datadir}/dbus-1/services/org.gtk.GLib.PACRunner.service
+
+%changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
 

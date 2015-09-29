@@ -1,6 +1,6 @@
 %define api_version 2.91
 Name: vte3
-Version: 0.40.2
+Version: 0.42.0
 Release: 1
 Summary: A terminal emulator
 License: LGPLv2+
@@ -78,3 +78,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/vte-%{api_version}.vapi
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

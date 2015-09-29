@@ -1,4 +1,4 @@
-%define ver 58
+%define ver 59
 %define sonamever 9 
 Name: boost
 Summary: The Boost C++ Libraries
@@ -6,8 +6,7 @@ Version: 1.%{ver}.0
 Release: 2 
 License: Boost
 URL: http://www.boost.org/
-Group: System Environment/Libraries
-Source: boost_1_%{ver}_0.tar.gz
+Source: boost_1_%{ver}_0.tar.bz2
 
 Provides: boost-doc = %{version}-%{release}
 
@@ -38,7 +37,6 @@ Standards Committee's upcoming C++ Standard Library Technical Report.)
 
 %package devel
 Summary: The Boost C++ headers and shared development libraries
-Group: Development/Libraries
 Requires: boost = %{version}-%{release}
 Provides: boost-python-devel = %{version}-%{release}
 
@@ -47,7 +45,6 @@ Headers and shared object symlinks for the Boost C++ libraries.
 
 %package static
 Summary: The Boost C++ static development libraries
-Group: Development/Libraries
 Requires: boost-devel = %{version}-%{release}
 Obsoletes: boost-devel-static < 1.34.1-14
 Provides: boost-devel-static = %{version}-%{release}
@@ -57,7 +54,6 @@ Static Boost C++ libraries.
 
 %package doc
 Summary: The Boost C++ html docs
-Group: Documentation
 Provides: boost-python-docs = %{version}-%{release}
 
 %description doc
@@ -66,16 +62,17 @@ HTML documentation files for Boost C++ libraries.
 %prep
 %setup -q -n %{name}_1_%{ver}_0
 %build
-export CC=clang
-export CXX=clang++
+#export CC=clang
+#export CXX=clang++
 
 BOOST_ROOT=`pwd`
 export BOOST_ROOT
 
-./bootstrap.sh --with-toolset=clang
+./bootstrap.sh
+# --with-toolset=clang
 BJAM=./bjam
 
-CONFIGURE_FLAGS="--with-toolset=clang"
+#CONFIGURE_FLAGS="--with-toolset=clang"
 PYTHON_VERSION=$(python -c 'import sys; print sys.version[:3]')
 PYTHON_FLAGS="--with-python-root=/usr --with-python-version=$PYTHON_VERSION"
 REGEX_FLAGS="--with-icu"
@@ -177,9 +174,10 @@ find libs doc more -type f \( -name \*.htm -o -name \*.html \) \
     | sed -n '/\//{s,/[^/]*$,,;p}' \
     | sort -u > tmp-doc-directories
 sed "s:^:$DOCPATH:" tmp-doc-directories | xargs -r mkdir -p
+#use -print0/-0 to avoid errors when filename contains space.
 cat tmp-doc-directories | while read a; do
-    find $a -mindepth 1 -maxdepth 1 -name \*.htm\* \
-    | xargs install -m 644 -p -t $DOCPATH$a
+    find $a -mindepth 1 -maxdepth 1 -name \*.htm\* -print0 \
+    | xargs -0 install -m 644 -p -t $DOCPATH$a
 done
 rm tmp-doc-directories
 install -p -m 644 -t $DOCPATH LICENSE_1_0.txt index.htm
@@ -187,7 +185,6 @@ install -p -m 644 -t $DOCPATH LICENSE_1_0.txt index.htm
 # remove scripts used to generate include files
 find $RPM_BUILD_ROOT%{_includedir}/ \( -name '*.pl' -o -name '*.sh' \) -exec rm {} \;
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -292,6 +289,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 
 %changelog
+* Thu Sep 03 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.59.0
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

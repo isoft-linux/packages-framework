@@ -2,12 +2,12 @@ Summary:	A voice compression format (codec)
 Name:		libspeex
 Version: 	1.2	
 %define rc_ver	rc2
-Release:	1.12.%{rc_ver}
+Release:	2.12.%{rc_ver}
 License:	BSD
 Group:		System Environment/Libraries
 URL:		http://www.speex.org/
 Source0:	http://downloads.xiph.org/releases/speex/speex-%{version}%{rc_ver}.tar.gz
-Provides:   speex=%{version}-%{release}
+Provides:   	speex = %{version}-%{release}
 BuildRequires:	libogg-devel
 
 %description
@@ -22,7 +22,7 @@ Summary: 	Development package for %{name}
 Group: 		Development/Libraries
 Requires: 	%{name} = %{version}-%{release}
 Requires: 	pkgconfig
-Provides:   speex-devel=%{version}-%{release}
+Provides:   speex-devel = %{version}-%{release}
 
 %description devel
 Speex is a patent-free compression format designed especially for

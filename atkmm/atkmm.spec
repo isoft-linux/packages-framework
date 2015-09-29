@@ -3,7 +3,7 @@
 %define release_version %(echo %{version} | awk -F. '{print $1"."$2}')
 
 Name:           atkmm
-Version:        2.22.7
+Version:        2.24.1
 Release:        1 
 Summary:        C++ interface for the ATK library
 
@@ -86,3 +86,6 @@ rpmclean
 
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+

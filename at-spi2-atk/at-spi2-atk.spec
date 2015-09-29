@@ -1,5 +1,5 @@
 Name:           at-spi2-atk
-Version:        2.16.0
+Version:        2.18.0
 Release:        2
 Summary:        A GTK+ module that bridges ATK to D-Bus at-spi
 
@@ -94,6 +94,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

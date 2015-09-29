@@ -2,7 +2,7 @@
 %global with_wayland 1 
 
 Name:          clutter
-Version:       1.22.2
+Version:       1.24.0
 Release:       1
 Summary:       Open Source software library for creating rich graphical user interfaces
 
@@ -114,6 +114,5 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 %files doc
 %{_datadir}/gtk-doc/html/clutter
-%{_datadir}/gtk-doc/html/cally
 
 %changelog

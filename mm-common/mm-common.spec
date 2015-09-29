@@ -1,12 +1,12 @@
-Name:	    mm-common	
-Version:	0.9.7
-Release:	1
-Summary:    Common build files of the C++ bindings	
+Name: mm-common	
+Version: 0.9.8
+Release: 1
+Summary: Common build files of the C++ bindings	
 
-Group:	    Desktop/Gnome/Development
-License:	GPL
-URL:		http://www.gnome.org
-Source0:	%{name}-%{version}.tar.xz
+Group: Desktop/Gnome/Development
+License: GPL
+URL: http://www.gnome.org
+Source0: %{name}-%{version}.tar.xz
 
 %description
 The mm-common module provides the build infrastructure and utilities shared among the GNOME C++ binding libraries. It is only a required dependency for building the C++ bindings from the gnome.org version control repository. An installation of mm-common is not required for building tarball releases, unless configured to use maintainer-mode.
@@ -34,4 +34,6 @@ rpmclean
 
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
 

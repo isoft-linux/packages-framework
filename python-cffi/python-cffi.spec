@@ -1,7 +1,7 @@
 %global with_python3 1
 
 Name:           python-cffi
-Version:        0.8.6
+Version:        1.1.2 
 Release:        1%{?dist}
 Group:          Development/Libraries
 Summary:        Foreign Function Interface for Python to call C code
@@ -96,3 +96,5 @@ popd
 %doc doc/build/html
 
 %changelog
+* Mon Sep 07 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.1.2

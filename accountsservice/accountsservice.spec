@@ -1,13 +1,10 @@
-%global _hardened_build 1
-
 Name:           accountsservice
 Version:        0.6.40
 Release:        2
 Summary:        D-Bus interfaces for querying and manipulating user account information
 
-Group:          System Environment/Daemons
 License:        GPLv3+
-URL:            http://www.fedoraproject.org/wiki/Features/UserAccountDialog
+URL:            http://www.freedesktop.org/wiki/Software/AccountsService/
 #VCS: git:git://git.freedesktop.org/accountsservice
 Source0:        http://www.freedesktop.org/software/accountsservice/accountsservice-%{version}.tar.xz
 
@@ -29,7 +26,6 @@ Requires(postun): systemd-units
 
 %package libs
 Summary: Client-side library to talk to accountsservice
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description libs
@@ -40,7 +36,6 @@ daemon.
 
 %package devel
 Summary: Development files for accountsservice-libs
-Group: Development/Libraries
 Requires: %{name}-libs = %{version}-%{release}
 
 %description devel

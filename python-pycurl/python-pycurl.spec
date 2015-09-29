@@ -3,7 +3,7 @@
 
 Name:           python-pycurl
 Version:        7.19.5.1
-Release:        2%{?dist}
+Release:        5
 Summary:        A Python interface to libcurl
 
 Group:          Development/Languages
@@ -15,7 +15,7 @@ Source0:        http://pycurl.sourceforge.net/download/pycurl-%{version}.tar.gz
 BuildRequires:  python-devel
 BuildRequires:  python3-devel
 BuildRequires:  libcurl-devel >= 7.19.0
-BuildRequires:  openssl-devel
+#BuildRequires:  openssl-devel
 BuildRequires:  python-nose
 BuildRequires:  python3-nose
 
@@ -58,9 +58,9 @@ cp -a . %{py3dir}
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS"
-%{__python} setup.py build 
+%{__python} setup.py build --with-nss
 pushd %{py3dir}
-%{__python3} setup.py build
+%{__python3} setup.py build --with-nss
 popd
 
 %check
@@ -73,9 +73,10 @@ popd
 #popd
 
 %install
-%{__python} setup.py install -O1 --skip-build --root %{buildroot}
+export PYCURL_SSL_LIBRARY=openssl
+%{__python} setup.py --with-nss install -O1 --skip-build --root %{buildroot}
 pushd %{py3dir}
-%{__python3} setup.py install -O1 --skip-build --root %{buildroot}
+%{__python3} setup.py --with-nss install -O1 --skip-build --root %{buildroot}
 popd
 rm -rf %{buildroot}%{_datadir}/doc/pycurl
 

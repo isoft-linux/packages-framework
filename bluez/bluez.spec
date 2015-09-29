@@ -1,8 +1,6 @@
-%global _hardened_build 1
-
 Summary: Bluetooth utilities
 Name: bluez
-Version: 5.31
+Version: 5.34
 Release: 1
 License: GPLv2+
 Group: Applications/System

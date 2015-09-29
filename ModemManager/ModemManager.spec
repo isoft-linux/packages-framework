@@ -2,7 +2,7 @@
 
 Summary: Mobile broadband modem management service
 Name: ModemManager
-Version: 1.4.8
+Version: 1.4.10
 Release: 1
 Source: %{name}-%{version}.tar.xz
 Patch0: modemmanager-remove-unused-var-fix-clang-build.patch

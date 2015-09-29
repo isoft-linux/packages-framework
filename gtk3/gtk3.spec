@@ -13,16 +13,23 @@
 %define gobject_introspection_version %{gobject_introspection_base_version}-1
 %define libpng_version 2:1.2.2-16
 
-%define base_version 3.16.4
+%define base_version 3.18.0
 %define bin_version 3.0.0
 
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 Name: gtk3
 Version: %{base_version}
-Release: 16
+Release: 18
 License: LGPLv2+
 Group: System Environment/Libraries
 Source: http://download.gnome.org/sources/gtk+/3.0/gtk+-%{version}.tar.xz
+#By Cjacker
+#gtk default to wayland backend now.
+#It's bad since we still use "Xorg" as our default Display Server.
+#here is a hack, if get WAYLAND_DISPLAY env, then prefer wayland backend,
+#else prefer x11 backend.
+#and GDK_BACKEND settings still works.
+Patch0: gtk-temp-fix-backend-selection.patch
 
 BuildRequires: atk-devel >= %{atk_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -105,6 +112,7 @@ gail-devel contains the files required to compile applications against the GAIL 
 
 %prep
 %setup -q -n gtk+-%{version}
+%patch0 -p1
 
 %build
 export CC=cc
@@ -210,6 +218,7 @@ glib-compile-schemas /usr/share/glib-2.0/schemas >/dev/null 2>&1 ||:
 
 %files devel
 %defattr(-, root, root)
+%{_bindir}/gtk-builder-tool
 %{_libdir}/lib*.so
 %{_datadir}/gtk-doc/html/gtk3
 %{_datadir}/gtk-doc/html/gdk3
@@ -244,7 +253,15 @@ glib-compile-schemas /usr/share/glib-2.0/schemas >/dev/null 2>&1 ||:
 %{_libdir}/pkgconfig/gail*.pc
 %{_datadir}/gtk-doc/html/gail-libgail-util3
 %{_includedir}/gail*
+
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
+* Fri Aug 21 2015 Cjacker <cjacker@foxmail.com>
+- update to 3.16.6
+- add patch0 to fix backend selection, now gtk default to wayland, it's bad for us.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

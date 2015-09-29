@@ -14,19 +14,17 @@
 Name: NetworkManager
 Summary: Network connection manager and user applications
 Epoch: 1
-Version: 1.0.4
+Version: 1.0.2 
 Release: 4 
 Group: System Environment/Base
 License: GPLv2+
 URL: http://www.gnome.org/projects/NetworkManager/
 
-#git clone git://anongit.freedesktop.org/NetworkManager/NetworkManager
-#Source0:  NetworkManager.tar.gz
-Source0: https://download.gnome.org/sources/NetworkManager/1.0/%{name}-%{version}.tar.xz
-
+Source: %{name}-%{version}.tar.xz
 Source2: NetworkManager.conf
 Source3: NetworkManager.init
 Patch0: explain-dns1-dns2.patch
+Patch1: NetworkManager-fix-polkit-icon-missing.patch
 
 Requires: dbus >= %{dbus_version}
 Requires: dbus-glib >= %{dbus_glib_version}
@@ -37,7 +35,6 @@ Requires: wpa_supplicant >= 1:0.7.3-1
 Requires: libnl3
 Requires: %{name}-glib = %{epoch}:%{version}-%{release}
 Requires: ppp >= %{ppp_version}
-#Requires: dnsmasq
 Requires: udev
 #Requires: mobile-broadband-provider-info >= 0.20090602
 #Requires: ModemManager >= 0.4
@@ -128,36 +125,37 @@ Group:   System Environment/Base
 Newt based console ui for Networkmanager
 
 %prep
-%setup -q
+%setup -q -n NetworkManager-%{version}
+%patch1 -p1
 
 %build
-if [ ! -f "configure" ]; then ./autogen.sh; fi
 %configure \
 	--disable-static \
 	--enable-ifcfg-rh \
 	--with-dhclient=no \
-	--with-dhcpcd=yes \
+	--with-dhcpcd=/usr/sbin/dhcpcd \
 	--with-crypto=nss \
 	--enable-more-warnings=yes \
 	--enable-wimax=no \
-    --with-system-ca-path=/etc/pki/tls/certs \
+    	--with-system-ca-path=/etc/pki/tls/cert.pem \
 	--with-tests=no \
-    --enable-gtk-doc \
+    	--disable-gtk-doc \
 	--with-pppd-plugin-dir=%{_libdir}/pppd/%{ppp_version} \
 	--with-dist-version=%{version}-%{release} \
-    --enable-introspection \
-    --with-modem-manager-1 \
-    --without-iptables \
-    --enable-vala=no  \
-    --enable-concheck=yes \
+    	--enable-introspection \
+    	--with-modem-manager-1 \
+    	--enable-bluez5-dun \
+    	--without-iptables \
+    	--enable-vala=no  \
+    	--enable-concheck=yes \
     %if %{build_nmtui}
-    --with-nmtui=yes \
+    	--with-nmtui=yes \
     %endif
     %if %{with_systemd}
-    --with-session-tracking=systemd \
-    --with-suspend-resume=systemd \
+    	--with-session-tracking=systemd \
+    	--with-suspend-resume=systemd \
     %else
-    --with-session-tracking=none 
+    	--with-session-tracking=none 
     %endif
 
 
@@ -241,7 +239,7 @@ fi
 %{_libdir}/NetworkManager/*.so*
 %{_mandir}/man1/*
 %{_mandir}/man5/*
-#%{_mandir}/man8/*
+%{_mandir}/man8/*
 
 
 %{_libdir}/girepository-1.0/NM-1.0.typelib
@@ -268,8 +266,6 @@ fi
 %{_sysconfdir}/rc.d/init.d/NetworkManager
 %endif
 %{_libdir}/girepository-?.?/NetworkManager-1.0.typelib
-%{_docdir}/NetworkManager/examples/server.conf
-%{_mandir}/man8/NetworkManager.8.gz
 
 %files devel
 %defattr(-,root,root,0755)
@@ -322,8 +318,6 @@ fi
 %endif
 
 %changelog
-* Fri Jul 17 2015 Cjacker <cjacker@foxmail.com>
-- update to 1.0.4
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

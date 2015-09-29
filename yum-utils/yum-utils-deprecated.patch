@@ -1,0 +1,495 @@
+diff --git a/debuginfo-install.py b/debuginfo-install.py
+index bb61a1d..5252d72 100755
+--- a/debuginfo-install.py
++++ b/debuginfo-install.py
+@@ -23,6 +23,7 @@ import yum.Errors
+ 
+ from utils import YumUtilBase
+ from yum import _
++from yumutils.deprecated import deprecated_warning
+ 
+ import logging
+ import rpmUtils
+@@ -196,5 +197,6 @@ if __name__ == '__main__':
+         import codecs
+         sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
+         sys.stdout.errors = 'replace'
+-    
++
++    deprecated_warning()
+     util = DebugInfoInstall()
+diff --git a/find-repos-of-install.py b/find-repos-of-install.py
+index aac29ea..f4dada8 100644
+--- a/find-repos-of-install.py
++++ b/find-repos-of-install.py
+@@ -19,9 +19,12 @@ import os
+ import os.path
+ 
+ from optparse import OptionParser
++from yumutils.deprecated import deprecated_warning
+ 
+ import yum
+ 
++deprecated_warning()
++
+ my = yum.YumBase()
+ my.conf.showdupesfromrepos = 1
+ 
+diff --git a/needs-restarting.py b/needs-restarting.py
+index b0e540b..a9ba04e 100755
+--- a/needs-restarting.py
++++ b/needs-restarting.py
+@@ -45,6 +45,7 @@ import glob
+ import stat
+ from optparse import OptionParser
+ from yum.Errors import RepoError
++from yumutils.deprecated import deprecated_warning
+ sys.path.insert(0,'/usr/share/yum-cli')
+ import utils
+ 
+@@ -175,6 +176,7 @@ def main(args):
+     
+ if __name__ == "__main__":
+     try:
++        deprecated_warning()
+         sys.exit(main(sys.argv))
+     except RepoError, e:
+         print >>sys.stderr, e
+diff --git a/package-cleanup.py b/package-cleanup.py
+index acad9f2..9c3a474 100755
+--- a/package-cleanup.py
++++ b/package-cleanup.py
+@@ -34,6 +34,7 @@ import yum.depsolve # For flags
+ from yum.Errors import YumBaseError
+ from rpmUtils import miscutils, arch
+ from optparse import OptionGroup
++from yumutils.deprecated import deprecated_warning
+ 
+ def exactlyOne(l):
+     return len(filter(None, l)) == 1
+@@ -397,4 +398,5 @@ class PackageCleanup(YumUtilBase):
+     
+ if __name__ == '__main__':
+     setup_locale()
++    deprecated_warning()
+     util = PackageCleanup()
+diff --git a/repo-check.py b/repo-check.py
+index 2aa8bde..f2ce616 100755
+--- a/repo-check.py
++++ b/repo-check.py
+@@ -19,6 +19,7 @@ sys.path.insert(0,'/usr/share/yum-cli')
+ import logging
+ from utils import YumUtilBase
+ from yum.misc import getCacheDir, setup_locale
++from yumutils.deprecated import deprecated_warning
+ 
+ import yum.Errors
+ 
+@@ -238,5 +239,6 @@ class RepoCheck(YumUtilBase):
+ 
+ if __name__ == '__main__':
+     setup_locale()
++    deprecated_warning()
+     util = RepoCheck()
+     
+diff --git a/repo-graph.py b/repo-graph.py
+index bca41d0..72880fc 100755
+--- a/repo-graph.py
++++ b/repo-graph.py
+@@ -23,6 +23,7 @@ import yum
+ import sys
+ from yum.misc import getCacheDir
+ from optparse import OptionParser
++from yumutils.deprecated import deprecated_warning
+ 
+ default_header = """
+ size="20.69,25.52";
+@@ -94,6 +95,7 @@ class yumQuiet(yum.YumBase):
+         return requires
+ 
+ if __name__ == '__main__':
++    deprecated_warning()
+     parser = OptionParser()
+     parser.add_option("--repoid", default=[], action="append",
+                       help="specify repositories to use")
+diff --git a/repo-rss.py b/repo-rss.py
+index 871e338..5d9c249 100755
+--- a/repo-rss.py
++++ b/repo-rss.py
+@@ -20,6 +20,7 @@ import yum.Errors
+ from yum.misc import getCacheDir, to_unicode
+ from yum.comps import Comps, CompsException
+ from yum.Errors import RepoMDError
++from yumutils.deprecated import deprecated_warning
+ import sys
+ import os
+ import libxml2
+@@ -252,6 +253,7 @@ def main(options, args):
+ 
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     usage = "repo-rss.py [options] repoid1 repoid2"
+     
+     parser = OptionParser(usage=usage)
+diff --git a/repoclosure.py b/repoclosure.py
+index f895f84..693b67d 100755
+--- a/repoclosure.py
++++ b/repoclosure.py
+@@ -32,6 +32,7 @@ import rpmUtils.arch
+ import rpmUtils.updates
+ from yum.constants import *
+ from yum.packageSack import ListPackageSack
++from yumutils.deprecated import deprecated_warning
+ 
+ def parseArgs():
+     usage = """
+@@ -303,6 +304,7 @@ def main():
+ 
+ if __name__ == "__main__":
+     try:
++        deprecated_warning()
+         main()
+     except (yum.Errors.YumBaseError, ValueError), e:
+         print >> sys.stderr, str(e)
+diff --git a/repodiff.py b/repodiff.py
+index 5ae1d8f..44092df 100755
+--- a/repodiff.py
++++ b/repodiff.py
+@@ -21,6 +21,7 @@ import os
+ import locale
+ import rpmUtils.arch
+ from yum.i18n import to_unicode
++from yumutils.deprecated import deprecated_warning
+ 
+ from urlgrabber.progress import format_number
+ 
+@@ -371,4 +372,5 @@ def main(args):
+       
+ if __name__ == "__main__":
+     yum.misc.setup_locale(override_time=True)
++    deprecated_warning()
+     main(sys.argv[1:])
+diff --git a/repomanage.py b/repomanage.py
+index bef3b03..6ffd8f5 100755
+--- a/repomanage.py
++++ b/repomanage.py
+@@ -27,6 +27,7 @@ import fnmatch
+ import string
+ import rpmUtils
+ from yum import misc
++from yumutils.deprecated import deprecated_warning
+ 
+ from optparse import OptionParser
+ 
+@@ -221,6 +222,7 @@ def usage():
+         
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     if len(sys.argv) < 1:
+         usage()
+         sys.exit(1)
+diff --git a/repoquery.py b/repoquery.py
+index af70518..7b4fed3 100755
+--- a/repoquery.py
++++ b/repoquery.py
+@@ -37,6 +37,7 @@ import yum.config
+ import yum.Errors
+ import yum.packages
+ from yum.i18n import to_unicode
++from yumutils.deprecated import deprecated_warning
+ from rpmUtils.arch import getArchList, getBaseArch
+ from rpmUtils.miscutils import formatRequire
+ import output
+@@ -1547,6 +1548,7 @@ def main(args):
+ 
+ if __name__ == "__main__":
+     misc.setup_locale()
++    deprecated_warning()
+     main(sys.argv)
+                 
+ # vim:sw=4:sts=4:expandtab              
+diff --git a/reposync.py b/reposync.py
+index 541ab9d..09133b5 100755
+--- a/reposync.py
++++ b/reposync.py
+@@ -41,6 +41,7 @@ from optparse import OptionParser
+ from urlparse import urljoin
+ 
+ from yumutils.i18n import _
++from yumutils.deprecated import deprecated_warning
+ 
+ import yum
+ import yum.Errors
+@@ -329,4 +330,5 @@ def main():
+     sys.exit(exit_code)
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     main()
+diff --git a/repotrack.py b/repotrack.py
+index 8dd8b9c..618d8f3 100755
+--- a/repotrack.py
++++ b/repotrack.py
+@@ -37,6 +37,7 @@ from yum.misc import getCacheDir
+ from yum.constants import *
+ from yum.packages import parsePackages
+ from yum.packageSack import ListPackageSack
++from yumutils.deprecated import deprecated_warning
+ 
+ class RepoTrack(yum.YumBase):
+     def __init__(self, opts):
+@@ -243,5 +244,6 @@ def main():
+             shutil.copy2(path, local)
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     main()
+     
+diff --git a/show-changed-rco.py b/show-changed-rco.py
+index f314ef0..0c0ed05 100755
+--- a/show-changed-rco.py
++++ b/show-changed-rco.py
+@@ -22,6 +22,7 @@ import os
+ 
+ from optparse import OptionParser
+ from optparse import SUPPRESS_HELP
++from yumutils.deprecated import deprecated_warning
+ 
+ version = "1.0.0"
+ 
+@@ -306,4 +307,5 @@ def main():
+ 
+ if __name__ == "__main__":
+     yum.misc.setup_locale()
++    deprecated_warning()
+     main()
+diff --git a/show-installed.py b/show-installed.py
+index 65aae11..674414c 100755
+--- a/show-installed.py
++++ b/show-installed.py
+@@ -7,6 +7,7 @@ TODO:
+ 
+ import yum
+ from optparse import OptionParser
++from yumutils.deprecated import deprecated_warning
+ import sys
+ 
+ __stateprefixes = {
+@@ -406,4 +407,5 @@ def __main__():
+     p.writeList()
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     __main__()
+diff --git a/verifytree.py b/verifytree.py
+index 78e8264..76fd453 100755
+--- a/verifytree.py
++++ b/verifytree.py
+@@ -20,6 +20,7 @@ import os
+ from yum.misc import getCacheDir, checksum
+ import urlparse
+ from yum import Errors
++from yumutils.deprecated import deprecated_warning
+ from optparse import OptionParser
+ import ConfigParser
+ 
+@@ -285,5 +286,6 @@ def main():
+     return retval
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     rc = main()
+     sys.exit(rc)
+diff --git a/yum-builddep.py b/yum-builddep.py
+index 7c40713..7b3c8a1 100755
+--- a/yum-builddep.py
++++ b/yum-builddep.py
+@@ -22,6 +22,7 @@ from yum.misc import setup_locale
+ from yum.i18n import exception2msg
+ import yum.Errors
+ from utils import YumUtilBase
++from yumutils.deprecated import deprecated_warning
+ 
+ import logging
+ import rpmUtils
+@@ -252,6 +253,7 @@ class YumBuildDep(YumUtilBase):
+             
+ if __name__ == '__main__':
+     setup_locale()
++    deprecated_warning()
+     util = YumBuildDep()
+         
+        
+diff --git a/yum-complete-transaction.py b/yum-complete-transaction.py
+index 6b01e4e..0000412 100755
+--- a/yum-complete-transaction.py
++++ b/yum-complete-transaction.py
+@@ -22,6 +22,7 @@ from yum.misc import setup_locale
+ 
+ from utils import YumUtilBase
+ from yum.constants import TS_REMOVE_STATES
++from yumutils.deprecated import deprecated_warning
+ 
+ import logging
+ import os
+@@ -263,6 +264,7 @@ class YumCompleteTransaction(YumUtilBase):
+ 
+ if __name__ == '__main__':
+     setup_locale()
++    deprecated_warning()
+     util = YumCompleteTransaction()
+ 
+ 
+diff --git a/yum-config-manager.py b/yum-config-manager.py
+index 380a54f..f751cb4 100755
+--- a/yum-config-manager.py
++++ b/yum-config-manager.py
+@@ -14,6 +14,8 @@ import yum.config
+ import yum.yumRepo
+ 
+ from yum.parser import varReplace
++from yumutils.deprecated import deprecated_warning
++
+ 
+ # Regular expressions to sanitise cache filenames
+ re_url_scheme    = re.compile(r'^\w+:/*(\w+:|www\.)?')
+@@ -110,6 +112,7 @@ VERSION = '1.0'
+ USAGE = '"yum-config-manager [options] [section]'
+ 
+ yum.misc.setup_locale()
++deprecated_warning()
+ 
+ yb = YumUtilBase(NAME, VERSION, USAGE)
+ logger = logging.getLogger("yum.verbose.cli.yum-config-manager")
+diff --git a/yum-debug-dump.py b/yum-debug-dump.py
+index 67d943f..fce26f7 100755
+--- a/yum-debug-dump.py
++++ b/yum-debug-dump.py
+@@ -22,6 +22,7 @@ import time
+ import yum
+ from yum import Errors
+ from yum.misc import getCacheDir
++from yumutils.deprecated import deprecated_warning
+ from rpmUtils import miscutils
+ import gzip
+ import rpm
+@@ -207,4 +208,5 @@ def main():
+     print "Output written to: %s" % fn
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     main()
+diff --git a/yum-debug-restore.py b/yum-debug-restore.py
+index 1d827f4..f201260 100755
+--- a/yum-debug-restore.py
++++ b/yum-debug-restore.py
+@@ -25,6 +25,7 @@ from optparse import OptionParser
+ 
+ import yum
+ import rpmUtils.miscutils
++from yumutils.deprecated import deprecated_warning
+ 
+ sections = ['%%%%SYSTEM INFO\n', '%%%%YUM INFO\n',
+             '%%%%RPMDB PROBLEMS\n', '%%%%RPMDB\n',
+@@ -236,6 +237,7 @@ def main():
+     os.system("yum shell %s %s" % (" ".join(xtra_args), fo.name))
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     main()
+ 
+ 
+diff --git a/yum-groups-manager.py b/yum-groups-manager.py
+index c536092..300abff 100755
+--- a/yum-groups-manager.py
++++ b/yum-groups-manager.py
+@@ -9,6 +9,7 @@ import gzip
+ 
+ import yum
+ from yum.i18n import to_unicode
++from yumutils.deprecated import deprecated_warning
+ import yum.comps
+ 
+ sys.path.insert(0, '/usr/share/yum-cli')
+@@ -308,4 +309,5 @@ def main():
+         print to_unicode(comps.xml())
+ 
+ if __name__ == "__main__":
++    deprecated_warning()
+     main()
+diff --git a/yumdb.py b/yumdb.py
+index c50159e..3196713 100755
+--- a/yumdb.py
++++ b/yumdb.py
+@@ -9,6 +9,7 @@ import shlex
+ 
+ import os
+ import glob
++from yumutils.deprecated import deprecated_warning
+ 
+ parser = None
+ 
+@@ -247,4 +248,5 @@ def main():
+ 
+ 
+ if __name__ == '__main__':
++    deprecated_warning()
+     main()
+diff --git a/yumdownloader.py b/yumdownloader.py
+index 1b95e8d..8b3d00a 100755
+--- a/yumdownloader.py
++++ b/yumdownloader.py
+@@ -23,6 +23,7 @@ from yum.misc import setup_locale
+ from yum.packages import parsePackages
+ from yum.Errors import RepoError
+ from yum.i18n import exception2msg
++from yumutils.deprecated import deprecated_warning
+ from utils import YumUtilBase
+ 
+ from urlparse import urljoin
+@@ -258,5 +259,6 @@ class YumDownloader(YumUtilBase):
+ 
+ if __name__ == '__main__':
+     setup_locale()
++    deprecated_warning()
+     util = YumDownloader()
+     sys.exit(util.exit_code)
+diff --git a/yumutils/deprecated.py b/yumutils/deprecated.py
+new file mode 100644
+index 0000000..d583915
+--- /dev/null
++++ b/yumutils/deprecated.py
+@@ -0,0 +1,29 @@
++#!/usr/bin/python -tt
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++#
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU Library General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++
++from __future__ import print_function
++from yumutils.i18n import _
++
++import sys
++
++WARNING = _("""
++Yum-utils package has been deprecated, use dnf instead.
++See 'man yum2dnf' for more information.
++
++""")
++
++def deprecated_warning():
++    print(WARNING, file=sys.stderr)
++
+-- 
+1.8.3.1

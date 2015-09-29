@@ -12,7 +12,7 @@
 %define python3_version                3.4
 
 Name: pygobject3
-Version: 3.16.1
+Version: 3.18.0
 Release: 1
 License: LGPLv2+ and MIT
 Group: Development/Languages
@@ -128,15 +128,10 @@ find $RPM_BUILD_ROOT -name '*.a' -delete
 
 %files
 %defattr(644, root, root, 755)
-%doc AUTHORS NEWS README COPYING
-%doc examples
-
 %dir %{python_sitearch}/gi
 %{python_sitearch}/gi/*
 %{python_sitearch}/pygtkcompat/*
 %{python_sitearch}/*.egg-info
-
-
 
 %files devel
 %defattr(644, root, root, 755)
@@ -147,16 +142,16 @@ find $RPM_BUILD_ROOT -name '*.a' -delete
 %if 0%{?with_python3}
 %files -n python3-gobject
 %defattr(644, root, root, 755)
-%doc AUTHORS NEWS README COPYING
-%doc examples
 %dir %{python3_sitearch}/gi
 %{python3_sitearch}/gi/*
 %{python3_sitearch}/pygtkcompat/*
 %{python3_sitearch}/*.egg-info
-
 %endif # with_python3
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

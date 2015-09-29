@@ -3,14 +3,14 @@
 %define         gitdate 
 
 Name:           weston
-Version:        1.8.0
-Release:        1%{?gitdate:.git%{gitdate}} 
+Version:        1.9.0
+Release:        3%{?gitdate:.git%{gitdate}} 
 Summary:        Reference compositor for Wayland
-Group:          User Interface/X
 License:        BSD and CC-BY-SA
 URL:            http://wayland.freedesktop.org/
-#git clone git://anongit.freedesktop.org/wayland/weston
 Source0:        http://wayland.freedesktop.org/releases/%{name}-%{?gitdate:}%{!?gitdate:%{version}}.tar.xz
+#git clone git://anongit.freedesktop.org/wayland/weston
+#Source0: weston.tar.gz
 
 Requires:       xkeyboard-config 
 BuildRequires:  autoconf
@@ -43,7 +43,6 @@ or under another compositor.
 %if %with_x11
 %package x11 
 Summary: weston x11 backend and XWayland support
-Group:   User Interface
 Requires: %name = %{version}
 
 %description x11 
@@ -52,7 +51,6 @@ Requires: %name = %{version}
 
 %package devel
 Summary: Libraries and headers for %{name}
-Group:   Development/Libraries
 Requires: %name = %{version}
 
 %description devel
@@ -60,7 +58,6 @@ Libraries and headers for %{name}
 
 %package demo 
 Summary: Demo applications for %{name}
-Group:   User Interface
 Requires: %name = %{version}
 
 %description demo 
@@ -71,6 +68,7 @@ Demo applications for %{name}
 %setup -q -n %{name}-%{?gitdate:}%{!?gitdate:%{version}}
 
 %build
+if [ ! -f "configure" ]; then ./autogen.sh; fi
 %configure \
     --disable-static \
     --disable-setuid-install \
@@ -94,14 +92,13 @@ make install DESTDIR=$RPM_BUILD_ROOT
 rpmclean
 %files
 %defattr(-,root,root,-)
-%doc README
-%doc data/COPYING
+%doc README COPYING
 %{_bindir}/weston
 %{_bindir}/weston-info
 %{_bindir}/weston-launch
 %{_bindir}/weston-terminal
 #need build weston with pango
-#%{_bindir}/weston-editor
+%{_bindir}/weston-editor
 
 %{_bindir}/wcap-decode
 %dir %{_libdir}/weston
@@ -114,7 +111,7 @@ rpmclean
 %{_libdir}/weston/fbdev-backend.so
 %{_libdir}/weston/headless-backend.so
 #%{_libdir}/weston/cms-colord.so
-#%{_libdir}/weston/cms-static.so
+%{_libdir}/weston/cms-static.so
 %{_libexecdir}/weston-*
 %{_mandir}/man1/*.1*
 %{_mandir}/man5/weston.ini.5.gz
@@ -164,7 +161,9 @@ rpmclean
 %{_bindir}/weston-subsurfaces
 %{_bindir}/weston-transformed
 %{_bindir}/weston-presentation-shm
+%{_bindir}/weston-simple-dmabuf
+
 %changelog
-* Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
-- first build, prepare for the new release.
+* Thu Sep 03 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.8.92
 

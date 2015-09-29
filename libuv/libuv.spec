@@ -1,54 +1,76 @@
-Name:		libuv
-Version:    1.6.1	
-Release:	1
-Summary:    Abstract IOCP Layer from NodeJS
+#we only need major.minor in the SONAME in the stable (even numbered) series
+#this should be changed to %%{version} in unstable (odd numbered) releases
+%global sover 0.10
 
-Group:		Extra/Runtime/Library
-License:	MIT and BSD and ISC
-URL:		http://www.libuv.org
-Source0:    http://libuv.org/dist/v0.10.29/%{name}-v%{version}.tar.gz	
+Name: libuv
+Epoch:   1
+Version: 1.4.0
+Release: 2%{?dist}
+Summary: Platform layer for node.js
+# the licensing breakdown is described in detail in the LICENSE file
+License: MIT and BSD and ISC
+URL: http://libuv.org/
+Source0: http://libuv.org/dist/v%{version}/%{name}-v%{version}.tar.gz
+Source2: libuv.pc.in
+
+BuildRequires: autoconf automake libtool
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
 
 %description
 libuv is a new platform layer for Node. Its purpose is to abstract IOCP on
-Windows and epoll/kqueue/event ports/etc. on Unix systems. We intend to
-eventually contain all platform differences in this library.
+Windows and libev on Unix systems. We intend to eventually contain all platform
+differences in this library.
 
-%package        devel
-Summary:        Development files for %{name}
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+%package devel
+Summary: Development libraries for libuv
+Requires: %{name}%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: pkgconfig
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
 
-%description    devel
-The %{name}-devel package contains libraries and header files for
-developing applications that use %{name}.
+%description devel
+Development libraries for libuv
+
+%package static
+Summary: Platform layer for node.js - static library
+Requires:   %{name}-devel = %{epoch}:%{version}-%{release}
+
+%description static
+Static library (.a) version of libuv.
 
 %prep
-%setup -q -n libuv-v%{version}
+%setup -q -n %{name}-v%{version}
 
 %build
-if [ ! -f "configure" ]; then ./autogen.sh; fi
+./autogen.sh
 %configure
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
-
-#we do not ship static library
-rm -rf $RPM_BUILD_ROOT%{_libdir}/lib*.a
-rpmclean
+make DESTDIR=%{buildroot} install
+rm -f %{buildroot}%{_libdir}/libuv.la
 
 %check
-make check
+# Tests are currently disabled because some require network access
+# Working with upstream to split these out
+#./run-tests
+#./run-benchmarks
+
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
-%{_libdir}/lib*.so.*
+%doc README.md AUTHORS LICENSE
+%{_libdir}/libuv.so.*
 
 %files devel
-%{_libdir}/lib*.so
-%{_libdir}/pkgconfig/*.pc
-%{_includedir}/*
+%doc README.md AUTHORS LICENSE
+%{_libdir}/libuv.so
+%{_libdir}/pkgconfig/libuv.pc
+%{_includedir}/uv*.h
+
+%files static
+%{_libdir}/libuv.a
 
 %changelog
-* Mon Jul 13 2015 Cjacker <cjacker@foxmail.com>
-- first build.

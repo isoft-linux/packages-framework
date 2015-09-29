@@ -1,5 +1,5 @@
 Name:           libsecret
-Version:        0.18.2
+Version:        0.18.3
 Release:        1
 Summary:        Library for storing and retrieving passwords and other secrets
 Group:          System Environment/Libraries 
@@ -72,6 +72,9 @@ rpmclean
 %{_datadir}/vala/vapi/libsecret-1.vapi
 
 %changelog
+* Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome 3.18
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 
