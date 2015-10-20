@@ -1,6 +1,6 @@
 Name:		im-chooser
 Version:	1.6.4
-Release:	7
+Release: 8	
 License:	GPLv2+ and LGPLv2+
 URL:		http://fedorahosted.org/im-chooser/
 BuildRequires:	gtk2-devel
@@ -54,6 +54,10 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/libimchooseui.{so,la,a}
 # disable panel so far
 rm -rf $RPM_BUILD_ROOT%{_libdir}/control-center-1/panels/libim-chooser.so
 rm -rf $RPM_BUILD_ROOT%{_datadir}/applications/im-chooser-panel.desktop
+
+
+#hide this menu item by default.
+echo "NoDisplay=true" >> $RPM_BUILD_ROOT%{_datadir}/applications/im-chooser.desktop
 
 %find_lang %{name}
 

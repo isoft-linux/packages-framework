@@ -1,9 +1,8 @@
 Name:           gcr
-Version:        3.17.4
+Version:        3.18.0
 Release:        1
 Summary:        A library for bits of crypto UI and parsing
 
-Group:          Development/Libraries
 License:        LGPLv2+
 URL:            http://live.gnome.org/CryptoGlue/
 Source0:        http://download.gnome.org/sources/gcr/3.10/gcr-%{version}.tar.xz
@@ -33,7 +32,6 @@ gck is a library for accessing PKCS#11 modules like smart cards.
 
 %package devel
 Summary: Development files for gcr
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -124,6 +122,9 @@ fi
 
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 3.18.0 
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

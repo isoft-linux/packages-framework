@@ -1,10 +1,9 @@
 Name:    librsvg2
 Summary: An SVG library based on cairo
-Version: 2.40.10
+Version: 2.40.11
 Release: 1
 
 License:        LGPLv2+
-Group:          System Environment/Libraries
 Source:         http://download.gnome.org/sources/librsvg/2.32/librsvg-%{version}.tar.xz
 
 Requires(post):   gdk-pixbuf2
@@ -28,7 +27,6 @@ An SVG library based on cairo.
 
 %package devel
 Summary:        Libraries and include files for developing with librsvg
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       gdk-pixbuf2-devel
 Requires:       cairo-devel
@@ -68,7 +66,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/mozilla/
 rm -f $RPM_BUILD_ROOT%{_sysconfdir}/gtk-2.0/gdk-pixbuf.loaders
 rm -f $RPM_BUILD_ROOT%{_datadir}/pixmaps/svg-viewer.svg
 
-rpmclean
 %post
 /sbin/ldconfig
 gdk-pixbuf-query-loaders --update-cache || :
@@ -99,6 +96,9 @@ gdk-pixbuf-query-loaders --update-cache || :
 
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 2.40.11 
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

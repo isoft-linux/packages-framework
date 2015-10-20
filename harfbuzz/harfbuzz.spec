@@ -1,5 +1,5 @@
 Name:           harfbuzz
-Version:        0.9.42
+Version:        1.0.4
 Release:        4 
 Summary:        Text shaping library
 
@@ -81,6 +81,5 @@ make check ||:
 %{_libdir}/libharfbuzz-icu.so.*
 
 %changelog
-* Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
-- first build, prepare for the new release.
-
+* Fri Oct 09 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.0.4

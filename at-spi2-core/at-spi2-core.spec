@@ -1,9 +1,8 @@
 Name:           at-spi2-core
-Version:        2.18.0
+Version:        2.18.1
 Release:        1
 Summary:        Protocol definitions and daemon for D-Bus at-spi
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 Source0:        http://download.gnome.org/sources/at-spi2-core/2.4/%{name}-%{version}.tar.xz
@@ -32,7 +31,6 @@ ORBIT / CORBA for its transport protocol.
 
 %package devel
 Summary: Development files and headers for at-spi2-core
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -53,9 +51,9 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT DATADIRNAME=share
 
-%{find_lang} %{name}
-
 rm $RPM_BUILD_ROOT%{_libdir}/libatspi.la
+
+%{find_lang} %{name}
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -78,6 +76,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/libatspi.la
 %{_libdir}/pkgconfig/atspi-2.pc
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 2.18.1
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

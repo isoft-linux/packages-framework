@@ -1,0 +1,17 @@
+diff -Nur logrotate-3.9.1/examples/logrotate-default logrotate-3.9.1n/examples/logrotate-default
+--- logrotate-3.9.1/examples/logrotate-default	2015-04-03 15:39:35.000000000 +0800
++++ logrotate-3.9.1n/examples/logrotate-default	2015-10-15 12:51:49.925630222 +0800
+@@ -1,9 +1,9 @@
+ # see "man logrotate" for details
+-# rotate log files weekly
+-weekly
++# rotate log files daily, for desktop 
++daily
+ 
+-# keep 4 weeks worth of backlogs
+-rotate 4
++# keep 4 weeks worth of backlogs, for desktop
++rotate 1 
+ 
+ # create new (empty) log files after rotating old ones
+ create

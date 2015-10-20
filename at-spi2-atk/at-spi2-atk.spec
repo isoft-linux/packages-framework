@@ -1,9 +1,8 @@
 Name:           at-spi2-atk
-Version:        2.18.0
+Version:        2.18.1
 Release:        2
 Summary:        A GTK+ module that bridges ATK to D-Bus at-spi
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 Source0:        http://download.gnome.org/sources/at-spi2-atk/2.4/%{name}-%{version}.tar.xz
@@ -32,7 +31,6 @@ D-Bus based at-spi.
 
 %package gtk2
 Summary: at-spi2-atk gtk2 module
-Group:   System Environment/Libraries 
 Requires: %{name} = %{version}-%{release}
 Requires: at-spi2-core
 
@@ -41,7 +39,6 @@ at-spi2-atk gtk2 module
 
 %package devel
 Summary: Development files and headers for at-spi2-atk
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: at-spi2-core-devel 
 Requires: atk-devel
@@ -94,6 +91,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

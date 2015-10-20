@@ -88,6 +88,7 @@
 #
 workgroup = MYGROUP
 server string = Samba Server Version %v
+server role = standalone server
 
 ;	netbios name = MYSERVER
 
@@ -123,9 +124,16 @@ max log size = 50
 security = user
 passdb backend = tdbsam
 
-map to guest = Bad User
+obey pam restrictions = yes
+
+#we have to map guest account to root, otherwise anonymous access to usershares will failed with "permission denied"
+#since guest user had no permission to access folder under user's home.
+#guest account = root
+
+map to guest = Bad Password
 guest ok = yes
 
+obey pam restrictions = yes
 
 # ----------------------- Domain Members Options ------------------------
 #
@@ -238,7 +246,7 @@ guest ok = yes
 ;	wins server = w.x.y.z
 ;	wins proxy = yes
 
-;	dns proxy = yes
+dns proxy = no 
 
 # --------------------------- Printing Options -----------------------------
 #

@@ -1,11 +1,12 @@
 %global WITH_MONO 0
+%global WITH_QT3 0
+
 %global WITH_COMPAT_DNSSD 1
 %global WITH_COMPAT_HOWL  1
-%define WITH_MONO 0
 
 Name:             avahi
-Version:          0.6.31
-Release:          1
+Version:          0.6.32
+Release:          2.rc
 Summary:          Local network service discovery
 License:          LGPLv2+
 URL:              http://avahi.org
@@ -27,7 +28,16 @@ BuildRequires:    libdaemon-devel >= 0.11
 BuildRequires:    glib2-devel
 BuildRequires:    libcap-devel
 BuildRequires:    expat-devel
-BuildRequires:    python
+%if %{WITH_QT3}
+BuildRequires:    qt3-devel
+%endif
+BuildRequires:    qt4-devel
+
+BuildRequires: xmltoman
+BuildRequires:    python-devel
+BuildRequires:    python3-devel
+BuildRequires:    gdbm-devel
+BuildRequires:    pygtk2
 BuildRequires:    intltool
 BuildRequires:    perl-XML-Parser
 %if %{WITH_MONO}
@@ -40,8 +50,10 @@ Requires(post):   systemd
 Requires(preun):  systemd
 Requires(postun): systemd
 
-Source0:          http://avahi.org/download/%{name}-%{version}.tar.gz
-Patch0:           avahi-0.6.30-mono-libdir.patch
+Source0:          http://avahi.org/download/%{name}-%{version}-rc.tar.gz
+
+
+Patch100:         avahi-0.6.30-mono-libdir.patch
 
 %description
 Avahi is a system which facilitates service discovery on
@@ -59,6 +71,23 @@ Requires:         %{name}-libs = %{version}-%{release}
 
 %description tools
 Command line tools that use avahi to browse and publish mDNS services.
+
+%package ui-tools
+Summary:          UI tools for mDNS browsing
+Requires:         %{name} = %{version}-%{release}
+Requires:         %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:         %{name}-glib%{?_isa} = %{version}-%{release}
+Requires:         %{name}-ui-gtk3%{?_isa} = %{version}-%{release}
+Requires:         python-avahi = %{version}-%{release}
+Requires:         vnc
+Requires:         openssh-clients
+Requires:         pygtk2
+Requires:         pygtk2-libglade
+Requires:         gdbm
+Requires:         dbus-python
+
+%description ui-tools
+Graphical user interface tools that use Avahi to browse for mDNS services.
 
 %package glib
 Summary:          Glib libraries for avahi
@@ -101,6 +130,71 @@ Requires:         %{name}-gobject = %{version}-%{release}
 %description gobject-devel
 The avahi-gobject-devel package contains the header files and libraries
 necessary for developing programs using avahi-gobject.
+
+%package ui
+Summary:          Gtk user interface library for Avahi (Gtk+ 2 version)
+Requires:         %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:         %{name}-glib%{?_isa} = %{version}-%{release}
+Requires:         gtk2
+
+%description ui
+This library contains a Gtk 2.x widget for browsing services.
+
+%package ui-gtk3
+Summary:          Gtk user interface library for Avahi (Gtk+ 3 version)
+Requires:         %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:         %{name}-glib%{?_isa} = %{version}-%{release}
+Requires:         gtk3
+
+%description ui-gtk3
+This library contains a Gtk 3.x widget for browsing services.
+
+%package ui-devel
+Summary:          Libraries and header files for Avahi UI development
+Requires:         %{name}-devel%{?_isa} = %{version}-%{release}
+Requires:         %{name}-ui%{?_isa} = %{version}-%{release}
+Requires:         %{name}-ui-gtk3%{?_isa} = %{version}-%{release}
+#Requires:         %{name}-glib-devel = %{version}-%{release}
+
+%description ui-devel
+The avahi-ui-devel package contains the header files and libraries
+necessary for developing programs using avahi-ui.
+
+%if %{WITH_QT3}
+%package qt3
+Summary:          Qt3 libraries for avahi
+Requires:         %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description qt3
+Libraries for easy use of avahi from Qt3 applications.
+
+%package qt3-devel
+Summary:          Libraries and header files for avahi Qt3 development
+Requires:         %{name}-devel%{?_isa} = %{version}-%{release}
+Requires:         %{name}-qt3%{?_isa} = %{version}-%{release}
+
+%description qt3-devel
+The avahi-qt3-devel package contains the header files and libraries
+necessary for developing programs using avahi with Qt3.
+%endif
+
+%package qt4
+Summary:          Qt4 libraries for avahi
+Requires:         %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description qt4
+Libraries for easy use of avahi from Qt4 applications.
+
+%package qt4-devel
+Summary:          Libraries and header files for avahi Qt4 development
+Requires:         %{name}-devel%{?_isa} = %{version}-%{release}
+Requires:         %{name}-qt4%{?_isa} = %{version}-%{release}
+
+%description qt4-devel
+Th avahi-qt4-devel package contains the header files and libraries
+necessary for developing programs using avahi with Qt4.
+
+
 
 %if %{WITH_MONO}
 %package sharp
@@ -228,11 +322,36 @@ avahi-dnsconfd connects to a running avahi-daemon and runs the script
 local LAN. This is useful for configuring unicast DNS servers in a DHCP-like
 fashion with mDNS.
 
+
+%package -n python-avahi
+Summary:          Python2 Avahi bindings
+Provides:         python2-avahi = %{version}-%{release}
+Requires:         %{name} = %{version}-%{release}
+Requires:         %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description -n python-avahi
+%{summary}.
+
+%package -n python3-avahi
+Summary:          Python3 Avahi bindings
+Requires:         %{name} = %{version}-%{release}
+Requires:         %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description -n python3-avahi
+%{summary}.
+
 %prep
-%setup -q
-%patch0 -p1 -b .mono-libdir
+%setup -q -n %{name}-%{version}-rc
+
+%patch100 -p1 -b .mono-libdir
+rm -fv docs/INSTALL
+
 
 %build
+# patch100 requires autogen
+rm -fv missing
+NOCONFIGURE=1 ./autogen.sh
+
 %configure \
         --with-distro=none \
         --disable-monodoc \
@@ -242,14 +361,9 @@ fashion with mDNS.
         --with-autoipd-user=avahi-autoipd \
         --with-autoipd-group=avahi-autoipd \
         --with-systemdsystemunitdir=/usr/lib/systemd/system \
-        --disable-gdbm \
-        --disable-python \
-        --disable-stack-protector \
-        --disable-gtk3 \
-        --disable-gtk \
+%if ! %{WITH_QT3}
         --disable-qt3 \
-        --disable-pygtk \
-        --disable-qt4 \
+%endif
         --enable-introspection \
 %if %{WITH_COMPAT_DNSSD}
         --enable-compat-libdns_sd \
@@ -292,8 +406,20 @@ ln -s avahi-compat-libdns_sd.pc %{buildroot}/%{_libdir}/pkgconfig/libdns_sd.pc
 ln -s avahi-compat-libdns_sd/dns_sd.h %{buildroot}/%{_includedir}/
 %endif
 
+# Add python3 support
+mkdir -p %{buildroot}%{python3_sitelib}/avahi/
+cp -r %{buildroot}%{python2_sitelib}/avahi/* %{buildroot}%{python3_sitelib}/avahi/
+rm -fv %{buildroot}%{buildroot}%{python3_sitelib}/avahi/*.py{c,o}
+
 rm -f %{buildroot}%{_sysconfdir}/rc.d/init.d/avahi-daemon
 rm -f %{buildroot}%{_sysconfdir}/rc.d/init.d/avahi-dnsconfd
+
+
+# Hide Menu Items.
+echo "NoDisplay=true" >> %{buildroot}%{_datadir}/applications/avahi-discover.desktop
+echo "NoDisplay=true" >> %{buildroot}%{_datadir}/applications/bssh.desktop
+echo "NoDisplay=true" >> %{buildroot}%{_datadir}/applications/bvnc.desktop
+
 
 %find_lang %{name}
 
@@ -365,6 +491,21 @@ fi
 %post gobject -p /sbin/ldconfig
 %postun gobject -p /sbin/ldconfig
 
+%if %{WITH_QT3}
+%post qt3 -p /sbin/ldconfig
+%postun qt3 -p /sbin/ldconfig
+%endif
+
+%post qt4 -p /sbin/ldconfig
+%postun qt4 -p /sbin/ldconfig
+
+%post ui -p /sbin/ldconfig
+%postun ui -p /sbin/ldconfig
+
+%post ui-gtk3 -p /sbin/ldconfig
+%postun ui-gtk3 -p /sbin/ldconfig
+
+
 %files -f %{name}.lang
 %doc docs/* avahi-daemon/example.service avahi-daemon/sftp-ssh.service avahi-daemon/ssh.service
 %dir %{_sysconfdir}/avahi
@@ -380,7 +521,8 @@ fi
 %{_datadir}/avahi/*.dtd
 %{_datadir}/avahi/service-types
 %dir %{_libdir}/avahi
-%{_datadir}/dbus-1/interfaces/*.xml
+%{_libdir}/avahi/service-types.db
+
 %{_mandir}/man5/*
 %{_mandir}/man8/avahi-daemon.*
 %{_unitdir}/avahi-daemon.service
@@ -402,6 +544,26 @@ fi
 %files tools
 %{_bindir}/*
 %{_mandir}/man1/*
+%exclude %{_bindir}/b*
+%exclude %{_bindir}/avahi-discover*
+%exclude %{_bindir}/avahi-bookmarks
+%exclude %{_mandir}/man1/b*
+%exclude %{_mandir}/man1/avahi-discover*
+%exclude %{_mandir}/man1/avahi-bookmarks*
+
+
+%files ui-tools
+%{_bindir}/b*
+%{_bindir}/avahi-discover
+# avahi-bookmarks is not really a UI tool, but I won't create a seperate package for it...
+%{_bindir}/avahi-bookmarks
+%{_mandir}/man1/b*
+%{_mandir}/man1/avahi-discover*
+%{_mandir}/man1/avahi-bookmarks*
+%{_datadir}/applications/b*.desktop
+%{_datadir}/applications/avahi-discover.desktop
+%{_datadir}/avahi/interfaces/
+%{python2_sitelib}/avahi_discover/
 
 %files devel
 %{_libdir}/libavahi-common.so
@@ -410,6 +572,7 @@ fi
 %{_includedir}/avahi-client
 %{_includedir}/avahi-common
 %{_includedir}/avahi-core
+%{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/pkgconfig/avahi-core.pc
 %{_libdir}/pkgconfig/avahi-client.pc
 
@@ -436,6 +599,38 @@ fi
 %{_libdir}/pkgconfig/avahi-gobject.pc
 %{_datadir}/gir-1.0/Avahi-0.6.gir
 %{_datadir}/gir-1.0/AvahiCore-0.6.gir
+
+%files ui
+%{_libdir}/libavahi-ui.so.*
+
+%files ui-gtk3
+%{_libdir}/libavahi-ui-gtk3.so.*
+
+%files ui-devel
+%{_libdir}/libavahi-ui.so
+%{_libdir}/libavahi-ui-gtk3.so
+%{_includedir}/avahi-ui
+%{_libdir}/pkgconfig/avahi-ui.pc
+%{_libdir}/pkgconfig/avahi-ui-gtk3.pc
+
+%if %{WITH_QT3}
+%files qt3
+%{_libdir}/libavahi-qt3.so.*
+
+%files qt3-devel
+%{_libdir}/libavahi-qt3.so
+%{_includedir}/avahi-qt3/
+%{_libdir}/pkgconfig/avahi-qt3.pc
+%endif
+
+%files qt4
+%{_libdir}/libavahi-qt4.so.*
+
+%files qt4-devel
+%{_libdir}/libavahi-qt4.so
+%{_includedir}/avahi-qt4/
+%{_libdir}/pkgconfig/avahi-qt4.pc
+
 
 %if %{WITH_MONO}
 %files sharp
@@ -474,7 +669,17 @@ fi
 %{_libdir}/pkgconfig/libdns_sd.pc
 %endif
 
+%files -n python-avahi
+# These are .py files only, so they don't go in lib64
+%{python2_sitelib}/avahi/
+
+%files -n python3-avahi
+# These are .py files only, so they don't go in lib64
+%{python3_sitelib}/avahi/
+
 %changelog
+* Sun Oct 18 2015 Cjacker <cjacker@foxmail.com>
+- update to 0.6.32-rc
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

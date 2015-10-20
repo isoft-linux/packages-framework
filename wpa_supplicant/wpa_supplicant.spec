@@ -5,7 +5,7 @@ Summary: WPA/WPA2/IEEE 802.1X Supplicant
 Name: wpa_supplicant
 Epoch: 1
 Version: 2.5
-Release: 5.git
+Release: 6.git
 License: BSD
 Group:  Framework/Runtime/Utility
 Source0: hostap.tar.gz

@@ -1,14 +1,14 @@
 Summary: Library for tracking application startup
 Name: startup-notification
 Version: 0.12
-Release: 1
+Release: 2 
 URL: http://www.freedesktop.org/software/startup-notification/
 Source0: %{name}-%{version}.tar.gz
 License: LGPL
-Group: System Environment/Libraries
 BuildRoot: %{_tmppath}/%{name}-root
 BuildRequires: libX11-devel
 BuildRequires: libXt-devel
+BuildRequires: libxcb-devel
 
 %description
 
@@ -19,7 +19,6 @@ feedback such as a busy cursor, among other features.
 
 %package devel
 Summary: Development portions of startup-notification
-Group: Development/Libraries
 Requires: startup-notification = %{version}-%{release}
 Requires: libX11-devel
 
@@ -40,7 +39,6 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 /bin/rm -f $RPM_BUILD_ROOT%{_libdir}/*.{a,la}
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT

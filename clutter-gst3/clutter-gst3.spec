@@ -1,5 +1,5 @@
 Name:           clutter-gst3
-Version:        3.0.10
+Version:        3.0.14
 Release:        1
 Summary:        GStreamer integration for Clutter
 
@@ -64,6 +64,8 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/gtk-doc/
 #doc #{_datadir}/gtk-doc/
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 3.0.14
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

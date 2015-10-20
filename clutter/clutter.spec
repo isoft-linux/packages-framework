@@ -2,11 +2,10 @@
 %global with_wayland 1 
 
 Name:          clutter
-Version:       1.24.0
+Version:       1.24.2
 Release:       1
 Summary:       Open Source software library for creating rich graphical user interfaces
 
-Group:         Development/Libraries
 License:       LGPLv2+
 URL:           http://www.clutter-project.org/
 Source0:       http://download.gnome.org/sources/clutter/1.18/clutter-%{version}.tar.xz
@@ -53,7 +52,6 @@ We hope however it can be used for a lot more.
 
 %package devel
 Summary:       Clutter development environment
-Group:         Development/Libraries
 Requires:      %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -62,7 +60,6 @@ clutter
 
 %package       doc
 Summary:       Documentation for %{name}
-Group:         Documentation
 Requires:      %{name} = %{version}-%{release}
 
 %description   doc
@@ -77,13 +74,13 @@ This package contains documentation for clutter.
 %setup -q
 %build
 %configure \
-	    --enable-xinput \
-        --enable-gdk-backend \
+    --enable-xinput \
+    --enable-gdk-backend \
 %if %{with_wayland}
-        --enable-egl-backend \
-        --enable-evdev-input \
-        --enable-wayland-backend \
-        --enable-wayland-compositor \
+    --enable-egl-backend \
+    --enable-evdev-input \
+    --enable-wayland-backend \
+    --enable-wayland-compositor \
 %endif
 
 make %{?_smp_mflags} V=1
@@ -116,3 +113,6 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_datadir}/gtk-doc/html/clutter
 
 %changelog
+
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.24.2

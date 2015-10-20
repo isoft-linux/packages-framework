@@ -4,7 +4,7 @@
 
 Name:           weston
 Version:        1.9.0
-Release:        3%{?gitdate:.git%{gitdate}} 
+Release:        4%{?gitdate:.git%{gitdate}} 
 Summary:        Reference compositor for Wayland
 License:        BSD and CC-BY-SA
 URL:            http://wayland.freedesktop.org/
@@ -89,7 +89,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rpmclean
 %files
 %defattr(-,root,root,-)
 %doc README COPYING

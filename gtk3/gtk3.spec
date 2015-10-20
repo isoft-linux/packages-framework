@@ -13,7 +13,7 @@
 %define gobject_introspection_version %{gobject_introspection_base_version}-1
 %define libpng_version 2:1.2.2-16
 
-%define base_version 3.18.0
+%define base_version 3.18.2
 %define bin_version 3.0.0
 
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
@@ -21,7 +21,6 @@ Name: gtk3
 Version: %{base_version}
 Release: 18
 License: LGPLv2+
-Group: System Environment/Libraries
 Source: http://download.gnome.org/sources/gtk+/3.0/gtk+-%{version}.tar.xz
 #By Cjacker
 #gtk default to wayland backend now.
@@ -71,7 +70,6 @@ suites.
 
 %package devel
 Summary: Development tools for GTK+ applications
-Group: Development/Libraries
 Requires: gtk3 = %{version}-%{release}
 Requires: pango-devel >= %{pango_version}
 Requires: atk-devel >= %{atk_version}
@@ -89,7 +87,6 @@ docs for the GTK+ widget toolkit.
 
 %package -n gail3
 Summary: Accessibility implementation for GTK+ and GNOME libraries
-Group: System Environment/Libraries
 BuildRequires: libtool automake autoconf gettext
 BuildRequires: atk-devel >= %{atk_version}
 
@@ -100,7 +97,6 @@ access those GUIs.
 
 %package -n gail3-devel
 Summary: Files to compile applications that use GAIL
-Group: Development/Libraries
 Requires: gail3
 Requires: gtk3-devel >= %{gtk3_version}
 Requires: atk-devel >= %{atk_version}
@@ -179,9 +175,9 @@ mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-3.0/modules
 #
 echo %dir %{_sysconfdir}/gtk-3.0/ >> all.lang
 
-mv $RPM_BUILD_ROOT/usr/bin/gtk-update-icon-cache $RPM_BUILD_ROOT/usr/bin/gtk3-update-icon-cache
-mv $RPM_BUILD_ROOT/usr/share/man/man1/gtk-update-icon-cache.1 $RPM_BUILD_ROOT/usr/share/man/man1/gtk3-update-icon-cache.1
-rpmclean
+mv $RPM_BUILD_ROOT%{_bindir}/gtk-update-icon-cache $RPM_BUILD_ROOT%{_bindir}/gtk3-update-icon-cache
+mv $RPM_BUILD_ROOT%{_mandir}/man1/gtk-update-icon-cache.1 $RPM_BUILD_ROOT%{_mandir}/man1/gtk3-update-icon-cache.1
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -255,6 +251,9 @@ glib-compile-schemas /usr/share/glib-2.0/schemas >/dev/null 2>&1 ||:
 %{_includedir}/gail*
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 3.18.2
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

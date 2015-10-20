@@ -1,16 +1,16 @@
-Name:           clutter-gst2
-Version:        2.0.16
-Release:        1
-Summary:        GStreamer integration for Clutter
+Name: clutter-gst2
+Version: 2.0.16
+Release: 2 
+Summary: GStreamer integration for Clutter
 
-License:        LGPLv2+
-URL:            http://www.clutter-project.org
-Source0:        http://ftp.gnome.org/pub/GNOME/sources/clutter-gst/2.0/clutter-gst-%{version}.tar.xz
+License: LGPLv2+
+URL: http://www.clutter-project.org
+Source0: http://ftp.gnome.org/pub/GNOME/sources/clutter-gst/2.0/clutter-gst-%{version}.tar.xz
 
-BuildRequires:  clutter-devel
-BuildRequires:  gobject-introspection-devel
-BuildRequires:  gstreamer-devel
-BuildRequires:  gstreamer-plugins-base-devel
+BuildRequires: clutter-devel
+BuildRequires: gobject-introspection-devel
+BuildRequires: gstreamer-devel
+BuildRequires: gstreamer-plugins-base-devel
 
 %description
 Clutter is an open source software library for creating fast, visually
@@ -18,9 +18,9 @@ rich and animated graphical user interfaces.
 
 Clutter GStreamer enables the use of GStreamer with Clutter.
 
-%package        devel
-Summary:        Development files for %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+%package devel
+Summary: Development files for %{name}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Clutter is an open source software library for creating fast, visually
@@ -64,3 +64,5 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/gtk-doc/
 #doc #{_datadir}/gtk-doc/
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- rebuild with clutter update.

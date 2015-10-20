@@ -1,11 +1,10 @@
 %global with_x11 1
 
 Name:           gdk-pixbuf2
-Version:        2.32.0
+Version:        2.32.1
 Release:        1
 Summary:        An image loading library
 
-Group:          Framework/Runtime/Library 
 License:        LGPLv2+
 URL:            http://www.gt.org
 #VCS:		git:git://git.gnome.org/gdk-pixbuf
@@ -39,7 +38,6 @@ clutter.
 
 %package devel
 Summary: Development files for gdk-pixbuf
-Group:  Framework/Development/Library
 Requires: %{name} = %{version}-%{release}
 Requires: glib2-devel
 
@@ -85,8 +83,6 @@ touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
 %find_lang gdk-pixbuf
 
-rpmclean
-
 %post
 /sbin/ldconfig
 gdk-pixbuf-query-loaders --update-cache || :
@@ -131,6 +127,9 @@ fi
 
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to gnome-3.18.1
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

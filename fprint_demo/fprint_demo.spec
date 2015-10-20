@@ -1,6 +1,6 @@
 Name: fprint_demo 
 Version: 0.4 
-Release: 1
+Release: 2 
 Summary: fprint demo application
 
 License: GPL
@@ -33,6 +33,9 @@ make install DESTDIR=%{buildroot}
 mkdir -p %{buildroot}%{_libdir}/udev/rules.d/
 install -m 0644 %{SOURCE1} %{buildroot}%{_libdir}/udev/rules.d/
 
+#hide menu item
+echo "NoDisplay=true" >> %{buildroot}%{_datadir}/applications/fprint_demo.desktop
+ 
 %post
 if [ $1 -eq 0 ] ; then
   touch --no-create %{_datadir}/icons/hicolor &>/dev/null

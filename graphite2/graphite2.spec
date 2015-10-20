@@ -1,5 +1,5 @@
 Name:           graphite2
-Version:        1.2.4
+Version:        1.3.3
 Release:        1
 Summary:        Font rendering capabilities for complex non-Roman writing systems
 Group:          Development/Tools
@@ -11,6 +11,9 @@ Patch1:         graphite2-1.2.0-cmakepath.patch
 
 BuildRequires:  cmake
 BuildRequires:  freetype-devel
+
+#for test
+BuildRequires: python2-fonttools
 
 Obsoletes:      silgraphite < 2.3.1-5
 
@@ -44,7 +47,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 rm -f $RPM_BUILD_ROOT/%{_libdir}/*.la
 
-rpmclean
 %check
 ctest
 
@@ -66,6 +68,5 @@ ctest
 %{_libdir}/pkgconfig/graphite2.pc
 
 %changelog
-* Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
-- first build, prepare for the new release.
-
+* Fri Oct 09 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.3.3

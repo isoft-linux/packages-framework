@@ -4,8 +4,8 @@
 %global pymodname cryptography_vectors
 
 Name:               python-%{modname}
-Version:            1.0
-Release:            1
+Version:            0.8.2
+Release:            1%{?dist}
 Summary:            Test vectors for the cryptography package
 
 Group:              Development/Libraries
@@ -78,3 +78,5 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
 
 
 %changelog
+* Thu Oct 08 2015 Cjacker <cjacker@foxmail.com>
+- downgrade from yetist. 

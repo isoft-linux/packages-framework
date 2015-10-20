@@ -1,12 +1,11 @@
-Name:	    LibRaw	
-Version:	0.16.2
-Release:	1
-Summary:	Raw image decoder
+Name: LibRaw 
+Version: 0.17.0
+Release: 2
+Summary: Raw image decoder
 
-Group:		System environment/Libraries
-License:	GPL
-URL:		http://www.libraw.org/
-Source0:	%{name}-%{version}.tar.gz
+License: GPL
+URL: http://www.libraw.org/
+Source0: http://www.libraw.org/data/%{name}-%{version}.tar.gz
 BuildRequires: lcms2-devel, libjpeg-turbo-devel, jasper-devel
 BuildRequires: libgomp, libstdc++-devel
 
@@ -16,12 +15,11 @@ include (CRW/CR2, NEF, RAF, DNG, and others).
 
 LibRaw is based on the source codes of the dcraw utility.
 
-%package        devel
-Summary:        Development files for %{name}
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+%package devel
+Summary: Development files for %{name}
+Requires: %{name} = %{version}-%{release}
 
-%description    devel
+%description devel
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
@@ -36,7 +34,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=%{buildroot}
 rm -rf $RPM_BUILD_ROOT/%{_docdir}/libraw
-rpmclean
 
 %files
 %{_bindir}/*
@@ -51,5 +48,7 @@ rpmclean
 %{_libdir}/libraw_r.so
 %{_libdir}/pkgconfig/libraw.pc
 %{_libdir}/pkgconfig/libraw_r.pc
-%changelog
 
+%changelog
+* Sun Oct 18 2015 Cjacker <cjacker@foxmail.com> - 0.17.0-2
+- update.

@@ -1,6 +1,6 @@
 Name:           tlp
 Version:        0.7
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Advanced power management tool for Linux
 License:        GPLv2+
 URL:            http://linrunner.de/tlp
@@ -12,7 +12,7 @@ BuildRequires:  systemd
 Requires:       ethtool
 Requires:       hdparm
 Requires:       iw
-Requires:       pure64-lsb-core
+Requires:       lsb
 Requires:       rfkill
 Requires:       systemd
 Requires:       udev

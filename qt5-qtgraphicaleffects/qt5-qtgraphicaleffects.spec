@@ -1,34 +1,32 @@
-Name:	    qt5-qtgraphicaleffects
-Version:	5.5.0
-Release:	1
-Summary:    QtGraphicaleffects component
+Name: qt5-qtgraphicaleffects
+Version: 5.5.1
+Release: 2 
+Summary: QtGraphicaleffects component
 
-Group:	    Extra/Runtime/Library	
-License:    LGPLv2 with exceptions or GPLv3 with exceptions	
+License: LGPLv2 with exceptions or GPLv3 with exceptions 
 
-URL:	    http://qt-project.org	
-Source0:    qtgraphicaleffects-opensource-src-%{version}.tar.xz	
+URL: http://qt-project.org 
+Source0: qtgraphicaleffects-opensource-src-%{version}.tar.xz 
 
-BuildRequires:  qt5-qtbase-devel
-Requires:   qt5-qtbase = %{version}-%{release}	
+BuildRequires: qt5-qtbase-devel >= %{version}
+BuildRequires: libmng-devel
+BuildRequires: libtiff-devel
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
 #for qhelpgenerator
-BuildRequires:  qt5-qttools
+BuildRequires: qt5-qttools
 #for absolute path qdoc
-BuildRequires:  qt5-qtbase
+BuildRequires: qt5-qtbase
 
 %description
 QtGraphicaleffects component
 
-%package        devel
-Summary:        Development files for %{name}
-Group:          Extra/Development/Library
-Requires:       %{name} = %{version}-%{release}
-Requires:       qt5-qtbase-devel = %{version}-%{release}	
+%package devel
+Summary: Development files for %{name}
+Requires: %{name} = %{version}-%{release}
 
-%description    devel
+%description devel
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
@@ -54,3 +52,8 @@ make install_docs INSTALL_ROOT=%{buildroot}
 
 %files devel
 %{_docdir}/qt5/*
+
+%changelog
+* Fri Oct 16 2015 Cjacker <cjacker@foxmail.com>
+- update to 5.5.1
+

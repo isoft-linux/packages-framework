@@ -1,0 +1,328 @@
+diff --git a/bridge/fdb.c b/bridge/fdb.c
+index bd7e4f9..5516633 100644
+--- a/bridge/fdb.c
++++ b/bridge/fdb.c
+@@ -31,7 +31,7 @@ static unsigned int filter_index;
+ 
+ static void usage(void)
+ {
+-	fprintf(stderr, "Usage: bridge fdb { add | append | del | replace ADDR dev DEV\n"
++	fprintf(stderr, "Usage: bridge fdb { add | append | del | replace } LLADDR dev DEV\n"
+ 			"              [ self ] [ master ] [ use ] [ router ]\n"
+ 			"              [ local | temp ] [ dst IPADDR ] [ vlan VID ]\n"
+ 		        "              [ port PORT] [ vni VNI ] [via DEV]\n");
+diff --git a/doc/ip-cref.tex b/doc/ip-cref.tex
+index ea14795..58b696b 100644
+--- a/doc/ip-cref.tex
++++ b/doc/ip-cref.tex
+@@ -2049,9 +2049,6 @@ table \verb|local| (ID 255).
+ The \verb|local| table is a special routing table containing
+ high priority control routes for local and broadcast addresses.
+ 
+-Rule 0 is special. It cannot be deleted or overridden.
+-
+-
+ \item Priority: 32766, Selector: match anything, Action: lookup routing
+ table \verb|main| (ID 254).
+ The \verb|main| table is the normal routing table containing all non-policy
+diff --git a/ip/iprule.c b/ip/iprule.c
+index 714278a..4402f99 100644
+--- a/ip/iprule.c
++++ b/ip/iprule.c
+@@ -36,7 +36,7 @@ static void usage(void)
+ 	fprintf(stderr, "SELECTOR := [ not ] [ from PREFIX ] [ to PREFIX ] [ tos TOS ] [ fwmark FWMARK[/MASK] ]\n");
+ 	fprintf(stderr, "            [ iif STRING ] [ oif STRING ] [ pref NUMBER ]\n");
+ 	fprintf(stderr, "ACTION := [ table TABLE_ID ]\n");
+-	fprintf(stderr, "          [ prohibit | reject | unreachable ]\n");
++	fprintf(stderr, "          [ prohibit | unreachable ]\n");
+ 	fprintf(stderr, "          [ realms [SRCREALM/]DSTREALM ]\n");
+ 	fprintf(stderr, "          [ goto NUMBER ]\n");
+ 	fprintf(stderr, "          SUPPRESSOR\n");
+diff --git a/man/man8/bridge.8 b/man/man8/bridge.8
+index 5347a56..af17f7f 100644
+--- a/man/man8/bridge.8
++++ b/man/man8/bridge.8
+@@ -65,7 +65,7 @@ bridge \- show / manipulate bridge addresses and devices
+ .IR DEVICE " ]"
+ 
+ .ti -8
+-.BR "bridge fdb" " [ " show " ] [ "
++.BR "bridge fdb show" " [ "
+ .B  dev
+ .IR DEV " ]"
+ 
+@@ -118,7 +118,7 @@ is given multiple times, the amount of information increases.
+ As a rule, the information is statistics or some time values.
+ 
+ .TP
+-.BR "\-n" , " \-net" , " \-netns " <NETNS>
++.BR "\-n" , " \-netns " <NETNS>
+ switches
+ .B bridge
+ to the specified network namespace
+diff --git a/man/man8/cbq.8 b/man/man8/cbq.8
+new file mode 100644
+index 0000000..78940b6
+--- /dev/null
++++ b/man/man8/cbq.8
+@@ -0,0 +1 @@
++.so man8/tc-cbq.8
+\ No newline at end of file
+diff --git a/man/man8/genl.8 b/man/man8/genl.8
+new file mode 100644
+index 0000000..b3e8f98
+--- /dev/null
++++ b/man/man8/genl.8
+@@ -0,0 +1,36 @@
++.TH GENL 8
++.SH NAME
++genl \- generic netlink utility frontend
++.SH SYNOPSIS
++.B genl
++.RI [ options ] { ctrl } [ help ]
++.SH DESCRIPTION
++This manual page documents briefly the
++.B genl
++command.
++.PP
++\fBgenl\fP utility provides a simple frontend to the generic netlink library.
++.SH OPTIONS
++genl supports the following options.
++.TP
++.B \-h, \-help
++Show summary of options.
++.TP
++.B \-V, \-Version
++Show version of program.
++.TP
++.B \-s, \-stats, \-statistics
++Show object statistics.
++.TP
++.B \-d, \-details
++Show object details.
++.TP
++.B \-r, \-raw
++Dump raw output only.
++.SH SEE ALSO
++.BR ip (8)
++.br
++.SH AUTHOR
++genl was written by Jamal Hadi Salim <hadi@cyberus.ca>.
++.PP
++This manual page was written by Petr Sabata <contyk@redhat.com>.
+diff --git a/man/man8/ifcfg.8 b/man/man8/ifcfg.8
+new file mode 100644
+index 0000000..a6b585e
+--- /dev/null
++++ b/man/man8/ifcfg.8
+@@ -0,0 +1,57 @@
++.TH IFCFG 8 "September 24 2009" "iproute2" "Linux"
++.SH NAME
++ifcfg \- simplistic script which replaces ifconfig IP managment
++.SH SYNOPSIS
++.ad l
++.in +8
++.ti -8
++.B ifcfg
++.RI "[ " DEVICE " [ " :ALIAS: " ] ] [ " command " ] " ADDRESS " [ " LENGTH " ] [ " PEER " ] "
++.sp
++
++.SH DESCRIPTION
++This manual page documents briefly the
++.B ifcfg
++command.
++.PP
++This is a simplistic script replacing one option of 
++.B ifconfig
++, namely, IP address management. It not only adds
++addresses, but also carries out Duplicate Address Detection RFC-DHCP,
++sends unsolicited ARP to update the caches of other hosts sharing
++the interface, adds some control routes and restarts Router Discovery
++when it is necessary.
++
++I strongly recommend using it 
++.RI instead
++of
++.RI ifconfig
++both on hosts and on routers.
++
++.SH IFCONFIG - COMMAND SYNTAX
++
++.SS
++.TP
++.B DEVICE
++- it may have alias, suffix, separated by colon.
++
++.TP
++.B command
++- add, delete or stop.
++
++.TP
++.B address
++- optionally followed by prefix length.
++
++.TP
++.B peer
++- optional peer address for pointpoint interfaces.
++
++.SH EXAMPLE
++.nf ifcfg eth0 193.233.7.90/24
++.fi
++This function determines, whether this is router or host.
++It returns 0, if the host is apparently not router.
++
++.SH SEE ALSO
++.BR ip-cref.dvi
+diff --git a/man/man8/ifstat.8 b/man/man8/ifstat.8
+new file mode 100644
+index 0000000..042dd3e
+--- /dev/null
++++ b/man/man8/ifstat.8
+@@ -0,0 +1,54 @@
++.TH IFSTAST 8
++.SH NAME
++ifstat \- handy utility to read net interface statistics
++.SH SYNOPSIS
++.B ifstat
++.RI [ options ]
++.RI [ interface
++.RI [ interface
++.RI [ ... ] ] ]
++.SH DESCRIPTION
++This manual page documents briefly the
++.B ifstat
++command.
++.PP
++\fBifstat\fP neatly prints out network interface statistics.
++The utility keeps records of the previous data displayed in history files and by default only shows difference between the last and the current call.  Location of the history files defaults to /tmp/.ifstat.u$UID but may be overridden with the IFSTAT_HISTORY environment variable.
++.SH OPTIONS
++.TP
++.B \-h, \-\-help
++Show summary of options.
++.TP
++.B \-V, \-\-version
++Show version of program.
++.TP
++.B \-a, \-\-ignore
++Ignore the history file.
++.TP
++.B \-d, \-\-scan=SECS
++Sample statistics every SECS second.
++.TP
++.B \-e, \-\-errors
++Show errors.
++.TP
++.B \-n, \-\-nooutput
++Don't display any output.  Update the history file only.
++.TP
++.B \-r, \-\-reset
++Reset history.
++.TP
++.B \-s, \-\-noupdate
++Don't update the history file.
++.TP
++.B \-t, \-\-interval=SECS
++Report average over the last SECS seconds.
++.TP
++.B \-z, \-\-zeros
++Show entries with zero activity.
++.SH SEE ALSO
++.BR ip (8)
++.br
++.SH AUTHOR
++ifstat was written by Alexey Kuznetsov <kuznet@ms2.inr.ac.ru>.
++.PP
++This manual page was written by Petr Sabata <contyk@redhat.com>.
+diff --git a/man/man8/ip-route.8.in b/man/man8/ip-route.8.in
+index 72d8d77..9bddfb1 100644
+--- a/man/man8/ip-route.8.in
++++ b/man/man8/ip-route.8.in
+@@ -16,7 +16,7 @@ ip-route \- routing table management
+ 
+ .ti -8
+ .BR "ip route" " { "
+-.BR list " | " flush " } "
++.BR show " | " flush " } "
+ .I  SELECTOR
+ 
+ .ti -8
+diff --git a/man/man8/ip-rule.8 b/man/man8/ip-rule.8
+index dd925be..8434945 100644
+--- a/man/man8/ip-rule.8
++++ b/man/man8/ip-rule.8
+@@ -41,7 +41,7 @@ ip-rule \- routing policy database management
+ .IR TABLE_ID " ] [ "
+ .B  nat
+ .IR ADDRESS " ] [ "
+-.BR prohibit " | " reject " | " unreachable " ] [ " realms
++.BR prohibit " | " unreachable " ] [ " realms
+ .RI "[" SRCREALM "/]" DSTREALM " ]"
+ .I  SUPPRESSOR
+ 
+@@ -108,8 +108,6 @@ The
+ .B local
+ table is a special routing table containing
+ high priority control routes for local and broadcast addresses.
+-.sp
+-Rule 0 is special. It cannot be deleted or overridden.
+ 
+ .TP
+ 2.
+diff --git a/man/man8/ip-tunnel.8 b/man/man8/ip-tunnel.8
+index 8b746cb..790921a 100644
+--- a/man/man8/ip-tunnel.8
++++ b/man/man8/ip-tunnel.8
+@@ -108,7 +108,7 @@ Modes for IPv4 encapsulation available:
+ .BR ipip ", " sit ", " isatap ", " vti ", and " gre "."
+ .br
+ Modes for IPv6 encapsulation available:
+-.BR ip6ip6 ", " ipip6 ", " ip6gre ", " vti6 ", and " any "."
++.BR ip6ip6 ", " ipip6 ", " ip6gre " and " vti6 "
+ 
+ .TP
+ .BI remote " ADDRESS"
+diff --git a/man/man8/ss.8 b/man/man8/ss.8
+index 6afbabb..773a4b4 100644
+--- a/man/man8/ss.8
++++ b/man/man8/ss.8
+@@ -131,7 +131,7 @@ Read filter information from FILE.
+ Each line of FILE is interpreted like single command line option. If FILE is - stdin is used.
+ .TP
+ .B FILTER := [ state STATE-FILTER ] [ EXPRESSION ]
+-Please take a look at the official documentation (Debian package iproute-doc) for details regarding filters.
++Please take a look at the official documentation (package iproute\-doc) for details regarding filters.
+ 
+ .SH STATE-FILTER
+ 
+@@ -186,7 +186,7 @@ Find all local processes connected to X server.
+ List all the tcp sockets in state FIN-WAIT-1 for our apache to network 193.233.7/24 and look at their timers.
+ .SH SEE ALSO
+ .BR ip (8),
+-.BR /usr/share/doc/iproute-doc/ss.html " (package iproute­doc)",
++.BR /usr/share/doc/iproute-doc/ss.ps " (package iproute\-doc)",
+ .br
+ .BR RFC " 793 "
+ - https://tools.ietf.org/rfc/rfc793.txt (TCP states) 
+diff --git a/man/man8/tc.8 b/man/man8/tc.8
+index feafa05..02d7997 100644
+--- a/man/man8/tc.8
++++ b/man/man8/tc.8
+@@ -446,7 +446,7 @@ don't terminate tc on errors in batch mode.
+ If there were any errors during execution of the commands, the application return code will be non zero.
+ 
+ .TP
+-.BR "\-n" , " \-net" , " \-netns " <NETNS>
++.BR "\-n" , " \-netns " <NETNS>
+ switches
+ .B tc
+ to the specified network namespace
+@@ -502,6 +502,9 @@ option was specified. Classes can be filtered only by
+ option.
+ 
+ .TP
++.BR "\-force"
++don't terminate tc on errors in batch mode.
++If there were any errors during execution of the commands, the application return code will be non zero.
+ .BR "\-nm" , " \-name"
+ resolve class name from
+ .B /etc/iproute2/tc_cls

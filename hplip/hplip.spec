@@ -10,7 +10,7 @@
 Summary: HP Linux Imaging and Printing Project
 Name: hplip
 Version: 3.15.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2+ and MIT
 
 Url: http://hplip.sourceforge.net/
@@ -337,6 +337,10 @@ mkdir -p %{buildroot}%{_datadir}/applications
 sed -i -e '/^Categories=/d' hplip.desktop
 # Encoding key is deprecated
 sed -i -e '/^Encoding=/d' hplip.desktop
+
+#Hide menu item by default. 
+echo "NoDisplay=true" >> hplip.desktop
+
 desktop-file-install --vendor HP                                \
         --dir %{buildroot}%{_datadir}/applications              \
         --add-category System                                   \

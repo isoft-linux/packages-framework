@@ -1,19 +1,18 @@
-%define         clutter_version 1.0
+%define clutter_version 1.0
 
-Name:           clutter-gtk
-Version:        1.6.4
-Release:        1 
-Summary:        A basic GTK clutter widget
+Name: clutter-gtk
+Version: 1.6.6
+Release: 2 
+Summary: A basic GTK clutter widget
 
-Group:          Development/Languages
-License:        LGPLv2+
-URL:            http://www.clutter-project.org
-Source0:        http://www.clutter-project.org/sources/%{name}/1.1/%{name}-%{version}.tar.xz
-Patch0:         clutter-gtk-fixdso.patch
+License: LGPLv2+
+URL: http://www.clutter-project.org
+Source0: http://www.clutter-project.org/sources/%{name}/1.1/%{name}-%{version}.tar.xz
+Patch0: clutter-gtk-fixdso.patch
 
-BuildRequires:  gtk3-devel >= 3.0.0
-BuildRequires:  clutter-devel >= 1.9
-BuildRequires:  gobject-introspection-devel
+BuildRequires: gtk3-devel >= 3.0.0
+BuildRequires: clutter-devel >= 1.9
+BuildRequires: gobject-introspection-devel
 
 %description
 clutter-gtk is a library which allows the embedding of a Clutter
@@ -21,10 +20,9 @@ canvas (or "stage") into a GTK+ application, as well as embedding
 GTK+ widgets inside the stage.
 
 %package devel
-Summary:        Clutter-gtk development environment
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
-Requires:       gtk3-devel clutter-devel
+Summary: Clutter-gtk development environment
+Requires: %{name} = %{version}-%{release}
+Requires: gtk3-devel clutter-devel
 
 %description devel
 Header files and libraries for building a extension library for the
@@ -63,3 +61,8 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_datadir}/gtk-doc/html/clutter-gtk-1.0
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- rebuild with clutter update.
+
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.6.6 

@@ -1,9 +1,8 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.8
-Release: 4
+Version: 2.8.1
+Release: 2 
 License: GPLv3
-Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0: ffmpeg-fix-defines.patch
 Patch1: ffmpeg-configure-dlvsym.patch
@@ -43,13 +42,11 @@ quality polyphase filter.
 
 %package libs 
 Summary: Runtime libraries for ffmpeg
-Group:  System Environment/Libraries 
 %description libs
 Runtime libraries for ffmpeg
 
 #%package shared-devel
 #Summary: Shared development libraries for ffmpeg
-#Group: Development/Libraries
 #Requires: %{name}-libs = %{version}-%{release}
 #Requires: %{name}-devel = %{version}-%{release}
 #
@@ -58,7 +55,6 @@ Runtime libraries for ffmpeg
 #
 #%package static-devel
 #Summary: Static development libraries for ffmpeg
-#Group: Development/Libraries
 #Requires: %{name}-devel = %{version}-%{release}
 #
 #%description static-devel
@@ -66,7 +62,6 @@ Runtime libraries for ffmpeg
 
 %package devel
 Summary: Development headers, libraries and pkgconfig files for ffmpeg
-Group: Development/Libraries
 Requires: %{name}-libs = %{version}-%{release}
 
 %description devel
@@ -143,7 +138,6 @@ cp -r doc/doc/doxy/* $RPM_BUILD_ROOT/%{_docdir}/ffmpeg-devel
 #ensure to remove static libraries.
 #since we do not ship dependent multimedia static libraries, the ffmpeg static libraries is useless.
 rm -rf  
-rpmclean
 
 %post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
@@ -183,6 +177,5 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
-- first build, prepare for the new release.
-
+* Mon Oct 19 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-2
+- update

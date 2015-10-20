@@ -1,0 +1,110 @@
+From 3d9c33b0c83722c90ca091389aff9056d97a8e93 Mon Sep 17 00:00:00 2001
+From: ph10 <ph10@6239d852-aaf2-0410-a92c-79f79f948069>
+Date: Fri, 9 Oct 2015 16:54:29 +0000
+Subject: [PATCH] Fix integer overflow for patterns whose minimum matching
+ length is very, very large.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream commit ported to 10.20:
+
+commit 91cb973c4537327c18217b50f20e82283affe976
+Author: ph10 <ph10@6239d852-aaf2-0410-a92c-79f79f948069>
+Date:   Fri Oct 9 16:54:29 2015 +0000
+
+    Fix integer overflow for patterns whose minimum matching length is very, very
+    large.
+
+    git-svn-id: svn://vcs.exim.org/pcre2/code/trunk@385 6239d852-aaf2-0410-a92c-79f79f948069
+
+The "Subject length lower bound" in testoutput should be 65535, but
+it's not because the lower bound guess was improved in:
+
+commit 209880186ae777d2404560fff04d4e3c36b55ffe
+Author: ph10 <ph10@6239d852-aaf2-0410-a92c-79f79f948069>
+Date:   Sat Aug 1 09:11:28 2015 +0000
+
+    Fix issues with minimum length finding.
+
+    git-svn-id: svn://vcs.exim.org/pcre2/code/trunk@331 6239d852-aaf2-0410-a92c-
+79f79f948069
+
+that is quite invasive, thus not ported. Therefore the test returns
+suboptimal value.
+
+Signed-off-by: Petr Písař <ppisar@redhat.com>
+---
+ src/pcre2_study.c    | 12 +++++++++---
+ testdata/testinput2  |  2 ++
+ testdata/testoutput2 |  8 ++++++++
+ 3 files changed, 19 insertions(+), 3 deletions(-)
+
+diff --git a/src/pcre2_study.c b/src/pcre2_study.c
+index 25d7e51..a5c2cb4 100644
+--- a/src/pcre2_study.c
++++ b/src/pcre2_study.c
+@@ -66,8 +66,11 @@ enum { SSB_FAIL, SSB_DONE, SSB_CONTINUE, SSB_UNKNOWN };
+ 
+ /* Scan a parenthesized group and compute the minimum length of subject that
+ is needed to match it. This is a lower bound; it does not mean there is a
+-string of that length that matches. In UTF8 mode, the result is in characters
+-rather than bytes.
++string of that length that matches. In UTF mode, the result is in characters
++rather than code units. The field in a compiled pattern for storing the minimum
++length is 16-bits long (on the grounds that anything longer than that is
++pathological), so we give up when we reach that amount. This also means that
++integer overflow for really crazy patterns cannot happen.
+ 
+ Arguments:
+   re              compiled pattern block
+@@ -97,7 +100,8 @@ if (*code == OP_CBRA || *code == OP_SCBRA ||
+     *code == OP_CBRAPOS || *code == OP_SCBRAPOS) cc += IMM2_SIZE;
+ 
+ /* Scan along the opcodes for this branch. If we get to the end of the
+-branch, check the length against that of the other branches. */
++branch, check the length against that of the other branches. If the accumulated
++length passes 16-bits, stop and return it. */
+ 
+ for (;;)
+   {
+@@ -105,6 +109,8 @@ for (;;)
+   PCRE2_UCHAR *cs, *ce;
+   register PCRE2_UCHAR op = *cc;
+ 
++  if (branchlength > UINT16_MAX) return branchlength;
++
+   switch (op)
+     {
+     case OP_COND:
+diff --git a/testdata/testinput2 b/testdata/testinput2
+index e0e149f..dc64019 100644
+--- a/testdata/testinput2
++++ b/testdata/testinput2
+@@ -4327,4 +4327,6 @@ a random value. /Ix
+ 
+ /^(?:(?(1)x|)+)+$()/B
+ 
++/^(o(\1{72}{\"{\\{00000059079}\d*){74}}){19}/I
++
+ # End of testinput2 
+diff --git a/testdata/testoutput2 b/testdata/testoutput2
+index b628466..cfc3ef0 100644
+--- a/testdata/testoutput2
++++ b/testdata/testoutput2
+@@ -14470,4 +14470,12 @@ Failed: error 161 at offset 32: number is too big
+         End
+ ------------------------------------------------------------------
+ 
++/^(o(\1{72}{\"{\\{00000059079}\d*){74}}){19}/I
++Capturing subpattern count = 2
++Max back reference = 1
++Compile options: <none>
++Overall options: anchored
++Last code unit = '}'
++Subject length lower bound = 52629
++
+ # End of testinput2 
+-- 
+2.4.3
+

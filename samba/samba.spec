@@ -1,12 +1,10 @@
-%{!?python_libdir: %define python_libdir %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1,1)")}
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           samba
-Version:        4.2.3
+Version:        4.3.0
 Release:        2 
 Summary:        Server and Client software to interoperate with Windows machines
 License:        GPLv3+ and LGPLv3+
-Group:          System Environment/Daemons
 URL:            http://www.samba.org/
 
 Source0:        http://samba.org/samba/ftp/stable/samba-%{version}.tar.gz
@@ -20,6 +18,8 @@ Source6: samba.pamd
 #keep it when update!!!!!!!!!!!!!!!!!!!!!!!
 Patch0: samba-disable-debug-msg.patch
 Patch1: pam_smbpass-add-user-when-samba-user-didnot-exist.patch 
+
+Patch2: samba-4.3.x-socket_perms.patch
 
 Requires(post): systemd
 Requires(preun): systemd
@@ -58,8 +58,7 @@ Samba is the standard Windows interoperability suite of programs for Linux and U
 
 %package devel
 Summary: Developer tools for Samba libraries
-Group: Development/Libraries
-Requires: %{name}
+Requires: %{name}-libs
 Provides: samba4-devel
 
 %description devel
@@ -67,17 +66,23 @@ The samba4-devel package contains the header files for the libraries
 needed to develop programs that link against the SMB, RPC and other
 libraries in the Samba suite.
 
+%package libs
+Summary: Samba libraries
+Requires: krb5-libs >= 1.10
+
+%description libs
+The samba4-libs package contains the libraries needed by programs that
+link against the SMB, RPC and other protocols provided by the Samba suite.
+
 %package -n libsmbclient
 Summary: The SMB client library
-Group: Applications/System
-Requires: %{name}
+Requires: %{name}-libs
 
 %description -n libsmbclient
 The libsmbclient contains the SMB client library from the Samba suite.
 
 %package -n libsmbclient-devel
 Summary: Developer tools for the SMB client library
-Group: Development/Libraries
 Requires: libsmbclient
 
 %description -n libsmbclient-devel
@@ -88,7 +93,7 @@ develop programs that link against the SMB client library in the Samba suite.
 %setup -q -n samba-%{version}
 %patch0 -p1
 %patch1 -p1
-
+%patch2 -p1
 
 %build
 #Why disable so many features:
@@ -103,9 +108,13 @@ develop programs that link against the SMB client library in the Samba suite.
         --with-pammodulesdir=%{_libdir}/security \
         --with-lockdir=/var/lib/samba \
         --with-cachedir=/var/lib/samba \
+        --with-pam \
+        --with-pam_smbpass \
+        --enable-cups  \
+        --enable-avahi \
+        --with-winbind \
         --disable-gnutls \
         --disable-rpath-install \
-        --with-pam \
         --without-ad-dc \
         --without-syslog \
         --without-automount \
@@ -114,15 +123,11 @@ develop programs that link against the SMB client library in the Samba suite.
         --without-fam \
         --without-regedit \
         --disable-glusterfs \
-        --with-pam_smbpass \
         --without-ads \
         --without-ldap \
         --without-quotas \
-        --enable-cups  \
-        --enable-avahi \
         --without-automount  \
         --without-cluster-support \
-        --without-winbind \
         --without-fam
 
 make %{?_smp_mflags}
@@ -167,8 +172,6 @@ install -m 0644 %{SOURCE5} %{buildroot}%{_sysconfdir}/security/pam_winbind.conf
 install -d -m 0755 %{buildroot}%{_sysconfdir}/pam.d
 install -m 0644 %{SOURCE6} %{buildroot}%{_sysconfdir}/pam.d/samba
 
-echo 127.0.0.1 localhost > %{buildroot}%{_sysconfdir}/samba/lmhosts
-
 install -m 0744 packaging/printing/smbprint %{buildroot}%{_bindir}/smbprint
 
 install -d -m 0755 %{buildroot}%{_sysconfdir}/tmpfiles.d/
@@ -181,9 +184,16 @@ install -m 0644 packaging/systemd/samba.sysconfig %{buildroot}%{_sysconfdir}/sys
 
 
 install -d -m 0755 %{buildroot}%{_unitdir}
-for i in nmb smb ; do
-    install -m 0644 packaging/systemd/$i.service %{buildroot}%{_unitdir}/$i.service
+for i in nmb smb winbind; do
+    cat packaging/systemd/$i.service | sed -e 's@\[Service\]@[Service]\nEnvironment=KRB5CCNAME=FILE:/run/samba/krb5cc_samba@g' >tmp$i.service
+    install -m 0644 tmp$i.service %{buildroot}%{_unitdir}/$i.service
 done
+
+# NetworkManager online/offline script
+install -d -m 0755 %{buildroot}%{_sysconfdir}/NetworkManager/dispatcher.d/
+install -m 0755 packaging/NetworkManager/30-winbind-systemd \
+            %{buildroot}%{_sysconfdir}/NetworkManager/dispatcher.d/30-winbind
+
 
 # Clean out crap left behind by the PIDL install.
 find %{buildroot} -type f -name .packlist -exec rm -f {} \;
@@ -212,15 +222,17 @@ fi
 
 %systemd_post smb.service
 %systemd_post nmb.service
-systemctl enable smb ||:
-systemctl enable nmb ||:
+%systemd_post winbind.service
+
 %preun
 %systemd_preun smb.service
 %systemd_preun nmb.service
+%systemd_preun winbind.service
 
 %postun
 %systemd_postun_with_restart smb.service
 %systemd_postun_with_restart nmb.service
+%systemd_postun_with_restart winbind.service
 
 %post -n libsmbclient -p /sbin/ldconfig
 
@@ -233,19 +245,32 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
+
 %{_bindir}/*
 %{_sbindir}/*
-%{_libdir}/samba
-%{_libdir}/*.so.*
+%dir %{_libdir}/samba/auth
+%{_libdir}/samba/auth/*
+%dir %{_libdir}/samba/vfs
+%{_libdir}/samba/vfs/*
+%dir %{_libdir}/samba/ldb
+%{_libdir}/samba/ldb/*
+%dir %{_libdir}/samba/idmap
+%{_libdir}/samba/idmap/*
+%dir %{_libdir}/samba/nss_info
+%{_libdir}/samba/nss_info/*
+
 %{_mandir}/*
 %{_sysconfdir}/tmpfiles.d/samba.conf
 %{_libdir}/security/pam_smbpass.so
 %{_libdir}/security/pam_winbind.so
 %{_unitdir}/nmb.service
 %{_unitdir}/smb.service
-%{_datadir}/samba/codepages/*
+%{_unitdir}/winbind.service
+%{_sysconfdir}/NetworkManager/dispatcher.d/30-winbind
 
 %ghost %dir /var/run/samba
+%ghost %dir /var/run/winbindd
+
 %dir /var/lib/samba
 %dir %{_sysconfdir}/logrotate.d/
 %config(noreplace) %{_sysconfdir}/logrotate.d/samba
@@ -255,7 +280,6 @@ rm -rf %{buildroot}
 %attr(700,root,root) %dir /var/lib/samba/private
 %attr(755,root,root) %dir %{_sysconfdir}/samba
 %config(noreplace) %{_sysconfdir}/samba/smb.conf
-%config(noreplace) %{_sysconfdir}/samba/lmhosts
 %config(noreplace) %{_sysconfdir}/sysconfig/samba
 
 %dir /var/lib/samba/sysvol
@@ -265,10 +289,6 @@ rm -rf %{buildroot}
 
 %attr(1770,root,wheel) %dir /var/lib/samba/usershares
 
-%exclude %{_libdir}/libsmbclient.so.*
-%exclude %{_libdir}/libsmbsharemodes.so.*
-%exclude %{_mandir}/man7/libsmbclient.7*
-
 %files devel
 %defattr(-,root,root)
 %dir %{_includedir}/samba-4.0
@@ -277,11 +297,42 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/*.pc
 #for libsmbclient-devel
 %exclude %{_includedir}/samba-4.0/libsmbclient.h
-%exclude %{_includedir}/samba-4.0/smb_share_modes.h
 %exclude %{_libdir}/libsmbclient.so
-%exclude %{_libdir}/libsmbsharemodes.so
 %exclude %{_libdir}/pkgconfig/smbclient.pc
-%exclude %{_libdir}/pkgconfig/smbsharemodes.pc
+%exclude %{_libdir}/winbind_krb5_locator.so
+
+%files libs
+%defattr(-,root,root)
+%{_libdir}/libdcerpc-binding.so.*
+%{_libdir}/libgensec.so.*
+%{_libdir}/libndr.so.*
+%{_libdir}/libndr-krb5pac.so.*
+%{_libdir}/libndr-nbt.so.*
+%{_libdir}/libndr-standard.so.*
+%{_libdir}/libnetapi.so.*
+%{_libdir}/libsamba-credentials.so.*
+%{_libdir}/libsamba-passdb.so.*
+%{_libdir}/libsamba-util.so.*
+%{_libdir}/libsamba-hostconfig.so.*
+%{_libdir}/libsamdb.so.*
+%{_libdir}/libsmbconf.so.*
+%{_libdir}/libsmbclient-raw.so.*
+%{_libdir}/libtevent-util.so.*
+%{_libdir}/libregistry.so.*
+%{_libdir}/libdcerpc.so.*
+%{_libdir}/libdcerpc-atsvc.so.*
+%{_libdir}/libdcerpc-samr.so.*
+%{_libdir}/libnss_winbind.so.*
+%{_libdir}/libnss_wins.so.*
+%{_libdir}/libsamba-policy.so.*
+%{_libdir}/libtorture.so.*
+%{_libdir}/libwbclient.so.*
+
+%dir %{_libdir}/samba
+%{_libdir}/samba/*.so.*
+%{_libdir}/samba/*.so
+
+%{_libdir}/winbind_krb5_locator.so
 
 %files -n libsmbclient
 %defattr(-,root,root)
@@ -293,6 +344,7 @@ rm -rf %{buildroot}
 %{_libdir}/libsmbclient.so
 %{_libdir}/pkgconfig/smbclient.pc
 %{_mandir}/man7/libsmbclient.7*
+
 
 
 %changelog

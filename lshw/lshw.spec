@@ -1,7 +1,7 @@
 Summary:       Hardware lister
 Name:          lshw
 Version:       B.02.17
-Release:       6%{?dist}
+Release:       7%{?dist}
 License:       GPLv2
 Group:         Applications/System
 URL:           http://ezix.org/project/wiki/HardwareLiSter
@@ -85,6 +85,10 @@ desktop-file-install \
 %{__install} -D -m 0644 %{SOURCE2} \
     %{buildroot}%{_datadir}/polkit-1/actions/org.ezix.lshw.gui.policy
 %{__install} -D -m 0755 %{SOURCE3} %{buildroot}%{_bindir}/lshw-gui
+
+
+#hide menu item
+echo "NoDisplay=true" >> %{buildroot}%{_datadir}/applications/lshw.desktop
 
 # translations seems borken, remove for now
 #find_lang %{name}

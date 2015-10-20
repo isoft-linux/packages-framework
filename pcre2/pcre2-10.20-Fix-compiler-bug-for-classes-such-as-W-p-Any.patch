@@ -1,0 +1,112 @@
+From 70af28aa1984e6b5293b9699a9ad40647a1004c1 Mon Sep 17 00:00:00 2001
+From: ph10 <ph10@6239d852-aaf2-0410-a92c-79f79f948069>
+Date: Fri, 9 Oct 2015 16:06:53 +0000
+Subject: [PATCH] Fix compiler bug for classes such as [\W\p{Any}].
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream commit ported to 10.20:
+
+commit 828e8822763794394ea98500bf0c6a5ffaf0f100
+Author: ph10 <ph10@6239d852-aaf2-0410-a92c-79f79f948069>
+Date:   Fri Oct 9 16:06:53 2015 +0000
+
+    Fix compiler bug for classes such as [\W\p{Any}].
+
+    git-svn-id: svn://vcs.exim.org/pcre2/code/trunk@384 6239d852-aaf2-0410-a92c-79f79f948069
+
+Signed-off-by: Petr Písař <ppisar@redhat.com>
+---
+ src/pcre2_compile.c  | 18 ++++++++++--------
+ testdata/testinput5  |  8 ++++++++
+ testdata/testoutput5 | 24 ++++++++++++++++++++++++
+ 3 files changed, 42 insertions(+), 8 deletions(-)
+
+diff --git a/src/pcre2_compile.c b/src/pcre2_compile.c
+index 4a9e42e..5d3584d 100644
+--- a/src/pcre2_compile.c
++++ b/src/pcre2_compile.c
+@@ -4675,19 +4675,21 @@ for (;; ptr++)
+     zeroreqcu = reqcu;
+     zeroreqcuflags = reqcuflags;
+ 
+-    /* If there are characters with values > 255, we have to compile an
+-    extended class, with its own opcode, unless there was a negated special
+-    such as \S in the class, and PCRE2_UCP is not set, because in that case all
++    /* If there are characters with values > 255, or Unicode property settings
++    (\p or \P), we have to compile an extended class, with its own opcode,
++    unless there were no property settings and there was a negated special such
++    as \S in the class, and PCRE2_UCP is not set, because in that case all
+     characters > 255 are in the class, so any that were explicitly given as
+-    well can be ignored. If (when there are explicit characters > 255 that must
+-    be listed) there are no characters < 256, we can omit the bitmap in the
+-    actual compiled code. */
++    well can be ignored. If (when there are explicit characters > 255 or
++    property settings that must be listed) there are no characters < 256, we
++    can omit the bitmap in the actual compiled code. */
+ 
+ #ifdef SUPPORT_WIDE_CHARS
+ #ifdef SUPPORT_UNICODE
+-    if (xclass && (!should_flip_negation || (options & PCRE2_UCP) != 0))
++    if (xclass && (xclass_has_prop || !should_flip_negation ||
++         (options & PCRE2_UCP) != 0))
+ #elif PCRE2_CODE_UNIT_WIDTH != 8
+-    if (xclass && !should_flip_negation)
++    if (xclass && (xclass_has_prop || !should_flip_negation))
+ #endif
+       {
+       *class_uchardata++ = XCL_END;    /* Marks the end of extra data */
+diff --git a/testdata/testinput5 b/testdata/testinput5
+index 7e2ba45..c4eb2af 100644
+--- a/testdata/testinput5
++++ b/testdata/testinput5
+@@ -1651,4 +1651,12 @@
+ 
+ /$(&.+[\p{Me}].\s\xdcC*?(?(<y>))(?<!^)$C((;*?(R))+(?(R)){0,6}?|){12\x8a\X*?\x8a\x0b\xd1^9\3*+(\xc1,\k'P'\xb4)\xcc(z\z(?JJ)(?'X'8};(\x0b\xd1^9\?'3*+(\xc1.]k+\x0b'Pm'\xb4\xcc4'\xd1'(?'X'))?-%--\x95$9*\4'|\xd1(''%\x95*$9)#(?'R')3\x07?('P\xed')\\x16:;()\x1e\x10*:(?<y>)\xd1+!~:(?)''(d'E:yD!\s(?'R'\x1e;\x10:U))|')g!\xb0*){29+))#(?'P'})*?/
+ 
++/[\W\p{Any}]/B
++    abc
++    123 
++
++/[\W\pL]/B
++    abc
++    123     
++
+ # End of testinput5 
+diff --git a/testdata/testoutput5 b/testdata/testoutput5
+index a99c12b..babb9df 100644
+--- a/testdata/testoutput5
++++ b/testdata/testoutput5
+@@ -4050,4 +4050,28 @@ Failed: error 122 at offset 1227: unmatched closing parenthesis
+ 
+ /$(&.+[\p{Me}].\s\xdcC*?(?(<y>))(?<!^)$C((;*?(R))+(?(R)){0,6}?|){12\x8a\X*?\x8a\x0b\xd1^9\3*+(\xc1,\k'P'\xb4)\xcc(z\z(?JJ)(?'X'8};(\x0b\xd1^9\?'3*+(\xc1.]k+\x0b'Pm'\xb4\xcc4'\xd1'(?'X'))?-%--\x95$9*\4'|\xd1(''%\x95*$9)#(?'R')3\x07?('P\xed')\\x16:;()\x1e\x10*:(?<y>)\xd1+!~:(?)''(d'E:yD!\s(?'R'\x1e;\x10:U))|')g!\xb0*){29+))#(?'P'})*?/
+ 
++/[\W\p{Any}]/B
++------------------------------------------------------------------
++        Bra
++        [\x00-/:-@[-^`{-\xff\p{Any}]
++        Ket
++        End
++------------------------------------------------------------------
++    abc
++ 0: a
++    123 
++ 0: 1
++
++/[\W\pL]/B
++------------------------------------------------------------------
++        Bra
++        [\x00-/:-@[-^`{-\xff\p{L}]
++        Ket
++        End
++------------------------------------------------------------------
++    abc
++ 0: a
++    123     
++No match
++
+ # End of testinput5 
+-- 
+2.4.3
+

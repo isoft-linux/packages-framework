@@ -7,10 +7,9 @@
 Summary: A printer administration tool
 Name: system-config-printer
 Version: 1.5.7
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: GPLv2+
 URL: http://cyberelk.net/tim/software/system-config-printer/
-Group: System Environment/Base
 Source0: http://cyberelk.net/tim/data/system-config-printer/1.5/%{name}-%{version}.tar.xz
 Patch1: system-config-printer-shbang.patch
 Patch2: system-config-printer-device-sorting.patch
@@ -46,7 +45,6 @@ the user to configure a CUPS print server.
 
 %package libs
 Summary: Libraries and shared code for printer administration tool
-Group: System Environment/Base
 Requires: python3-cups >= 1.9.60
 Requires: python3-pycurl
 Requires: gobject-introspection
@@ -64,7 +62,6 @@ the configuration tool.
 
 %package applet
 Summary: Print job notification applet
-Group: System Environment/Base
 Requires: %{name}-libs
 
 %description applet
@@ -72,7 +69,6 @@ Print job notification applet.
 
 %package udev
 Summary: Rules for udev for automatic configuration of USB printers
-Group: System Environment/Base
 Requires: system-config-printer-libs = %{version}-%{release}
 Obsoletes: hal-cups-utils < 0.6.20
 Provides: hal-cups-utils = 0.6.20
@@ -102,8 +98,11 @@ touch %buildroot%{_localstatedir}/run/udev-configure-printer/usb-uris
 
 # Manually invoke the python byte compile macro for each path that
 # needs byte compilation
-%py_byte_compile %{__python3} %%{buildroot}%{python3_sitelib}/cupshelpers
-%py_byte_compile %{__python3} %%{buildroot}%{datadir}/system-config-printer
+%py_byte_compile %{__python3} %{buildroot}%{python3_sitelib}/cupshelpers
+%py_byte_compile %{__python3} %{buildroot}%{datadir}/system-config-printer
+
+#hide desktop item.
+echo "NoDisplay=true" >> %{buildroot}%{_datadir}/applications/system-config-printer.desktop
 
 %find_lang system-config-printer
 
@@ -192,3 +191,6 @@ touch %buildroot%{_localstatedir}/run/udev-configure-printer/usb-uris
 exit 0
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- tune desktop file.
+

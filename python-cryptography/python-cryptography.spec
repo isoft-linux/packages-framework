@@ -1,32 +1,46 @@
 %global with_python3 1
 
-%global reqs() %1-idna >= 2.0 %1-pyasn1 %1-six >= 1.4.1 %1-cffi >= 0.8
-%global breqs() %1-setuptools %1-pretend %1-iso8601 %1-cryptography-vectors = %{version}
-
 Name:           python-cryptography
-Version:        1.0
-Release:        1
+Version:        0.8.2
+Release:        1%{?dist}
 Summary:        PyCA's cryptography library
 
 Group:          Development/Libraries
 License:        ASL 2.0 or BSD
 URL:            https://cryptography.io/en/latest/
 Source0:        https://pypi.python.org/packages/source/c/cryptography/cryptography-%{version}.tar.gz
+Patch0:		cryptography-fix-dsa-double-free.patch
 
 BuildRequires:  openssl-devel
-Requires:       openssl
+BuildRequires:  python-enum34
 
 BuildRequires:  python2-devel
-BuildRequires:  pytest %breqs python
-BuildRequires:  python-enum34 python-ipaddress %reqs python
-Requires:       python-enum34 python-ipaddress %reqs python
+BuildRequires:  python-setuptools
+BuildRequires:  python-cffi >= 0.8
+BuildRequires:  python-six
+BuildRequires:  python-cryptography-vectors = %{version}
+BuildRequires:  python-pyasn1
+BuildRequires:  python-iso8601
+BuildRequires:  python-pretend
+BuildRequires:  pytest
 
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
-BuildRequires:  python3-pytest %breqs python3
-BuildRequires:  %reqs python3
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-cffi >= 0.8
+BuildRequires:  python3-six
+BuildRequires:  python3-cryptography-vectors = %{version}
+BuildRequires:  python3-pyasn1
+BuildRequires:  python3-iso8601
+BuildRequires:  python3-pretend
+BuildRequires:  python3-pytest
 %endif
 
+Requires:       openssl
+Requires:       python-enum34
+Requires:       python-cffi >= 0.8
+Requires:       python-six >= 1.6.1
+Requires:       python-pyasn1
 
 %description
 cryptography is a package designed to expose cryptographic primitives and
@@ -38,7 +52,9 @@ Group:          Development/Libraries
 Summary:        PyCA's cryptography library
 
 Requires:       openssl
-Requires:       %reqs python3
+Requires:       python3-cffi >= 0.8
+Requires:       python3-six >= 1.6.1
+Requires:       python3-pyasn1
 
 %description -n python3-cryptography
 cryptography is a package designed to expose cryptographic primitives and
@@ -47,6 +63,7 @@ recipes to Python developers.
 
 %prep
 %setup -q -n cryptography-%{version}
+%patch0 -p1
 
 %if 0%{?with_python3}
 rm -rf %{py3dir}
@@ -101,3 +118,5 @@ popd
 
 
 %changelog
+* Thu Oct 08 2015 Cjacker <cjacker@foxmail.com>
+- downgrade from yetist 

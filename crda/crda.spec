@@ -1,5 +1,5 @@
 %define         crda_version    3.18
-%define         regdb_version   2015.04.06
+%define         regdb_version   2015.09.25
 
 Name:           crda
 Version:        %{crda_version}_%{regdb_version}

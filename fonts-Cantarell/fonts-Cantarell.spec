@@ -1,5 +1,5 @@
 Name:           fonts-Cantarell
-Version:        0.0.16
+Version:        0.0.17.2
 Release:        3 
 Summary:        Gnome cantarell font
 License:        GPL
@@ -11,6 +11,7 @@ Gnome cantarell TrueType font
 
 %prep
 %setup -q -n cantarell-fonts-%{version}
+
 %Build
 %configure --with-fontdir=%{buildroot}%{_datadir}/fonts
 
@@ -22,8 +23,6 @@ pushd $RPM_BUILD_ROOT%{_sysconfdir}/fonts/conf.d
 ln -s %{_datadir}/fontconfig/conf.avail/31-cantarell.conf .
 popd
 
-rpmclean
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -33,3 +32,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/fontconfig/conf.avail/*.conf
 %{_datadir}/fonts/*.otf
 
+%changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 0.0.17.2

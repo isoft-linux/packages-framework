@@ -1,37 +1,36 @@
-Name:	    qt5-qtquick1
-Version:	5.5.0
-Release:	1
-Summary:    QtQuick1 component
+Name: qt5-qtquick1
+Version: 5.5.1
+Release: 2 
+Summary: QtQuick1 component
 
-Group:	    Extra/Runtime/Library	
-License:    LGPLv2 with exceptions or GPLv3 with exceptions	
+License: LGPLv2 with exceptions or GPLv3 with exceptions 
 
-URL:	    http://qt-project.org	
-Source0:    qtquick1-opensource-src-%{version}.tar.xz	
+URL: http://qt-project.org 
+Source0: qtquick1-opensource-src-%{version}.tar.xz 
 
-BuildRequires:  qt5-qtbase-devel
-#for uiplugin
-BuildRequires:  qt5-qttools-devel = %{version}-%{release}
-Requires:   qt5-qtbase = %{version}-%{release}	
+BuildRequires: qt5-qtbase-devel >= %{version}
+BuildRequires: qt5-qtscript-devel >= %{version}
+BuildRequires: qt5-qttools-devel >= %{version}
+BuildRequires: qt5-qtxmlpatterns-devel >= %{version}
+BuildRequires: qt5-qtwebkit-devel >= %{version}
 
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
 #for qhelpgenerator
-BuildRequires:  qt5-qttools
+BuildRequires: qt5-qttools
 #for absolute path qdoc
-BuildRequires:  qt5-qtbase
+BuildRequires: qt5-qtbase
 
 %description
 QtQuick1 component
 
-%package        devel
-Summary:        Development files for %{name}
-Group:          Extra/Development/Library
-Requires:       %{name} = %{version}-%{release}
-Requires:       qt5-qtbase-devel = %{version}-%{release}	
+%package devel
+Summary: Development files for %{name}
+Requires: %{name} = %{version}-%{release}
+Requires: qt5-qtbase-devel >= %{version}
 
-%description    devel
+%description devel
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
@@ -55,22 +54,22 @@ make install_docs INSTALL_ROOT=%{buildroot}
 mkdir %{buildroot}%{_bindir}
 pushd %{buildroot}%{_qt5_bindir}
 for i in * ; do
-  case "${i}" in
-    # qt4 conflicts
-    qmlviewer)
-      ln -v  ${i} %{buildroot}%{_bindir}/${i}-qt5
-      ln -sv ${i} ${i}-qt5
-      ;;
-    # stuff handled by qtchooser
-    qml1plugindump)
-      ln -v  ${i} %{buildroot}%{_bindir}/${i}
-      ln -v  ${i} %{buildroot}%{_bindir}/${i}-qt5
-      ln -sv ${i} ${i}-qt5
-      ;;
-    *)
-      ln -v  ${i} %{buildroot}%{_bindir}/${i}
-      ;;
-  esac
+ case "${i}" in
+ # qt4 conflicts
+ qmlviewer)
+ ln -v ${i} %{buildroot}%{_bindir}/${i}-qt5
+ ln -sv ${i} ${i}-qt5
+ ;;
+ # stuff handled by qtchooser
+ qml1plugindump)
+ ln -v ${i} %{buildroot}%{_bindir}/${i}
+ ln -v ${i} %{buildroot}%{_bindir}/${i}-qt5
+ ln -sv ${i} ${i}-qt5
+ ;;
+ *)
+ ln -v ${i} %{buildroot}%{_bindir}/${i}
+ ;;
+ esac
 done
 popd
 
@@ -78,14 +77,14 @@ popd
 #fake debug library
 pushd %{buildroot}%{_qt5_libdir}
 for lib in libQt*.so ; do
-  ln -s $lib $(basename $lib .so)_debug.so
+ ln -s $lib $(basename $lib .so)_debug.so
 done
 popd
 
 if [ -d "examples/" ]; then
-    mkdir -p %{buildroot}%{_libdir}/qt5/examples
-    cp -r examples/* %{buildroot}%{_libdir}/qt5/examples/
-    rm -rf %{buildroot}%{_libdir}/qt5/examples/*.pro
+ mkdir -p %{buildroot}%{_libdir}/qt5/examples
+ cp -r examples/* %{buildroot}%{_libdir}/qt5/examples/
+ rm -rf %{buildroot}%{_libdir}/qt5/examples/*.pro
 fi
 
 
@@ -110,4 +109,7 @@ fi
 
 #%{_docdir}/qt5/*
 
+%changelog
+* Fri Oct 16 2015 Cjacker <cjacker@foxmail.com>
+- update to 5.5.1
 

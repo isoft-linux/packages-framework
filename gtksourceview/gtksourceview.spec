@@ -5,10 +5,9 @@
 
 Summary: A library for viewing source files
 Name: gtksourceview
-Version: 3.18.0
+Version: 3.18.1
 Release: 1
 License: LGPLv2+ and GPLv2+
-Group: System Environment/Libraries
 URL: http://gtksourceview.sourceforge.net/ 
 Source0: http://download.gnome.org/sources/gtksourceview/3.6/gtksourceview-%{version}.tar.xz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
@@ -25,7 +24,6 @@ syntax highlighting and other features typical of a source code editor.
 
 %package devel
 Summary: Files to compile applications that use gtksourceview2
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: gtk3-devel >= %{gtk3_version} 
 Requires: libxml2-devel
@@ -48,9 +46,8 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT DATADIRNAME=share
 
 %find_lang %{po_package}
-rpmclean
-%post -p /sbin/ldconfig
 
+%post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %clean
@@ -74,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/gtksourceview-3.0.vapi
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 3.18.1
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

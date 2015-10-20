@@ -1,9 +1,8 @@
 Name:           pulseaudio
 Summary:        Improved Linux Sound Server
 Version:        7.0 
-Release:        1
+Release:        2 
 License:        LGPLv2+
-Group:          System Environment/Daemons
 
 Source0: http://freedesktop.org/software/pulseaudio/releases/pulseaudio-%{version}.tar.xz
 # revert upstream commit to rely solely on autospawn for autostart, instead
@@ -52,7 +51,6 @@ Enlightened Sound Daemon (ESOUND).
 
 %package esound-compat
 Summary:        PulseAudio EsounD daemon compatibility script
-Group:          System Environment/Daemons
 Requires:       %{name} = %{version}-%{release}
 Provides:       esound
 Obsoletes:      esound
@@ -63,7 +61,6 @@ and start PulseAudio with EsounD protocol modules.
 
 %package module-x11
 Summary:        X11 support for the PulseAudio sound server
-Group:          System Environment/Daemons
 Requires:       %{name} = %{version}-%{release}
 Requires:       %{name}-utils = %{version}-%{release}
 
@@ -72,7 +69,6 @@ X11 bell and security modules for the PulseAudio sound server.
 
 %package module-zeroconf
 Summary:        Zeroconf support for the PulseAudio sound server
-Group:          System Environment/Daemons
 Requires:       %{name} = %{version}-%{release}
 Requires:       pulseaudio-utils
 
@@ -82,7 +78,6 @@ Zeroconf publishing module for the PulseAudio sound server.
 %ifnarch s390 s390x
 %package module-bluetooth
 Summary:        Bluetooth support for the PulseAudio sound server
-Group:          System Environment/Daemons
 Requires:       %{name} = %{version}-%{release}
 Requires:       bluez >= 5.0 
 
@@ -98,7 +93,6 @@ proximity again
 %package libs
 Summary:        Libraries for PulseAudio clients
 License:        LGPLv2+
-Group:          System Environment/Libraries
 Provides:       pulseaudio-lib
 Obsoletes:      pulseaudio-lib
 
@@ -109,7 +103,6 @@ to interface with a PulseAudio sound server.
 %package core-libs
 Summary:        Core libraries for the PulseAudio sound server.
 License:        LGPLv2+
-Group:          System Environment/Libraries
 
 %description core-libs
 This package contains runtime libraries that are used internally in the
@@ -118,7 +111,6 @@ PulseAudio sound server.
 %package libs-glib2
 Summary:        GLIB 2.x bindings for PulseAudio clients
 License:        LGPLv2+
-Group:          System Environment/Libraries
 Provides:       pulseaudio-lib-glib2
 Obsoletes:      pulseaudio-lib-glib2
 
@@ -129,7 +121,6 @@ a GLIB 2.x based application.
 %package libs-zeroconf
 Summary:    Zeroconf support for PulseAudio clients
 License:        LGPLv2+
-Group:      System Environment/Libraries
 Provides:       pulseaudio-lib-zeroconf
 Obsoletes:      pulseaudio-lib-zeroconf
 
@@ -140,7 +131,6 @@ clients to automatically detect PulseAudio servers using Zeroconf.
 %package libs-devel
 Summary:        Headers and libraries for PulseAudio client development
 License:        LGPLv2+
-Group:          Development/Libraries
 Requires:       %{name}-libs = %{version}-%{release}
 Requires:       %{name}-libs-glib2 = %{version}-%{release}
 #Requires:       %{name}-libs-zeroconf = %{version}-%{release}
@@ -157,7 +147,6 @@ a PulseAudio sound server.
 %package utils
 Summary:        PulseAudio sound server utilities
 License:        LGPLv2+
-Group:          Applications/Multimedia
 Requires:       %{name}-libs = %{version}-%{release}
 
 %description utils
@@ -231,7 +220,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/pulseaudio/*.la
 
 %find_lang %{name}
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -466,6 +454,5 @@ exit 0
 
 
 %changelog
-* Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
-- first build, prepare for the new release.
-
+* Mon Oct 19 2015 Cjacker <cjacker@foxmail.com>
+- rebuild.

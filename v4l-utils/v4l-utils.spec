@@ -1,6 +1,6 @@
 Name:           v4l-utils
 Version:        1.6.3
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Utilities for video4linux and DVB devices
 Group:          Applications/System
 # libdvbv5, dvbv5 utils, ir-keytable and v4l2-sysfs-path are GPLv2 only
@@ -109,14 +109,19 @@ make doxygen-run
 
 
 %install
-%make_install
+make install DESTDIR=$RPM_BUILD_ROOT
+
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 rm $RPM_BUILD_ROOT%{_libdir}/{v4l1compat.so,v4l2convert.so}
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man3/
 cp -arv %{_builddir}/%{name}-%{version}/doxygen-doc/man/man3 $RPM_BUILD_ROOT%{_mandir}/
 rm $RPM_BUILD_ROOT%{_mandir}/man3/_*3
+
+
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/qv4l2.desktop
 
+#hide menu item
+echo "NoDisplay=true" >> $RPM_BUILD_ROOT%{_datadir}/applications/qv4l2.desktop
 
 %post -n libv4l -p /sbin/ldconfig
 

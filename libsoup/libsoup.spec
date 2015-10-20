@@ -1,9 +1,8 @@
 Summary: Soup, an HTTP library implementation
 Name: libsoup
-Version: 2.52.0
+Version: 2.52.1
 Release: 2 
 License: LGPL
-Group:  Framework/Runtime/Library 
 Source0: ftp://ftp.gnome.org/pub/gnome/sources/libsoup/2.2/%{name}-%{version}.tar.xz
 URL:  ftp://ftp.gnome.org/pub/gnome/sources/libsoup/
 
@@ -23,7 +22,6 @@ supported for those who want it).
 
 %package devel
 Summary: Header files for the Soup library
-Group:  Framework/Development/Library 
 Requires: %{name} = %{version}
 Requires: glib2-devel, libxml2-devel
 
@@ -47,7 +45,6 @@ rm -f $RPM_BUILD_ROOT/%{_libdir}/*.a
 
 %find_lang %{name}
 
-rpmclean
 %post -p /sbin/ldconfig 
 
 %postun -p /sbin/ldconfig
@@ -71,6 +68,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/libsoup-*.vapi
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 2.52.1
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

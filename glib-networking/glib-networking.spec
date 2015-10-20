@@ -1,11 +1,10 @@
 %define glib2_version 2.42
 
 Name:           glib-networking
-Version:        2.46.0
+Version:        2.46.1
 Release:        1
 Summary:        Networking support for GLib
 
-Group:          Framework/Runtime/Library 
 License:        LGPLv2+
 URL:            http://www.gnome.org
 Source:         http://download.gnome.org/sources/glib-networking/2.36/%{name}-%{version}.tar.xz
@@ -62,6 +61,9 @@ gio-querymodules %{_libdir}/gio/modules
 %{_datadir}/dbus-1/services/org.gtk.GLib.PACRunner.service
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 2.46.1
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

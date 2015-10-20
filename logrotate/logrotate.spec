@@ -1,14 +1,16 @@
 Summary: Rotates, compresses, removes and mails system log files
 Name: logrotate
 Version: 3.9.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPL+
-Group: System Environment/Base
 Url: https://fedorahosted.org/logrotate/
 Source: https://fedorahosted.org/releases/l/o/logrotate/logrotate-%{version}.tar.gz
 Source1: rwtab
 # Change the location of status file
 Patch0: logrotate-3.9.1-statusfile.patch
+
+# Daily rotate and keep one week for desktop
+Patch1: logrotate-for-desktop.patch
 
 Requires: coreutils >= 5.92 popt
 BuildRequires: popt-devel libacl-devel acl
@@ -29,6 +31,7 @@ log files on your system.
 %prep
 %setup -q
 %patch0 -p1 -b .statusfile
+%patch1 -p1
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS"
@@ -83,3 +86,5 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/rwtab.d/logrotate
 
 %changelog
+* Thu Oct 15 2015 Cjacker <cjacker@foxmail.com>
+- add patch to enable daily rotate and keep logs one week for Desktop.

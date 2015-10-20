@@ -1,5 +1,5 @@
 Name:           libbluray
-Version:        0.8.1
+Version:        0.9.0
 Release:        1
 Summary:        Library to access Blu-Ray disks for video playback 
 Group:          System Environment/Libraries
@@ -68,6 +68,5 @@ make check
 
 
 %changelog
-* Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
-- first build, prepare for the new release.
-
+* Fri Oct 09 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.9.0

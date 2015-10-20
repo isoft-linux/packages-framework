@@ -1,0 +1,25 @@
+diff -Nur fltk-1.3.3/src/fl_font_xft.cxx fltk-1.3.3new/src/fl_font_xft.cxx
+--- fltk-1.3.3/src/fl_font_xft.cxx	2014-08-21 12:13:47.000000000 +0000
++++ fltk-1.3.3new/src/fl_font_xft.cxx	2015-08-04 14:03:50.077828833 +0000
+@@ -216,7 +216,20 @@
+     XftPatternAddInteger(fnt_pat, XFT_SLANT, slant);
+     XftPatternAddDouble (fnt_pat, XFT_PIXEL_SIZE, (double)size);
+     XftPatternAddString (fnt_pat, XFT_ENCODING, fl_encoding_);
+-
++    char *lang = getenv("LANG");
++    if(lang) {
++         if(strstr(lang,"zh_CN"))
++                 FcPatternAddCharSet(fnt_pat, FC_CHARSET, FcLangGetCharSet((FcChar8*)"zh-cn"));
++         else if(strstr(lang,"zh_TW"))
++                 FcPatternAddCharSet(fnt_pat, FC_CHARSET, FcLangGetCharSet((FcChar8*)"zh-tw"));
++         else if(strstr(lang,"ja_JP"))
++                 FcPatternAddCharSet(fnt_pat, FC_CHARSET, FcLangGetCharSet((FcChar8*)"ja"));
++         else if(strstr(lang,"ko_KR"))
++                 FcPatternAddCharSet(fnt_pat, FC_CHARSET, FcLangGetCharSet((FcChar8*)"ko"));
++         else 
++                 FcPatternAddCharSet(fnt_pat, FC_CHARSET, FcLangGetCharSet((FcChar8*)"en"));
++    } else 
++         FcPatternAddCharSet(fnt_pat, FC_CHARSET, FcLangGetCharSet((FcChar8*)"en"));
+     // rotate font if angle!=0
+     if (angle !=0) {
+       XftMatrix m;

@@ -7,10 +7,9 @@
 
 Summary: System for layout and rendering of internationalized text
 Name: pango
-Version: 1.38.0
+Version: 1.38.1
 Release: 3
 License: LGPL
-Group: System Environment/Libraries
 Source: http://ftp.gnome.org/pub/gnome/sources/pango/1.8/pango-%{version}.tar.xz
 
 URL: http://www.pango.org
@@ -32,6 +31,8 @@ BuildRequires: harfbuzz-devel
 BuildRequires: cairo-devel >= %{cairo_version}
 BuildRequires: gobject-introspection
 
+BuildRequires: libthai-devel
+
 BuildRequires: libXft-devel
 
 %description
@@ -40,7 +41,6 @@ Pango is a system for layout and rendering of internationalized text.
 
 %package devel
 Summary: System for layout and rendering of internationalized text.
-Group: Development/Libraries
 Requires: pango = %{version}
 Requires: glib2-devel >= %{glib2_version}
 Requires: freetype-devel >= %{freetype_version}
@@ -57,7 +57,6 @@ pango.
 
 %package tests
 Summary: Tests for the %{name} package
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description tests
@@ -172,6 +171,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/installed-tests
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 1.38.1
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

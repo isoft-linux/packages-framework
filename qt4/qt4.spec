@@ -2,7 +2,7 @@
 Summary:  Qt toolkit
 Name:	  qt4
 Version:  4.8.7
-Release:  10 
+Release:  11
 License:  GPL/QPL
 Group: 	  System Environment/Libraries
 Url:   	  http://www.trolltech.com/products/qt/
@@ -54,6 +54,17 @@ Patch38: qt-4.8-poll.patch
 Patch39: qt-everywhere-opensource-src-4.8.1-qtgahandle.patch
 Patch40: qt-everywhere-opensource-src-4.8.5-qgtkstyle_disable_gtk_theme_check.patch
 Patch42: qt-everywhere-opensource-src-4.8.5-QTBUG-22829.patch
+
+# fix QTBUG-35459 (too low entityCharacterLimit=1024 for CVE-2013-4549)
+Patch84: qt-everywhere-opensource-src-4.8.5-QTBUG-35459.patch
+
+# systemtrayicon plugin support (for appindicators)
+Patch86: qt-everywhere-opensource-src-4.8.6-systemtrayicon.patch
+
+# fixes for LibreOffice from the upstream Qt bug tracker (#1105422):
+Patch87: qt-everywhere-opensource-src-4.8.6-QTBUG-37380.patch
+Patch88: qt-everywhere-opensource-src-4.8.6-QTBUG-34614.patch
+Patch89: qt-everywhere-opensource-src-4.8.6-QTBUG-38585.patch
 
 ExclusiveArch: %{ix86} x86_64 ppc ppc64 sparc sparc64
 
@@ -147,6 +158,12 @@ This package contains some demos for qt4 programing.
 %patch39 -p1
 %patch40 -p1
 %patch42 -p1
+
+%patch84 -p1
+%patch86 -p1
+%patch87 -p1
+%patch88 -p0
+%patch89 -p0
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`

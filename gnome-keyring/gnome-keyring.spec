@@ -6,10 +6,9 @@
 
 Summary: Framework for managing passwords and other secrets
 Name: gnome-keyring
-Version: 3.17.91
+Version: 3.18.0
 Release: 1
 License: GPLv2+ and LGPLv2+
-Group: System Environment/Libraries
 #VCS: git:git://git.gnome.org/gnome-keyring
 Source: http://download.gnome.org/sources/gnome-keyring/2.32/gnome-keyring-%{version}.tar.xz
 Patch0:   gnome-keyring-fix-header.patch
@@ -37,7 +36,6 @@ Applications can use the gnome-keyring library to integrate with the keyring.
 %package devel
 Summary: Development files for gnome-keyring
 License: LGPLv2+
-Group: Development/Libraries
 Requires: %name = %{version}-%{release}
 Requires: glib2-devel
 
@@ -48,7 +46,6 @@ header files needed to develop applications that use gnome-keyring.
 %package pam
 Summary: Pam module for unlocking keyrings
 License: LGPLv2+
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 # for /lib/security
 Requires: pam
@@ -84,8 +81,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 
 %find_lang gnome-keyring
-
-rpmclean
 
 %post
 /sbin/ldconfig
@@ -127,8 +122,11 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas >/dev/null 2>&1 ||:
 
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 3.18.0
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
-- update to gnome 3.18
+- update to gnome 3.17.91
 
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.

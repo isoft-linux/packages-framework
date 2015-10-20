@@ -2,11 +2,10 @@
 %define release_version %(echo %{version} | awk -F. '{print $1"."$2}')
 
 Name:           libsigc++
-Version:        2.6.0
+Version:        2.6.1
 Release:        1 
 Summary:        Typesafe signal framework for C++
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://libsigc.sourceforge.net/
 Source0:        http://ftp.gnome.org/pub/GNOME/sources/libsigc++/%{release_version}/libsigc++-%{version}.tar.xz
@@ -28,7 +27,6 @@ starting with version 1.1.2, uses libsigc++.
 
 %package devel
 Summary:        Development tools for the typesafe signal framework for C++
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description devel
@@ -38,7 +36,6 @@ needed for development with %{name}.
 
 %package        doc
 Summary:        Documentation for %{name}, includes full API docs
-Group:          Documentation
 BuildArch:      noarch
 Requires:       %{name} = %{version}-%{release}
 
@@ -59,11 +56,8 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
-rpmclean
 %post -p /sbin/ldconfig
-
 %postun -p /sbin/ldconfig
-
 
 %files
 %doc AUTHORS COPYING README NEWS ChangeLog
@@ -84,6 +78,9 @@ rpmclean
 
 
 %changelog
+* Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
+- update to 2.6.1
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 
