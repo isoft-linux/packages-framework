@@ -1,9 +1,8 @@
 Name: libguess
 Version: 1.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 Summary: High-speed character set detection library
-Group: System Environment/Libraries
 License: BSD
 URL: http://rabbit.dereferenced.org/~nenolod/distfiles/
 Source0: http://rabbit.dereferenced.org/~nenolod/distfiles/%{name}-%{version}.tar.bz2
@@ -23,7 +22,6 @@ operations.
 
 %package devel
 Summary: Files needed for developing with %{name}
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -69,3 +67,6 @@ LD_LIBRARY_PATH=${RPM_BUILD_ROOT}%{_libdir} make
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2-3
+- Rebuild for new 4.0 release.
+

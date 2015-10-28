@@ -6,9 +6,8 @@
 Summary:        Creates a common metadata repository
 Name:           createrepo_c
 Version:        0.9.0
-Release:        4
+Release:        5
 License:        GPLv2
-Group:          System Environment/Base
 # Use the following commands to generate the tarball:
 #  git clone https://github.com/Tojaj/createrepo_c.git
 #  cd createrepo_c
@@ -45,7 +44,6 @@ rpm packages and maintaining it.
 
 %package libs
 Summary:    Library for repodata manipulation
-Group:      Development/Libraries
 
 %description libs
 Libraries for applications using the createrepo_c library
@@ -54,7 +52,6 @@ for easy manipulation with a repodata.
 
 %package devel
 Summary:    Library for repodata manipulation
-Group:      Development/Libraries
 Requires:   pkgconfig >= 1:0.14
 Requires:   %{name}-libs =  %{version}-%{release}
 
@@ -64,7 +61,6 @@ These development files are for easy manipulation with a repodata.
 
 %package -n python-createrepo_c
 Summary:    Python bindings for the createrepo_c library
-Group:      Development/Languages
 Requires:   %{name}-libs = %{version}-%{release}
 
 %description -n python-createrepo_c
@@ -120,3 +116,6 @@ make install DESTDIR=$RPM_BUILD_ROOT/
 %{python_sitearch}/createrepo_c/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.0-5
+- Rebuild for new 4.0 release.
+

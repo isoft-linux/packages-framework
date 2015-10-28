@@ -1,6 +1,6 @@
 Name:		xdg-user-dirs
 Version:	0.15
-Release:	4
+Release:	5
 Summary:	Handles user special directories
 
 License:	GPLv2+ and MIT
@@ -56,5 +56,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man5/user-dirs.dirs.5.gz
 
 %changelog
+* Sat Oct 24 2015 builder - 0.15-5
+- Rebuild for new 4.0 release.
+
 * Wed Oct 14 2015 Cjacker <cjacker@foxmail.com>
 - change xinitrc.d/xdg-user-dirs.sh, force create dirs everytime.

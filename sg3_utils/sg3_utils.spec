@@ -1,9 +1,8 @@
 Summary: Utilities for devices that use SCSI command sets
 Name: sg3_utils
 Version: 1.41
-Release: 1
+Release: 2
 License: GPLv2+ and BSD
-Group: Applications/System
 Source0: http://sg.danny.cz/sg/p/sg3_utils-%{version}b4r644.tar.xz
 URL: http://sg.danny.cz/sg/sg3_utils.html
 Requires: %{name}-libs = %{version}-%{release}
@@ -24,14 +23,12 @@ and the incorrect usage of them may render your system inoperable.
 
 %package libs
 Summary: Shared library for %{name}
-Group: System Environment/Libraries
 
 %description libs
 This package contains the shared library for %{name}.
 
 %package devel
 Summary: Development library and header files for the sg3_utils library
-Group: Development/Libraries
 Requires: %{name}-libs = %{version}-%{release}
 
 %description devel
@@ -50,7 +47,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/*.la
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.41-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

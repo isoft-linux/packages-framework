@@ -9,9 +9,8 @@
 
 Name:		hawkey
 Version:	0.6.0
-Release:	2
+Release:	3
 Summary:	Library providing simplified C and Python API to libsolv
-Group:		System Environment/Libraries
 License:	LGPLv2+
 URL:		https://github.com/rpm-software-management/%{name}
 # git clone https://github.com/rpm-software-management/hawkey.git && cd hawkey && tito build --tgz
@@ -36,7 +35,6 @@ A Library providing simplified C and Python API to libsolv.
 
 %package devel
 Summary:	A Library providing simplified C and Python API to libsolv
-Group:		Development/Libraries
 Requires:	hawkey%{?_isa} = %{version}-%{release}
 Requires:	libsolv-devel
 
@@ -45,7 +43,6 @@ Development files for hawkey.
 
 %package -n python-hawkey
 Summary:	Python 2 bindings for the hawkey library
-Group:		Development/Languages
 BuildRequires:  python2-devel
 BuildRequires:  python-nose
 %if %{with python3}
@@ -61,7 +58,6 @@ Python 2 bindings for the hawkey library.
 %if %{with python3}
 %package -n python3-hawkey
 Summary:	Python 3 bindings for the hawkey library
-Group:		Development/Languages
 BuildRequires:	python3-devel
 BuildRequires:	python3-nose
 BuildRequires:	python3-sphinx >= 1.1.3-9
@@ -136,3 +132,6 @@ popd
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.0-3
+- Rebuild for new 4.0 release.
+

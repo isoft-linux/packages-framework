@@ -2,10 +2,9 @@
 
 Name:           python-gitdb
 Version:        0.6.4
-Release:        2
+Release:        3
 Summary:        A pure-Python git object database
 
-Group:          Development/Languages
 License:        BSD
 URL:            http://pypi.python.org/packages/source/g/gitdb/gitdb-%{version}.tar.gz#md5=44e4366b8bdfd306b075c3a52c96ae1a
 Source0:        gitdb-%{version}.tar.gz
@@ -92,3 +91,6 @@ popd
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.4-3
+- Rebuild for new 4.0 release.
+

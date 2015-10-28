@@ -5,10 +5,9 @@
 
 Name:           python-pygments
 Version:        1.6
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Syntax highlighting engine written in Python
 
-Group:          Development/Libraries
 License:        BSD
 URL:            http://pygments.org/
 Source0:        http://pypi.python.org/packages/source/P/%{upstream_name}/%{upstream_name}-%{version}.tar.gz
@@ -41,7 +40,6 @@ need to prettify source code. Highlights are:
 %if 0%{?with_python3}
 %package -n python3-pygments
 Summary:        Syntax highlighting engine written in Python 3
-Group:          Development/Libraries
 Requires:       python3-setuptools
 
 %description -n python3-pygments
@@ -131,3 +129,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6-5
+- Rebuild for new 4.0 release.
+

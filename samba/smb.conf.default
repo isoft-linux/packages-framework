@@ -129,8 +129,8 @@ obey pam restrictions = yes
 #we have to map guest account to root, otherwise anonymous access to usershares will failed with "permission denied"
 #since guest user had no permission to access folder under user's home.
 #guest account = root
-
-map to guest = Bad Password
+guest account = root
+#map to guest = Bad Password
 guest ok = yes
 
 obey pam restrictions = yes

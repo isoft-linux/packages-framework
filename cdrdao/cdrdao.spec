@@ -1,9 +1,8 @@
 Summary:   Writes audio CD-Rs in disk-at-once (DAO) mode
 Name:      cdrdao
 Version:   1.2.3
-Release:   25%{?dist}
+Release:   26%{?dist}
 License:   GPLv2+
-Group:     Applications/Multimedia
 URL:       http://cdrdao.sourceforge.net/
 Source0:   http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 
@@ -60,3 +59,6 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.3-26
+- Rebuild for new 4.0 release.
+

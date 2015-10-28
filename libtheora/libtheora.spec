@@ -1,10 +1,9 @@
 Summary: Theora Video Compression Codec
 Name: libtheora
 Version: 1.1.1
-Release: 1 
+Release: 2 
 Epoch: 0
 License: BSD
-Group: System Environment/Libraries
 URL: http://www.theora.org
 Source0: http://downloads.xiph.org/releases/theora/%{name}-%{version}.tar.bz2
 Patch0: libtheora-clang.patch
@@ -23,7 +22,6 @@ in the future to improve over what is possible with VP3.
 
 %package devel
 Summary: Development tools for Theora applications
-Group: Development/Libraries
 Requires:	libogg-devel >= 2:1.1
 Requires:	libtheora = %{epoch}:%{version}-%{release}
 Requires:	pkgconfig
@@ -56,7 +54,6 @@ rm -rf $RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT/%{_libdir}/*.la
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,8 +74,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/theora
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
+%{_docdir}/%{name}-%{version}
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0:1.1.1-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

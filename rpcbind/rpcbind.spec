@@ -1,8 +1,7 @@
 Name:           rpcbind
 Version:        0.2.3
-Release:        0.2%{?dist}
+Release:        0.3%{?dist}
 Summary:        Universal Addresses to RPC Program Number Mapper
-Group:          System Environment/Daemons
 License:        BSD
 URL:            http://nfsv4.bullopensource.org
 
@@ -120,3 +119,6 @@ fi
 %{_unitdir}/rpcbind.socket
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.2.3-0.3
+- Rebuild for new 4.0 release.
+

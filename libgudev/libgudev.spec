@@ -1,9 +1,8 @@
 Name:		libgudev
 Version:    230	
-Release:	1
+Release:	2
 Summary:    Libraries for adding libudev support to applications that use glib	
 
-Group:	    Framework/Runtime/Library	
 License:	GPL
 URL:		http://wiki.gnome.org/Projects/libgudev
 Source0:    %{name}-%{version}.tar.xz
@@ -16,7 +15,6 @@ Libraries for adding libudev support to applications that use glib
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -35,7 +33,6 @@ make %{?_smp_mflags}
 make install DESTDIR=%{buildroot}
 
 
-rpmclean
 %files
 %{_libdir}/libgudev-1.0.so.*
 %{_libdir}/girepository-1.0/GUdev-1.0.typelib
@@ -49,4 +46,7 @@ rpmclean
 %{_datadir}/gir-1.0/GUdev-1.0.gir
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 230-2
+- Rebuild for new 4.0 release.
+
 

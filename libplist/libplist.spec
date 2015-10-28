@@ -2,10 +2,9 @@
 
 Name:          libplist
 Version:       1.12
-Release:       5
+Release:       6
 Summary:       Library for manipulating Apple Binary and XML Property Lists
 
-Group:         System Environment/Libraries
 License:       LGPLv2+
 URL:           http://www.libimobiledevice.org/
 Source0:       http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
@@ -19,21 +18,19 @@ libplist is a library for manipulating Apple Binary and XML Property Lists
 
 %package devel
 Summary: Development package for libplist
-Group: Development/Libraries
 Requires: libplist = %{version}-%{release}
 Requires: pkgconfig
 
 %description devel
 %{name}, development headers and libraries.
 
-#%package python
-#Summary: Python package for libplist
-#Group: Development/Libraries
-#Requires: libplist = %{version}-%{release}
-#Requires: python
-#
-#%description python
-#%{name}, python libraries and support
+%package python
+Summary: Python package for libplist
+Requires: libplist = %{version}-%{release}
+Requires: python
+
+%description python
+%{name}, python libraries and support
 
 %prep
 %setup -q
@@ -47,7 +44,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
-
 %postun -p /sbin/ldconfig
 
 %files
@@ -62,14 +58,19 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/libplist.pc
 %{_libdir}/pkgconfig/libplist++.pc
 %{_libdir}/libplist.so
+%{_libdir}/libplist.a
 %{_libdir}/libplist++.so
+%{_libdir}/libplist++.a
 %{_includedir}/plist
 
-#%files python
-#%defattr(-,root,root,-)
-#%{python_sitearch}/plist*
+%files python
+%defattr(-,root,root,-)
+%{python_sitearch}/plist*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.12-6
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

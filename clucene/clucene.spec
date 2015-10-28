@@ -1,9 +1,8 @@
 Summary:	A C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	10
+Release:	11
 License:	LGPLv2+ or ASL 2.0
-Group:		Development/System
 URL:		http://www.sourceforge.net/projects/clucene
 Source0:	http://downloads.sourceforge.net/clucene/clucene-core-%{version}.tar.gz
 BuildRequires:	gawk cmake zlib-devel boost-devel
@@ -20,7 +19,6 @@ date with Lucene 2.3.2. It contains most of the same functionality as the Java v
 
 %package core
 Summary:	Core clucene module
-Group:		Development/System
 Provides:	clucene = %{version}-%{release}
 #Requires: %{name} = %{version}-%{release}
 %description core
@@ -32,7 +30,6 @@ date with Lucene 2.3.2. It contains most of the same functionality as the Java v
 
 %package core-devel
 Summary:	Headers for developing programs that will use %{name}
-Group:		Development/Libraries
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	%{name}-contribs-lib = %{version}-%{release}
 %description core-devel
@@ -41,7 +38,6 @@ developing with clucene
 
 %package contribs-lib
 Summary:	Language specific text analyzers for %{name}
-Group:  	Development/System
 Requires:	%{name}-core = %{version}-%{release}
 %description contribs-lib
 %{summary}.
@@ -114,3 +110,6 @@ rm -rf %{buildroot}%{_libdir}/CLuceneConfig.cmake
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.3.3.4-11
+- Rebuild for new 4.0 release.
+

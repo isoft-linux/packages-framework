@@ -1,9 +1,8 @@
 Summary: An encoder/decoder for the Free Lossless Audio Codec.
 Name:    libflac
 Version: 1.3.1
-Release: 2 
+Release: 3 
 License: LGPL/GPL
-Group:   System Environment/Libraries
 Source: https://svn.xiph.org/releases/flac/flac-%{version}.tar.xz
 URL:    http://flac.sourceforge.net/
 
@@ -23,7 +22,6 @@ various music players.
 
 %package devel
 Summary: Static libraries and header files from FLAC.
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Provides: flac-devel = %{version}-%{release}
 
@@ -46,7 +44,6 @@ rm -rf %{buildroot}
 find doc/ -name "Makefile*" -exec rm -f {} \;
 rm -rf $RPM_BUILD_ROOT/usr/share/doc
 
-rpmclean
 %clean
 rm -rf %{buildroot}
 
@@ -71,6 +68,9 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.1-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,9 +1,8 @@
 Summary: Library of functions for manipulating TIFF format image files
 Name: libtiff
 Version: 4.0.3
-Release: 1
+Release: 2
 License: libtiff
-Group: System Environment/Libraries
 URL: http://www.libtiff.org/
 
 Source: ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
@@ -30,7 +29,6 @@ format image files.
 
 %package devel
 Summary: Development tools for programs which will use the libtiff library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -44,7 +42,6 @@ install the libtiff package.
 
 %package static
 Summary: Static TIFF image format file library
-Group: Development/Libraries
 Requires: %{name}-devel = %{version}-%{release}
 
 %description static
@@ -131,7 +128,6 @@ fi
 
 # don't include documentation Makefiles, they are a multilib hazard
 find html -name 'Makefile*' | xargs rm
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -161,3 +157,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.0.3-2
+- Rebuild for new 4.0 release.
+

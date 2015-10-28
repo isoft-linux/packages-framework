@@ -2,7 +2,7 @@
 
 Name:           python-%{pyname}
 Version:        1.0.7
-Release:        4
+Release:        5
 Summary:        Port of the python 3.3+ ipaddress module to 2.6+
 
 License:        Python
@@ -41,3 +41,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.7-5
+- Rebuild for new 4.0 release.
+

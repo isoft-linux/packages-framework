@@ -5,7 +5,7 @@
 Name: libuv
 Epoch:   1
 Version: 1.4.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Platform layer for node.js
 # the licensing breakdown is described in detail in the LICENSE file
 License: MIT and BSD and ISC
@@ -74,3 +74,6 @@ rm -f %{buildroot}%{_libdir}/libuv.la
 %{_libdir}/libuv.a
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.4.0-3
+- Rebuild for new 4.0 release.
+

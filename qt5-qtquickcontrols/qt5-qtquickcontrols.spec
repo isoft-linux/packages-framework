@@ -1,6 +1,6 @@
 Name: qt5-qtquickcontrols 
 Version: 5.5.1
-Release: 2 
+Release: 3 
 Summary: QucikControls Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -53,7 +53,6 @@ if [ -d "examples/" ]; then
  rm -rf %{buildroot}%{_libdir}/qt5/examples/*.pro
 fi
 
-rpmclean
 
 %files
 %{_libdir}/qt5/qml/*
@@ -63,6 +62,9 @@ rpmclean
 %{_docdir}/qt5/*
 
 %changelog
+* Sat Oct 24 2015 builder - 5.5.1-3
+- Rebuild for new 4.0 release.
+
 * Fri Oct 16 2015 Cjacker <cjacker@foxmail.com>
 - update to 5.5.1
 

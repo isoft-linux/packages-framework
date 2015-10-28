@@ -3,10 +3,9 @@
 
 Name:		vpnc-script
 Version:	%{git_date}
-Release:	3.git%{git_commit_hash}%{?dist}
+Release:	4.git%{git_commit_hash}%{?dist}
 
 Summary:	Routing setup script for vpnc and openconnect
-Group:		Applications/Internet
 BuildArch:	noarch
 Requires:	net-tools
 Requires:	which
@@ -36,3 +35,6 @@ install -m 0755 vpnc-script \
 %{_sysconfdir}/vpnc/vpnc-script
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 20140805-4.gitdf5808b
+- Rebuild for new 4.0 release.
+

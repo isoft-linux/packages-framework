@@ -4,10 +4,9 @@ Summary:   NetworkManager VPN plugin for vpnc
 Name:      NetworkManager-vpnc
 Epoch:     1
 Version:   1.0.2
-Release:   2%{snapshot}%{?dist}
+Release:   3%{snapshot}%{?dist}
 License:   GPLv2+
 URL:       http://www.gnome.org/projects/NetworkManager/
-Group:     System Environment/Base
 Source0:   https://download.gnome.org/sources/NetworkManager-vpnc/1.0/%{name}-%{version}%{snapshot}.tar.xz
 
 BuildRequires: gtk3-devel
@@ -36,7 +35,6 @@ the vpnc server with NetworkManager.
 
 %package -n NetworkManager-vpnc-gnome
 Summary: NetworkManager VPN plugin for vpnc - GNOME files
-Group:   System Environment/Base
 
 Requires: NetworkManager-vpnc = %{epoch}:%{version}-%{release}
 Requires: network-manager-applet 
@@ -99,3 +97,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/gnome-vpn-properties/vpnc/nm-vpnc-dialog.ui
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.0.2-3
+- Rebuild for new 4.0 release.
+

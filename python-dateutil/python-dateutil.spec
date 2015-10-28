@@ -1,10 +1,9 @@
 Name:           python-dateutil
 Version:        2.4.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Epoch:          1
 Summary:        Powerful extensions to the standard datetime module
 
-Group:          Development/Languages
 License:        Python
 URL:            https://github.com/dateutil/dateutil
 Source0:        https://github.com/dateutil/dateutil/archive/%{version}.tar.gz
@@ -83,3 +82,6 @@ make -C docs html
 %doc docs/_build/html
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:2.4.2-3
+- Rebuild for new 4.0 release.
+

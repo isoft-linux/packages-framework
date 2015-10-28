@@ -1,9 +1,8 @@
 Name:		gssproxy
 Version:	0.4.1
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	GSSAPI Proxy
 
-Group:		System Environment/Libraries
 License:	MIT
 URL:		http://fedorahosted.org/gss-proxy
 Source0:	http://fedorahosted.org/released/gss-proxy/%{name}-%{version}.tar.gz
@@ -102,3 +101,6 @@ rm -rf %{buildroot}
 %systemd_postun_with_restart gssproxy.service
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4.1-3
+- Rebuild for new 4.0 release.
+

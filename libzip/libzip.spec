@@ -1,9 +1,8 @@
 Name:		libzip
 Version:	1.0.1
-Release:	1
+Release:	2
 Summary:	C library for reading, creating, and modifying zip archives
 
-Group:		System Environment/Library
 License:	Public Domain
 URL:		http://www.nih.at/libzip
 Source0:	http://www.nih.at/libzip/libzip-1.0.1.tar.xz
@@ -13,7 +12,6 @@ Source0:	http://www.nih.at/libzip/libzip-1.0.1.tar.xz
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -32,7 +30,6 @@ make %{?_smp_mflags}
 make install DESTDIR=%{buildroot}
 rm -rf $RPM_BUILD_ROOT%{_libdir}/libzip.a
 
-rpmclean
 %files
 %{_bindir}/zipmerge
 %{_bindir}/zipcmp
@@ -49,4 +46,7 @@ rpmclean
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.1-2
+- Rebuild for new 4.0 release.
+
 

@@ -5,7 +5,7 @@ Summary: Gstreamer phonon backend
 Name:    phonon-backend-gstreamer
 Epoch:   2
 Version: 4.8.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -108,14 +108,15 @@ fi
 gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null ||:
 
 %files
-%doc COPYING.LIB
 %{_libdir}/kde4/plugins/phonon_backend/phonon_gstreamer.so
 %{_datadir}/kde4/services/phononbackends/gstreamer.desktop
 %{_datadir}/icons/hicolor/*/apps/phonon-gstreamer.*
 
 %files -n phonon-qt5-backend-gstreamer
-%doc COPYING.LIB
 %{_qt5_plugindir}/phonon4qt5_backend/phonon_gstreamer.so
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2:4.8.2-4
+- Rebuild for new 4.0 release.
+

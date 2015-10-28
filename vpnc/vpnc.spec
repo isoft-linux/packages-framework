@@ -2,11 +2,10 @@
 
 Name:		vpnc
 Version:	0.5.3
-Release:	26%{snapshot}
+Release:	27%{snapshot}
 
 Summary:	IPSec VPN client compatible with Cisco equipment
 
-Group:		Applications/Internet
 License:	GPLv2+
 URL:		http://www.unix-ag.uni-kl.de/~massar/vpnc/
 Source0:	http://www.unix-ag.uni-kl.de/~massar/vpnc/%{name}-%{version}%{snapshot}.tar.gz
@@ -71,3 +70,6 @@ install -d -m 0755 %{buildroot}%{_localstatedir}/run/%{name}/
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.5.3-27.svn550
+- Rebuild for new 4.0 release.
+

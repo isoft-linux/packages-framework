@@ -1,9 +1,8 @@
 Name:           perl-XML-LibXML
 Version:        2.0117
-Release:        1
+Release:        2
 Epoch:          1
 Summary:        Perl interface to the libxml2 library
-Group:          Development/Libraries
 License:        (GPL+ or Artistic) and MIT
 URL:            http://search.cpan.org/dist/XML-LibXML/
 Source0:        http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-%{version}.tar.gz 
@@ -89,4 +88,9 @@ fi
 %{perl_vendorarch}/auto/XML
 %{perl_vendorarch}/XML
 %{_mandir}/man3/*.3*
+
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:2.0117-2
+- Rebuild for new 4.0 release.
 

@@ -1,9 +1,8 @@
 Summary: Audio/Video Control library for IEEE-1394 devices
 Name: libavc1394
 Version: 0.5.4
-Release: 4 
+Release: 5 
 License: LGPL
-Group: System Environment/Libraries
 Source: http://dl.sourceforge.net/libavc1394/libavc1394-%{version}.tar.gz
 Patch1: libavc1394-automake.patch
 BuildRequires: libraw1394-devel
@@ -18,7 +17,6 @@ to control devices like the tape on a VCR or camcorder.
 
 %package devel
 Summary: Development libs for libavc1394
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: libraw1394-devel
 
@@ -66,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/librom1394.so
 
 %changelog
+* Sat Oct 24 2015 builder - 0.5.4-5
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

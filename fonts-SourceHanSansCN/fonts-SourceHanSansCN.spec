@@ -1,11 +1,14 @@
 Name:          fonts-SourceHanSansCN
 Summary:       Adobe OpenType Pan-CJK font family for Simplified Chinese
 Version:       1.002 
-Release:       1
+Release:       2
 License:       GPL 
 URL:            https://github.com/adobe-fonts/source-han-sans/
 Source0:        https://github.com/adobe-fonts/source-han-sans/raw/release/SubsetOTF/SourceHanSansCN.zip
 Source1:        65-0-adobe-source-han-sans-cn.conf
+
+BuildArch: noarch
+
 %description
 Adobe OpenType Pan-CJK font family for Simplified Chinese
 
@@ -33,3 +36,8 @@ popd
 %{_sysconfdir}/fonts/conf.d/*
 %{_datadir}/fontconfig/conf.avail/*
 %{_datadir}/fonts/*.otf
+
+%changelog
+* Sat Oct 24 2015 builder - 1.002-2
+- Rebuild for new 4.0 release.
+

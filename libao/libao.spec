@@ -1,8 +1,7 @@
 Name:           libao
 Version:        1.2.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Cross Platform Audio Output Library
-Group:          System Environment/Libraries
 License:        GPLv2+
 URL:            http://xiph.org/ao/
 Source0:        http://downloads.xiph.org/releases/ao/%{name}-%{version}.tar.gz
@@ -17,7 +16,6 @@ ESD, OSS, Solaris, and IRIX.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -66,3 +64,6 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}*
 
 
 %changelog
+* Sat Oct 24 2015 builder - 1.2.0-6
+- Rebuild for new 4.0 release.
+

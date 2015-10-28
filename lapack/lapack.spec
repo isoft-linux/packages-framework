@@ -10,9 +10,8 @@
 Summary: Numerical linear algebra package libraries
 Name: lapack
 Version: %{mediumver}.0
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: BSD
-Group: System Environment/Libraries
 URL: http://www.netlib.org/lapack/
 Source0: http://www.netlib.org/lapack/lapack-%{version}.tgz
 Source1: http://www.netlib.org/lapack/manpages.tgz
@@ -43,7 +42,6 @@ is coded in Fortran90 and built with gcc.
 
 %package devel
 Summary: LAPACK development libraries
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: blas-devel%{?_isa} = %{version}-%{release}
 
@@ -52,7 +50,6 @@ LAPACK development libraries (shared).
 
 %package static
 Summary: LAPACK static libraries
-Group: Development/Libraries
 Requires: lapack-devel%{?_isa} = %{version}-%{release}
 
 %description static
@@ -60,7 +57,6 @@ LAPACK static libraries.
 
 %package -n blas
 Summary: The Basic Linear Algebra Subprograms library
-Group: System Environment/Libraries
 
 %description -n blas
 BLAS (Basic Linear Algebra Subprograms) is a standard library which
@@ -68,7 +64,6 @@ provides a number of basic algorithms for numerical algebra.
 
 %package -n blas-devel
 Summary: BLAS development libraries
-Group: Development/Libraries
 Requires: blas%{?_isa} = %{version}-%{release}
 Requires: gcc-gfortran
 
@@ -77,7 +72,6 @@ BLAS development libraries (shared).
 
 %package -n blas-static
 Summary: BLAS static libraries
-Group: Development/Libraries
 Requires: blas-devel%{?_isa} = %{version}-%{release}
 
 %description -n blas-static
@@ -86,7 +80,6 @@ BLAS static libraries.
 %if 0%{?arch64}
 %package -n lapack64
 Summary: Numerical linear algebra package libraries
-Group: System Environment/Libraries
 
 %description -n lapack64
 LAPACK (Linear Algebra PACKage) is a standard library for numerical
@@ -104,7 +97,6 @@ This build has 64bit INTEGER support.
 
 %package -n lapack64-devel
 Summary: LAPACK development libraries (64bit INTEGER)
-Group: Development/Libraries
 Requires: lapack-devel%{?_isa} = %{version}-%{release}
 Requires: blas64-devel%{?_isa} = %{version}-%{release}
 
@@ -113,7 +105,6 @@ LAPACK development libraries (shared, 64bit INTEGER).
 
 %package -n lapack64-static
 Summary: LAPACK static libraries (64bit INTEGER)
-Group: Development/Libraries
 Requires: lapack64-devel%{?_isa} = %{version}-%{release}
 
 %description -n lapack64-static
@@ -121,7 +112,6 @@ LAPACK static libraries (64bit INTEGER).
 
 %package -n blas64
 Summary: The Basic Linear Algebra Subprograms library (64bit INTEGER)
-Group: System Environment/Libraries
 
 %description -n blas64
 BLAS (Basic Linear Algebra Subprograms) is a standard library which
@@ -130,7 +120,6 @@ has 64bit INTEGER support.
 
 %package -n blas64-devel
 Summary: BLAS development libraries
-Group: Development/Libraries
 Requires: blas-devel%{?_isa} = %{version}-%{release}
 Requires: gcc-gfortran
 
@@ -139,7 +128,6 @@ BLAS development libraries (shared).
 
 %package -n blas64-static
 Summary: BLAS static libraries (64bit INTEGER)
-Group: Development/Libraries
 Requires: blas64-devel%{?_isa} = %{version}-%{release}
 
 %description -n blas64-static
@@ -451,3 +439,6 @@ ln -sf libblas64.so.%{version} libblas64.so.%{mediumver}
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.5.0-11
+- Rebuild for new 4.0 release.
+

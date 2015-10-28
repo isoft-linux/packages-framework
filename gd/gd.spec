@@ -1,8 +1,7 @@
 Summary:        A graphics library for quick creation of PNG or JPEG images
 Name:           gd
 Version:        2.1.1
-Release:        2
-Group:          System Environment/Libraries
+Release:        3
 License:        BSD-style
 URL:            http://libgd.github.io/ 
 Source0:        https://github.com/libgd/libgd/archive/gd-%{version}.tar.gz
@@ -22,7 +21,6 @@ browsers. Note that gd is not a paint program.
 %package progs
 Requires:       gd = %{version}-%{release}
 Summary:        Utility programs that use libgd
-Group:          Applications/Multimedia
 
 %description progs
 The gd-progs package includes utility programs supplied with gd, a
@@ -32,7 +30,6 @@ these, you must also install gd.
 
 %package devel
 Summary:        The development libraries and header files for gd
-Group:          Development/Libraries
 Requires:       gd = %{version}-%{release}
 Requires:       libjpeg-devel, freetype-devel, libpng-devel, zlib-devel
 
@@ -55,7 +52,6 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT/%{_libdir}/libgd.la
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -67,7 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README-JPEG.TXT index.html entities.html
 %{_libdir}/*.so.*
 
 %files progs
@@ -86,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.1.1-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -4,7 +4,7 @@
 
 Name:           unicode-ucd
 Version:        8.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Unicode Character Database
 
 # https://fedoraproject.org/wiki/Licensing/MIT#Modern_Style_without_sublicense_.28Unicode.29
@@ -45,3 +45,6 @@ cp -p %{SOURCE1} .
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 8.0.0-2
+- Rebuild for new 4.0 release.
+

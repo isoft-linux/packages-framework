@@ -2,9 +2,8 @@ Summary: Compat library to support binary need libpng12
 Name: libpng12-compat
 Epoch: 2
 Version: 1.2.50
-Release: 3 
+Release: 4 
 License: zlib
-Group: System Environment/Libraries
 URL: http://www.libpng.org/pub/png/
 
 Source: ftp://ftp.simplesystems.org/pub/png/src/libpng-%{version}.tar.xz
@@ -30,7 +29,6 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/*.la
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -44,3 +42,6 @@ rpmclean
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2:1.2.50-4
+- Rebuild for new 4.0 release.
+

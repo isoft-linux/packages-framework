@@ -1,9 +1,8 @@
 Name:		fprintd
 Version:	0.6.0
-Release:	1
+Release:	2
 Summary:	D-Bus service for Fingerprint reader access
 
-Group:		System Environment/Daemons
 License:	GPLv2+
 Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
 Url:		http://www.freedesktop.org/wiki/Software/fprint/fprintd
@@ -28,7 +27,6 @@ Requires:	%{name} = %{version}-%{release}
 Provides:	pam_fprint = %{version}-%{release}
 Obsoletes:	pam_fprint < 0.2-3
 
-Group:		System Environment/Base
 License:	GPLv2+
 
 %description pam
@@ -38,7 +36,6 @@ authentication.
 %package devel
 Summary:	Development files for %{name}
 Requires:	%{name} = %{version}-%{release}
-Group:		Development/Libraries
 License:	GFDLv1.1+
 
 %description devel
@@ -61,7 +58,6 @@ mkdir -p $RPM_BUILD_ROOT/%{_localstatedir}/lib/fprint
 rm -f $RPM_BUILD_ROOT/%{_lib}/security/pam_fprintd.{a,la,so.*}
 
 %find_lang %{name}
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -92,6 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/net.reactivated.Fprint.Manager.xml
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.0-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

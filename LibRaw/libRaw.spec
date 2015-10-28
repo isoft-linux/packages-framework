@@ -1,6 +1,6 @@
 Name: LibRaw 
 Version: 0.17.0
-Release: 2
+Release: 3
 Summary: Raw image decoder
 
 License: GPL
@@ -50,5 +50,8 @@ rm -rf $RPM_BUILD_ROOT/%{_docdir}/libraw
 %{_libdir}/pkgconfig/libraw_r.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.17.0-3
+- Rebuild for new 4.0 release.
+
 * Sun Oct 18 2015 Cjacker <cjacker@foxmail.com> - 0.17.0-2
 - update.

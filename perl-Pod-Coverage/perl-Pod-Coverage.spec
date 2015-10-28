@@ -1,9 +1,8 @@
 Name:           perl-Pod-Coverage
 Version:        0.23
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Checks if the documentation of a module is comprehensive
 License:        GPL+ or Artistic
-Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Pod-Coverage/
 Source0:        http://www.cpan.org/authors/id/R/RC/RCLAMP/Pod-Coverage-%{version}.tar.gz
 # Make pod_cover more secure, CPAN RT#85540
@@ -69,3 +68,6 @@ make test
 %{_mandir}/man3/Pod::Coverage::Overloader.3pm*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.23-9
+- Rebuild for new 4.0 release.
+

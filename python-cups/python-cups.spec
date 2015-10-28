@@ -6,11 +6,10 @@
 Summary:       Python bindings for CUPS
 Name:          python-cups
 Version:       1.9.72
-Release:       2%{?dist}
+Release:       3%{?dist}
 URL:           http://cyberelk.net/tim/software/pycups/
 Source:        http://cyberelk.net/tim/data/pycups/pycups-%{version}.tar.bz2
 License:       GPLv2+
-Group:         Development/Languages
 BuildRequires: cups-devel
 BuildRequires: python2-devel python3-devel
 
@@ -21,7 +20,6 @@ system-config-printer, but can be put to other uses as well.
 
 %package -n python3-cups
 Summary:       Python3 bindings for CUPS API, known as pycups.
-Group:         Development/Languages
 
 %description -n python3-cups
 This package provides Python bindings for CUPS API,
@@ -67,3 +65,6 @@ popd
 %{_rpmconfigdir}/postscriptdriver.prov
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.9.72-3
+- Rebuild for new 4.0 release.
+

@@ -1,7 +1,6 @@
 Name:		libwebp
 Version:	0.4.3
-Release:	1
-Group:		Development/Libraries
+Release:	2
 URL:		http://webmproject.org/
 Summary:	Library and tools for the WebP graphics format
 # Additional IPR is licensed as well. See PATENTS file for details
@@ -19,7 +18,6 @@ developers can use WebP to compress, archive and distribute digital
 images more efficiently.
 
 %package tools
-Group:		Development/Tools
 Summary:	The WebP command line tools
 
 %description tools
@@ -30,7 +28,6 @@ developers can use WebP to compress, archive and distribute digital
 images more efficiently.
 
 %package devel
-Group:		Development/Libraries
 Summary:	Development files for libwebp, a library for the WebP format
 Requires:	%{name} = %{version}-%{release}
 
@@ -55,7 +52,6 @@ make %{?_smp_mflags}
 
 %install
 %make_install
-rpmclean
 
 %post -n %{name} -p /sbin/ldconfig
 
@@ -78,6 +74,9 @@ rpmclean
 %{_libdir}/pkgconfig/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4.3-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

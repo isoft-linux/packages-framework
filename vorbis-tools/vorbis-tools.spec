@@ -1,9 +1,8 @@
 Summary:	The Vorbis General Audio Compression Codec tools
 Name:		vorbis-tools
 Version:	1.4.0
-Release:	21%{?dist}
+Release:	22%{?dist}
 Epoch:		1
-Group:		Applications/Multimedia
 License:	GPLv2
 URL:		http://www.xiph.org/
 Source:		http://downloads.xiph.org/releases/vorbis/%{name}-%{version}.tar.gz
@@ -77,3 +76,6 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}*
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.4.0-22
+- Rebuild for new 4.0 release.
+

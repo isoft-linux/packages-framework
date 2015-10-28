@@ -5,8 +5,7 @@ Name: pm-utils
 Summary: Power management utilities and scripts
 License: GPLv2
 Version: 1.4.1
-Release: 23
-Group:  Framework/Runtime/Utility
+Release: 24
 URL: http://pm-utils.freedesktop.org
 %ifnarch s390 s390x
 Requires: kbd
@@ -46,7 +45,6 @@ to power management.
 
 %package devel
 Summary: Files for development using %{name}
-Group:  Framework/Development/Library
 Requires: %{name} = %{version}-%{release}
 # for /usr/share/pkgconfig
 Requires:       pkgconfig
@@ -135,3 +133,6 @@ rm -rf %{_localstatedir}/run/pm-utils/{pm-suspend,pm-powersave}/storage/*
 %{_libdir}/pkgconfig/pm-utils.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.1-24
+- Rebuild for new 4.0 release.
+

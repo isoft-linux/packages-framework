@@ -2,9 +2,8 @@
 
 Name: python3-cairo
 Version: 1.10.0
-Release: 1 
+Release: 2 
 License: MPLv1.1 or LGPLv2
-Group: Development/Languages
 Summary: Python 3 bindings for the cairo library
 URL: http://cairographics.org/pycairo
 
@@ -25,7 +24,6 @@ Python 3 bindings for the cairo library.
 
 %package devel
 Summary: Libraries and headers for python3-cairo
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: cairo-devel
 Requires: pkgconfig
@@ -75,7 +73,6 @@ find $RPM_BUILD_ROOT -name '*.la' | xargs rm -f
 #PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} %{_bindir}/py.test-3*
 
 %files
-%doc python3-cairo-1.10.0
 %{_libdir}/python*/site-packages/cairo/
 
 %files devel
@@ -83,3 +80,6 @@ find $RPM_BUILD_ROOT -name '*.la' | xargs rm -f
 %{_libdir}/pkgconfig/py3cairo.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.10.0-2
+- Rebuild for new 4.0 release.
+

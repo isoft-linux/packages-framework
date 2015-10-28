@@ -1,8 +1,7 @@
 Summary: TagLib Audio Meta-Data Library 
 Name: taglib
 Version: 1.9.1
-Release: 1
-Group:  System Environment/Libraries
+Release: 2
 License: GPL
 URL: http://developer.kde.org/~wheeler/taglib.html
 Source: http://developer.kde.org/~wheeler/files/src/%{name}-%{version}.tar.gz
@@ -16,7 +15,6 @@ FLAC files.
 
 %package devel
 Summary: Development tools for taglib 
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 %description devel
 Development tools for taglib
@@ -40,7 +38,6 @@ rm -rf $RPM_BUILD_ROOT
 cd build
 make install  DESTDIR=$RPM_BUILD_ROOT
 
-rpmclean
 
 %clean 
 rm -rf $RPM_BUILD_ROOT
@@ -63,4 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/taglib_c.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.9.1-2
+- Rebuild for new 4.0 release.
+
 

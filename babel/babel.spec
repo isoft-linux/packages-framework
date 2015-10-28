@@ -2,10 +2,9 @@
 
 Name:           babel
 Version:        1.3
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Tools for internationalizing Python applications
 
-Group:          Development/Languages
 License:        BSD
 URL:            http://babel.pocoo.org/
 Source0:        https://pypi.python.org/packages/source/B/Babel/Babel-%{version}.tar.gz
@@ -42,7 +41,6 @@ Babel is composed of two major parts:
 
 %package -n python-babel
 Summary:        Library for internationalizing Python applications
-Group:          Development/Languages
 
 Requires:       python-setuptools
 Requires:       pytz
@@ -59,7 +57,6 @@ Babel is composed of two major parts:
 %if 0%{?with_python3}
 %package -n python3-babel
 Summary:        Library for internationalizing Python applications
-Group:          Development/Languages
 
 Requires:       python3-setuptools
 Requires:       python3-pytz
@@ -76,7 +73,6 @@ Babel is composed of two major parts:
 
 %package doc
 Summary:        Documentation for Babel
-Group:          Development/Languages
 Provides:       python-babel-doc = %{version}-%{release}
 %if 0%{?with_python3}
 Provides:       python3-babel-doc = %{version}-%{release}
@@ -155,3 +151,6 @@ rm -rf %{buildroot}
 %doc docs/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3-9
+- Rebuild for new 4.0 release.
+

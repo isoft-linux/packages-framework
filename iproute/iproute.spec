@@ -2,8 +2,7 @@
 Summary:            Advanced IP routing and network device configuration tools
 Name:               iproute
 Version:            4.2.0
-Release:            2%{?dist}
-Group:              Applications/System
+Release:            3%{?dist}
 URL:                http://kernel.org/pub/linux/utils/net/%{name}2/
 Source0:            http://kernel.org/pub/linux/utils/net/%{name}2/%{name}2-%{version}.tar.xz
 Source1:            cbq-0000.example
@@ -31,7 +30,6 @@ which are designed to use the advanced networking capabilities of the Linux
 
 %package doc
 Summary:            Documentation for iproute2 utilities with examples
-Group:              Applications/System
 License:            GPLv2+
 
 %description doc
@@ -39,7 +37,6 @@ The iproute documentation contains howtos and examples of settings.
 
 %package devel
 Summary:            iproute development files
-Group:              Development/Libraries
 License:            GPLv2+
 Provides:           iproute-static = %{version}-%{release}
 
@@ -150,3 +147,6 @@ done
 %{_includedir}/libnetlink.h
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.2.0-3
+- Rebuild for new 4.0 release.
+

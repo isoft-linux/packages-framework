@@ -58,7 +58,7 @@
 Summary: Implementation of Linux Standard Base specification
 Name: isoft-lsb
 Version: 4.1
-Release: 30
+Release: 31
 URL: http://www.linuxfoundation.org/collaborate/workgroups/lsb
 Source0: %{name}-%{version}-%{srcrelease}.tar.bz2
 Patch0: lsb-release-3.1-update-init-functions.patch
@@ -67,7 +67,6 @@ Patch2: isoft-lsb-trigger.patch
 Patch3: isoft-lsb-arm.patch
 Patch4: isoft-lsb-aarch64.patch
 License: GPLv2
-Group: System Environment/Base
 BuildRequires: glibc-devel
 
 %ifarch %{ix86}
@@ -124,7 +123,6 @@ Applications. It also contains requirements that will ensure that all
 components required by the LSB are installed on the system.
 
 %package submod-security
-Group: System Environment/Base
 Summary: LSB Security submodule support
 Requires: nspr%{?_isa}
 # Requires: nspr-devel
@@ -138,7 +136,6 @@ The Linux Standard Base (LSB) Security submodule specifications define
 components that are required to be present on an LSB conforming system.
 
 %package submod-multimedia
-Group: System Environment/Base
 Summary: LSB Multimedia submodule support
 Requires: alsa-lib%{?_isa}
 
@@ -150,7 +147,6 @@ The Linux Standard Base (LSB) Multimedia submodule specifications define
 components that are required to be present on an LSB conforming system.
 
 %package core
-Group: System Environment/Base
 Summary: LSB Core module support
 # gLSB Library
 Requires: glibc%{?_isa}
@@ -308,7 +304,6 @@ system interfaces, libraries, and runtime environment upon which all conforming
 applications and libraries depend.
 
 %package cxx
-Group: System Environment/Base
 Summary: LSB CXX module support
 Requires: libstdc++%{?_isa}
 Requires: isoft-lsb-core%{?_isa} = %{version}-%{release}
@@ -324,7 +319,6 @@ provide low-level support for the core constructs of the language, and
 implement the standard base C++ libraries.
 
 %package desktop
-Group: System Environment/Base
 Summary: LSB Desktop module support
 Requires: xdg-utils
 # LSB_Graphics library
@@ -381,7 +375,6 @@ The Linux Standard Base (LSB) Desktop Specifications define components that are
 required to be present on an LSB conforming system.
 
 %package languages
-Group: System Environment/Base
 Summary: LSB Languages module support
 # Perl and Perl non-builtin modules
 Requires: /usr/bin/perl
@@ -428,7 +421,6 @@ The Linux Standard Base (LSB) Languages module supports components for runtime
 languages which are found on an LSB conforming system.
 
 %package printing
-Group: System Environment/Base
 Summary: LSB Printing module support
 # gLSB Printing Libraries
 Requires: cups-libs
@@ -446,7 +438,6 @@ The Linux Standard Base (LSB) Printing specifications define components that
 are required to be present on an LSB conforming system.
 
 %package trialuse
-Group: System Environment/Base
 Summary: LSB Trialuse module support
 Requires: isoft-lsb-submod-multimedia%{?_isa} = %{version}-%{release}
 Requires: isoft-lsb-submod-security%{?_isa} = %{version}-%{release}
@@ -460,7 +451,6 @@ The Linux Standard Base (LSB) Trialuse module support defines components
 which are not required parts of the LSB Specification.
 
 %package supplemental
-Group: System Environment/Base
 Summary: LSB supplemental dependencies required by LSB certification tests
 Requires: net-tools
 Requires: fonts-Cantarell
@@ -759,3 +749,6 @@ os.remove("%{_datadir}/lsb")
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.1-31
+- Rebuild for new 4.0 release.
+

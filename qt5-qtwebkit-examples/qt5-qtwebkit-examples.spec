@@ -1,6 +1,6 @@
 Name: qt5-qtwebkit-examples 
 Version: 5.5.1
-Release: 1
+Release: 2
 Summary: WebKit examples of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -9,6 +9,8 @@ URL: http://qt-project.org
 Source0: qtwebkit-examples-opensource-src-%{version}.tar.xz 
 
 BuildRequires: qt5-qtbase-devel qt5-qtwebkit-devel
+
+BuildArch: noarch
 
 %description
 %{summary}
@@ -40,6 +42,9 @@ fi
 %{_libdir}/qt5/examples/*
 
 %changelog
+* Sat Oct 24 2015 builder - 5.5.1-2
+- Rebuild for new 4.0 release.
+
 * Fri Oct 16 2015 Cjacker <cjacker@foxmail.com>
 - update to 5.5.1
 

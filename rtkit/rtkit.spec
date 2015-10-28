@@ -1,8 +1,7 @@
 Name:             rtkit
 Version:          0.11
-Release:          11%{?dist}
+Release:          12%{?dist}
 Summary:          Realtime Policy and Watchdog Daemon
-Group:            System Environment/Base
 # The daemon itself is GPLv3+, the reference implementation for the client BSD
 License:          GPLv3+ and BSD
 URL:              http://git.0pointer.de/?p=rtkit.git
@@ -80,3 +79,6 @@ dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesk
 %{_mandir}/man8/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.11-12
+- Rebuild for new 4.0 release.
+

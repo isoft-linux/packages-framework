@@ -1,9 +1,8 @@
 Name:		hwloc
 Version:	1.11.0
-Release:	1
+Release:	2
 Summary:	Portable Hardware Locality
 
-Group:		System Environment/Libraries
 License:    BSD	
 URL:		http://www.open-mpi.org/projects/hwloc/
 Source0:	%{name}-%{version}.tar.bz2
@@ -14,7 +13,6 @@ The Portable Hardware Locality (hwloc) software package provides a portable abst
 
 %package -n libhwloc-devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       libhwloc = %{version}-%{release}
 
 %description -n libhwloc-devel
@@ -23,7 +21,6 @@ documentation for %{name}.
 
 %package -n libhwloc
 Summary:        libraries  for %{name}.
-Group:          System Environment/Libraries
 
 %description -n libhwloc
 The %{name}-devel package contains libraries and header files for
@@ -73,4 +70,7 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.11.0-2
+- Rebuild for new 4.0 release.
+
 

@@ -2,7 +2,7 @@
 
 Name:              openvpn
 Version:           2.3.7
-Release:           2
+Release:           3
 Summary:           A full-featured SSL VPN solution
 URL:               http://openvpn.net/
 Source0:           http://openvpn.net/release/%{name}-%{version}.tar.gz
@@ -17,7 +17,6 @@ Source4:           openvpn@.service
 Source5:           %{name}-tmpfile.conf
 
 License:           GPLv2
-Group:             Applications/Internet
 BuildRequires:     systemd-devel
 BuildRequires:     lzo-devel
 BuildRequires:     openssl-devel
@@ -125,3 +124,6 @@ fi
 %config %dir %{_sysconfdir}/%{name}/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.3.7-3
+- Rebuild for new 4.0 release.
+

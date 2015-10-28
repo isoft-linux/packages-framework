@@ -3,7 +3,7 @@
 
 Name:           python-%{pypi_name}
 Version:        0.24.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A built-package format for Python
 
 License:        MIT
@@ -89,15 +89,15 @@ popd
 
 %check
 # remove setup.cfg that makes pytest require pytest-cov (unnecessary dep)
-#rm setup.cfg
-#PYTHONPATH=$(pwd) py.test --ignore build 
-## no test for Python 3, no python3-jsonschema yet
-#%if %{with python3}
-#pushd %{py3dir}
-#rm setup.cfg
-#PYTHONPATH=$(pwd) py.test-%{python3_version} --ignore build
-#popd
-#%endif # with_python3
+rm setup.cfg
+PYTHONPATH=$(pwd) py.test --ignore build 
+# no test for Python 3, no python3-jsonschema yet
+%if %{with python3}
+pushd %{py3dir}
+rm setup.cfg
+PYTHONPATH=$(pwd) py.test-%{python3_version} --ignore build
+popd
+%endif # with_python3
 
 
 %files
@@ -116,3 +116,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.24.0-5
+- Rebuild for new 4.0 release.
+

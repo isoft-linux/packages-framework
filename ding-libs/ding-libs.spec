@@ -1,8 +1,7 @@
 Name: ding-libs
 Version: 0.5.0
-Release: 27%{?dist}
+Release: 28%{?dist}
 Summary: "Ding is not GLib" assorted utility libraries
-Group: Development/Libraries
 License: LGPLv3+
 URL: http://fedorahosted.org/sssd/
 Source0: http://fedorahosted.org/releases/d/i/ding-libs/%{name}-%{version}.tar.gz
@@ -45,7 +44,6 @@ A set of helpful libraries used by projects such as SSSD.
 
 %package devel
 Summary: Development packages for ding-libs
-Group: Development/Libraries
 License: LGPLv3+
 
 # ding-libs is a meta-package that will pull in all of its own
@@ -67,7 +65,6 @@ libdhash, libini_config, librefarray and libpath_utils.
 
 %package -n libpath_utils
 Summary: Filesystem Path Utilities
-Group: Development/Libraries
 License: LGPLv3+
 Version: %{path_utils_version}
 
@@ -76,7 +73,6 @@ Utility functions to manipulate filesystem pathnames
 
 %package -n libpath_utils-devel
 Summary: Development files for libpath_utils
-Group: Development/Libraries
 Requires: libpath_utils = %{path_utils_version}-%{release}
 License: LGPLv3+
 Version: %{path_utils_version}
@@ -106,7 +102,6 @@ Utility functions to manipulate filesystem pathnames
 ##############################################################################
 
 %package -n libdhash
-Group: Development/Libraries
 Summary: Dynamic hash table
 License: LGPLv3+
 Version: %{dhash_version}
@@ -117,7 +112,6 @@ time properties
 
 %package -n libdhash-devel
 Summary: Development files for libdhash
-Group: Development/Libraries
 Requires: libdhash = %{dhash_version}-%{release}
 License: LGPLv3+
 Version: %{dhash_version}
@@ -148,7 +142,6 @@ time properties
 ##############################################################################
 %package -n libcollection
 Summary: Collection data-type for C
-Group: Development/Libraries
 License: LGPLv3+
 Version: %{collection_version}
 
@@ -158,7 +151,6 @@ and serialization
 
 %package -n libcollection-devel
 Summary: Development files for libcollection
-Group: Development/Libraries
 License: LGPLv3+
 Requires: libcollection = %{collection_version}-%{release}
 Version: %{collection_version}
@@ -194,7 +186,6 @@ and serialization
 
 %package -n libref_array
 Summary: A refcounted array for C
-Group: Development/Libraries
 License: LGPLv3+
 Version: %{ref_array_version}
 
@@ -203,7 +194,6 @@ A dynamically-growing, reference-counted array
 
 %package -n libref_array-devel
 Summary: Development files for libref_array
-Group: Development/Libraries
 Requires: libref_array = %{ref_array_version}-%{release}
 License: LGPLv3+
 Version: %{ref_array_version}
@@ -235,7 +225,6 @@ A dynamically-growing, reference-counted array
 
 %package -n libbasicobjects
 Summary: Basic object types for C
-Group: Development/Libraries
 License: GPLv3+
 Version: %{basicobjects_version}
 
@@ -244,7 +233,6 @@ Basic object types
 
 %package -n libbasicobjects-devel
 Summary: Development files for libbasicobjects
-Group: Development/Libraries
 License: GPLv3+
 Version: %{basicobjects_version}
 Requires: libbasicobjects = %{basicobjects_version}-%{release}
@@ -273,7 +261,6 @@ Basic object types
 
 %package -n libini_config
 Summary: INI file parser for C
-Group: Development/Libraries
 License: LGPLv3+
 Version: %{ini_config_version}
 
@@ -283,7 +270,6 @@ structure
 
 %package -n libini_config-devel
 Summary: Development files for libini_config
-Group: Development/Libraries
 License: LGPLv3+
 Requires: libini_config = %{ini_config_version}-%{release}
 Requires: libcollection-devel = %{collection_version}-%{release}
@@ -354,3 +340,6 @@ rm -f */doc/html/installdox
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.5.0-28
+- Rebuild for new 4.0 release.
+

@@ -1,9 +1,8 @@
 Name:          libimobiledevice
 Version:       1.2.0
-Release:       1 
+Release:       2 
 Summary:       Library for connecting to mobile devices
 
-Group:         System Environment/Libraries
 License:       LGPLv2+
 URL:           http://www.libimobiledevice.org/
 Source0:       http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
@@ -24,7 +23,6 @@ and music players
 
 %package devel
 Summary: Development package for libimobiledevice
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -43,7 +41,6 @@ make %{?_smp_mflags} V=1
 %install
 make install DESTDIR=%{buildroot}
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -62,3 +59,6 @@ rpmclean
 %{_includedir}/libimobiledevice/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.0-2
+- Rebuild for new 4.0 release.
+

@@ -1,10 +1,9 @@
 Name:           libssh
 Version:        0.7.0
-Release:        3
+Release:        4
 Summary:        A library implementing the SSH protocol
 License:        LGPLv2+
 URL:            http://www.libssh.org
-Group:          System Environment/Libraries
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0:        https://red.libssh.org/attachments/download/140/libssh-0.7.0.tar.xz
@@ -26,7 +25,6 @@ third-party programs others than libcrypto (from openssl).
 
 %package devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Requires:       pkgconfig
 Requires:       cmake
@@ -90,3 +88,6 @@ rm -rf %{buildroot}
 %{_libdir}/libssh_threads.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.7.0-4
+- Rebuild for new 4.0 release.
+

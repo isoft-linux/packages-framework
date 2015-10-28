@@ -1,9 +1,8 @@
 Name:       opencc
 Version:    1.0.2
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    Libraries for Simplified-Traditional Chinese Conversion
 License:    ASL 2.0
-Group:      System Environment/Libraries
 URL:        https://github.com/BYVoid/OpenCC
 # Source URL: https://github.com/BYVoid/OpenCC/archive/ver.%{version}.tar.gz
 Source0:    OpenCC-ver.%{version}.tar.gz
@@ -19,7 +18,6 @@ Traditional Chinese and Simplified Chinese.
 
 %package doc
 Summary:    Documentation for OpenCC
-Group:      Applications/Text
 Requires:   %{name} = %{version}-%{release}
 
 %description doc
@@ -28,7 +26,6 @@ Doxygen generated documentation for OpenCC.
 
 %package tools
 Summary:    Command line tools for OpenCC
-Group:      Applications/Text
 Requires:   %{name} = %{version}-%{release}
 
 %description tools
@@ -38,7 +35,6 @@ for building dictionaries.
 
 %package devel
 Summary:    Development files for OpenCC
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -87,3 +83,6 @@ ctest
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.2-5
+- Rebuild for new 4.0 release.
+

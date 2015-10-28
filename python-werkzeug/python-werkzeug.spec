@@ -8,10 +8,9 @@
 
 Name:           python-werkzeug
 Version:        0.9.6
-Release:        2
+Release:        3
 Summary:        The Swiss Army knife of Python web development 
 
-Group:          Development/Libraries
 License:        BSD
 URL:            http://werkzeug.pocoo.org/
 Source0:        http://pypi.python.org/packages/source/W/Werkzeug/%{srcname}-%{version}.tar.gz
@@ -43,7 +42,6 @@ bulletin boards, etc.).
 
 %package doc
 Summary:        Documentation for %{name}
-Group:          Documentation
 Requires:       %{name} = %{version}-%{release}
 
 %description doc
@@ -78,7 +76,6 @@ bulletin boards, etc.).
 
 %package -n python3-werkzeug-doc
 Summary:        Documentation for python3-werkzeug
-Group:          Documentation
 Requires:       python3-werkzeug = %{version}-%{release}
 
 %description -n python3-werkzeug-doc
@@ -158,3 +155,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.6-3
+- Rebuild for new 4.0 release.
+

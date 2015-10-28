@@ -1,6 +1,6 @@
 Name: fprint_demo 
 Version: 0.4 
-Release: 2 
+Release: 3 
 Summary: fprint demo application
 
 License: GPL
@@ -59,5 +59,8 @@ update-desktop-database -q > /dev/null ||:
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4-3
+- Rebuild for new 4.0 release.
+
 * Fri Aug 07 2015 Cjacker <cjacker@foxmail.com>
 - initial build.

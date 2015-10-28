@@ -4,7 +4,7 @@
 
 Name:           freerdp
 Version:        1.2.0
-Release:        0.9%{?shortcommit:.git.%{shortcommit}}%{?dist}
+Release:        0.10%{?shortcommit:.git.%{shortcommit}}%{?dist}
 Epoch:          2
 Summary:        Free implementation of the Remote Desktop Protocol (RDP)
 
@@ -211,3 +211,6 @@ find %{buildroot} -name "*.a" -delete
 %{_libdir}/pkgconfig/winpr.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2:1.2.0-0.10.git.24a752a
+- Rebuild for new 4.0 release.
+

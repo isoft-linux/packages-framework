@@ -1,9 +1,8 @@
 Summary: A hexadecimal file viewer and editor.
 Name: hexedit
 Version: 1.2.12
-Release: 3.2
+Release: 4.2
 License: GPL
-Group: Applications/Editors
 Url: http://merd.net/pixel
 Source: http://merd.net/pixel/%{name}-%{version}.src.tgz
 Patch: hexedit-1.2.2-config.patch
@@ -37,3 +36,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/*/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.12-4.2
+- Rebuild for new 4.0 release.
+

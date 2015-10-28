@@ -5,9 +5,8 @@
 Summary:   NetworkManager VPN plug-in for openswan and libreswan
 Name:      NetworkManager-openswan
 Version:   %{realversion}
-Release:   2%{?dist}
+Release:   3%{?dist}
 License:   GPLv2+
-Group:     System Environment/Base
 URL:       https://download.gnome.org/sources/NetworkManager-openswan/1.0/
 Source0:   https://download.gnome.org/sources/NetworkManager-openswan/1.0/%{name}-%{realversion}.tar.xz
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -38,7 +37,6 @@ with NetworkManager and the GNOME desktop
 
 %package -n NetworkManager-openswan-gnome
 Summary: NetworkManager VPN plugin for openswan/libreswan - GNOME files
-Group:   System Environment/Base
 
 Requires: NetworkManager-openswan = %{version}-%{release}
 Requires: network-manager-applet 
@@ -91,3 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.2-3
+- Rebuild for new 4.0 release.
+

@@ -1,8 +1,7 @@
 Name: libatasmart
 Version: 0.19
-Release: 4 
+Release: 5 
 Summary: ATA S.M.A.R.T. Disk Health Monitoring Library
-Group: System Environment/Libraries
 Source0: http://0pointer.de/public/libatasmart-%{version}.tar.xz
 License: LGPLv2+
 Url: http://git.0pointer.de/?p=libatasmart.git;a=summary
@@ -15,7 +14,6 @@ health monitoring.
 
 %package devel
 Summary: Development Files for libatasmart Client Development
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -57,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc blob-examples/SAMSUNG* blob-examples/ST* blob-examples/Maxtor* blob-examples/WDC* blob-examples/FUJITSU* blob-examples/INTEL* blob-examples/TOSHIBA* blob-examples/MCC*
 
 %changelog
+* Sat Oct 24 2015 builder - 0.19-5
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -7,10 +7,9 @@
 
 Name: 		%{gstreamer}-plugins-good
 Version: 	1.6.0
-Release: 	1
+Release: 	2
 Summary: 	GStreamer plug-ins with good code and licensing
 
-Group: 		Applications/Multimedia
 License: 	LGPL
 URL:		http://gstreamer.freedesktop.org/
 Vendor:         GStreamer Backpackers Team <package@gstreamer.freedesktop.org>
@@ -48,7 +47,6 @@ plug-ins.
 %if %with_x11
 %package x11
 Summary:        Xorg related plugin of gstreamer
-Group:          System Environment/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description x11
@@ -75,7 +73,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang gst-plugins-good-%{majorminor}
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -102,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
+- Rebuild for new 4.0 release.
+
 * Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.6.0
 

@@ -6,11 +6,10 @@
 
 Name:           libchewing
 Version:        0.4.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Intelligent phonetic input method library for Traditional Chinese
 Summary(zh_TW): %{name_zh_TW}
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://chewing.csie.net/
 Source0:        https://github.com/chewing/%{name}/archive/v%{version}.tar.gz
@@ -36,7 +35,6 @@ input method that is useful for inputting Mandarin Chinese.
 %package -n %{name}-devel
 Summary:        Development files for libchewing
 Summary(zh_TW): %{name_zh_TW}開發者套件
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description -n %{name}-devel
@@ -51,7 +49,6 @@ library.
 %package -n %{name}-python
 Summary:        Python binding for libchewing
 Summary(zh_TW): %{name_zh_TW} python 綁定
-Group:          Development/Libraries
 BuildRequires:  python2-devel
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Requires:       python
@@ -106,3 +103,6 @@ rm -rf %{buildroot}/%{_infodir}
 %{libchewing_python_dir}
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4.0-6
+- Rebuild for new 4.0 release.
+

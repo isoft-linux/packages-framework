@@ -1,7 +1,7 @@
 Summary: Rotates, compresses, removes and mails system log files
 Name: logrotate
 Version: 3.9.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPL+
 Url: https://fedorahosted.org/logrotate/
 Source: https://fedorahosted.org/releases/l/o/logrotate/logrotate-%{version}.tar.gz
@@ -86,5 +86,8 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/rwtab.d/logrotate
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.9.1-4
+- Rebuild for new 4.0 release.
+
 * Thu Oct 15 2015 Cjacker <cjacker@foxmail.com>
 - add patch to enable daily rotate and keep logs one week for Desktop.

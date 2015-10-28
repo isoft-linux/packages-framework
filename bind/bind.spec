@@ -7,7 +7,7 @@ Summary:  The Berkeley Internet Name Domain (BIND) DNS (Domain Name System) serv
 Name:     bind
 License:  ISC
 Version:  9.10.2
-Release:  9%{?PATCHVER:.%{PATCHVER}}%{?PREVER:.%{PREVER}}%{?dist}
+Release:  10%{?PATCHVER:.%{PATCHVER}}%{?PREVER:.%{PREVER}}%{?dist}
 Epoch:    32
 Url:      http://www.isc.org/products/BIND/
 Source0:   ftp://ftp.isc.org/isc/bind9/%{VERSION}/bind-%{VERSION}.tar.gz
@@ -183,6 +183,9 @@ rm -rf ${RPM_BUILD_ROOT}:;
 %{_mandir}/man1/nslookup.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 32:9.10.2-10.P3
+- Rebuild for new 4.0 release.
+
 * Fri Aug 14 2015 Cjacker <cjacker@foxmail.com>
 - initial build.
 - only ship bind utils such as nslookup/dig etc.

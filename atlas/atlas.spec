@@ -5,10 +5,9 @@ Version:        3.10.2
 %if "%{?enable_native_atlas}" != "0"
 %define dist .native
 %endif
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Automatically Tuned Linear Algebra Software
 
-Group:          System Environment/Libraries
 License:        BSD
 URL:            http://math-atlas.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/math-atlas/%{name}%{version}.tar.bz2
@@ -88,7 +87,6 @@ see the documentation for information.
 
 %package devel
 Summary:        Development libraries for ATLAS
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Obsoletes:	%name-header <= %version-%release
 
@@ -98,7 +96,6 @@ This package contains headers for development with ATLAS
 
 %package static
 Summary:        Static libraries for ATLAS
-Group:          Development/Libraries
 Requires:       %{name}-devel = %{version}-%{release}
 
 %description static
@@ -143,7 +140,6 @@ Linear Algebra Software).
 
 %package sse2
 Summary:        ATLAS libraries for SSE2 extensions
-Group:          System Environment/Libraries
 
 %description sse2
 This package contains ATLAS (Automatically Tuned Linear Algebra Software)
@@ -153,7 +149,6 @@ SSE(1) and SSE3 extensions also exist.
 
 %package sse2-devel
 Summary:        Development libraries for ATLAS with SSE2 extensions
-Group:          Development/Libraries
 Requires:       %{name}-sse2 = %{version}-%{release}
 Obsoletes:	%name-header <= %version-%release
 
@@ -164,7 +159,6 @@ to the ix86 architecture.
 
 %package sse2-static
 Summary:        Static libraries for ATLAS with SSE2 extensions
-Group:          Development/Libraries
 Requires:       %{name}-sse2-devel = %{version}-%{release}
 
 %description sse2-static
@@ -175,7 +169,6 @@ ix86 architecture.
 
 %package sse3
 Summary:        ATLAS libraries for SSE3 extensions
-Group:          System Environment/Libraries
 
 %description sse3
 This package contains the ATLAS (Automatically Tuned Linear Algebra
@@ -183,7 +176,6 @@ Software) libraries compiled with optimizations for the SSE3.
 
 %package sse3-devel
 Summary:        Development libraries for ATLAS with SSE3 extensions
-Group:          Development/Libraries
 Requires:       %{name}-sse3 = %{version}-%{release}
 Obsoletes:	%name-header <= %version-%release
 
@@ -194,7 +186,6 @@ to the ix86 architecture.
 
 %package sse3-static
 Summary:        Static libraries for ATLAS with SSE2 extensions
-Group:          Development/Libraries
 Requires:       %{name}-sse2-devel = %{version}-%{release}
 
 %description sse3-static
@@ -373,8 +364,10 @@ for type in %{types}; do
 		sed -i 's#ARCH =.*#ARCH = HAMMER64SSE3#' Make.inc
 #		sed -i 's#-DATL_SSE3##' Make.inc
 		sed -i 's#-DATL_AVX##' Make.inc 
+		sed -i 's#MAC##' Make.inc 
 #		sed -i 's#-msse3#-msse2#' Make.inc 
 		sed -i 's#-mavx#-msse3#' Make.inc
+		sed -i 's#-msse32##' Make.inc 
 		echo 'base makefile edited' 
 #		sed -i 's#PMAKE = $(MAKE) .*#PMAKE = $(MAKE) -j 1#' Make.inc 
 	elif [ "$type" = "sse3" ]; then
@@ -384,6 +377,7 @@ for type in %{types}; do
 		sed -i 's#-DATL_SSE2##' Make.inc
 		sed -i 's#-mavx#-msse2#' Make.inc 
 		sed -i 's#-msse3#-msse2#' Make.inc 
+		sed -i 's#-msse32##' Make.inc 
 		echo 'sse makefile edited'
 		%define pr_sse3 %(echo $((%{__isa_bits}+4)))
 	fi
@@ -799,3 +793,6 @@ fi
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.10.2-6
+- Rebuild for new 4.0 release.
+

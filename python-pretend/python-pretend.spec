@@ -4,10 +4,9 @@
 
 Name:           python-pretend
 Version:        1.0.8
-Release:        3
+Release:        4
 Summary:        A library for stubbing in Python
 
-Group:          Development/Libraries
 License:        BSD
 URL:            https://github.com/alex/pretend
 Source0:        https://pypi.python.org/packages/source/p/%{srcname}/%{srcname}-%{version}.tar.gz
@@ -84,3 +83,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.8-4
+- Rebuild for new 4.0 release.
+

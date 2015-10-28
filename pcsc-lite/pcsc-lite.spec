@@ -1,9 +1,8 @@
 Name:           pcsc-lite
 Version:        1.8.13
-Release:        1
+Release:        2
 Summary:        PC/SC Lite smart card framework and applications
 
-Group:          System Environment/Daemons
 License:        BSD
 URL:            http://pcsclite.alioth.debian.org/
 Source0:        https://alioth.debian.org/frs/download.php/file/4126/pcsc-lite-%{version}.tar.bz2
@@ -29,14 +28,12 @@ line tools.
 
 %package        libs
 Summary:        PC/SC Lite libraries
-Group:          System Environment/Libraries
 
 %description    libs
 PC/SC Lite libraries.
 
 %package        devel
 Summary:        PC/SC Lite development files
-Group:          Development/Libraries
 Requires:       %{name}-libs = %{version}-%{release}
 
 %description    devel
@@ -44,7 +41,6 @@ PC/SC Lite development files.
 
 %package        doc
 Summary:        PC/SC Lite developer documentation
-Group:          Documentation
 BuildArch:      noarch
 Requires:       %{name}-libs = %{version}-%{release}
 
@@ -121,6 +117,9 @@ rm $RPM_BUILD_ROOT%{_docdir}/pcsc-lite/README.DAEMON
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.8.13-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

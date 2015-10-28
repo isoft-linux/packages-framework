@@ -3,7 +3,7 @@
 
 Name:           ibus
 Version:        1.5.10
-Release:        2 
+Release:        3 
 Summary:        Intelligent Input Bus for Linux OS
 License:        LGPLv2+
 URL:            http://code.google.com/p/ibus/
@@ -190,7 +190,6 @@ desktop-file-install --delete-original          \
 # FIXME: no version number
 %find_lang %{name}10
 
-rpmclean
 
 %post
 # recreate icon cache
@@ -303,5 +302,8 @@ fi
 %{_datadir}/gtk-doc/html/ibus
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5.10-3
+- Rebuild for new 4.0 release.
+
 * Mon Aug 17 2015 Cjacker <cjacker@foxmail.com>
 - rebuild with older glib2. since we decrease glib2 for avoid filemonitor bug.

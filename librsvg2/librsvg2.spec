@@ -1,7 +1,7 @@
 Name:    librsvg2
 Summary: An SVG library based on cairo
 Version: 2.40.11
-Release: 1
+Release: 2
 
 License:        LGPLv2+
 Source:         http://download.gnome.org/sources/librsvg/2.32/librsvg-%{version}.tar.xz
@@ -96,6 +96,9 @@ gdk-pixbuf-query-loaders --update-cache || :
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.40.11-2
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 2.40.11 
 

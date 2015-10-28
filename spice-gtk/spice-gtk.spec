@@ -1,9 +1,8 @@
 Name:           spice-gtk
 Version:        0.29
-Release:        1
+Release:        2
 Summary:        A GTK2 widget for SPICE clients
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://spice-space.org/page/Spice-Gtk
 Source0:        http://www.spice-space.org/download/gtk/%{name}-%{version}.tar.bz2
@@ -32,7 +31,6 @@ Client libraries for SPICE desktop servers.
 
 %package devel
 Summary: Development files to build GTK2 applications with spice-gtk-2.0
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: spice-glib-devel = %{version}-%{release}
 Requires: pkgconfig
@@ -44,14 +42,12 @@ Libraries, includes, etc. to compile with the spice-gtk libraries
 
 %package -n spice-glib
 Summary: A GObject for communicating with Spice servers
-Group: Development/Libraries
 
 %description -n spice-glib
 spice-client-glib-2.0 is a SPICE client library for GLib2.
 
 %package -n spice-glib-devel
 Summary: Development files to build Glib2 applications with spice-glib-2.0
-Group: Development/Libraries
 Requires: spice-glib = %{version}-%{release}
 Requires: pkgconfig
 Requires: glib2-devel
@@ -63,7 +59,6 @@ Libraries, includes, etc. to compile with the spice-glib-2.0 libraries
 
 %package python
 Summary: Python bindings for the spice-gtk-2.0 library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description python
@@ -73,7 +68,6 @@ A module allowing use of the spice-gtk-2.0 widget from python
 
 %package tools
 Summary: Spice-gtk tools
-Group: Applications/Internet
 
 %description tools
 Simple clients for interacting with SPICE servers.
@@ -153,3 +147,6 @@ rm -rf %{buildroot}
 %{_bindir}/spicy-screenshot
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.29-2
+- Rebuild for new 4.0 release.
+

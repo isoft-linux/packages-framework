@@ -1,9 +1,8 @@
 Summary:	Library for manipulating GIF format image files
 Name:		giflib
 Version:    5.1.1
-Release:    8	
+Release:    9	
 License:	MIT
-Group:		System Environment/Libraries
 URL:		http://www.sourceforge.net/projects/%{name}/
 Source:		http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 Provides:	libungif = %{version}-%{release}
@@ -18,7 +17,6 @@ was in effect.
 
 %package devel
 Summary:	Development tools for programs using the giflib library
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Provides:	libungif-devel = %{version}-%{release}
 Obsoletes:	libungif-devel <= %{version}-%{release}
@@ -30,7 +28,6 @@ image files. It contains the documentation of the giflib library, too.
 
 %package utils
 Summary:	Programs for manipulating GIF format image files
-Group:		Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 Provides:	libungif-progs = %{version}-%{release}
 Obsoletes:	libungif-progs <= %{version}-%{release}
@@ -78,7 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.so.*
 %files devel
 %defattr(-,root,root,-)
-%doc doc/* util/giffiltr.c util/gifspnge.c
+%doc doc/*
 %{_libdir}/lib*.so
 %{_includedir}/*.h
 
@@ -87,6 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %{_mandir}/man1/*
 %changelog
+* Sat Oct 24 2015 builder - 5.1.1-9
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,6 +1,6 @@
 Name:       fonts-Arundina
 Version:    0.2.0
-Release:    1 
+Release:    2 
 Summary:    Variable-width sans-serif Thai Arundina fonts
 License:    Bitstream Vera
 URL:        http://linux.thai.net/projects/thaifonts-arundina
@@ -8,6 +8,8 @@ Source0:    thai-arundina.tar.gz
 Source1:    67-thai-arundina-sans.conf       
 Source2:    67-thai-arundina-sans-mono.conf  
 Source3:    67-thai-arundina-serif.conf
+
+BuildArch: noarch
  
 %description
 Arundina fonts were created aiming at Bitstream Vera / Dejavu
@@ -46,3 +48,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/fonts/conf.d/*
 %{_datadir}/fontconfig/conf.avail/*
 %{_datadir}/fonts/*.ttf
+
+%changelog
+* Sat Oct 24 2015 builder - 0.2.0-2
+- Rebuild for new 4.0 release.
+

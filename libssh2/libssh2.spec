@@ -1,8 +1,7 @@
 Name:		libssh2
 Version:	1.6.0
-Release:    1	
+Release:    2	
 Summary:	A library implementing the SSH2 protocol
-Group:		System Environment/Libraries
 License:	BSD
 URL:		http://www.libssh2.org/
 Source0:	http://libssh2.org/download/libssh2-%{version}.tar.gz
@@ -26,7 +25,6 @@ SECSH-DHGEX(04), and SECSH-NUMBERS(10).
 
 %package	devel
 Summary:	Development files for libssh2
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	pkgconfig
 
@@ -36,7 +34,6 @@ developing applications that use libssh2.
 
 %package	docs
 Summary:	Documentation for libssh2
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description	docs
@@ -85,12 +82,11 @@ rm -rf %{buildroot}
 %postun -p /sbin/ldconfig
 
 %files
-%doc AUTHORS ChangeLog COPYING README NEWS
+%doc ChangeLog COPYING README NEWS
 %{_libdir}/libssh2.so.1
 %{_libdir}/libssh2.so.1.*
 
 %files docs
-%doc HACKING
 %{_mandir}/man3/libssh2_*.3*
 
 %files devel
@@ -102,3 +98,6 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/libssh2.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
+- Rebuild for new 4.0 release.
+

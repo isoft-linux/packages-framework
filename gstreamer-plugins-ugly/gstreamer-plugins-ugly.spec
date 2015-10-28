@@ -5,10 +5,9 @@
 
 Name: 		%{gstreamer}-plugins-ugly
 Version: 	1.6.0
-Release: 	1
+Release: 	2
 Summary: 	GStreamer streaming media framework "ugly" plug-ins
 
-Group: 		Applications/Multimedia
 License: 	LGPL
 URL:		http://gstreamer.freedesktop.org/
 Vendor:         GStreamer Backpackers Team <package@gstreamer.freedesktop.org>
@@ -77,7 +76,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang gst-plugins-ugly-%{majorminor}
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -90,6 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
+- Rebuild for new 4.0 release.
+
 * Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.6.0
 

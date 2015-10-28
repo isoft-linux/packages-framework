@@ -1,11 +1,10 @@
 Name:           lirc
 Version:        0.9.2a
 %global         src_vers  %(echo %{version} | sed 's/_/-/g' )
-Release:        2%{?dist}
+Release:        3%{?dist}
 
 Summary:        The Linux Infrared Remote Control package
 
-Group:          System Environment/Daemons
                 # lib/ciniparser* and lib/dictionary* are BSD, others GPLv2
 License:        GPLv2 and BSD
 URL:            http://www.lirc.org/
@@ -58,7 +57,6 @@ default driver and most of the applications.
 
 %package        libs
 Summary:        LIRC libraries
-Group:          System Environment/Libraries
 Requires:       lirc-core%{?_isa} = %{version}-%{release}
 
 %description    libs
@@ -82,7 +80,6 @@ LIRC configuration process.
 
 %package        devel
 Summary:        Development files for LIRC
-Group:          Development/Libraries
 Requires:       lirc-libs%{?_isa} = %{version}-%{release}
 
 %description    devel
@@ -95,7 +92,6 @@ developing applications that use LIRC.
 
 %package        doc
 Summary:        LIRC documentation
-Group:          Documentation
 BuildArch:      noarch
 
 %description    doc
@@ -269,3 +265,6 @@ find /etc/systemd -name lirc.service -xtype l -delete || :
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.2a-3
+- Rebuild for new 4.0 release.
+

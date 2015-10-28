@@ -2,9 +2,8 @@
 Summary: Open implementation of Service Location Protocol V2
 Name:    openslp
 Version: 2.0.0
-Release: 7
+Release: 8
 
-Group:   System Environment/Libraries
 License: BSD
 URL:     http://sourceforge.net/projects/openslp/
 Source0: http://downloads.sf.net/openslp/openslp-%{version}.tar.gz
@@ -39,14 +38,12 @@ by RFC 2608 and RFC 2614.
 
 %package devel
 Summary: OpenSLP headers and libraries
-Group:   Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description devel
 OpenSLP header files and libraries.
 
 %package server
 Summary: OpenSLP server daemon
-Group:   System Environment/Daemons
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: net-tools
 %description server
@@ -164,3 +161,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0.0-8
+- Rebuild for new 4.0 release.
+

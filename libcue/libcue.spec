@@ -1,9 +1,8 @@
 Name:		libcue
 Version:	1.4.0
-Release:	6%{?dist}
+Release:	7%{?dist}
 Summary:	Cue sheet parser library
 
-Group:		System Environment/Libraries
 # Files libcue/rem.{c,h} contains a BSD header
 License:	GPLv2 and BSD
 URL:		https://libcue.sourceforge.net/
@@ -23,7 +22,6 @@ a file pointer. For handling of the parsed data a convenient API is available.
 
 %package devel
 Summary:	Development files
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	pkgconfig
 
@@ -67,3 +65,6 @@ rm -f %{buildroot}%{_libdir}/libcue.la
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.0-7
+- Rebuild for new 4.0 release.
+

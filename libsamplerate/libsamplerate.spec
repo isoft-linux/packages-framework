@@ -1,16 +1,14 @@
 Summary:	Sample rate conversion library for audio data
 Name:		libsamplerate
 Version:	0.1.8
-Release:	4
+Release:	5
 License:	GPL
-Group:		System Environment/Libraries
 URL:		http://www.mega-nerd.com/SRC/
 Source0:	http://www.mega-nerd.com/SRC/%{name}-%{version}.tar.gz
 BuildRequires:	libsndfile-devel >= 1.0.6 pkgconfig
 
 %package devel
 Summary:	Development related files for %{name}
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release} pkgconfig
 
 
@@ -44,7 +42,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 cp -a doc _doc
 rm _doc/Makefile* _doc/NEWS _doc/ChangeLog
 
-rpmclean
 %check || :
 make check
 
@@ -71,6 +68,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.8-5
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

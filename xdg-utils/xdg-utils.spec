@@ -4,7 +4,7 @@
 Summary: Basic desktop integration functions 
 Name:    xdg-utils
 Version: 1.1.0
-Release: 0.40.%{pre}%{?dist}
+Release: 0.41.%{pre}%{?dist}
 
 URL:     http://portland.freedesktop.org/ 
 %if 0%{?pre:1}
@@ -101,3 +101,6 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 builder - 1.1.0-0.41.rc3
+- Rebuild for new 4.0 release.
+

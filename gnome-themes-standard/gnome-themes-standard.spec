@@ -1,9 +1,8 @@
 Summary:        Adwaita theme engines for GTK+ 3.0
 Name:           gnome-themes-standard
 Version:        3.18.0
-Release: 	6 
+Release: 	7 
 License:        GPL
-Group:          System Environment/Libraries
 Source:         %{name}-%{version}.tar.xz
 Requires:       gtk3
 BuildRequires:  gtk3-devel
@@ -15,12 +14,13 @@ Adwaita, gnome standard theme engines for GTK+ 3.0
 
 %package gtk2 
 Summary: Adwaita theme engine for GTK+ 2.0
-Group:   System Environment/Libraries
 
 %description gtk2
 Adwaita theme engine for GTK+ 2.0
+
 %prep
 %setup -q 
+
 %build
 %configure
 make %{?_smp_mflags}
@@ -29,7 +29,6 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 rm -rf %{buildroot}/%{_datadir}/locale
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -46,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/themes/HighContrast/gtk-2.0
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-7
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

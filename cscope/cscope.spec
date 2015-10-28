@@ -1,7 +1,7 @@
 Summary: Cscope is a text screen based source browsing tool.
 Name: cscope
 Version: 15.8b
-Release: 2 
+Release: 3 
 License: GPL
 Source: http://prdownloads.sourceforge.net/cscope/cscope-%{version}.tar.gz
 Source1: xcscope-init.el
@@ -24,7 +24,6 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -35,4 +34,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/cscope.1.gz
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 15.8b-3
+- Rebuild for new 4.0 release.
+
 

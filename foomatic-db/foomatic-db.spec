@@ -6,9 +6,8 @@
 Summary: Database of printers and printer drivers
 Name: foomatic-db
 Version: %{dbver_rel}
-Release: 39.%{dbver_snap}%{?dist}
+Release: 40.%{dbver_snap}%{?dist}
 License: GPLv2+
-Group: System Environment/Libraries
 Requires: %{name}-filesystem = %{version}-%{release}
 Requires: %{name}-ppds = %{version}-%{release}
 
@@ -32,7 +31,6 @@ The site http://www.openprinting.org/ is based on this database.
 %package filesystem
 Summary: Directory layout for the foomatic package
 License: Public Domain
-Group: System Environment/Base
 
 %description filesystem
 
@@ -41,7 +39,6 @@ Directory layout for the foomatic package.
 %package ppds
 Summary: PPDs from printer manufacturers
 License: GPLv2+ and MIT
-Group: System Environment/Libraries
 # We ship a symlink in a directory owned by cups
 BuildRequires: cups
 Requires: cups
@@ -88,3 +85,6 @@ ln -sf ../../foomatic/db/source/PPD %{buildroot}%{_datadir}/cups/model/foomatic-
 %{_datadir}/cups/model/foomatic-db-ppds
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.0-40.20150415
+- Rebuild for new 4.0 release.
+

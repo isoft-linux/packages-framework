@@ -1,6 +1,6 @@
 Name:		libgxim
 Version:	0.5.0
-Release:	5
+Release:	6
 License:	LGPLv2+
 URL:		http://tagoh.bitbucket.org/libgxim/
 BuildRequires:	intltool gettext ruby
@@ -8,7 +8,6 @@ BuildRequires:	glib2-devel >= 2.26, gtk2-devel
 Source0:	http://bitbucket.org/tagoh/%{name}/downloads/%{name}-%{version}.tar.bz2
 
 Summary:	GObject-based XIM protocol library
-Group:		System Environment/Libraries
 
 %description
 libgxim is a X Input Method protocol library that is implemented by GObject.
@@ -20,7 +19,6 @@ This package contains the shared library.
 
 %package	devel
 Summary:	Development files for libgxim
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	pkgconfig
 Requires:	glib2-devel >= 2.26.0
@@ -70,3 +68,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/libgxim
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.5.0-6
+- Rebuild for new 4.0 release.
+

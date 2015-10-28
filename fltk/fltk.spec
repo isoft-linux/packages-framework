@@ -9,11 +9,10 @@
 Summary:	C++ user interface toolkit
 Name:		fltk
 Version:	1.3.3
-Release:	5%{?dist}
+Release:	6%{?dist}
 
 # see COPYING (or http://www.fltk.org/COPYING.php ) for exceptions details
 License:	LGPLv2+ with exceptions	
-Group:		System Environment/Libraries
 URL:		http://www.fltk.org/
 %if "%{?snap:1}" == "1"
 Source0:        http://ftp.easysw.com/pub/fltk/snapshots/fltk-1.3.x-%{snap}.tar.bz2
@@ -208,5 +207,8 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.3-6
+- Rebuild for new 4.0 release.
+
 * Sun Oct 18 2015 Cjacker <cjacker@foxmail.com>
 - hide fluid menu item.

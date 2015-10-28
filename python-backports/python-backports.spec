@@ -1,6 +1,6 @@
 Name:           python-backports
 Version:        1.0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Namespace for backported Python features
 
 # Only code is sourced from http://www.python.org/dev/peps/pep-0382/
@@ -45,3 +45,6 @@ install -pm 644 %{SOURCE0} %{buildroot}%{python_sitearch}/backports/__init__.py
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0-7
+- Rebuild for new 4.0 release.
+

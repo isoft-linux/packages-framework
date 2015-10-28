@@ -1,10 +1,9 @@
 Summary: Command-line tools and library for transforming PDF files
 Name:    qpdf
 Version: 5.1.3
-Release: 1 
+Release: 2 
 # MIT: e.g. libqpdf/sha2.c
 License: Artistic 2.0 and MIT
-Group:   System Environment/Base
 URL:     http://qpdf.sourceforge.net/
 Source0: http://downloads.sourceforge.net/sourceforge/qpdf/qpdf-%{version}.tar.gz
 
@@ -26,16 +25,13 @@ Requires: qpdf-libs%{?_isa} = %{version}-%{release}
 
 %package libs
 Summary: QPDF library for transforming PDF files
-Group:   System Environment/Libraries
 
 %package devel
 Summary: Development files for QPDF library
-Group:   Development/Libraries
 Requires: qpdf-libs%{?_isa} = %{version}-%{release}
 
 %package doc
 Summary: QPDF Manual
-Group:   Documentation
 BuildArch: noarch
 Requires: qpdf-libs = %{version}-%{release}
 
@@ -108,6 +104,9 @@ make check
 %doc __doc/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.1.3-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

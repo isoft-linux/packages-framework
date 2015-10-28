@@ -1,9 +1,8 @@
 Name:           perl-Devel-Symdump
 Version:        2.15
-Release:        2%{?dist}
+Release:        3%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
-Group:          Development/Libraries
 License:        GPL+ or Artistic
 Url:            http://search.cpan.org/dist/Devel-Symdump/
 Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
@@ -69,3 +68,6 @@ prove t/pod.t t/podcover.t t/glob_to_local_typeglob.t :: --doit
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:2.15-3
+- Rebuild for new 4.0 release.
+

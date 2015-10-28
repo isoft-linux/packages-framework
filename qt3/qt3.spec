@@ -1,10 +1,9 @@
 Summary: The shared library for the Qt GUI toolkit.
 Name: qt3
 Version: 3.3.8
-Release: 8 
+Release: 9 
 Epoch: 1
 License: GPL/QPL
-Group: System Environment/Libraries
 Url: http://www.troll.no
 Source0: ftp://ftp.troll.no/qt/source/qt-x11-free-%{version}.tar.bz2
 Source2: qt3.sh
@@ -142,13 +141,11 @@ BuildRequires: sqlite-devel
 
 %package config
 Summary: Grapical configuration tool for programs using Qt
-Group: User Interface/Desktops
 Requires: %{name} = %{epoch}:%{version}-%{release}
 
 
 %package devel
 Summary: Development files for the Qt GUI toolkit.
-Group: Development/Libraries
 Requires: %{name} = %{epoch}:%{version}-%{release}
 Requires: freetype-devel
 Requires: fontconfig-devel
@@ -170,37 +167,31 @@ Requires: mesa-libGL-devel
 
 %package devel-docs
 Summary: Documentation for the Qt GUI toolkit.
-Group: Development/Libraries
 Requires: %{name}-devel = %{epoch}:%{version}-%{release}
 
 
 %package ODBC
 Summary: ODBC drivers for Qt's SQL classes.
-Group: System Environment/Libraries
 Requires: %{name} = %{epoch}:%{version}-%{release}
 
 
 %package MySQL
 Summary: MySQL drivers for Qt's SQL classes.
-Group: System Environment/Libraries
 Requires: %{name} = %{epoch}:%{version}-%{release}
 
 
 %package PostgreSQL
 Summary: PostgreSQL drivers for Qt's SQL classes.
-Group: System Environment/Libraries
 Requires: %{name} = %{epoch}:%{version}-%{release}
 
 
 %package sqlite
 Summary: sqlite drivers for Qt's SQL classes.
-Group: System Environment/Libraries
 Requires: %{name} = %{epoch}:%{version}-%{release}
 
 
 %package designer
 Summary: Interface designer (IDE) for the Qt toolkit
-Group: Development/Tools
 Requires: %{name}-devel = %{epoch}:%{version}-%{release}
 
 
@@ -485,7 +476,6 @@ pushd $RPM_BUILD_ROOT/%{qtdir}/doc
 ln -sf /usr/share/doc/qt-devel-%{version}/html html
 popd
 
-rpmclean
 %clean
 rm -rf %{buildroot}
 
@@ -560,6 +550,9 @@ rm -rf %{buildroot}
 %{qtdir}/bin/designer
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:3.3.8-9
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

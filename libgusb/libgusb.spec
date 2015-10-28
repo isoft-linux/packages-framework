@@ -1,7 +1,7 @@
 Summary:   GLib wrapper around libusb1
 Name:      libgusb
 Version:   0.2.5
-Release:   1 
+Release:   2 
 License:   LGPLv2+
 URL:       https://gitorious.org/gusb/
 Source0:   http://people.freedesktop.org/~hughsient/releases/%{name}-%{version}.tar.xz
@@ -44,7 +44,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/libgusb.la
-rpmclean
 
 %check
 make check
@@ -69,3 +68,6 @@ make check
 %{_datadir}/vala/vapi/gusb.vapi
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.2.5-2
+- Rebuild for new 4.0 release.
+

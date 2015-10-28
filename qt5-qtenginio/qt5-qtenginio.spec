@@ -1,6 +1,6 @@
 Name: qt5-qtenginio 
 Version: 5.5.1
-Release: 2 
+Release: 4 
 Summary: Enginio Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -46,14 +46,6 @@ rm -rf %{buildroot}
 make install INSTALL_ROOT=%{buildroot}
 make install_docs INSTALL_ROOT=%{buildroot}
 
-#fake debug library
-pushd %{buildroot}%{_qt5_libdir}
-for lib in libQt*.so ; do
- ln -s $lib $(basename $lib .so)_debug.so
-done
-popd
-
-
 if [ -d "examples/" ]; then
  mkdir -p %{buildroot}%{_libdir}/qt5/examples
  cp -r examples/* %{buildroot}%{_libdir}/qt5/examples/
@@ -79,6 +71,12 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Sat Oct 24 2015 builder - 5.5.1-4
+- Rebuild for new 4.0 release.
+
+* Fri Oct 23 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-3
+- Fix wrong libQt*debug links
+
 * Fri Oct 16 2015 Cjacker <cjacker@foxmail.com>
 - update to 5.5.1
 

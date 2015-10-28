@@ -1,6 +1,6 @@
 Name:           libdatrie
 Version:        0.2.8
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Implementation of Double-Array structure for representing trie
 License:        LGPLv2+
 URL:            http://linux.thai.net/projects/datrie
@@ -61,3 +61,6 @@ LD_LIBRARY_PATH=../datrie/.libs make check %{?_smp_mflags}
 %{_mandir}/man1/trietool*.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.2.8-7
+- Rebuild for new 4.0 release.
+

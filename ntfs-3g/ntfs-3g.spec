@@ -8,9 +8,8 @@
 Name:		ntfs-3g
 Summary:	Linux NTFS userspace driver
 Version:	2015.3.14
-Release:    1	
+Release:    2	
 License:	GPLv2+
-Group:		System Environment/Base
 Source0:	http://tuxera.com/opensource/%{name}_ntfsprogs-%{version}%{?subver}.tgz
 URL:		http://www.ntfs-3g.org/
 %if %{with_externalfuse}
@@ -39,7 +38,6 @@ file access right and ownership support.
 
 %package devel
 Summary:	Development files and libraries for ntfs-3g
-Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	pkgconfig
 Provides:	ntfsprogs-devel = %{epoch}:%{version}-%{release}
@@ -53,7 +51,6 @@ functionality.
 
 %package -n ntfsprogs
 Summary:	NTFS filesystem libraries and utilities
-Group:		System Environment/Base
 # We don't really provide this. This code is dead and buried now.
 Provides:	ntfsprogs-gnomevfs = %{epoch}:%{version}-%{release}
 Obsoletes:	ntfsprogs-gnomevfs
@@ -164,3 +161,6 @@ rm -rf %{buildroot}%{_defaultdocdir}/%{name}/README
 %exclude %{_mandir}/man8/ntfs-3g*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2:2015.3.14-2
+- Rebuild for new 4.0 release.
+

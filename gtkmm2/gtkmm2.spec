@@ -4,7 +4,7 @@
 
 Name:           gtkmm2
 Version:        2.24.4
-Release:        1
+Release:        2
 Summary:        C++ interface for the GTK+ library
 
 License:        LGPLv2+
@@ -51,6 +51,8 @@ cp -a demos/ _docs/
 
 
 %build
+export CXXFLAGS="-std=c++11"
+
 %configure --disable-static
 
 # fix lib64 rpaths
@@ -67,7 +69,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
-rpmclean
 
 %check
 make check %{?_smp_mflags}
@@ -97,3 +98,6 @@ make check %{?_smp_mflags}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.24.4-2
+- Rebuild for new 4.0 release.
+

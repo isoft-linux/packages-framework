@@ -2,7 +2,7 @@ Summary: NFS utilities and supporting clients and daemons for the kernel NFS ser
 Name: nfs-utils
 URL: http://sourceforge.net/projects/nfs
 Version: 1.3.2
-Release: 10%{?dist}
+Release: 11%{?dist}
 Epoch: 1
 
 # group all 32bit related archs
@@ -23,7 +23,6 @@ Patch102: nfs-utils-1.2.3-sm-notify-res_init.patch
 Patch103: nfs-utils-1.2.5-idmap-errmsg.patch
 Patch104: nfs-utils-1.3.2-systemd-gssargs.patch
 
-Group: System Environment/Daemons
 Provides: exportfs    = %{epoch}:%{version}-%{release}
 Provides: nfsstat     = %{epoch}:%{version}-%{release}
 Provides: showmount   = %{epoch}:%{version}-%{release}
@@ -287,3 +286,6 @@ fi
 /sbin/umount.nfs4
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.3.2-11
+- Rebuild for new 4.0 release.
+

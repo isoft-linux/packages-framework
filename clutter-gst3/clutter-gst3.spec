@@ -1,6 +1,6 @@
 Name:           clutter-gst3
 Version:        3.0.14
-Release:        1
+Release:        2
 Summary:        GStreamer integration for Clutter
 
 License:        LGPLv2+
@@ -64,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/gtk-doc/
 #doc #{_datadir}/gtk-doc/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.0.14-2
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 3.0.14
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>

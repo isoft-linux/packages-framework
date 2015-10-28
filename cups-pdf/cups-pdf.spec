@@ -2,8 +2,7 @@ Summary:        Extension for creating pdf-Files with CUPS
 Summary(fr):    Extension de CUPS pour créer des fichiers PDF
 Name:           cups-pdf
 Version:        2.6.1
-Release:        10%{?dist}
-Group:          Applications/Publishing
+Release:        14%{?dist}
 URL:            http://www.cups-pdf.de/
 License:        GPLv2+
 
@@ -25,7 +24,7 @@ BuildRequires:  cups-devel
 
 Requires:       ghostscript, cups
 Requires(post): %{_bindir}/pgrep
-
+Requires(post): bash coreutils grep sed
 
 # These are the defaults paths defined in config.h
 # CUPS-PDF spool directory
@@ -103,18 +102,65 @@ rm -rf %{buildroot}
 
 
 %post
-# First install : create the printer if cupsd is running
-if [ "$1" -eq "1" ] && %{_bindir}/pgrep -u root -f %{_sbindir}/cupsd >/dev/null
-then
-    /usr/sbin/lpadmin -p Cups-PDF -v cups-pdf:/ -m CUPS-PDF.ppd -E || :
+(
+if [ ! -d "/etc/cups/ppd" ]; then
+  mkdir -p /etc/cups/ppd
 fi
 
+if [ ! -f "/etc/cups/ppd/CUPS-PDF.ppd" ]; then
+  cp /usr/share/cups/model/CUPS-PDF.ppd /etc/cups/ppd/CUPS-PDF.ppd
+fi
+
+grep -q "Printer Cups-PDF" /etc/cups/printers.conf
+
+if [ $? -eq 1 ]; then
+   cat >> /etc/cups/printers.conf <<EOF
+<Printer Cups-PDF>
+UUID urn:uuid:e4a01409-204d-31c9-5871-4c10562a3ebb
+Info Cups-PDF
+DeviceURI cups-pdf:/
+State Idle
+StateTime 1438211065
+ConfigTime 1441188293
+Type 8388612
+Accepting Yes
+Shared Yes
+JobSheets none none
+QuotaPeriod 0
+PageLimit 0
+KLimit 0
+OpPolicy default
+ErrorPolicy stop-printer
+</Printer>
+EOF
+fi
+) ||:
 
 %postun
 if [ "$1" -eq "0" ]; then
-    # Delete the printer
-    /usr/sbin/lpadmin -x Cups-PDF || :
-fi
+  rm -rf /etc/cups/ppd/CUPS-PDF.ppd
+  # Delete the printer
+  line_num=1
+  
+  start_line_num=-1
+  end_line_num=-1
+  
+  while read line 
+  do
+    if [ "$line"x = "<Printer Cups-PDF>"x ]; then
+      start_line_num=$line_num
+    fi
+    if [ $start_line_num -ne -1 ]; then
+      if [ "$line"x = "</Printer>"x ]; then
+        end_line_num=$line_num
+        break
+      fi
+    fi
+    line_num=`expr $line_num + 1`
+  done </etc/cups/printers.conf
+  
+  sed -i $start_line_num','$end_line_num'd' /etc/cups/printers.conf
+fi ||:
 
 
 %files
@@ -127,3 +173,9 @@ fi
 %{_datadir}/cups/model/CUPS-PDF.ppd
 
 %changelog
+* Mon Oct 26 2015 cjacker - 2.6.1-14
+- Do not use lpadmin add or delete printer, use script instread.
+
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.6.1-11
+- Rebuild for new 4.0 release.
+

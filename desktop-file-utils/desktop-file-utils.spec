@@ -1,11 +1,10 @@
 Summary: Utilities for manipulating .desktop files
 Name: desktop-file-utils
 Version: 0.22
-Release: 3
+Release: 4
 URL: http://www.freedesktop.org/software/desktop-file-utils
 Source0: %{name}-%{version}.tar.xz
 License: GPL
-Group: Development/Tools
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: glib2-devel >= 2.12.0
@@ -31,7 +30,6 @@ make %{?_smp_mflags}
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -44,6 +42,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %{_mandir}/man1/*
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.22-4
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

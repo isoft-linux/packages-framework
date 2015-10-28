@@ -1,6 +1,6 @@
 Name:		im-chooser
 Version:	1.6.4
-Release: 8	
+Release: 9	
 License:	GPLv2+ and LGPLv2+
 URL:		http://fedorahosted.org/im-chooser/
 BuildRequires:	gtk2-devel
@@ -11,7 +11,6 @@ BuildRequires:	desktop-file-utils intltool gettext
 Source0:	http://fedorahosted.org/releases/i/m/%{name}/%{name}-%{version}.tar.bz2
 
 Summary:	Desktop Input Method configuration tool
-Group:		Applications/System
 Obsoletes:	im-chooser-gnome3 < 1.4.2-2
 Provides:	im-chooser-gnome3 = %{version}-%{release}
 Requires:	%{name}-common = %{version}-%{release}
@@ -22,7 +21,6 @@ to be used or disable Input Method usage on the desktop.
 
 %package	common
 Summary:	Common files for im-chooser subpackages
-Group:		Applications/System
 Requires:	imsettings >= 1.3.0
 Obsoletes:	im-chooser < 1.5.0.1
 
@@ -89,3 +87,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/imchooseui/imchoose.ui
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.4-9
+- Rebuild for new 4.0 release.
+

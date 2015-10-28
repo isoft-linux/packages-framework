@@ -4,12 +4,11 @@ Summary: A development library for text mode user interfaces.
 Name: newt
 %define version 0.52.18
 Version: %{version}
-release: 7 
+release: 8 
 License: LGPL
-Group: System Environment/Libraries
 Source: https://fedorahosted.org/releases/n/e/newt/newt-%{version}.tar.gz
 
-BuildRequires: python, python-devel, perl, slang-devel
+BuildRequires: python, python-devel, perl, slang-devel, python3, python3-devel
 
 Requires: slang
 Provides: snack
@@ -28,7 +27,6 @@ slang library.
 %package devel
 Summary: Newt windowing toolkit development files.
 Requires: slang-devel %{name} = %{version}
-Group: Development/Libraries
 
 %description devel
 The newt-devel package contains the header files and libraries
@@ -41,7 +39,6 @@ newt.
 
 %package static
 Summary: Static newt library
-Group: Development/Libraries
 Requires: %{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
@@ -49,11 +46,18 @@ Static newt library
 
 %package python 
 Summary: python binding for newt library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: python
 
 %description python 
+python binding for newt library
+
+%package -n python3-newt
+Summary: python3 binding for newt library
+Requires: %{name} = %{version}-%{release}
+Requires: python3
+
+%description -n python3-newt
 python binding for newt library
 
 
@@ -78,11 +82,9 @@ python -c 'from compileall import *; compile_dir("'$RPM_BUILD_ROOT'%{_libdir}/py
 rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
-
 %postun -p /sbin/ldconfig
 
 %post devel -p /sbin/ldconfig
-
 %postun devel -p /sbin/ldconfig
 
 
@@ -96,7 +98,11 @@ rm -rf $RPM_BUILD_ROOT
 %files python
 %defattr (-,root,root)
 %doc peanuts.py popcorn.py
-%{_libdir}/python%{pythonver}/site-packages/*
+%{python_sitearch}/*
+
+%files -n python3-newt
+%defattr (-,root,root)
+%{python3_sitearch}/*
 
 %files devel
 %defattr (-,root,root)
@@ -111,3 +117,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libnewt.a
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.52.18-8
+- Rebuild for new 4.0 release.
+

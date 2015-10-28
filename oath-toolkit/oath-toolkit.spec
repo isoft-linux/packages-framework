@@ -1,8 +1,7 @@
 Name:          oath-toolkit
 Version:       2.6.0
-Release:       2%{?dist}
+Release:       3%{?dist}
 License:       GPLv3+
-Group:         System Environment/Libraries
 Summary:       One-time password components
 BuildRequires: pam-devel, gtk-doc, libtool, libltdl-devel
 BuildRequires: xmlsec1-devel, xmlsec1-openssl-devel, autoconf, automake
@@ -26,7 +25,6 @@ described in RFC6030 is supported.
 
 %package -n liboath
 Summary:          Library for OATH handling
-Group:            Development/Libraries
 License:          LGPLv2+
 Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -40,7 +38,6 @@ HOTP algorithm (RFC4226) and the time-based TOTP algorithm (RFC6238).
 
 %package -n liboath-devel
 Summary:  Development files for liboath
-Group:    Development/Libraries
 License:  LGPLv2+
 Requires: liboath%{?_isa} = %{version}-%{release}
 
@@ -49,7 +46,6 @@ Development files for liboath.
 
 %package -n liboath-doc
 Summary:   Documentation files for liboath
-Group:     Development/Libraries
 License:   LGPLv2+
 Requires:  liboath = %{version}-%{release}
 Requires:  gtk-doc
@@ -60,7 +56,6 @@ Documentation files for liboath.
 
 %package -n libpskc
 Summary:          Library for PSKC handling
-Group:            Development/Libraries
 License:          LGPLv2+
 Requires:         xml-common
 Requires(post):   /sbin/ldconfig
@@ -74,7 +69,6 @@ Container (PSKC) format described in RFC6030 is supported.
 
 %package -n libpskc-devel
 Summary:  Development files for libpskc
-Group:    Development/Libraries
 License:  LGPLv2+
 Requires: libpskc%{?_isa} = %{version}-%{release}
 
@@ -83,7 +77,6 @@ Development files for libpskc.
 
 %package -n libpskc-doc
 Summary:   Documentation files for libpskc
-Group:     Development/Libraries
 License:   LGPLv2+
 Requires:  libpskc = %{version}-%{release}
 Requires:  gtk-doc
@@ -112,7 +105,6 @@ A command line tool for manipulating PSKC data.
 
 %package -n pam_oath
 Summary:  A PAM module for pluggable login authentication for OATH
-Group:    Development/Libraries
 Requires: pam
 
 %description -n pam_oath
@@ -190,3 +182,6 @@ mkdir -p -m 0600 %{buildroot}%{_sysconfdir}/liboath
 %{_libdir}/security/pam_oath.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.6.0-3
+- Rebuild for new 4.0 release.
+

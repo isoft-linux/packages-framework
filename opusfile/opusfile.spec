@@ -1,9 +1,8 @@
 Name:          opusfile
 Version:       0.6
-Release:       3%{?dist}
+Release:       4%{?dist}
 Summary:       A high-level API for decoding and seeking within .opus files
 
-Group:         System Environment/Libraries
 License:       BSD
 URL:           http://www.opus-codec.org/
 Source0:       http://downloads.xiph.org/releases/opus/%{name}-%{version}.tar.gz
@@ -26,7 +25,6 @@ decoded with a single output format, even if the channel count changes).
 
 %package devel
 Summary: Development package for %{name}
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -65,3 +63,6 @@ find %{buildroot} -type f -name "*.la" -delete
 %{_libdir}/libopusurl.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6-4
+- Rebuild for new 4.0 release.
+

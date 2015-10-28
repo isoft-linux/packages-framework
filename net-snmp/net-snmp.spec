@@ -11,11 +11,10 @@
 Summary: A collection of SNMP protocol tools and libraries
 Name: net-snmp
 Version: 5.7.3
-Release: 5%{?dist}
+Release: 6%{?dist}
 Epoch: 1
 
 License: BSD
-Group: System Environment/Daemons
 URL: http://net-snmp.sourceforge.net/
 Source0: https://downloads.sourceforge.net/project/net-snmp/net-snmp/%{version}/net-snmp-%{version}.tar.gz
 Source1: net-snmp.redhat.conf
@@ -79,7 +78,6 @@ You will probably also want to install the net-snmp-utils package,
 which contains NET-SNMP utilities.
 
 %package utils
-Group: Applications/System
 Summary: Network management utilities using SNMP, from the NET-SNMP project
 Requires: %{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 
@@ -92,7 +90,6 @@ using the SNMP protocol. You will also need to install the net-snmp
 package.
 
 %package devel
-Group: Development/Libraries
 Summary: The development environment for the NET-SNMP project
 Requires: %{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: %{name}-agent-libs%{?_isa} = %{epoch}:%{version}-%{release}
@@ -117,7 +114,6 @@ tools. You'll also need to have the net-snmp and net-snmp-utils
 packages installed.
 
 %package perl
-Group: Development/Libraries
 Summary: The perl NET-SNMP module and the mib2c tool
 Requires: %{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}, perl
 Requires: %{name}-agent-libs%{?_isa} = %{epoch}:%{version}-%{release}
@@ -144,7 +140,6 @@ with perl.
 #Install the net-snmp-gui package, if you want to use this interactive utility.
 
 %package libs
-Group: Development/Libraries
 Summary: The NET-SNMP runtime client libraries
 
 %description libs
@@ -152,7 +147,6 @@ The net-snmp-libs package contains the runtime client libraries for shared
 binaries and applications.
 
 %package agent-libs
-Group: Development/Libraries
 Summary: The NET-SNMP runtime agent libraries
 # the libs link against libperl.so:
 Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
@@ -163,7 +157,6 @@ The net-snmp-agent-libs package contains the runtime agent libraries for shared
 binaries and applications.
 
 %package python
-Group: Development/Libraries
 Summary: The Python 'netsnmp' module for the Net-SNMP
 Requires: %{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 
@@ -466,4 +459,9 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/libnetsnmphelpers*.so.*
 %{_libdir}/libnetsnmpmibs*.so.*
 %{_libdir}/libnetsnmptrapd*.so.*
+
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:5.7.3-6
+- Rebuild for new 4.0 release.
 

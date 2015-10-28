@@ -2,10 +2,9 @@
 
 Name:       ibus-libpinyin
 Version:    1.6.92
-Release:    2
+Release:    3
 Summary:    Intelligent Pinyin engine based on libpinyin for IBus
 License:    GPLv2+
-Group:      System Environment/Libraries
 URL:        https://github.com/libpinyin/ibus-libpinyin
 Source0:    http://downloads.sourceforge.net/libpinyin/ibus-libpinyin/%{name}-%{version}.tar.gz
 %if %snapshot
@@ -89,3 +88,6 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 %{_datadir}/ibus/component/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.92-3
+- Rebuild for new 4.0 release.
+

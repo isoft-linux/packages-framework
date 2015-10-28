@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 2 
+Release: 3 
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -124,9 +124,22 @@ developing applications that use %{name}.
 %patch51 -p1
 
 %patch56 -p1
-%build
+
+# drop -fexceptions from $RPM_OPT_FLAGS
+RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
+
 %define platform linux-g++
 
+sed -i -e "s|-O2|$RPM_OPT_FLAGS|g" \
+  mkspecs/%{platform}/qmake.conf
+
+sed -i -e "s|^\(QMAKE_LFLAGS_RELEASE.*\)|\1 $RPM_LD_FLAGS|" \
+  mkspecs/common/g++-unix.conf
+
+# undefine QMAKE_STRIP (and friends), so we get useful -debuginfo pkgs
+sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
+
+%build
 ./configure -v \
  -confirm-license \
  -opensource \
@@ -258,6 +271,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-3
+- Rebuild for new 4.0 release.
+
 * Fri Oct 16 2015 Cjacker <cjacker@foxmail.com>
 - update to 5.5.1
 

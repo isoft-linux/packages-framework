@@ -1,8 +1,7 @@
 Name:network-manager-applet
 Summary: GNOME applications for use with NetworkManager
 Version: 1.0.4
-Release: 3 
-Group: System Environment/Base
+Release: 4 
 License: GPLv2+
 URL: http://www.gnome.org/projects/NetworkManager/
 Source: %{name}-%{version}.tar.xz
@@ -29,7 +28,6 @@ NetworkManager, including a panel applet for wireless networks.
 
 %package -n libnm-gtk 
 Summary: Libraries of NetworkManager GTK+ binding
-Group:  System Environment/Libraries 
 Requires: gtk3
 Requires: NetworkManager-glib
 %description -n libnm-gtk
@@ -37,7 +35,6 @@ Requires: NetworkManager-glib
 
 %package -n libnm-gtk-devel 
 Summary: Libraries and headers of NetworkManager GTK+ binding.
-Group: Development/Libraries
 Requires: libnm-gtk = %{version}-%{release}
 Requires: gtk3-devel
 Requires: NetworkManager-glib-devel
@@ -67,7 +64,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 echo "NoDisplay=true" >>$RPM_BUILD_ROOT/%{_datadir}/applications/nm-connection-editor.desktop
 %find_lang nm-applet
-rpmclean
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -120,4 +116,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %dir %{_includedir}/libnm-gtk
 %{_includedir}/libnm-gtk/*
 %{_datadir}/gir-?.?/NMGtk-1.0.gir
+
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-4
+- Rebuild for new 4.0 release.
 

@@ -3,7 +3,7 @@
 Summary: Multimedia framework api
 Name:    phonon
 Version: 4.8.3
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: LGPLv2+
 URL:     http://phonon.kde.org/
 %if 0%{?snap}
@@ -120,8 +120,8 @@ mkdir -p %{buildroot}%{_qt5_plugindir}/phonon4qt5_backend
 
 #for qt4, dirty hack
 #install headers into the Qt4 dir, for example, PyQt4 will need it.
-install -d %{buildroot}%{_qt4_headerdir}/phonon
-cp -r %{buildroot}%{_includedir}/phonon/* %{buildroot}%{_qt4_headerdir}/phonon/
+#install -d %{buildroot}%{_qt4_headerdir}/phonon
+#cp -r %{buildroot}%{_includedir}/phonon/* %{buildroot}%{_qt4_headerdir}/phonon/
 #sed -i 's#includedir=/usr/include#includedir=/usr/lib/qt4/include#' %{buildroot}%{_libdir}/pkgconfig/phonon.pc
 
 %check
@@ -196,3 +196,6 @@ test "$(pkg-config --modversion phonon4qt5)" = "%{version}"
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.8.3-5
+- Rebuild for new 4.0 release.
+

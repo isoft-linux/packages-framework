@@ -1,6 +1,6 @@
 Name:           cpptest
 Version:        1.1.2
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        A portable and powerful and simple unit testing framework for C++
 
 License:        LGPLv2+
@@ -56,3 +56,6 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.2-6
+- Rebuild for new 4.0 release.
+

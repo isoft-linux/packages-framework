@@ -15,7 +15,6 @@ Name: pygobject3
 Version: 3.18.0
 Release: 1
 License: LGPLv2+ and MIT
-Group: Development/Languages
 Summary: Python 2 bindings for GObject Introspection
 URL: https://live.gnome.org/PyGObject
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
@@ -47,7 +46,6 @@ for use in Python programs.
 
 %package devel
 Summary: Development files for embedding PyGObject introspection support
-Group: Development/Languages
 Requires: %{name} = %{version}-%{release}
 Requires: glib2-devel
 Requires: gobject-introspection-devel
@@ -59,7 +57,6 @@ This package contains files required to embed PyGObject
 %if 0%{?with_python3}
 %package -n python3-gobject
 Summary: Python 3 bindings for GObject Introspection
-Group: Development/Languages
 Requires: python3-cairo
 Requires: gobject-introspection >= %{gobject_introspection_version}
 

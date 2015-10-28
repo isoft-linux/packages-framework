@@ -5,31 +5,23 @@
 
 Name:           python-flask
 Version:        0.10.1
-Release:        6
+Release:        7
 Epoch:          1
 Summary:        A micro-framework for Python based on Werkzeug, Jinja 2 and good intentions
 
-Group:          Development/Libraries
 License:        BSD
 URL:            http://flask.pocoo.org/
 Source0:        http://pypi.python.org/packages/source/F/Flask/%{srcname}-%{srcversion}.tar.gz
+patch0: flask-fix-test-error-with-simplejson-installed.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel python-setuptools python-werkzeug python-sphinx
 Requires:       python-werkzeug
 
-# if we're not on rhel, 0%%{?rhel} < 7, so we need to also check for 0%{?rhel}
-%if 0%{?rhel} && 0%{?rhel} < 7
-BuildRequires:  python-jinja2-26
-BuildRequires:  python-itsdangerous
-Requires:       python-jinja2-26
-Requires:       python-itsdangerous
-%else
 BuildRequires:  python-jinja2
 BuildRequires:  python-itsdangerous
 Requires:       python-jinja2
 Requires:       python-itsdangerous
-%endif
 
 %description
 Flask is called a “micro-framework” because the idea to keep the core
@@ -44,7 +36,6 @@ authentication technologies and more.
 
 %package doc
 Summary:        Documentation for %{name}
-Group:          Documentation
 Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %description doc
@@ -76,7 +67,6 @@ authentication technologies and more.
 
 %package -n python3-flask-doc
 Summary:        Documentation for python3-flask
-Group:          Documentation
 Requires:       python3-flask = %{epoch}:%{version}-%{release}
 
 %description -n python3-flask-doc
@@ -86,6 +76,8 @@ Documentation and examples for python3-flask.
 
 %prep
 %setup -q -n %{srcname}-%{srcversion}
+%patch0 -p1
+
 %{__sed} -i "/platforms/ a\    requires=['Jinja2 (>=2.4)']," setup.py
 
 %if 0%{?with_python3}
@@ -176,5 +168,8 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:0.10.1-7
+- Rebuild for new 4.0 release.
+
 * Wed Aug 26 2015 Cjacker <cjacker@foxmail.com>
 - initial build

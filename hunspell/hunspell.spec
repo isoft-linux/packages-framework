@@ -1,11 +1,10 @@
 Name:      hunspell
 Summary:   Hunspell is a spell checker and morphological analyzer library
 Version:   1.3.3
-Release:   1 
+Release:   2 
 Source0:   http://downloads.sourceforge.net/%{name}/hunspell-%{version}.tar.gz
 Patch0:     hunspell-musl-fix-includes.patch
 
-Group:     System Environment/Libraries
 URL:       http://hunspell.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 License:   LGPLv2+ or GPLv2+ or MPLv1.1
@@ -20,7 +19,6 @@ Curses library, Ispell pipe interface, OpenOffice.org UNO module.
 %package devel
 Requires: hunspell = %{version}-%{release}, pkgconfig
 Summary: Files for developing with hunspell
-Group: Development/Libraries
 
 %description devel
 Includes and definitions for developing with hunspell
@@ -60,7 +58,6 @@ rm -f $RPM_BUILD_ROOT/%{_bindir}/example
 mkdir $RPM_BUILD_ROOT/%{_datadir}/myspell
 install -m 755 src/tools/affixcompress $RPM_BUILD_ROOT/%{_bindir}/affixcompress
 install -m 755 src/tools/makealias $RPM_BUILD_ROOT/%{_bindir}/makealias
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -97,6 +94,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/hunspell.3.gz
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.3-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

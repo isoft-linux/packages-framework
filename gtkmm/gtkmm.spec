@@ -4,10 +4,9 @@
 
 Name:           gtkmm
 Version:        3.18.0
-Release:        1
+Release:        2
 Summary:        C++ interface for the GTK+ library
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.gtkmm.org/
 Source0:        http://ftp.gnome.org/pub/GNOME/sources/gtkmm/%{release_version}/gtkmm-%{version}.tar.xz
@@ -26,7 +25,6 @@ widgets that are easily extensible via inheritance.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description devel
@@ -36,7 +34,6 @@ developing applications that use %{name}.
 
 %package        doc
 Summary:        API documentation for %{name}
-Group:          Documentation
 BuildArch:      noarch
 Requires:       %{name} = %{version}-%{release}
 Requires:       glibmm-doc
@@ -70,7 +67,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
-rpmclean
 
 %check
 make check %{?_smp_mflags}
@@ -100,6 +96,9 @@ make check %{?_smp_mflags}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

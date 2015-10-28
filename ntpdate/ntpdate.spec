@@ -1,7 +1,7 @@
 Summary: Utility to set the date and time via NTP
 Name: ntpdate
 Version: 4.2.6p5
-Release: 32%{?dist}
+Release: 33%{?dist}
 License: (MIT and BSD and BSD with advertising) and GPLv2
 URL: http://www.ntp.org
 Source0: http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-%{version}.tar.gz
@@ -48,6 +48,9 @@ install -D -m0644 %{SOURCE1} $RPM_BUILD_ROOT%{_mandir}/man8/ntpdate.8
 %{_mandir}/man8/ntpdate.8*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.2.6p5-33
+- Rebuild for new 4.0 release.
+
 * Fri Aug 14 2015 Cjacker <cjacker@foxmail.com>
 - initial build.
 - only ship ntpdate utility.

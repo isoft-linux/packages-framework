@@ -3,10 +3,9 @@
 
 Name:           python-mock
 Version:        1.0.1
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        A Python Mocking and Patching Library for Testing
 
-Group:          Development/Libraries
 License:        BSD
 URL:            http://www.voidspace.org.uk/python/%{mod_name}/
 Source0:        http://pypi.python.org/packages/source/m/%{mod_name}/%{mod_name}-%{version}.tar.gz
@@ -33,7 +32,6 @@ needed attributes in the normal way.
 %if 0%{?with_python3}
 %package -n python3-mock
 Summary:        A Python Mocking and Patching Library for Testing
-Group:          Development/Libraries
 
 %description -n python3-mock
 Mock is a Python module that provides a core mock class. It removes the need
@@ -95,3 +93,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.1-6
+- Rebuild for new 4.0 release.
+

@@ -1,9 +1,8 @@
 Name:           jbigkit
 Version:        2.0
-Release:        9
+Release:        10
 Summary:        JBIG1 lossless image compression tools
 
-Group:          Development/Libraries
 License:        GPLv2+
 URL:            http://www.cl.cam.ac.uk/~mgk25/jbigkit/
 Source0:        http://www.cl.cam.ac.uk/~mgk25/download/jbigkit-%{version}.tar.gz
@@ -12,11 +11,9 @@ Patch1:         jbigkit-2.0-warnings.patch
 
 %package libs
 Summary:        JBIG1 lossless image compression library
-Group:          Development/Libraries
 
 %package devel
 Summary:        JBIG1 lossless image compression library -- development files
-Group:          Development/Libraries
 Requires:       jbigkit-libs = %{version}-%{release}
 
 %description libs
@@ -90,3 +87,6 @@ make test
 %{_includedir}/jbig*.h
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0-10
+- Rebuild for new 4.0 release.
+

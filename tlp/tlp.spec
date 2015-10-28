@@ -1,6 +1,6 @@
 Name:           tlp
 Version:        0.7
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Advanced power management tool for Linux
 License:        GPLv2+
 URL:            http://linrunner.de/tlp
@@ -106,3 +106,6 @@ install -D systemd-rfkill@.service %{buildroot}%{_sysconfdir}/systemd/system/sys
 /bin/systemctl enable NetworkManager-dispatcher.service >/dev/null 2>&1 || :
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.7-7
+- Rebuild for new 4.0 release.
+

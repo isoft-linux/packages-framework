@@ -1,9 +1,8 @@
 Name:           liboggz
 Version:        1.1.1
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Simple programming interface for Ogg files and streams
 
-Group:          System Environment/Libraries
 License:        BSD
 URL:            http://www.xiph.org/oggz/
 Source0:        http://downloads.xiph.org/releases/liboggz/%{name}-%{version}.tar.gz
@@ -20,7 +19,6 @@ format.
 
 %package devel
 Summary:	Files needed for development using liboggz
-Group:          Development/Libraries
 Requires:       liboggz = %{version}-%{release}
 Requires:       libogg-devel >= 1.0
 Requires:       pkgconfig
@@ -36,7 +34,6 @@ development using liboggz.
 
 %package doc
 Summary:        Documentation for liboggz
-Group:		Documentation
 Requires:	liboggz = %{version}-%{release}
 
 %description doc
@@ -101,3 +98,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.1-10
+- Rebuild for new 4.0 release.
+

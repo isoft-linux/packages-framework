@@ -1,6 +1,6 @@
 Name:           at-spi2-core
 Version:        2.18.1
-Release:        1
+Release:        2
 Summary:        Protocol definitions and daemon for D-Bus at-spi
 
 License:        LGPLv2+
@@ -76,6 +76,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/libatspi.la
 %{_libdir}/pkgconfig/atspi-2.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.18.1-2
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 2.18.1
 

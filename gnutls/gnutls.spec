@@ -1,17 +1,25 @@
-%bcond_with dane
+%bcond_without dane
 %bcond_with guile
-
 Summary: A TLS protocol implementation
 Name: gnutls
-Version: 3.4.2
-Release: 1
+Version: 3.4.6
+Release: 1%{?dist}
+# The libraries are LGPLv2.1+, utilities are GPLv3+
 License: GPLv3+ and LGPLv2+
-Group:  Framework/Runtime/Library 
-BuildRequires: p11-kit-devel >= 0.20.2, gettext
-BuildRequires: zlib-devel, readline-devel, libtasn1-devel >= 3.1
-BuildRequires: libtool, automake, autoconf
-BuildRequires: nettle-devel >= 2.7.1
+Group: System Environment/Libraries
+BuildRequires: p11-kit-devel >= 0.21.3, gettext-devel
+BuildRequires: zlib-devel, readline-devel, libtasn1-devel >= 4.3
+BuildRequires: libtool, automake, autoconf, texinfo
+BuildRequires: autogen-libopts-devel >= 5.18 autogen
+BuildRequires: nettle-devel >= 3.1.1
+BuildRequires: trousers-devel >= 0.3.11.2
+BuildRequires: libidn-devel
 BuildRequires: gperf
+Requires: crypto-policies
+Requires: p11-kit-trust
+Requires: libtasn1 >= 4.3
+Recommends: trousers >= 0.3.11.2
+
 %if %{with dane}
 BuildRequires: unbound-devel unbound-libs
 %endif
@@ -20,48 +28,51 @@ BuildRequires: guile-devel
 %endif
 URL: http://www.gnutls.org/
 Source0: ftp://ftp.gnutls.org/gcrypt/gnutls/%{name}-%{version}.tar.xz
+#Source1: ftp://ftp.gnutls.org/gcrypt/gnutls/%{name}-%{version}.tar.xz.sig
 Source1: libgnutls-config
 Patch1: gnutls-3.2.7-rpath.patch
 Patch3: gnutls-3.1.11-nosrp.patch
+Patch4: gnutls-3.4.1-default-policy.patch
+Patch5: gnutls-3.4.2-no-now-guile.patch
 
-# Wildcard bundling exception https://fedorahosted.org/fpc/ticket/174
 Provides: bundled(gnulib) = 20130424
 
 %package c++
 Summary: The C++ interface to GnuTLS
-Group:  Framework/Runtime/Library 
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %package devel
 Summary: Development files for the %{name} package
-Group:  Framework/Development/Library
-Requires: %{name} = %{version}-%{release}
-Requires: %{name}-c++ = %{version}-%{release}
+Group: Development/Libraries
+Requires: %{name}%{?_isa} = %{version}-%{release}
+Requires: %{name}-c++%{?_isa} = %{version}-%{release}
 %if %{with dane}
-Requires: %{name}-dane = %{version}-%{release}
+Requires: %{name}-dane%{?_isa} = %{version}-%{release}
 %endif
 Requires: pkgconfig
+Requires(post): /sbin/install-info
+Requires(preun): /sbin/install-info
 
 %package utils
 License: GPLv3+
 Summary: Command line tools for TLS protocol
-Group:  Framework/Runtime/Utility 
-Requires: %{name} = %{version}-%{release}
+Group: Applications/System
+Requires: %{name}%{?_isa} = %{version}-%{release}
 %if %{with dane}
-Requires: %{name}-dane = %{version}-%{release}
+Requires: %{name}-dane%{?_isa} = %{version}-%{release}
 %endif
 
 %if %{with dane}
 %package dane
 Summary: A DANE protocol implementation for GnuTLS
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 %endif
 
 %if %{with guile}
 %package guile
 Summary: Guile bindings for the GNUTLS library
 Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: guile
 %endif
 
@@ -120,43 +131,38 @@ This package contains Guile bindings for the library.
 
 %prep
 %setup -q
-
 %patch1 -p1 -b .rpath
 %patch3 -p1 -b .nosrp
+%patch4 -p1 -b .default-policy
+%patch5 -p1 -b .guile
 
 sed 's/gnutls_srp.c//g' -i lib/Makefile.in
 sed 's/gnutls_srp.lo//g' -i lib/Makefile.in
-
+sed -i -e 's|sys_lib_dlsearch_path_spec="/lib /usr/lib|sys_lib_dlsearch_path_spec="/lib /usr/lib %{_libdir}|g' configure
+rm -f lib/minitasn1/*.c lib/minitasn1/*.h
+rm -f src/libopts/*.c src/libopts/*.h src/libopts/compat/*.c src/libopts/compat/*.h
 
 %build
-export LDFLAGS="-Wl,--no-add-needed"
-%configure --with-libtasn1-prefix=%{_prefix} \
-           --with-included-libcfg \
-           --enable-local-libopts \
-           --disable-static \
+%configure --disable-static \
            --disable-openssl-compatibility \
            --disable-srp-authentication \
-	       --disable-non-suiteb-curves \
+	   --disable-non-suiteb-curves \
 	   --with-system-priority-file=%{_sysconfdir}/crypto-policies/back-ends/gnutls.config \
 	   --with-default-trust-store-pkcs11="pkcs11:model=p11-kit-trust;manufacturer=PKCS%2311%20Kit" \
+	   --with-trousers-lib=%{_libdir}/libtspi.so.1 \
 %if %{with guile}
            --enable-guile \
-%ifarch %{arm}
-           --disable-largefile \
-%endif
 %else
            --disable-guile \
 %endif
 %if %{with dane}
 	   --with-unbound-root-key-file=/var/lib/unbound/root.key \
-           --enable-dane \
+           --enable-libdane \
 %else
-           --disable-dane \
+           --disable-libdane \
 %endif
            --disable-rpath
-# Note that the arm hack above is not quite right and the proper thing would
-# be to compile guile with largefile support.
-make %{?_smp_mflags}
+make %{?_smp_mflags} V=1
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
@@ -165,8 +171,10 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/gnutls-srpcrypt
 cp -f %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/libgnutls-config
 rm -f $RPM_BUILD_ROOT%{_mandir}/man1/srptool.1
 rm -f $RPM_BUILD_ROOT%{_mandir}/man3/*srp*
+rm -f $RPM_BUILD_ROOT%{_infodir}/dir
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/libguile*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/guile/2.0/guile-gnutls*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/guile/2.0/guile-gnutls*.la
 %if %{without dane}
 rm -f $RPM_BUILD_ROOT%{_libdir}/pkgconfig/gnutls-dane.pc
 %endif
@@ -184,6 +192,16 @@ make check %{?_smp_mflags}
 
 %postun c++ -p /sbin/ldconfig
 
+%post devel
+if [ -f %{_infodir}/gnutls.info.gz ]; then
+    /sbin/install-info %{_infodir}/gnutls.info.gz %{_infodir}/dir || :
+fi
+
+%preun devel
+if [ $1 = 0 -a -f %{_infodir}/gnutls.info.gz ]; then
+   /sbin/install-info --delete %{_infodir}/gnutls.info.gz %{_infodir}/dir || :
+fi
+
 %if %{with dane}
 %post dane -p /sbin/ldconfig
 
@@ -199,7 +217,8 @@ make check %{?_smp_mflags}
 %files -f gnutls.lang
 %defattr(-,root,root,-)
 %{_libdir}/libgnutls.so.30*
-%doc COPYING COPYING.LESSER README AUTHORS NEWS THANKS
+%doc README AUTHORS NEWS THANKS
+%license COPYING COPYING.LESSER
 
 %files c++
 %{_libdir}/libgnutlsxx.so.*
@@ -211,15 +230,17 @@ make check %{?_smp_mflags}
 %{_libdir}/libgnutls*.so
 %{_libdir}/pkgconfig/*.pc
 %{_mandir}/man3/*
+%{_infodir}/gnutls*
+%{_infodir}/pkcs11-vision*
 
 %files utils
 %defattr(-,root,root,-)
 %{_bindir}/certtool
-#%{_bindir}/tpmtool
-#%{_bindir}/danetool
+%{_bindir}/tpmtool
 %{_bindir}/ocsptool
 %{_bindir}/psktool
 %{_bindir}/p11tool
+%{_bindir}/crywrap
 %if %{with dane}
 %{_bindir}/danetool
 %endif
@@ -236,7 +257,7 @@ make check %{?_smp_mflags}
 %if %{with guile}
 %files guile
 %defattr(-,root,root,-)
-%{_libdir}/libguile*.so*
+%{_libdir}/guile/2.0/guile-gnutls*.so*
 %{_datadir}/guile/site/gnutls
 %{_datadir}/guile/site/gnutls.scm
 %endif

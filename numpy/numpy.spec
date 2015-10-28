@@ -5,11 +5,10 @@
 
 Name:           numpy
 Version:        1.9.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Epoch:          1
 Summary:        A fast multidimensional array facility for Python
 
-Group:          Development/Languages
 # Everything is BSD except for class SafeEval in numpy/lib/utils.py which is Python
 License:        BSD and Python
 URL:            http://www.numpy.org/
@@ -38,7 +37,6 @@ this package is a version of f2py that works properly with NumPy.
 
 %package f2py
 Summary:        f2py for numpy
-Group:          Development/Libraries
 Requires:       %{name} = %{epoch}:%{version}-%{release}
 Requires:       python-devel
 Provides:       f2py = %{version}-%{release}
@@ -51,7 +49,6 @@ This package includes a version of f2py that works properly with NumPy.
 %package -n python3-numpy
 Summary:        A fast multidimensional array facility for Python
 
-Group:          Development/Languages
 License:        BSD
 %description -n python3-numpy
 NumPy is a general-purpose array-processing package designed to
@@ -67,7 +64,6 @@ this package is a version of f2py that works properly with NumPy.
 
 %package -n python3-numpy-f2py
 Summary:        f2py for numpy
-Group:          Development/Libraries
 Requires:       python3-numpy = %{epoch}:%{version}-%{release}
 Requires:       python3-devel
 Provides:       python3-f2py = %{version}-%{release}
@@ -219,3 +215,6 @@ popd &> /dev/null
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.9.2-3
+- Rebuild for new 4.0 release.
+

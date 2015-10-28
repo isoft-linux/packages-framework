@@ -6,7 +6,7 @@
 ##%define run_check 0%{!?_with_check:0}
 
 Name:		Cython
-Version:	0.22
+Version:	0.23
 ##Release:	4.b3%{?dist}
 Release:	2%{?dist}
 Summary:	A language for writing Python extension modules
@@ -118,20 +118,20 @@ popd
 %{python_sitearch}/Cython
 %{python_sitearch}/cython.py*
 %{python_sitearch}/pyximport
-%if 0%{?fedora} >= 9 || 0%{?rhel} >= 6
 %{python_sitearch}/Cython*egg-info
-%endif
+
 %if 0%{?with_python3}
 %files -n python3-Cython
 %doc *.txt Demos Doc Tools
 %{python3_sitearch}/*
 %{_bindir}/cython3
 %{_bindir}/cygdb3
-%if 0%{?fedora} >= 9 || 0%{?rhel} >= 6
 %{python3_sitearch}/Cython*egg-info
-%endif
 %endif # with_python3
 %doc *.txt Demos Doc Tools
 
 
 %changelog
+* Sun Oct 25 2015 cjacker - 0.23-2
+- Rebuild for new 4.0 release
+

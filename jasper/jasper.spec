@@ -1,9 +1,8 @@
 Name: jasper
 Version: 1.900.1
-Release: 1
+Release: 2
 Summary: JasPer
 License: Modified BSD
-Group: Development/Libraries
 Source: http://www.ece.uvic.ca/~mdadams/jasper/software/jasper-1.900.1.zip
 Patch0: jpc_dec.c.patch
 Patch1: libjasper-stepsizes-overflow.patch
@@ -24,7 +23,6 @@ format defined in ISO/IEC 15444-1:2000.
 
 %package devel
 Summary: Include Files and Documentation
-Group: Development/Libraries
 Requires: %{name} = %{version}
 
 %description devel
@@ -51,7 +49,6 @@ mkdir -p $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/*.la
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -74,5 +71,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.900.1-2
+- Rebuild for new 4.0 release.
+
 * Thu Apr 5 2007 Xuqing Kuang <xqkuang@redflag-linux.com> - 1.900.1-1
 - initial version

@@ -4,9 +4,8 @@
 Summary: Open Motif runtime libraries and executables.
 Name: openmotif
 Version: 2.3.4
-Release: 2
+Release: 3
 License: Open Group Public License
-Group: System Environment/Libraries
 Source: motif-%{version}-src.tgz
 Source1: xmbind
 URL: http://www.motifzone.net/
@@ -33,7 +32,6 @@ linked against Motif, and the Motif Window Manager "mwm".
 
 %package devel
 Summary: Open Motif development libraries and header files.
-Group: Development/Libraries
 Conflicts: lesstif-devel <= 0.92.32-6
 Requires: openmotif = %{version}-%{release}
 Requires: libjpeg-devel libpng-devel
@@ -85,7 +83,6 @@ install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/xinit/xinitrc.d/xmbind.sh
 
 rm -fr $RPM_BUILD_ROOT%{prefix}/%{_lib}/*.la \
        $RPM_BUILD_ROOT%{prefix}/share/Xm/doc
-rpmclean
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -94,7 +91,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc COPYRIGHT.MOTIF README RELEASE RELNOTES
 /etc/X11/xinit/xinitrc.d/xmbind.sh
 %{_prefix}/%{_lib}/X11/system.mwmrc
 %{prefix}/bin/mwm
@@ -121,3 +117,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/man/man5/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.3.4-3
+- Rebuild for new 4.0 release.
+

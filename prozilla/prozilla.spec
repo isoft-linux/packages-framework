@@ -1,8 +1,7 @@
 Name:	  	prozilla	
 Version:    2.0.4	
-Release:	1
+Release:	2
 Summary:	A download accelerator for Linux.
-Group:		System Environment/Shells
 License:	GPL
 Source:		prozilla-2.0.4.tar.bz2
 Patch:		prozilla-2.0.4-compile-fix.patch
@@ -15,7 +14,6 @@ improvement in your file downloading speeds.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 
 %description    devel
 The %{name}-devel package contains libraries and header files for
@@ -50,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libprozilla.a
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0.4-2
+- Rebuild for new 4.0 release.
+
 * Wed Jul 15 2015 Cjacker <cjacker@foxmail.com>
 - add devel package.
 

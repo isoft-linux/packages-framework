@@ -1,9 +1,8 @@
 Name:          geoclue
 Version:       0.12.99
-Release:       8%{?dist}
+Release:       9%{?dist}
 Summary:       A modular geoinformation service
 
-Group:         System Environment/Libraries
 License:       LGPLv2
 URL:           http://geoclue.freedesktop.org/
 Source0:       http://people.freedesktop.org/~hadess/%{name}-%{version}.tar.gz
@@ -29,7 +28,6 @@ location-aware applications as simple as possible.
 
 %package devel
 Summary: Development package for geoclue
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: dbus-devel
 Requires: libxml2-devel
@@ -40,7 +38,6 @@ Files for development with geoclue.
 
 %package doc
 Summary: Developer documentation for geoclue
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
@@ -49,7 +46,6 @@ Developer documentation for geoclue
 
 %package gui
 Summary: Testing gui for geoclue
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description gui
@@ -57,7 +53,6 @@ Testing gui for geoclue
 
 %package gypsy
 Summary: gypsy provider for geoclue
-Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description gypsy
@@ -65,7 +60,6 @@ A gypsy provider for geoclue
 
 %package gsmloc
 Summary: gsmloc provider for geoclue
-Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description gsmloc
@@ -158,3 +152,6 @@ cp test/.libs/geoclue-test-gui $RPM_BUILD_ROOT%{_bindir}/
 %{_datadir}/dbus-1/services/org.freedesktop.Geoclue.Providers.Gsmloc.service
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.12.99-9
+- Rebuild for new 4.0 release.
+

@@ -1,6 +1,6 @@
 Name:           gcab
 Version:        0.6
-Release:        2
+Release:        3
 Summary:        Cabinet file library and tool
 
 License:        LGPLv2+
@@ -50,7 +50,6 @@ rm -f %{buildroot}%{_libdir}/*.la
 
 %find_lang %{name}
 
-rpmclean
 %post -n libgcab -p /sbin/ldconfig
 %postun -n libgcab -p /sbin/ldconfig
 
@@ -73,3 +72,6 @@ rpmclean
 %{_libdir}/pkgconfig/libgcab-1.0.pc
 
 %changelog
+* Sat Oct 24 2015 builder - 0.6-3
+- Rebuild for new 4.0 release.
+

@@ -4,10 +4,9 @@
 
 Name:           atkmm
 Version:        2.24.1
-Release:        1 
+Release:        2 
 Summary:        C++ interface for the ATK library
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.gtkmm.org/
 Source0:        http://ftp.gnome.org/pub/GNOME/sources/atkmm/%{release_version}/atkmm-%{version}.tar.xz
@@ -27,7 +26,6 @@ quickly create complex user interfaces.
 
 %package devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Conflicts:      gtkmm-devel < 2.21.1
 
@@ -38,7 +36,6 @@ developing applications that use %{name}.
 
 %package        doc
 Summary:        Developer's documentation for the atkmm library
-Group:          Documentation
 BuildArch:      noarch
 Requires:       %{name} = %{version}-%{release}
 Requires:       glibmm-doc
@@ -63,7 +60,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -86,6 +82,9 @@ rpmclean
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.24.1-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

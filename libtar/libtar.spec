@@ -1,9 +1,8 @@
 Summary:        Tar file manipulation API
 Name:           libtar
 Version:        1.2.20
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        MIT
-Group:          System Environment/Libraries
 URL:            http://www.feep.net/libtar/
 Source0:        ftp://ftp.feep.net/pub/software/libtar/libtar-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -17,7 +16,6 @@ extensions.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -55,4 +53,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.20-2
+- Rebuild for new 4.0 release.
+
 

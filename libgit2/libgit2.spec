@@ -1,6 +1,6 @@
 Name: libgit2
 Version: 0.23.2
-Release: 4
+Release: 5
 Summary: A C implementation of the Git core methods as a library
 
 License: GPLv2 with exceptions
@@ -50,7 +50,6 @@ make test
 %install
 make install DESTDIR=%{buildroot}
 
-rpmclean
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -69,5 +68,8 @@ rpmclean
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.23.2-5
+- Rebuild for new 4.0 release.
+
 * Fri Sep 25 2015 Cjacker <cjacker@foxmail.com>
 - update to 0.23.2

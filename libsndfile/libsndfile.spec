@@ -1,9 +1,8 @@
 Summary: 	Library for reading and writing sound files
 Name: 		libsndfile
 Version: 	1.0.25
-Release: 	1
+Release: 	2
 License: 	LGPL
-Group: 		System Environment/Libraries
 URL: 		http://www.mega-nerd.com/libsndfile/
 Source0: 	http://www.mega-nerd.com/libsndfile/libsndfile-%{version}.tar.gz
 Patch0:		libsndfile-1.0.11-svx-channels.patch
@@ -14,7 +13,6 @@ BuildRequires:  libflac-devel
 
 %package devel
 Summary:	Development files for libsndfile
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release} pkgconfig
 
 %description
@@ -73,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.25-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

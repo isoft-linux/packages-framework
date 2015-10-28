@@ -2,7 +2,7 @@
 
 Name:           python-requests
 Version:        2.7.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        HTTP library, written in Python, for human beings
 
 License:        ASL 2.0
@@ -132,3 +132,6 @@ popd
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.7.0-3
+- Rebuild for new 4.0 release.
+

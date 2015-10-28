@@ -1,9 +1,8 @@
 Name:           media-player-info
 Version:        22
-Release:        1
+Release:        2
 Summary:        Data files describing media player capabilities
 
-Group:          System Environment/Base
 License:        BSD
 URL:            http://www.freedesktop.org/wiki/Software/media-player-info
 Source0:        http://www.freedesktop.org/software/media-player-info/%{name}-%{version}.tar.gz
@@ -43,3 +42,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 22-2
+- Rebuild for new 4.0 release.
+

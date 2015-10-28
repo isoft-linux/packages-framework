@@ -1,6 +1,6 @@
 Name:           gtkspell3
 Version:        3.0.7
-Release:        1
+Release:        2
 Summary:        On-the-fly spell checking for GtkTextView widgets
 
 License:        GPLv2+
@@ -36,9 +36,6 @@ developing applications that use GtkSpell API version 3.0.
 %setup -q
 
 %build
-export CC=clang
-export CXX=clang++
-
 %configure --disable-static --enable-vala
 make %{?_smp_mflags} V=1
 
@@ -67,3 +64,6 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_datadir}/vala/vapi/gtkspell3-3.0.deps
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.0.7-2
+- Rebuild for new 4.0 release.
+

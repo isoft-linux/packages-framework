@@ -5,9 +5,8 @@ Summary: WPA/WPA2/IEEE 802.1X Supplicant
 Name: wpa_supplicant
 Epoch: 1
 Version: 2.5
-Release: 6.git
+Release: 7.git
 License: BSD
-Group:  Framework/Runtime/Utility
 Source0: hostap.tar.gz
 #Source0: http://w1.fi/releases/%{name}-%{version}%{rcver}%{snapshot}.tar.gz
 Source1: build-config
@@ -53,7 +52,6 @@ authentication/association of the wlan driver.
 
 %package gui
 Summary: Graphical User Interface for %{name}
-Group: Applications/System
 
 %description gui
 Graphical User Interface for wpa_supplicant written using QT
@@ -62,7 +60,6 @@ Graphical User Interface for wpa_supplicant written using QT
 
 %package -n libeap
 Summary: EAP peer library
-Group: System Environment/Libraries
 
 %description -n libeap
 This package contains the runtime EAP peer library. Don't use this
@@ -70,7 +67,6 @@ unless you know what you're doing.
 
 %package -n libeap-devel
 Summary: Header files for EAP peer library
-Group: Development/Libraries
 Requires: libeap = %{epoch}:%{version}-%{release}
 
 %description -n libeap-devel
@@ -173,5 +169,8 @@ fi
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:2.5-7.git
+- Rebuild for new 4.0 release.
+
 * Wed Aug 05 2015 Cjacker <cjacker@foxmail.com>
 - update to ab653ed

@@ -1,8 +1,7 @@
 Summary: Tool for decoding raw image data from digital cameras
 Name: dcraw
 Version: 9.25.0
-Release: 3%{?dist}
-Group: Applications/Multimedia
+Release: 4%{?dist}
 License: GPLv2+
 URL: http://cybercom.net/~dcoffin/dcraw
 Source0: http://cybercom.net/~dcoffin/dcraw/archive/dcraw-%{version}.tar.gz
@@ -70,3 +69,6 @@ done
 %{_mandir}/man1/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 9.25.0-4
+- Rebuild for new 4.0 release.
+

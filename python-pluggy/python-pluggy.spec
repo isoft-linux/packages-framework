@@ -9,7 +9,7 @@
 
 Name:           python-pluggy
 Version:        0.3.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        The plugin manager stripped of pytest specific details
 
 License:        MIT
@@ -113,3 +113,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.3.0-4
+- Rebuild for new 4.0 release.
+

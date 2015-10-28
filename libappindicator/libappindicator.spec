@@ -1,9 +1,8 @@
 Name:		libappindicator
 Version:	12.10.0
-Release:	10%{?dist}
+Release:	11%{?dist}
 Summary:	Application indicators library
 
-Group:		System Environment/Libraries
 License:	LGPLv2 and LGPLv3
 URL:		https://launchpad.net/libappindicator
 Source0:	https://launchpad.net/libappindicator/12.10/%{version}/+download/%{name}-%{version}.tar.gz
@@ -33,7 +32,6 @@ none of those are available.
 
 %package -n python-appindicator
 Summary:	Python 2 bindings for %{name}
-Group:		System Environment/Libraries
 
 Requires:	%{name} = %{version}-%{release}
 
@@ -43,7 +41,6 @@ This package contains the Python 2 bindings for the appindicator library.
 
 %package devel
 Summary:	Development files for %{name}
-Group:		Development/Libraries
 
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-glib-devel
@@ -55,7 +52,6 @@ This package contains the development files for the appindicator library.
 
 %package gtk3
 Summary:	Application indicators library - GTK 3
-Group:		System Environment/Libraries
 
 %description gtk3
 A library to allow applications to export a menu into the Unity Menu bar. Based
@@ -67,7 +63,6 @@ This package contains the GTK 3 version of this library.
 
 %package gtk3-devel
 Summary:	Development files for %{name}-gtk3
-Group:		Development/Libraries
 
 Requires:	%{name}-gtk3 = %{version}-%{release}
 Requires:	dbus-glib-devel
@@ -79,7 +74,6 @@ This package contains the development files for the appindicator-gtk3 library.
 
 %package docs
 Summary:	Documentation for %{name} and %{name}-gtk3
-Group:		Documentation
 
 BuildArch:	noarch
 
@@ -185,3 +179,6 @@ find %{buildroot} -type f -name '*.la' -delete
 %doc %{_datadir}/gtk-doc/html/libappindicator/
 
 %changelog
+* Sat Oct 24 2015 builder - 12.10.0-11
+- Rebuild for new 4.0 release.
+

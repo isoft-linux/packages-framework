@@ -1,8 +1,7 @@
 Name: libndp
 Version: 1.5
-Release: 2
+Release: 3
 Summary: Library for Neighbor Discovery Protocol
-Group: System Environment/Libraries
 License: LGPLv2+
 URL: http://www.libndp.org/
 Source: http://www.libndp.org/files/libndp-%{version}.tar.gz
@@ -15,7 +14,6 @@ for IPv6 Neighbor Discovery Protocol.  It also provides a tool
 named ndptool for sending and receiving NDP messages.
 
 %package devel
-Group: Development/Libraries
 Summary: Libraries and header files for libndp development
 Requires: libndp = %{version}-%{release}
 
@@ -35,7 +33,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -51,3 +48,6 @@ rpmclean
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5-3
+- Rebuild for new 4.0 release.
+

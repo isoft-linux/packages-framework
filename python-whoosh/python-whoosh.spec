@@ -4,7 +4,7 @@
 
 Name:           python-whoosh
 Version:        2.5.7
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Fast, pure-Python full text indexing, search, and spell checking library 
 
 License:        BSD 
@@ -82,15 +82,16 @@ popd
 %endif
 
 %files
-%doc docs/html/ README.txt LICENSE.txt
 %{python2_sitelib}/*.egg-info/
 %{python2_sitelib}/whoosh
 
 %if 0%{?with_python3}
 %files -n python3-whoosh
-%doc README.txt LICENSE.txt docs/html/
 %{python3_sitelib}/whoosh
 %{python3_sitelib}/*.egg-info/
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.5.7-6
+- Rebuild for new 4.0 release.
+

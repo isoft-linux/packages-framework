@@ -1,9 +1,8 @@
 Name:           pigz
 Version:        2.3.3
-Release:        3
+Release:        4
 Summary:        Parallel implementation of gzip
 
-Group:          Applications/File
 License:        zlib
 URL:            http://www.zlib.net/pigz/
 Source0:        http://www.zlib.net/%{name}/%{name}-%{version}.tar.gz
@@ -45,3 +44,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.3.3-4
+- Rebuild for new 4.0 release.
+

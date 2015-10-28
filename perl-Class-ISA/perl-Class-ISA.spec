@@ -1,9 +1,8 @@
 Name:           perl-Class-ISA
 Version:        0.36
-Release:        1016%{?dist}
+Release:        1017%{?dist}
 Summary:        Report the search path for a class's ISA tree
 License:        GPL+ or Artistic
-Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Class-ISA/
 Source0:        http://www.cpan.org/authors/id/S/SM/SMUELLER/Class-ISA-%{version}.tar.gz
 BuildArch:      noarch
@@ -37,3 +36,6 @@ make test
 %{perl_vendorlib}/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.36-1017
+- Rebuild for new 4.0 release.
+

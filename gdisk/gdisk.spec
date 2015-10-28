@@ -1,10 +1,9 @@
 Summary:       An fdisk-like partitioning tool for GPT disks
 Name:          gdisk
 Version:       1.0.0 
-Release:       1
+Release:       2
 License:       GPLv2
 URL:           http://www.rodsbooks.com/gdisk/
-Group:         System Environment/Base
 Source0:       http://downloads.sourceforge.net/gptfdisk/gptfdisk-%{version}.tar.gz
 BuildRequires: popt-devel
 BuildRequires: libicu-devel
@@ -47,6 +46,9 @@ done
 %{_mandir}/man8/fixparts.8*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.0-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,9 +1,8 @@
 Summary: A utility for retrieving files using the HTTP or FTP protocols
 Name: wget
 Version: 1.16.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv3+
-Group: Applications/Internet
 Url: http://www.gnu.org/software/wget/
 Source: ftp://ftp.gnu.org/gnu/wget/wget-%{version}.tar.xz
 
@@ -65,3 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wget
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.16.3-3
+- Rebuild for new 4.0 release.
+

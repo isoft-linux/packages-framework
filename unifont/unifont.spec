@@ -1,6 +1,6 @@
 Name:            unifont
 Version:         7.0.06
-Release:         2
+Release:         3
 License:         GPLv2+ and GFDL
 Url:             https://savannah.gnu.org/projects/unifont
 Summary:         Tools and glyph descriptions in a very simple text format
@@ -9,7 +9,7 @@ Source0:         http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}/%{name}-%{ver
 Source1:         unifont.metainfo.xml
 
 BuildRequires:   xorg-x11-font-utils
-BuildRequires:   fontforge
+#BuildRequires:   fontforge
 BuildRequires:   fontpackages-devel
 
 %description
@@ -81,3 +81,6 @@ rm %{buildroot}/usr/share/consolefonts/Unifont-APL8x16.psf.gz
 #%license COPYING
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 7.0.06-3
+- Rebuild for new 4.0 release.
+

@@ -2,7 +2,7 @@
 
 Name:           python-backports-ssl_match_hostname
 Version:        3.4.0.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        The ssl.match_hostname() function from Python 3
 
 License:        Python
@@ -56,3 +56,6 @@ rm -f %{buildroot}%{python_sitelib}/backports/__init__.py*
 %{python_sitelib}/backports.ssl_match_hostname-%{version}-*.egg-info/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.4.0.2-5
+- Rebuild for new 4.0 release.
+

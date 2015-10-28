@@ -23,12 +23,11 @@
 Summary:        Specialist tools for ALSA
 Name:           alsa-tools
 Version:        1.0.29
-Release:        4%{?dist}
+Release:        5%{?dist}
 
 # Checked at least one source file from all the sub-projects contained in
 # the source tarball and they are consistent GPLv2+ - TJ 2007-11-15
 License:        GPLv2+
-Group:          Applications/Multimedia
 URL:            http://www.alsa-project.org/
 Source:		ftp://ftp.alsa-project.org/pub/tools/%{name}-%{version}.tar.bz2
 
@@ -81,7 +80,6 @@ certain sound cards.
 
 %package firmware
 Summary:        ALSA tools for uploading firmware to some soundcards
-Group:          Applications/System
 Requires:       udev
 Requires:       alsa-firmware
 Requires:       fxload
@@ -279,3 +277,6 @@ install -m 644 %{SOURCE5} %{buildroot}/lib/udev/rules.d
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-5
+- Rebuild for new 4.0 release.
+

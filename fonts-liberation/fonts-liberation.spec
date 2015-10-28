@@ -1,6 +1,6 @@
 Name:    fonts-liberation
 Version: 1.07.4
-Release: 3 
+Release: 4 
 Summary: Liberation TrueType fonts
 License: GPL
 URL:     https://fedorahosted.org/liberation-fonts/
@@ -12,6 +12,8 @@ Source4: liberation-fonts-serif.conf
 Source5: liberation-fonts-narrow.conf
 
 Provides: liberation-fonts = %{version}
+
+BuildArch: noarch
 
 %description
 Liberation TrueType fonts
@@ -48,3 +50,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/fonts/conf.d/*
 %{_datadir}/fontconfig/conf.avail/*
 %{_datadir}/fonts/*.ttf
+
+%changelog
+* Sat Oct 24 2015 builder - 1.07.4-4
+- Rebuild for new 4.0 release.
+

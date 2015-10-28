@@ -1,6 +1,6 @@
 Name: qt5-qtsvg 
 Version: 5.5.1
-Release: 2 
+Release: 3 
 Summary: SVG component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -77,6 +77,9 @@ fi
 %{_libdir}/qt5/mkspecs/modules/*.pri
 %{_docdir}/qt5/*
 %changelog
+* Sat Oct 24 2015 builder - 5.5.1-3
+- Rebuild for new 4.0 release.
+
 * Fri Oct 16 2015 Cjacker <cjacker@foxmail.com>
 - update to 5.5.1
 

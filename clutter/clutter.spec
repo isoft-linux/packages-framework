@@ -3,7 +3,7 @@
 
 Name:          clutter
 Version:       1.24.2
-Release:       1
+Release:       2
 Summary:       Open Source software library for creating rich graphical user interfaces
 
 License:       LGPLv2+
@@ -113,6 +113,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_datadir}/gtk-doc/html/clutter
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.24.2-2
+- Rebuild for new 4.0 release.
+
 
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.24.2

@@ -2,9 +2,8 @@ Summary:	A voice compression format (codec)
 Name:		libspeex
 Version: 	1.2	
 %define rc_ver	rc2
-Release:	2.12.%{rc_ver}
+Release:	2.12.%{rc_ver}.1
 License:	BSD
-Group:		System Environment/Libraries
 URL:		http://www.speex.org/
 Source0:	http://downloads.xiph.org/releases/speex/speex-%{version}%{rc_ver}.tar.gz
 Provides:   	speex = %{version}-%{release}
@@ -19,7 +18,6 @@ data (e.g. voice mail).
 
 %package devel
 Summary: 	Development package for %{name}
-Group: 		Development/Libraries
 Requires: 	%{name} = %{version}-%{release}
 Requires: 	pkgconfig
 Provides:   speex-devel = %{version}-%{release}
@@ -30,7 +28,6 @@ speech. This package contains development files for %{name}
 
 %package -n speex-tools
 Summary:	The tools package for %{name}
-Group:		Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
 
 %description -n speex-tools
@@ -76,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 #%{_mandir}/man1/speexdec.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2-2.12.rc2.1
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

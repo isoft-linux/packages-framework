@@ -1,12 +1,11 @@
 Name: libmng
 Version: 2.0.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.libmng.com/
 Summary: Library for Multiple-image Network Graphics support
 # This is a common zlib variant.
 License: zlib
 Source0: http://download.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-Group: System Environment/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 BuildRequires: libjpeg-turbo-devel
@@ -16,7 +15,6 @@ BuildRequires: autoconf
 
 %package devel
 Summary: Development files for the Multiple-image Network Graphics library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: zlib-devel
 Requires: libjpeg-devel
@@ -71,3 +69,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/libmng.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0.3-3
+- Rebuild for new 4.0 release.
+

@@ -3,10 +3,9 @@
 
 Name:           crda
 Version:        %{crda_version}_%{regdb_version}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Regulatory compliance daemon for 802.11 wireless networking
 
-Group:          System Environment/Base
 License:        ISC
 URL:            http://www.linuxwireless.org/en/developers/Regulatory/CRDA
 BuildRoot:      %{_tmppath}/%{name}-%{crda_version}-%{release}-root-%(%{__id_u} -n)
@@ -40,7 +39,6 @@ communication from the kernel.
 
 %package devel
 Summary:        Header files for use with libreg. 
-Group:          Development/System
 
 
 %description devel
@@ -126,3 +124,6 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18_2015.09.25-3
+- Rebuild for new 4.0 release.
+

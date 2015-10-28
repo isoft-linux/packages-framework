@@ -1,9 +1,8 @@
 Name:           libdvdread
 Version:        5.0.3 
-Release:        1 
+Release:        2 
 Summary:        A library for reading DVD video discs based on Ogle code
 
-Group:          System Environment/Libraries
 License:        GPLv2+
 Source0:        http://download.videolan.org/videolan/libdvdread/5.0.3/libdvdread-%{version}.tar.bz2
 
@@ -13,7 +12,6 @@ It provides the functionality that is required to access many DVDs.
 
 %package        devel
 Summary:        Development files for libdvdread
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
 
@@ -49,9 +47,11 @@ rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root,-)
-%doc DEVELOPMENT-POLICY.txt TODO
 %{_includedir}/dvdread
 %{_libdir}/libdvdread.so
 %{_libdir}/pkgconfig/dvdread.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.0.3-2
+- Rebuild for new 4.0 release.
+

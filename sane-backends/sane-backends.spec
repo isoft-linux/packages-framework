@@ -15,12 +15,11 @@
 Summary: Scanner access software
 Name: sane-backends
 Version: 1.0.24
-Release: 20 
+Release: 21 
 # lib/ is LGPLv2+, backends are GPLv2+ with exceptions
 # Tools are GPLv2+, docs are public domain
 # see LICENSE for details
 License: GPLv2+ and GPLv2+ with exceptions and Public Domain
-Group: System Environment/Libraries
 Source0: ftp://ftp.sane-project.org/pub/sane/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1: sane.png
 
@@ -40,7 +39,7 @@ BuildRequires: libusb-devel
 %endif
 BuildRequires: libjpeg-devel
 BuildRequires: libtiff-devel
-BuildRequires: v4l-utils-devel
+BuildRequires: libv4l-devel
 BuildRequires: gettext
 BuildRequires: gphoto2-devel
 Requires: systemd >= 183
@@ -54,7 +53,6 @@ hand-held scanner, video and still cameras, frame-grabbers, etc.).
 
 %package doc
 Summary: SANE backends documentation
-Group: Documentation
 BuildArch: noarch
 
 %description doc
@@ -62,7 +60,6 @@ This package contains documentation for SANE backends.
 
 %package libs
 Summary: SANE libraries
-Group: System Environment/Libraries
 
 %description libs
 This package contains the SANE libraries which are needed by applications that
@@ -70,7 +67,6 @@ want to access scanners.
 
 %package devel
 Summary: SANE development toolkit
-Group: Development/Libraries
 Requires: sane-backends = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: sane-backends-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 %if %libusb1
@@ -88,7 +84,6 @@ Easy (SANE) modules.
 
 %package drivers-scanners
 Summary: SANE backend drivers for scanners
-Group: System Environment/Libraries
 Requires: sane-backends = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: sane-backends-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 
@@ -97,7 +92,6 @@ This package contains backend drivers to access scanner hardware through SANE.
 
 %package drivers-cameras
 Summary: Scanner backend drivers for digital cameras
-Group: System Environment/Libraries
 Requires: sane-backends = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires: sane-backends-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 
@@ -214,6 +208,9 @@ popd
 %{_libdir}/sane/*gphoto2.so*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.24-21
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

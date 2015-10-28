@@ -3,9 +3,8 @@
 Name:           python-pycparser
 Summary:        C parser and AST generator written in Python
 Version:        2.14
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        BSD
-Group:          System Environment/Libraries
 URL:            http://github.com/eliben/pycparser
 Source0:        http://github.com/eliben/pycparser/archive/release_v%{version}.tar.gz
 Source1:        pycparser-0.91.1-remove-relative-sys-path.py
@@ -39,7 +38,6 @@ need to parse C source code.
 %if 0%{?with_python3}
 %package -n python3-pycparser
 Summary:        C parser and AST generator written in Python
-Group:          System Environment/Libraries
 Requires:       python3-ply
 
 %description -n python3-pycparser
@@ -110,3 +108,6 @@ popd
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.14-3
+- Rebuild for new 4.0 release.
+

@@ -1,10 +1,9 @@
 Name:           libaacs
 Version:        0.8.1
-Release:        1.1
+Release:        2.1
 License:        LGPL-2.1+
 Summary:        Open implentation of AACS specification
 Url:            http://www.videolan.org/developers/libaacs.html
-Group:          System/Libraries
 Source:         ftp://ftp.videolan.org/pub/videolan/libaacs/%{version}/libaacs-%{version}.tar.bz2
 Patch1:         libaacs-pthread.patch
 BuildRequires:  bison
@@ -19,7 +18,6 @@ This research project provides, through an open-source library, a way to underst
 
 %package devel
 Summary:        Open implentation of AACS specification - Development files
-Group:          Development/Languages/C and C++
 Requires:       %{name} = %{version}
 
 %description devel
@@ -57,3 +55,6 @@ find %{buildroot} -type f -name "*.la" -delete -print
 %{_includedir}/%{name}/
 
 %changelog
+* Sat Oct 24 2015 builder - 0.8.1-2.1
+- Rebuild for new 4.0 release.
+

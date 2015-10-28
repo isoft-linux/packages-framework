@@ -1,9 +1,8 @@
 Name:      hyphen
 Summary:   A text hyphenation library
 Version:   2.8.8
-Release:   2
+Release:   3
 Source:    http://downloads.sourceforge.net/hunspell/hyphen-%{version}.tar.gz
-Group:     System Environment/Libraries
 URL:       http://hunspell.sf.net
 License:   GPLv2 or LGPLv2+ or MPLv1.1
 BuildRequires: perl, patch, autoconf, automake, libtool
@@ -18,7 +17,6 @@ Hyphen is a library for high quality hyphenation and justification.
 %package devel
 Requires: hyphen = %{version}-%{release}
 Summary: Files for developing with hyphen
-Group: Development/Libraries
 
 %description devel
 Includes and definitions for developing with hyphen
@@ -26,7 +24,6 @@ Includes and definitions for developing with hyphen
 %package en
 Requires: hyphen
 Summary: English hyphenation rules
-Group: Applications/Text
 BuildArch: noarch
 
 %description en
@@ -83,3 +80,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/substrings.pl
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.8.8-3
+- Rebuild for new 4.0 release.
+

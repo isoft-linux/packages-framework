@@ -1,10 +1,9 @@
 Name: minicom
 Summary: A text-based modem control and terminal emulation program
 Version: 2.7
-Release: 5%{?dist}
+Release: 6%{?dist}
 URL: http://alioth.debian.org/projects/minicom/
 License: GPL+ and GPLv2+ and GPLv2 and LGPLv2+ Public Domain and Copyright only
-Group: Applications/Communications
 ExcludeArch: s390 s390x
 
 Source0: https://alioth.debian.org/frs/download.php/file/3977/minicom-2.7.tar.gz
@@ -52,3 +51,6 @@ mkdir -p %{buildroot}%{_sysconfdir}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.7-6
+- Rebuild for new 4.0 release.
+

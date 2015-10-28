@@ -1,9 +1,8 @@
 Name:          xapian-core
 Version:       1.2.21
-Release:       1
+Release:       2
 Summary:       The Xapian Probabilistic Information Retrieval Library
 
-Group:         Applications/Databases
 License:       GPLv2+
 URL:           http://www.xapian.org/
 Source0:       http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.xz
@@ -19,7 +18,6 @@ indexing and search facilities to applications
 
 %package libs
 Summary:       Xapian search engine libraries
-Group:         System Environment/Libraries
 
 %description libs
 Xapian is an Open Source Probabilistic Information Retrieval framework. It
@@ -28,7 +26,6 @@ indexing and search facilities to applications. This package provides the
 libraries for applications using Xapian functionality
 
 %package devel
-Group:         Development/Libraries
 Summary:       Files needed for building packages which use Xapian
 Requires:      %{name} = %{version}-%{release}
 Requires:      %{name}-libs = %{version}-%{release}
@@ -99,3 +96,6 @@ rm -rf %{buildroot}%{_datadir}/doc/%{name}
 %{_mandir}/man1/xapian-config.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.21-2
+- Rebuild for new 4.0 release.
+

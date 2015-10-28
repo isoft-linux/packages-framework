@@ -1,6 +1,6 @@
 Name: clutter-gst2
 Version: 2.0.16
-Release: 2 
+Release: 3 
 Summary: GStreamer integration for Clutter
 
 License: LGPLv2+
@@ -64,5 +64,8 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/gtk-doc/
 #doc #{_datadir}/gtk-doc/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0.16-3
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - rebuild with clutter update.

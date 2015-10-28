@@ -10,10 +10,9 @@
 
 Name:           python-nose
 Version:        1.3.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Discovery-based unittest extension for Python
 
-Group:          Development/Languages
 License:        LGPLv2+ and Public Domain
 URL:            http://somethingaboutorange.com/mrl/projects/nose/
 Source0:        http://pypi.python.org/packages/source/n/nose/nose-%{version}.tar.gz
@@ -49,7 +48,6 @@ output capture and more.
 
 %package docs
 Summary:        Nose Documentation
-Group:          Documentation
 BuildRequires:  python-sphinx
 Requires: python-nose
 
@@ -59,7 +57,6 @@ Documentation for Nose
 %if 0%{?with_python3}
 %package -n python3-%{upstream_name}
 Summary:        Discovery-based unittest extension for Python3
-Group:          Development/Languages
 Requires:       python3-setuptools
 
 %description -n python3-%{upstream_name}
@@ -173,3 +170,6 @@ rm -rf %{buildroot}
 %endif # with_docs
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.7-3
+- Rebuild for new 4.0 release.
+

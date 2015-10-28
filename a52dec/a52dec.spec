@@ -1,9 +1,8 @@
 Summary: A free library for decoding ATSC A/52 (also known as AC-3) streams.
 Name: a52dec 
 Version: 0.7.4 
-Release: 4
+Release: 5
 License: GPL
-Group: System Environment/Libraries
 URL:    http://liba52.sourceforge.net/files/
 Source: http://liba52.sourceforge.net/files/%{name}-%{version}.tar.gz
 %description
@@ -11,7 +10,6 @@ liba52 is a free library for decoding ATSC A/52 (also known as AC-3) streams.
 The A/52 standard is used in a variety of applications, including digital television and DVD. 
 %package devel
 Summary: Shared libraries for a52dec
-Group: Development/Libraries
 Requires: %{name} = %{version}
 
 %description devel
@@ -28,7 +26,6 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
-rpmclean
 %clean
 rm -rf %{buildroot}
 
@@ -44,6 +41,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.7.4-5
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,7 +1,7 @@
 Name:       m17n-db
 Summary:    Multilingualization datafiles for m17n-lib
 Version:    1.7.0
-Release:    4%{?dist}
+Release:    5%{?dist}
 License:    LGPLv2+
 URL:        http://www.nongnu.org/m17n
 Source0:    http://download-mirror.savannah.gnu.org/releases/m17n/%{name}-%{version}.tar.gz
@@ -135,3 +135,6 @@ cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/m17n
 %{_datadir}/pkgconfig/m17n-db.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.7.0-5
+- Rebuild for new 4.0 release.
+

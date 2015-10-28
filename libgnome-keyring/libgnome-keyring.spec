@@ -5,9 +5,8 @@
 Summary: Framework for managing passwords and other secrets
 Name: libgnome-keyring
 Version: 3.12.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: GPLv2+ and LGPLv2+
-Group: System Environment/Libraries
 #VCS: git:git://git.gnome.org/libgnome-keyring
 Source: http://download.gnome.org/sources/libgnome-keyring/3.12/libgnome-keyring-%{version}.tar.xz
 URL: http://live.gnome.org/GnomeKeyring
@@ -32,7 +31,6 @@ with the gnome-keyring system.
 %package devel
 Summary: Development files for libgnome-keyring
 License: LGPLv2+
-Group: Development/Libraries
 Requires: %name = %{version}-%{release}
 Requires: glib2-devel
 Conflicts: gnome-keyring-devel < 2.29.4
@@ -81,3 +79,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.12.0-6
+- Rebuild for new 4.0 release.
+

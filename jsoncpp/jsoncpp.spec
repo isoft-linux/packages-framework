@@ -1,8 +1,7 @@
 Name:       jsoncpp
 Version:    0.10.5
-Release:    1
+Release:    2
 Summary:    JSON library implemented in C++
-Group:      System Environment/Libraries
 License:    Public Domain or MIT
 URL:        https://github.com/open-source-parsers/jsoncpp
 Source0:    https://github.com/open-source-parsers/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
@@ -20,7 +19,6 @@ generate.
 
 %package devel
 Summary:    Development headers and library for %{name}
-Group:      Development/Libraries
 Requires:   %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -29,7 +27,6 @@ This package contains the development headers and library for %{name}.
 
 %package doc
 Summary:    Documentation for %{name}
-Group:      Documentation
 BuildArch:  noarch
 
 %description doc
@@ -85,3 +82,6 @@ sed -i 's|@@LIBDIR@@|%{_libdir}|g' $RPM_BUILD_ROOT%{_libdir}/pkgconfig/jsoncpp.p
 %{_docdir}/%{name}/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.10.5-2
+- Rebuild for new 4.0 release.
+

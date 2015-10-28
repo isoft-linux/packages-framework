@@ -1,11 +1,10 @@
 Summary: Library implementing the Unicode Bidirectional Algorithm
 Name: fribidi
 Version: 0.19.6
-Release: 1
+Release: 2
 URL: http://fribidi.org
 Source: http://fribidi.org/download/%{name}-%{version}.tar.bz2
 License: LGPLv2+ and UCD
-Group: System Environment/Libraries
 
 %description
 A library to handle bidirectional scripts (for example Hebrew, Arabic),
@@ -14,7 +13,6 @@ is always written in logical order.
 
 %package devel
 Summary: Libraries and include files for FriBidi
-Group: System Environment/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -49,3 +47,6 @@ rm -f $RPM_BUILD_ROOT/%{_libdir}/*.la
 %{_mandir}/man3/%{name}_*.gz
 
 %changelog
+* Sat Oct 24 2015 builder - 0.19.6-2
+- Rebuild for new 4.0 release.
+

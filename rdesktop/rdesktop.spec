@@ -1,13 +1,13 @@
+%define debug_package %{nil} 
 Name:           rdesktop
 Version:        1.6.0
-Release:        1
+Release:        2
 Summary:        X client for remote desktop into Windows Terminal Server
 
-Group:          User Interface/Desktops
 License:        GPL
 URL:            http://www.rdesktop.org/
 Source0:        %{name}-%{version}.tar.gz
-Patch0: 		rdesktop-1.4.1-printf-info-for-rdesktop-ui.patch
+Patch0: 	rdesktop-1.4.1-printf-info-for-rdesktop-ui.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  openssl-devel
 
@@ -28,7 +28,6 @@ make %{?_smp_mflags}
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -40,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

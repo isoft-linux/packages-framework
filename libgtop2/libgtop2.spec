@@ -3,10 +3,9 @@
 Name:     libgtop2
 Summary:  LibGTop library (version 2)
 Version:  2.32.0
-Release:  1 
+Release:  2 
 License:  GPLv2+
 URL:      http://download.gnome.org/sources/libgtop/2.28
-Group:    System Environment/Libraries
 #VCS: git://git.gnome.org/libgtop
 Source:   http://download.gnome.org/sources/libgtop/2.28/libgtop-%{version}.tar.xz
 Patch0:   libgtop-fix-header.patch
@@ -21,7 +20,6 @@ such as their PID, memory usage, etc.
 
 %package devel
 Summary:  Libraries and include files for developing with libgtop
-Group:    Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -66,6 +64,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %exclude %{_datadir}/info
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.32.0-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

@@ -1,8 +1,7 @@
 Name:           xvidcore
 Version:        1.3.3
-Release:        2
+Release:        3
 Summary:        Free reimplementation of the OpenDivX video codec
-Group:          System Environment/Libraries
 License:        XVID (GPL with specific restrictions)
 URL:            http://www.xvid.org/
 Source0:        http://downloads.xvid.org/downloads/xvidcore-%{version}.tar.bz2
@@ -13,7 +12,6 @@ and DivX4 videos with it, as well as encode compatible files.
 
 %package        devel
 Summary:        Development files for the XviD video codec
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -35,7 +33,6 @@ rm -rf $RPM_BUILD_ROOT
 make -C build/generic install DESTDIR=$RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_libdir}/libxvidcore.a
 chmod +x $RPM_BUILD_ROOT%{_libdir}/*.so*
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -54,4 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_includedir}/xvid.h
 %{_libdir}/libxvidcore.so
+
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.3-3
+- Rebuild for new 4.0 release.
 

@@ -4,8 +4,7 @@
 
 Name: libtdb
 Version: 1.3.0
-Release: 1 
-Group: System Environment/Daemons
+Release: 2 
 Summary: The tdb library
 License: LGPLv3+
 URL: http://tdb.samba.org/
@@ -25,7 +24,6 @@ Provides: bundled(libreplace)
 A library that implements a trivial database.
 
 %package devel
-Group: Development/Libraries
 Summary: Header files need to link the Tdb library
 Requires: libtdb = %{version}-%{release}
 Requires: pkgconfig
@@ -34,7 +32,6 @@ Requires: pkgconfig
 Header files needed to develop programs that link against the Tdb library.
 
 %package -n tdb-tools
-Group: Development/Libraries
 Summary: Developer tools for the Tdb library
 Requires: libtdb = %{version}-%{release}
 
@@ -42,7 +39,6 @@ Requires: libtdb = %{version}-%{release}
 Tools to manage Tdb files
 
 %package -n python-tdb
-Group: Development/Libraries
 Summary: Python bindings for the Tdb library
 Requires: libtdb = %{version}-%{release}
 
@@ -69,7 +65,6 @@ find $RPM_BUILD_ROOT -name "*.so*" -exec chmod -c +x {} \;
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/libtdb.a
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -108,3 +103,6 @@ rm -rf $RPM_BUILD_ROOT
 %postun -n python-tdb -p /sbin/ldconfig
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.0-2
+- Rebuild for new 4.0 release.
+

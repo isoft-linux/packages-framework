@@ -4,10 +4,9 @@
 
 Name:           pygpgme
 Version:        0.3
-Release:        13
+Release:        14
 Summary:        Python module for working with OpenPGP messages
 
-Group:          Development/Languages
 License:        LGPLv2+
 URL:            http://cheeseshop.python.org/pypi/pygpgme
 # pygpgme is being developed for Ubuntu and built for Ubuntu out of
@@ -48,7 +47,6 @@ the GPGME library.
 %if 0%{?with_python3}
 %package -n python3-pygpgme
 Summary: Python3 module for working with OpenPGP messages
-Group:   Development/Languages
 
 %description -n python3-pygpgme
 PyGPGME is a Python module that lets you sign, verify, encrypt and decrypt
@@ -120,3 +118,6 @@ find tests -name '*.pyc' -delete
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.3-14
+- Rebuild for new 4.0 release.
+

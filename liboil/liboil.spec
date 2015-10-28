@@ -1,10 +1,9 @@
 Summary: Library of Optimized Inner Loops, CPU optimized functions
 Name: liboil
 Version: 0.3.16
-Release: 12%{?dist}
+Release: 13%{?dist}
 # See COPYING which details everything, various BSD licenses apply
 License: BSD
-Group: System Environment/Libraries
 URL: http://liboil.freedesktop.org/
 Source: http://liboil.freedesktop.org/download/%{name}-%{version}.tar.gz
 
@@ -25,7 +24,6 @@ extended instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
 %package devel
 Summary: Development files and static library for %{name}
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig, gtk-doc
 
@@ -80,3 +78,6 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.3.16-13
+- Rebuild for new 4.0 release.
+

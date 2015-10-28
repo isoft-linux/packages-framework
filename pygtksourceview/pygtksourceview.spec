@@ -6,10 +6,9 @@
 
 Name:           pygtksourceview
 Version:        2.10.1
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Python bindings for gtksourceview
 
-Group:          Development/Languages
 # No version specified.
 License:        LGPLv2+
 URL:            http://download.gnome.org/sources/pygtksourceview/
@@ -28,7 +27,6 @@ library.
 
 %package devel
 Summary: Development files for using %{name} in Python programs
-Group: Development/Languages
 Requires: %{name} = %{version}-%{release}
 Requires: %{name}-doc = %{version}-%{release}
 Requires: gtksourceview2-devel >= %{gtksourceview_version}
@@ -41,7 +39,6 @@ use the %{name} bindings.
 
 %package doc
 Summary: Documentation files for %{name}
-Group: Development/Languages
 
 %description doc
 This package contains documentation files for %{name}.
@@ -73,3 +70,6 @@ rm $RPM_BUILD_ROOT%{python_sitearch}/gtksourceview2.la
 %{_datadir}/gtk-doc/html/pygtksourceview2
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.10.1-12
+- Rebuild for new 4.0 release.
+

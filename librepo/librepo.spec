@@ -13,10 +13,9 @@
 
 Name:           librepo
 Version:        1.7.16
-Release:        2
+Release:        3
 Summary:        Repodata downloading library
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            https://github.com/Tojaj/librepo
 # Use the following commands to generate the tarball:
@@ -48,7 +47,6 @@ metadata.
 
 %package devel
 Summary:        Repodata downloading library
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -56,7 +54,6 @@ Development files for librepo.
 
 %package -n python-librepo
 Summary:        Python bindings for the librepo library
-Group:          Development/Languages
 BuildRequires:  pygpgme
 BuildRequires:  python2-devel
 %if %{with tests}
@@ -73,7 +70,6 @@ Python bindings for the librepo library.
 %if %{with python3}
 %package -n python3-librepo
 Summary:        Python 3 bindings for the librepo library
-Group:          Development/Languages
 BuildRequires:  python3-pygpgme
 BuildRequires:  python3-devel
 BuildRequires:  python3-flask
@@ -151,3 +147,6 @@ popd
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.7.16-3
+- Rebuild for new 4.0 release.
+

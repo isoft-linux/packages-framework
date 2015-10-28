@@ -1,8 +1,7 @@
 Name:		pptp
 Version:	1.8.0
-Release:	7
+Release:	8
 Summary:	Point-to-Point Tunneling Protocol (PPTP) Client
-Group:		Applications/Internet
 License:	GPLv2+
 URL:		http://pptpclient.sourceforge.net/
 Source0:	http://downloads.sf.net/pptpclient/pptp-%{version}.tar.gz
@@ -23,7 +22,6 @@ by employers and some cable and ADSL service providers.
 
 %package setup
 Summary:	PPTP Tunnel Configuration Script
-Group:		Applications/Internet
 Requires:	%{name} = %{version}-%{release}
 
 %description setup
@@ -76,3 +74,6 @@ rm -rf %{buildroot}
 %{_mandir}/man8/pptpsetup.8*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.8.0-8
+- Rebuild for new 4.0 release.
+

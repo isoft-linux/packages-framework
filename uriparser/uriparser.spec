@@ -1,8 +1,6 @@
-%{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
-
 Name:           uriparser
 Version:        0.8.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        URI parsing library - RFC 3986
 
 License:        BSD
@@ -57,14 +55,11 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
 find $RPM_BUILD_ROOT -name '*.la' -delete
 
-# fcami - update for https://fedoraproject.org/wiki/Changes/UnversionedDocdirs
 if [ ${RPM_BUILD_ROOT}%{_datadir}/doc/%{name} != ${RPM_BUILD_ROOT}%{_pkgdocdir} ]
   then mv ${RPM_BUILD_ROOT}%{_datadir}/doc/%{name}/html ${RPM_BUILD_ROOT}%{_pkgdocdir}
 fi
 
-
 %post -p /sbin/ldconfig
-
 %postun -p /sbin/ldconfig
 
 %files
@@ -79,3 +74,6 @@ fi
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.2-2
+- Rebuild for new 4.0 release.
+

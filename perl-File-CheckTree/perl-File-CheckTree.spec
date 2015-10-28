@@ -1,9 +1,8 @@
 Name:           perl-File-CheckTree
 Version:        4.42
-Release:        295%{?dist}
+Release:        296%{?dist}
 Summary:        Run many file-test checks on a tree
 License:        GPL+ or Artistic
-Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/File-CheckTree/
 Source0:        http://www.cpan.org/authors/id/R/RJ/RJBS/File-CheckTree-%{version}.tar.gz
 BuildArch:      noarch
@@ -59,3 +58,6 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.42-296
+- Rebuild for new 4.0 release.
+

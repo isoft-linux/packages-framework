@@ -1,9 +1,8 @@
 Name:           cifs-utils
 Version:        6.4
-Release:        1
+Release:        2
 Summary:        Utilities for mounting and managing CIFS mounts
 
-Group:          System Environment/Daemons
 License:        GPLv3
 URL:            http://linux-cifs.samba.org/cifs-utils/
 
@@ -23,7 +22,6 @@ file system.
 
 %package devel
 Summary:        Files needed for building plugins for cifs-utils
-Group:          Development/Libraries
 
 %description devel
 The SMB/CIFS protocol is a standard file sharing protocol widely deployed
@@ -68,6 +66,9 @@ rm -rf %{buildroot}
 %{_includedir}/cifsidmap.h
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 6.4-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

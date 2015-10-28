@@ -1,9 +1,8 @@
 Summary:        Converter between the rpm, dpkg, stampede slp, and Slackware tgz file formats
 Name:           alien
 Version:        8.90
-Release:        5%{?dist}
+Release:        6%{?dist}
 
-Group:          Applications/System
 License:        GPLv2+
 URL:            http://kitenet.net/~joey/code/alien/
 Source:         http://ftp.debian.org/debian/pool/main/a/alien/alien_%version.tar.gz
@@ -50,3 +49,6 @@ chmod 755 %{buildroot}%{_bindir}/alien
 %{_localstatedir}/lib/alien
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 8.90-6
+- Rebuild for new 4.0 release.
+

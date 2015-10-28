@@ -1,7 +1,7 @@
 Summary: A sophisticated file transfer program
 Name: lftp
 Version: 4.6.4
-Release: 1	
+Release: 2	
 License: GPLv3+
 URL: http://lftp.yar.ru/
 Source0: ftp://ftp.yar.ru/lftp/lftp-%{version}.tar.xz
@@ -54,5 +54,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.6.4-2
+- Rebuild for new 4.0 release.
+
 * Tue Aug 25 2015 Cjacker <cjacker@foxmail.com>
 - update to 4.6.4

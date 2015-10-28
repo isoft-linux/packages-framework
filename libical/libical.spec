@@ -1,9 +1,8 @@
 Summary:	Reference implementation of the iCalendar data type and serialization format
 Name:		libical
 Version:    1.0	
-Release:	4
+Release:	5
 License:	LGPLv2 or MPLv1.1
-Group:		System Environment/Libraries
 URL:		http://freeassociation.sourceforge.net/
 Source:		http://downloads.sourceforge.net/freeassociation/%{name}-%{version}.tar.gz
 Requires:	tzdata
@@ -16,7 +15,6 @@ used in dozens of calendaring and scheduling products.
 
 %package devel
 Summary:	Development files for libical
-Group:		Development/Libraries
 Requires:	%{name}%{?_isa} = %{version}-%{release}, pkgconfig
 
 %description devel
@@ -71,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/%{name}/vobject.h
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0-5
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

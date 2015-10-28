@@ -1,7 +1,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.8.1
-Release: 2 
+Release: 4 
 License: GPLv3
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0: ffmpeg-fix-defines.patch
@@ -9,7 +9,7 @@ Patch1: ffmpeg-configure-dlvsym.patch
 Patch2: ffmpeg-fix-libv4l2-errors.patch
  
 URL: http://ffmpeg.sourceforge.net/
-BuildRequires: freetype-devel, zlib-devel, bzip2-devel
+BuildRequires: freetype-devel, zlib-devel, bzip2-devel xz-devel
 BuildRequires: libtheora-devel, libvorbis-devel
 BuildRequires: xvidcore-devel
 BuildRequires: yasm >= 1.2.0
@@ -28,6 +28,16 @@ BuildRequires: libX11-devel libXv-devel libXext-devel
 BuildRequires: openjpeg-devel
 BuildRequires: libbluray-devel
 BuildRequires: libmfx-devel
+
+BuildRequires: libdc1394-devel libraw1394-devel
+BuildRequires: wavpack-devel
+BuildRequires: openal-devel
+BuildRequires: libv4l-devel
+BuildRequires: fontconfig-devel freetype-devel fribidi-devel
+BuildRequires: libass-devel
+
+#for ffplay
+BuildRequires: SDL-devel
 
 Requires: %{name}-libs = %{version}-%{release}
 
@@ -77,22 +87,16 @@ Development headers, libraries and pkgconfig files for ffmpeg.
 	--shlibdir=%{_libdir} \
 	--mandir=%{_mandir} \
 	--enable-shared \
-	--disable-static \
 	--enable-runtime-cpudetect \
 	--enable-libbluray \
 	--enable-libcdio \
-	--disable-sdl \
-	--disable-libcelt \
-	--disable-libdc1394 \
-	--disable-libiec61883 \
-	--disable-libmodplug \
-	--disable-libopencv \
-	--enable-libopenjpeg \
+	--enable-sdl \
+	--enable-libdc1394 \
 	--enable-libpulse \
 	--enable-libspeex \
 	--enable-libvpx \
-	--disable-libwavpack \
-	--disable-openal \
+	--enable-libwavpack \
+	--enable-openal \
 	--enable-gpl \
 	--enable-version3 \
 	--enable-nonfree \
@@ -100,9 +104,8 @@ Development headers, libraries and pkgconfig files for ffmpeg.
 	--enable-avfilter \
 	--enable-pthreads \
 	--enable-x11grab \
-	--disable-avisynth \
+	--enable-libopenjpeg \
 	--enable-libfaac \
-	--disable-libmp3lame \
 	--enable-libtheora \
 	--enable-libvorbis \
 	--enable-libx264 \
@@ -111,6 +114,18 @@ Development headers, libraries and pkgconfig files for ffmpeg.
     	--enable-vaapi \
     	--enable-vdpau \
 	--enable-libmfx \
+        --enable-libv4l2 \
+        --enable-fontconfig \
+        --enable-libass \
+        --enable-libfribidi \
+        --enable-libfreetype \
+	--disable-static \
+	--disable-libcelt \
+	--disable-libiec61883 \
+	--disable-libmodplug \
+	--disable-libopencv \
+	--disable-avisynth \
+	--disable-libmp3lame \
 	--disable-stripping \
     	--enable-doc \
     	--extra-cflags="-fPIC" 
@@ -177,5 +192,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-4
+- Rebuild for new 4.0 release.
+
+* Thu Oct 22 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-3
+- add SDL-devel requires, enable ffplay
+
 * Mon Oct 19 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-2
 - update

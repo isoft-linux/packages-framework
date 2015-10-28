@@ -1,7 +1,7 @@
 Summary: Library for tracking application startup
 Name: startup-notification
 Version: 0.12
-Release: 2 
+Release: 3 
 URL: http://www.freedesktop.org/software/startup-notification/
 Source0: %{name}-%{version}.tar.gz
 License: LGPL
@@ -62,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.12-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

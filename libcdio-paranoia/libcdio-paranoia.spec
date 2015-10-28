@@ -1,8 +1,7 @@
 Name: libcdio-paranoia
 Version: 10.2+0.90+1
-Release: 1 
+Release: 2 
 Summary: CD paranoia on top of libcdio
-Group: System Environment/Libraries
 License: GPLv2+ and LGPLv2+
 URL: http://www.gnu.org/software/libcdio/
 Source0: http://ftp.gnu.org/gnu/libcdio/libcdio-paranoia-%{version}.tar.gz
@@ -22,7 +21,6 @@ with cdparanoia-III-10.2's license. And also, libcdio is just too large.
 
 %package devel
 Summary: Header files and libraries for %{name}
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -85,3 +83,6 @@ chrpath --delete $RPM_BUILD_ROOT%{_libdir}/*.so.*
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 10.2+0.90+1-2
+- Rebuild for new 4.0 release.
+

@@ -2,9 +2,8 @@
 Summary:  Qt toolkit
 Name:	  qt4
 Version:  4.8.7
-Release:  11
+Release:  12
 License:  GPL/QPL
-Group: 	  System Environment/Libraries
 Url:   	  http://www.trolltech.com/products/qt/
 
 Source0:  qt-everywhere-opensource-src-%{version}%{snap}.tar.gz 
@@ -96,7 +95,6 @@ handling.
 
 %package devel
 Summary: Development files for the Qt toolkit
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: libpng-devel
 Requires: libjpeg-devel
@@ -111,7 +109,6 @@ Qt Linguist
 
 %package doc
 Summary: API documentation, demos and example programs for %{name}
-Group: Documentation
 Requires: %{name} = %{version}-%{release}
 Requires: qt4-demos
 Provides: %{name}-assistant = %{version}-%{release}
@@ -121,7 +118,6 @@ Qt Assistant, Qt Demo
 
 %package sqlite 
 Summary: SQLite driver for Qt's SQL classes
-Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: sqlite
 %description sqlite 
@@ -129,7 +125,6 @@ Requires: sqlite
 
 %package demos 
 Summary: Demos for qt4 programing
-Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 %description demos 
 This package contains some demos for qt4 programing.
@@ -406,6 +401,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.8.7-12
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -8,10 +8,9 @@
 
 Name: 		%{gstreamer}-plugins-base
 Version: 	1.6.0
-Release: 	1
+Release: 	2
 Summary: 	GStreamer streaming media framework plug-ins
 
-Group: 		Applications/Multimedia
 License: 	LGPL
 URL:		http://gstreamer.freedesktop.org/
 Vendor:         GStreamer Backpackers Team <package@gstreamer.freedesktop.org>
@@ -50,7 +49,6 @@ plug-ins.
 
 %package devel
 Summary: 	GStreamer Plugin Library Headers
-Group: 		Development/Libraries
 Requires: 	%{gstreamer}-plugins-base = %{version}
 
 %description devel
@@ -59,7 +57,6 @@ GStreamer Plugins Base library development and header files.
 %if %with_x11
 %package x11
 Summary:        Xorg related plugin of gstreamer
-Group:          System Environment/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description x11
@@ -125,6 +122,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/gst-plugins-base/%{majorminor}/license-translations.dict
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
+- Rebuild for new 4.0 release.
+
 * Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.6.0
 

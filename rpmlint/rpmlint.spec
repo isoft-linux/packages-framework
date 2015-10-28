@@ -1,8 +1,7 @@
 Name:           rpmlint
 Version:        1.6
-Release:        4
+Release:        5
 Summary:        Tool for checking common errors in RPM packages
-Group:          Development/Tools
 License:        GPLv2
 URL:            http://sourceforge.net/projects/rpmlint/
 Source0:        http://downloads.sourceforge.net/project/rpmlint/%{name}-%{version}.tar.xz
@@ -84,3 +83,6 @@ make check
 %{_mandir}/man1/rpmlint.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6-5
+- Rebuild for new 4.0 release.
+

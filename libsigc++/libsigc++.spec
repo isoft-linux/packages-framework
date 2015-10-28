@@ -3,7 +3,7 @@
 
 Name:           libsigc++
 Version:        2.6.1
-Release:        1 
+Release:        2 
 Summary:        Typesafe signal framework for C++
 
 License:        LGPLv2+
@@ -78,6 +78,9 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.6.1-2
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 2.6.1
 

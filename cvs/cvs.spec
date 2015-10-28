@@ -1,8 +1,7 @@
 Name: cvs
 Version: 1.11.23
-Release: 39%{?dist}
+Release: 40%{?dist}
 Summary: Concurrent Versions System
-Group: Development/Tools
 URL: http://cvs.nongnu.org/
 # Source files in zlib/ directory are licensed under zlib/libpng
 # Other files are mostly GPL+, some of them are GPLv2+ or
@@ -157,3 +156,6 @@ install -D -m 644 %{SOURCE8} $RPM_BUILD_ROOT/%{_mandir}/man5/cvs.sh.5
 #%{_datadir}/cvs/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.11.23-40
+- Rebuild for new 4.0 release.
+

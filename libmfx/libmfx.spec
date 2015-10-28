@@ -1,6 +1,6 @@
 Name: libmfx
 Version: 1.16	
-Release: 1.git
+Release: 2.git
 Summary: Libmfx is part of Intel's Media SDK as a dispatch interface for video encode/decode 	
 License: Redistributable	
 URL: https://github.com/lu-zero/mfx_dispatch	
@@ -15,7 +15,6 @@ Libmfx is part of Intel's Media SDK as a dispatch interface for video encode/dec
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -44,4 +43,7 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/pkgconfig/libmfx.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.16-2.git
+- Rebuild for new 4.0 release.
+
 

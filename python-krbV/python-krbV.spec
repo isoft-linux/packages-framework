@@ -2,10 +2,9 @@
 
 Name: python-krbV
 Version: 1.0.90
-Release: 10
+Release: 11
 Summary: Python extension module for Kerberos 5
 
-Group: Development/Languages
 License: LGPLv2+
 
 URL: http://fedorahosted.org/python-krbV/
@@ -43,3 +42,6 @@ export CFLAGS="%{optflags} -Wextra"
 %{python_sitearch}/krbVmodule.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.90-11
+- Rebuild for new 4.0 release.
+

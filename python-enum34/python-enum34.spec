@@ -2,8 +2,7 @@
 
 Name:           python-enum34
 Version:        1.0.4
-Release:        2
-Group:          Development/Libraries
+Release:        3
 Summary:        Backport of Python 3.4 Enum
 License:        BSD
 BuildArch:      noarch
@@ -31,7 +30,6 @@ in an enumeration.
 %if 0%{?with_python3}
 %package -n python3-enum34
 Summary:        Backport of Python 3.4 Enum
-Group:          Development/Libraries
 
 %description -n python3-enum34
 Python 3.4 introduced official support for enumerations.  This is a
@@ -98,3 +96,6 @@ rm -rf %{buildroot}%{python2_sitelib}/enum/{LICENSE,README,doc}
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-3
+- Rebuild for new 4.0 release.
+

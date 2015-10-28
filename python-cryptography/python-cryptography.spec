@@ -2,10 +2,9 @@
 
 Name:           python-cryptography
 Version:        0.8.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        PyCA's cryptography library
 
-Group:          Development/Libraries
 License:        ASL 2.0 or BSD
 URL:            https://cryptography.io/en/latest/
 Source0:        https://pypi.python.org/packages/source/c/cryptography/cryptography-%{version}.tar.gz
@@ -48,7 +47,6 @@ recipes to Python developers.
 
 %if 0%{?with_python3}
 %package -n  python3-cryptography
-Group:          Development/Libraries
 Summary:        PyCA's cryptography library
 
 Requires:       openssl
@@ -118,5 +116,8 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.2-2
+- Rebuild for new 4.0 release.
+
 * Thu Oct 08 2015 Cjacker <cjacker@foxmail.com>
 - downgrade from yetist 

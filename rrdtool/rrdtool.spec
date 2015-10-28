@@ -17,9 +17,8 @@
 Summary: Round Robin Database Tool to store and display time-series data
 Name: rrdtool
 Version: 1.4.7
-Release: 5
+Release: 6
 License: GPLv2+ with exceptions
-Group: Applications/Databases
 URL: http://oss.oetiker.ch/rrdtool/
 Source0: http://oss.oetiker.ch/%{name}/pub/%{name}-%{version}.tar.gz
 Source1: php4-%{svnrev}.tar.gz
@@ -44,7 +43,6 @@ put a friendly user interface on it.
 
 %package devel
 Summary: RRDtool libraries and header files
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -55,7 +53,6 @@ server load average). This package allow you to use directly this library.
 
 %package doc
 Summary: RRDtool documentation
-Group: Documentation
 
 %description doc
 RRD is the Acronym for Round Robin Database. RRD is a system to store and
@@ -64,7 +61,6 @@ server load average). This package contains documentation on using RRD.
 
 %package perl
 Summary: Perl RRDtool bindings
-Group: Development/Languages
 Requires: %{name} = %{version}-%{release}
 Requires: perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Obsoletes: perl-%{name} < %{version}-%{release}
@@ -80,7 +76,6 @@ The Perl RRDtool bindings
 
 %package python
 Summary: Python RRDtool bindings
-Group: Development/Languages
 BuildRequires: python-devel
 Requires: python >= %{rrd_python_version}
 Requires: %{name} = %{version}-%{release}
@@ -99,7 +94,6 @@ Python RRDtool bindings.
 %if %{with_php}
 %package php
 Summary: PHP RRDtool bindings
-Group: Development/Languages
 BuildRequires: php-devel >= 4.0
 Requires: php >= 4.0
 Requires: %{name} = %{version}-%{release}
@@ -117,7 +111,6 @@ RRDtool bindings to the PHP HTML-embedded scripting language.
 %if %{with_tcl}
 %package tcl
 Summary: Tcl RRDtool bindings
-Group: Development/Languages
 BuildRequires: tcl-devel >= 8.0
 Requires: tcl >= 8.0
 Requires: %{name} = %{version}-%{release}
@@ -132,7 +125,6 @@ The %{name}-tcl package includes RRDtool bindings for Tcl.
 
 %package ruby
 Summary: Ruby RRDtool bindings
-Group: Development/Languages
 BuildRequires: ruby, ruby-devel
 Requires: ruby(abi) = 1.9.1
 Requires: %{name} = %{version}-%{release}
@@ -272,7 +264,6 @@ find examples/ -type f -exec chmod 0644 {} \;
         $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod \
         $RPM_BUILD_ROOT%{_datadir}/%{name}/examples \
         $RPM_BUILD_ROOT%{perl_vendorarch}/auto/*/{.packlist,*.bs}
-rpmclean
 %check
 # minimal load test for the PHP extension
 %if %{with_php}
@@ -347,3 +338,6 @@ LD_LIBRARY_PATH=%{buildroot}%{_libdir} php -n \
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.7-6
+- Rebuild for new 4.0 release.
+

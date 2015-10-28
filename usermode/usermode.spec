@@ -1,9 +1,8 @@
 Summary: Tools for certain user account management tasks
 Name: usermode
 Version: 1.111
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: GPLv2+
-Group: Applications/System
 URL: https://fedorahosted.org/usermode/
 Source: https://fedorahosted.org/releases/u/s/usermode/usermode-%{version}.tar.xz
 Source1: config-util
@@ -17,7 +16,6 @@ BuildRequires: util-linux
 
 %package gtk
 Summary: Graphical tools for certain user account management tasks
-Group: Applications/System
 Requires: %{name} = %{version}-%{release}
 
 %global _hardened_build 1
@@ -85,3 +83,6 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/applications
 %{_datadir}/pixmaps/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.111-8
+- Rebuild for new 4.0 release.
+

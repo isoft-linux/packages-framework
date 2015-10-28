@@ -8,7 +8,7 @@
 Summary: System for layout and rendering of internationalized text
 Name: pango
 Version: 1.38.1
-Release: 3
+Release: 4
 License: LGPL
 Source: http://ftp.gnome.org/pub/gnome/sources/pango/1.8/pango-%{version}.tar.xz
 
@@ -171,6 +171,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/installed-tests
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.38.1-4
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.38.1
 

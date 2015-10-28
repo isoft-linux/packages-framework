@@ -1,9 +1,8 @@
 Summary:        Library for reading, mastering and writing optical discs
 Name:           libburn
 Version:        1.3.6
-Release:        1
+Release:        2
 License:        GPLv2+
-Group:          System Environment/Libraries
 URL:            http://libburnia-project.org/
 Source0:        http://files.libburnia-project.org/releases/%{name}-%{version}.tar.gz
 BuildRequires:  intltool, gettext, doxygen
@@ -21,7 +20,6 @@ need such a reload. The code of libburn is independent of cdrecord.
 
 %package        devel
 Summary:        Development files for libburn
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}, pkgconfig
 
 %description    devel
@@ -30,7 +28,6 @@ developing applications that use libburn.
 
 %package -n     cdrskin
 Summary:        Limited cdrecord compatibility wrapper to ease migration to libburn
-Group:          Applications/Multimedia
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description -n cdrskin
@@ -41,8 +38,6 @@ features from the command line.
 %setup -q
 
 %build
-export CC=clang
-export CXX=clang++
 %configure --disable-static
 make %{?_smp_mflags}
 doxygen doc/doxygen.conf
@@ -54,7 +49,6 @@ make DESTDIR=$RPM_BUILD_ROOT INSTALL='install -p' install
 # Don't install any libtool .la files
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}.la
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -80,3 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/cdrskin
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.6-2
+- Rebuild for new 4.0 release.
+

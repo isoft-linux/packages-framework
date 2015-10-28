@@ -6,9 +6,8 @@
 Summary: The libglade library for loading user interfaces.
 Name: libglade2
 Version: 2.6.4
-Release: 3 
+Release: 4 
 License: LGPL
-Group: System Environment/Libraries
 Source: libglade-%{version}.tar.bz2
 Patch:  libglade-2.6.2-set-prop-for-tool-item.patch	
 URL: http://www.gnome.org
@@ -35,7 +34,6 @@ initial interface loading time, there is no performance tradeoff.
 
 %package devel
 Summary: The files needed for libglade application development.
-Group: Development/Libraries
 Requires: %name = %{version}
 Requires: libxml2-devel >= %{libxml2_version}
 Requires: gtk2-devel >= %{gtk2_version}
@@ -50,8 +48,6 @@ that you can use to develop libglade applications.
 %patch -p1
 
 %build
-export CC=clang
-export CXX=clang++
 %configure --disable-gtk-doc
 make %{?_smp_mflags}
 
@@ -61,7 +57,6 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 rm $RPM_BUILD_ROOT%{_libdir}/*.la
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -85,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.6.4-4
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

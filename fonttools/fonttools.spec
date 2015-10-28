@@ -2,7 +2,7 @@
 
 Name:           fonttools
 Version:        3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A tool to convert True/OpenType fonts to XML and back
 License:        BSD
 URL:            https://github.com/behdad/%{name}/
@@ -97,5 +97,8 @@ popd
 %{python3_sitelib}/FontTools
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.0-2
+- Rebuild for new 4.0 release.
+
 * Fri Oct 09 2015 Cjacker <cjacker@foxmail.com>
 - Updated to version 3.0

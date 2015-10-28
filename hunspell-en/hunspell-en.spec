@@ -2,7 +2,7 @@ Name: hunspell-en
 Summary: English hunspell dictionaries
 %define upstreamid 20140811.1
 Version: 0.%{upstreamid}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Source0: https://github.com/kevina/wordlist/archive/rel-2014.08.11.1.tar.gz
 Source1: http://en-gb.pyxidium.co.uk/dictionary/en_GB.zip
 #See http://mxr.mozilla.org/mozilla/source/extensions/spellcheck/locales/en-US/hunspell/mozilla_words.diff?raw=1
@@ -24,7 +24,6 @@ Patch6: hunspell-en-calender.patch
 Patch7: en_IE.supplemental.patch
 #call git to get the release hash, but this is a tarball
 Patch8: hunspell-en-dont-call-git-during-build.patch
-Group: Applications/Text
 URL: http://wordlist.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 License: LGPLv2+ and LGPLv2 and BSD
@@ -40,7 +39,6 @@ English (US, UK, etc.) hunspell dictionaries
 %package US
 Requires: hunspell
 Summary: US English hunspell dictionaries
-Group: Applications/Text
 
 %description US
 US English hunspell dictionaries
@@ -48,7 +46,6 @@ US English hunspell dictionaries
 %package GB
 Requires: hunspell
 Summary: UK English hunspell dictionaries
-Group: Applications/Text
 
 %description GB
 UK English hunspell dictionaries
@@ -121,3 +118,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/myspell/en_GB.*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.20140811.1-3
+- Rebuild for new 4.0 release.
+

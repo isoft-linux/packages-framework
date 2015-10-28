@@ -1,7 +1,7 @@
 Summary: Soup, an HTTP library implementation
 Name: libsoup
 Version: 2.52.1
-Release: 2 
+Release: 3 
 License: LGPL
 Source0: ftp://ftp.gnome.org/pub/gnome/sources/libsoup/2.2/%{name}-%{version}.tar.xz
 URL:  ftp://ftp.gnome.org/pub/gnome/sources/libsoup/
@@ -68,6 +68,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/libsoup-*.vapi
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.52.1-3
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 2.52.1
 

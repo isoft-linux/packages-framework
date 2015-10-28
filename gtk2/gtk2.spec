@@ -16,9 +16,8 @@
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 Name: gtk2
 Version: %{base_version}
-Release: 16
+Release: 17
 License: LGPLv2+
-Group: System Environment/Libraries
 Source: http://download.gnome.org/sources/gtk+/2.11/gtk+-%{version}.tar.xz
 Source1: gtk+2.0_2.24.24-0ubuntu1.debian.tar.xz
 
@@ -80,7 +79,6 @@ suites.
 
 %package devel
 Summary: Development tools for GTK+ applications
-Group: Development/Libraries
 Requires: gtk2 = %{version}-%{release}
 Requires: pango-devel >= %{pango_version}
 Requires: atk-devel >= %{atk_version}
@@ -101,7 +99,6 @@ docs for the GTK+ widget toolkit.
 
 %package -n gail
 Summary: Accessibility implementation for GTK+ and GNOME libraries
-Group: System Environment/Libraries
 BuildRequires: libtool automake autoconf gettext
 BuildRequires: atk-devel >= %{atk_version}
 
@@ -112,7 +109,6 @@ access those GUIs.
 
 %package -n gail-devel
 Summary: Files to compile applications that use GAIL
-Group: Development/Libraries
 Requires: gail
 Requires: gtk2-devel >= %{gtk2_version}
 Requires: atk-devel >= %{atk_version}
@@ -210,7 +206,6 @@ mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/modules
 echo %dir %{_sysconfdir}/gtk-2.0/ >> all.lang
 echo %ghost %{_sysconfdir}/gtk-2.0//gtk.immodules >> all.lang
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -273,6 +268,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/gail-libgail-util
 %{_includedir}/gail*
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.24.28-17
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

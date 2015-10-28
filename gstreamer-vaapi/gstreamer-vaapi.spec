@@ -4,9 +4,8 @@
 
 Name: %{gstreamer}-vaapi
 Version: 0.6.0
-Release: 3 
+Release: 4 
 Summary: VA-API support to GStreamer
-Group: Libraries/Multimedia
 License: LGPL
 URL: http://freedesktop.org/wiki/Software/vaapi
 Source: http://www.freedesktop.org/software/vaapi/releases/gstreamer-vaapi/gstreamer-vaapi-%{version}.tar.bz2
@@ -47,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.0-4
+- Rebuild for new 4.0 release.
+
 * Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
 - rebuild with libva-1.6.1 and gstreamer-1.6.0
 

@@ -2,9 +2,8 @@
 Summary: Root crontab files used to schedule the execution of programs
 Name: crontabs
 Version: 1.11
-Release: 10.%{snap_release}%{?dist}
+Release: 11.%{snap_release}%{?dist}
 License: Public Domain and GPLv2
-Group: System Environment/Base
 URL: https://fedorahosted.org/crontabs 
 Source0: https://fedorahosted.org/releases/c/r/crontabs/%{name}-%{version}-1.%{snap_release}.tar.gz
 BuildArch: noarch
@@ -56,3 +55,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man4/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.11-11.20130830git
+- Rebuild for new 4.0 release.
+

@@ -5,10 +5,9 @@
 
 Name:       python-sphinx
 Version:    1.2.3
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    Python documentation generator
 
-Group:      Development/Tools
 
 # Unless otherwise noted, the license for code is BSD
 # sphinx/util/stemmer.py Public Domain
@@ -82,7 +81,6 @@ the Python docs:
 %if 0%{?with_python3}
 %package -n python3-sphinx
 Summary:       Python documentation generator
-Group:         Development/Tools
 Requires:      python3-docutils
 Requires:      python3-jinja2
 Requires:      python3-pygments
@@ -120,7 +118,6 @@ the Python docs:
 
 %package doc
 Summary:    Documentation for %{name}
-Group:      Documentation
 License:    BSD
 Requires:   %{name} = %{version}-%{release}
 
@@ -270,3 +267,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.3-3
+- Rebuild for new 4.0 release.
+

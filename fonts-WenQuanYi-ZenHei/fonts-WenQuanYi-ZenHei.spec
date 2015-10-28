@@ -1,12 +1,14 @@
 Name:    fonts-WenQuanYi-ZenHei
 Version: 0.9.45
-Release: 1
+Release: 2
 Summary: Wen Quan Yi Zen Hei TrueType fonts 
 License: GPL
 URL:     http://wenq.org 
 Source0: wqy-zenhei-%{version}.tar.gz
 Patch0:  wqy-zenhei-fix-fontconfig-warning.patch
 Provides: wqy-zenhei-fonts = %{version}
+
+BuildArch: noarch
 
 %description
 Wen Quan Yi Zen Hei TrueType fonts
@@ -39,3 +41,8 @@ rm -rf $RPM_BUILD_ROOT
 #%{_sysconfdir}/fonts/conf.d/*
 %{_datadir}/fontconfig/conf.avail/*
 %{_datadir}/fonts/*.ttc
+
+%changelog
+* Sat Oct 24 2015 builder - 0.9.45-2
+- Rebuild for new 4.0 release.
+

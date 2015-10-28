@@ -3,7 +3,7 @@
 
 Name:		libdbusmenu
 Version:	12.10.2
-Release:	9%{?dist}
+Release:	10%{?dist}
 Summary:	A library that pulling out some code out of indicator-applet
 
 # All files installed in final rpms use C sources with dual licensing headers.
@@ -100,7 +100,6 @@ other side of the bus
 %package	doc
 Summary:	Document files for %{name}
 BuildArch:	noarch
-Group:		Documentation
 %description	doc 
 The %{name}-doc package contains documents for
 developing applications that use %{name}.
@@ -251,3 +250,6 @@ mv %{buildroot}%{_docdir}/%{name}/examples/glib-server-nomenu.c \
 %{tools_doc}/README.dbusmenu-bench
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 12.10.2-10
+- Rebuild for new 4.0 release.
+

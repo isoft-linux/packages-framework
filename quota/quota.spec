@@ -1,10 +1,12 @@
+%define debug_package %{nil}
 #allow remote set quota by defined rpcsetquota to 1(set to 0 to disabled it)
+
 %{!?rpcsetquota:%define rpcsetquota 1}
 
 Name: quota
 Epoch: 1
 Version: 4.02
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: System administration tools for monitoring users' disk usage
 # quota_nld.c, quotaio_xfs.h:       GPLv2
 # bylabel.c copied from util-linux: GPLv2+
@@ -12,7 +14,6 @@ Summary: System administration tools for monitoring users' disk usage
 # doc/quotas.ms, quotaops.c, quot.c, quotaon.c, edquota.c, quot.h, quota.c,
 # quotaio_v1.c:                     BSD
 License: BSD and LGPLv2+ and GPLv2 and GPLv2+
-Group: System Environment/Base
 URL: http://sourceforge.net/projects/linuxquota/
 Source0: http://downloads.sourceforge.net/linuxquota/%{name}-%{version}.tar.gz
 Source1: quota_nld.service
@@ -42,7 +43,6 @@ and limiting user and or group disk usage per file system.
 
 
 %package nld
-Group: System Environment/Daemons
 Summary: quota_nld daemon
 Requires: quota-nls = %{epoch}:%{version}-%{release}
 Requires(post): systemd
@@ -58,7 +58,6 @@ a dialog) and writing them to the terminal user has last accessed.
 
 
 %package rpc
-Group: System Environment/Daemons
 Summary: RPC quota daemon
 Requires: quota-nls = %{epoch}:%{version}-%{release}
 Requires(post): systemd
@@ -73,7 +72,6 @@ NFS client.
 
 
 %package warnquota
-Group: System Environment/Base
 Summary: Send e-mail to users over quota
 Requires: quota-nls = %{epoch}:%{version}-%{release}
 
@@ -84,7 +82,6 @@ via cron(8).
 
 
 %package nls
-Group: System Environment/Base
 Summary: Gettext catalogs for disk quota tools
 BuildArch: noarch
 
@@ -93,7 +90,6 @@ Disk quota tools messages translated into different natural languages.
 
 
 %package devel
-Group: Development/Libraries
 Summary: Development files for quota
 Requires: quota =  %{epoch}:%{version}-%{release}
 
@@ -106,7 +102,6 @@ on remote machines.
 
 
 %package doc
-Group: Documentation
 Summary: Additional documentation for disk quotas
 Requires: quota =  %{epoch}:%{version}-%{release}
 BuildArch: noarch
@@ -229,3 +224,6 @@ install -p -m644 -D %{SOURCE4} \
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:4.02-5
+- Rebuild for new 4.0 release.
+

@@ -1,7 +1,7 @@
 Summary:    Python bindings for lzma
 Name:       pyliblzma
 Version:    0.5.3
-Release:    13
+Release:    14
 License:    LGPLv3+
 URL:        https://launchpad.net/pyliblzma
 Source0:    http://pypi.python.org/packages/source/p/pyliblzma/%{name}-%{version}.tar.bz2
@@ -44,3 +44,6 @@ rm -rf %{buildroot}
 %{python_sitearch}/%{name}*.egg-info
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.5.3-14
+- Rebuild for new 4.0 release.
+

@@ -2,9 +2,8 @@ Summary:    SpeexDSP is a patent-free, Open Source/Free Software DSP library
 Name:		libspeexdsp
 Version: 	1.2	
 %define rc_ver	rc3
-Release:	1.12.%{rc_ver}
+Release:	1.12.%{rc_ver}.1
 License:	BSD
-Group:		System Environment/Libraries
 URL:		http://www.speex.org/
 Source0:	http://downloads.xiph.org/releases/speex/speexdsp-%{version}%{rc_ver}.tar.gz
 
@@ -23,7 +22,6 @@ data (e.g. voice mail).
 
 %package devel
 Summary: 	Development package for %{name}
-Group: 		Development/Libraries
 Requires: 	%{name} = %{version}-%{release}
 Requires: 	pkgconfig
 Provides: speexdsp-devel=%{version}-%{release}
@@ -63,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libspeexdsp.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2-1.12.rc3.1
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,8 +1,7 @@
 Name:           libbluray
 Version:        0.9.0
-Release:        1
+Release:        2
 Summary:        Library to access Blu-Ray disks for video playback 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.videolan.org/developers/libbluray.html
 Source0:        ftp://ftp.videolan.org/pub/videolan/%{name}/%{version}/%{name}-%{version}.tar.bz2
@@ -18,7 +17,6 @@ such as mplayer and vlc.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description    devel
@@ -45,7 +43,6 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
-rpmclean
 
 %check
 make check
@@ -68,5 +65,8 @@ make check
 
 
 %changelog
+* Sat Oct 24 2015 builder - 0.9.0-2
+- Rebuild for new 4.0 release.
+
 * Fri Oct 09 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.9.0

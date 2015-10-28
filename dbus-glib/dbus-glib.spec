@@ -8,11 +8,10 @@
 Summary: GLib bindings for D-Bus
 Name: dbus-glib
 Version: 0.104
-Release: 3 
+Release: 4 
 URL: http://www.freedesktop.org/software/dbus/
 Source0: http://dbus.freedesktop.org/releases/dbus-glib/%{name}-%{version}.tar.gz
 License: AFL and GPLv2+
-Group:  Framework/Runtime/Library 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: libtool
 BuildRequires: dbus-devel >= %{dbus_version}
@@ -32,7 +31,6 @@ the GLib thread abstraction and main loop.
 
 %package devel
 Summary: Libraries and headers for the D-Bus GLib bindings
-Group:  Framework/Development/Library
 Requires: %name = %{version}-%{release}
 Requires: glib2-devel 
 Requires: dbus-devel 
@@ -46,7 +44,6 @@ Headers and static libraries for the D-Bus GLib bindings
 %if 0
 %package gtk
 Summary: GTK based tools
-Group: Development/Tools 
 Requires: %name = %{version}-%{release}
 Requires: gtk2 >= %{gtk_version}
 %description gtk
@@ -108,3 +105,6 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.104-4
+- Rebuild for new 4.0 release.
+

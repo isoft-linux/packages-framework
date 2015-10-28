@@ -1,9 +1,8 @@
 Summary: Library to access the contents of an iPod
 Name: libgpod
 Version: 0.8.3
-Release: 1 
+Release: 2 
 License: LGPLv2+
-Group: System Environment/Libraries
 URL: http://www.gtkpod.org/libgpod.html
 Source0: http://downloads.sourceforge.net/gtkpod/%{name}-%{version}.tar.bz2
 Patch50:  libgpod-0.8.2-pkgconfig_overlinking.patch
@@ -30,7 +29,6 @@ smart playlists, playcounts, ratings, podcasts, album artwork, photos, etc.
 
 %package devel
 Summary: Development files for the libgpod library
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -43,7 +41,6 @@ libgpod.
 
 %package doc
 Summary: API documentation for the libgpod library
-Group: Documentation
 License: GFDL
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
@@ -66,9 +63,6 @@ chmod -x bindings/python/examples/*.py
 
 
 %build
-export CC=clang
-export CXX=clang++
-
 %configure --without-hal --enable-udev --with-temp-mount-dir=%{_localstatedir}/run/%{name}
 make %{?_smp_mflags}
 
@@ -85,7 +79,6 @@ echo "D /var/run/%{name} 0755 root root -" > \
 rm -rf $RPM_BUILD_ROOT%{_libdir}/libgpod.a
 rm -rf $RPM_BUILD_ROOT%{_libdir}/pkgconfig/libgpod-sharp.pc
 
-rpmclean
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -116,3 +109,6 @@ rpmclean
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.3-2
+- Rebuild for new 4.0 release.
+

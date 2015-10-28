@@ -2,7 +2,7 @@
 
 Name: clutter-gtk
 Version: 1.6.6
-Release: 2 
+Release: 3 
 Summary: A basic GTK clutter widget
 
 License: LGPLv2+
@@ -61,6 +61,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_datadir}/gtk-doc/html/clutter-gtk-1.0
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.6-3
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - rebuild with clutter update.
 

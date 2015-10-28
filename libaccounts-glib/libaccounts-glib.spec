@@ -1,7 +1,6 @@
 Name:		libaccounts-glib
 Version:	1.18
-Release:	1
-Group:		System Environment/Libraries
+Release:	2
 Summary:	Accounts framework for Linux and POSIX based platforms
 License:	LGPLv2
 URL:		https://gitlab.com/accounts-sso/libaccounts-glib
@@ -21,7 +20,6 @@ BuildRequires:	gtk-doc
 
 %package devel
 Summary:	Development files for %{name}
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel
 
@@ -61,7 +59,6 @@ rm -rf %{buildroot}%{_datadir}/libaccounts-glib0-test
 rm -rf $RPM_BUILD_ROOT%{_datadir}/libaccounts-glib/testdata
 rm -rf $RPM_BUILD_ROOT%{_libdir}/libaccounts-glib/*test*
 
-rpmclean
 
 %check
 make check ||:
@@ -105,3 +102,6 @@ make check ||:
 %doc %{_datadir}/gtk-doc/html/libaccounts-glib/
 
 %changelog
+* Sat Oct 24 2015 builder - 1.18-2
+- Rebuild for new 4.0 release.
+

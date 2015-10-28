@@ -1,11 +1,10 @@
 %define pre_version .pre9
 
 Summary: Wireless ethernet configuration tools
-Group: System Environment/Base
 License: GPL
 Name: wireless-tools
 Version: 30
-Release: 1%{pre_version}
+Release: 2%{pre_version}
 Epoch: 1
 URL: http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html
 Source: http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/wireless_tools.%{version}%{?pre_version}.tar.gz
@@ -20,7 +19,6 @@ specific stats for wireless networking equipment.
 
 %package devel
 Summary: Development headers for the wireless-tools package
-Group: Development/Libraries
 Requires: wireless-tools = %{epoch}:%{version}-%{release}
 
 %description devel
@@ -45,7 +43,6 @@ make install INSTALL_DIR=$RPM_BUILD_ROOT/sbin \
 	INSTALL_LIB=$RPM_BUILD_ROOT%{_libdir} \
 	INSTALL_INC=$RPM_BUILD_ROOT%{_includedir} \
 	INSTALL_MAN=$RPM_BUILD_ROOT%{_mandir}
-rpmclean
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
@@ -66,3 +63,6 @@ rpmclean
 
 
 %changelog
+* Sat Oct 24 2015 builder - 1:30-2.pre9
+- Rebuild for new 4.0 release.
+

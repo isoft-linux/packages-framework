@@ -4,7 +4,7 @@
 Summary: A fast metadata parser for yum
 Name: yum-metadata-parser
 Version: 1.1.4
-Release: 15
+Release: 16
 Source0: http://linux.duke.edu/projects/yum/download/%{name}/%{name}-%{version}.tar.gz
 Source1: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 Patch0: BZ-612409-handle-2GB-rpms.patch
@@ -13,7 +13,6 @@ Patch2: UPSTREAM-weak-deps.patch
 Patch3: UPSTREAM-index-weak-deps.patch
 Patch4: UPSTREAM-fix-minor-mem-leak.patch
 License: GPLv2
-Group: Development/Libraries
 URL: http://linux.duke.edu/projects/yum/
 Conflicts: yum < 3.2.0
 BuildRequires: python-devel
@@ -59,3 +58,6 @@ cp %{SOURCE1} .
 %{python_sitelib_platform}/*egg-info
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.4-16
+- Rebuild for new 4.0 release.
+

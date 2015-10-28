@@ -1,9 +1,8 @@
 Name:		chmlib
 Summary:	Library for dealing with ITSS/CHM format files
 Version:	0.40
-Release:    1	
+Release:    2	
 License:	LGPLv2+
-Group:		Development/Libraries
 Url:		http://www.jedrea.com/chmlib/
 Source0:	http://www.jedrea.com/chmlib/%{name}-%{version}.tar.bz2
 Patch1:		chmlib-0001-Patch-to-fix-integer-types-problem-by-Goswin-von-Bre.patch
@@ -19,7 +18,6 @@ performance indexing into ITSS archives.
 
 %package devel
 Summary:	Library for dealing with ITSS/CHM format files - development files
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
@@ -39,7 +37,6 @@ rm -rf %{buildroot}
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/%{_libdir}/*.la
 
-rpmclean
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
@@ -63,6 +60,9 @@ rm -rf %{buildroot}
 %{_libdir}/libchm.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.40-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

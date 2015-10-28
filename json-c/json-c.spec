@@ -2,7 +2,7 @@
 
 Name:           json-c
 Version:        0.12
-Release:        6
+Release:        7
 Summary:        A JSON implementation in C
 License:        MIT
 URL:            https://github.com/json-c/json-c/wiki
@@ -77,3 +77,6 @@ end
 %doc doc/html/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.12-7
+- Rebuild for new 4.0 release.
+

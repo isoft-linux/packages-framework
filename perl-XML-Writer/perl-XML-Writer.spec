@@ -1,8 +1,7 @@
 Name:           perl-XML-Writer
 Version:        0.625
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A simple Perl module for writing XML documents
-Group:          Development/Libraries
 License:        CC0
 URL:            http://search.cpan.org/dist/XML-Writer/
 Source0:        http://www.cpan.org/authors/id/J/JO/JOSEPHW/XML-Writer-%{version}.tar.gz
@@ -57,3 +56,6 @@ make test
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.625-5
+- Rebuild for new 4.0 release.
+

@@ -3,9 +3,8 @@
 
 Name:			fdupes
 Version:		1.51
-Release:		9%{?dist}
+Release:		10%{?dist}
 Summary:		Finds duplicate files in a given set of directories
-Group:		Applications/File
 
 License:		MIT
 URL:			https://code.google.com/p/fdupes/
@@ -69,3 +68,6 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{macrosdir}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.51-10
+- Rebuild for new 4.0 release.
+

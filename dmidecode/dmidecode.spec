@@ -1,9 +1,8 @@
 Summary:        Tool to analyse BIOS DMI data
 Name:           dmidecode
 Version:        2.12
-Release:        1 
+Release:        2 
 Epoch:          1
-Group:          System Environment/Base
 License:        GPLv2+
 Source0:        %{name}-%{version}.tar.gz
 URL:            http://www.nongnu.org/dmidecode/
@@ -28,7 +27,7 @@ I/O ports (e.g. serial, parallel, USB).
 %setup -q
 
 %build
-make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" CC=clang CXX=clang++
+make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf ${buildroot}
@@ -44,4 +43,9 @@ rm -rf ${buildroot}
 %{_sbindir}/ownership
 %{_sbindir}/biosdecode
 %{_mandir}/man8/*
+
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:2.12-2
+- Rebuild for new 4.0 release.
 

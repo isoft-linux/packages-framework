@@ -1,10 +1,9 @@
 Summary: Utility for secure communication and data storage
 Name:    gnupg2
 Version: 2.1.5
-Release: 2
+Release: 3
 
 License: GPLv3+
-Group:   Applications/System
 Source0: ftp://ftp.gnupg.org/gcrypt/%{?pre:alpha/}gnupg/gnupg-%{version}%{?pre}.tar.bz2
 Source1: ftp://ftp.gnupg.org/gcrypt/%{?pre:alpha/}gnupg/gnupg-%{version}%{?pre}.tar.bz2.sig
 Patch3:  gnupg-2.0.20-secmem.patch
@@ -46,7 +45,6 @@ Obsoletes: dirmngr < 1.2.0-1
 %package smime
 Summary: CMS encryption and signing tool and smart card support for GnuPG
 Requires: gnupg2 = %{version}-%{release}
-Group: Applications/Internet
 
 
 %description
@@ -165,3 +163,6 @@ make -k check
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.1.5-3
+- Rebuild for new 4.0 release.
+

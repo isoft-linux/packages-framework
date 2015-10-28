@@ -1,9 +1,8 @@
 Name:          ideviceinstaller
 Version:       1.1.0
-Release:       5
+Release:       6
 Summary:       tool to allow to install, upgrade, uninstall, archive, restore, and enumerate installed or archived apps of iOS device.
 
-Group:         System Environment/Libraries
 License:       LGPLv2+
 URL:           http://www.libimobiledevice.org/
 Source0:       http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
@@ -30,7 +29,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -42,6 +40,9 @@ rpmclean
 %{_mandir}/man1/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.0-6
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

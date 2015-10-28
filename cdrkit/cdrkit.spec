@@ -1,9 +1,8 @@
 Summary: A collection of CD/DVD utilities
 Name: cdrkit
 Version: 1.1.11
-Release: 11 
+Release: 12 
 License: GPLv2
-Group: Applications/System
 URL: http://cdrkit.org/
 Source: http://cdrkit.org/releases/cdrkit-%{version}.tar.gz
 
@@ -46,3 +45,6 @@ rm $RPM_BUILD_ROOT%{_bindir}/cdda2mp3
 %{_mandir}/man*/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.11-12
+- Rebuild for new 4.0 release.
+

@@ -8,9 +8,8 @@
 Summary: Disk Manager
 Name: udisks2
 Version: 2.1.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+
-Group: System Environment/Libraries
 URL: http://www.freedesktop.org/wiki/Software/udisks
 Source0: http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
 Patch0: udisks-2.1.6-fix-udisksctl-segfault.patch
@@ -62,7 +61,6 @@ series.
 
 %package -n libudisks2
 Summary: Dynamic library to access the udisks daemon
-Group: System Environment/Libraries
 License: LGPLv2+
 
 %description -n libudisks2
@@ -72,7 +70,6 @@ series.
 
 %package -n libudisks2-devel
 Summary: Development files for libudisks2
-Group: Development/Libraries
 Requires: libudisks2%{?_isa} = %{version}-%{release}
 License: LGPLv2+
 
@@ -160,3 +157,6 @@ make check
 %{_libdir}/pkgconfig/udisks2.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.1.6-2
+- Rebuild for new 4.0 release.
+

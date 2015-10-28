@@ -15,9 +15,8 @@
 Name:           python-coverage
 Summary:        Code coverage testing module for Python
 Version:        4.0
-Release:        0.7.%{?prever}%{?dist}
+Release:        0.8.%{?prever}%{?dist}
 License:        BSD and (MIT or GPLv2)
-Group:          System Environment/Libraries
 URL:            http://nedbatchelder.com/code/modules/coverage.html
 Source0:        http://pypi.python.org/packages/source/c/coverage/coverage-%{version}%{?prever}.tar.gz
 # https://bitbucket.org/ned/coveragepy/issue/363/annotate-command-hits-unicode-happy-fun
@@ -37,7 +36,6 @@ have been executed.
 %if 0%{?with_python3}
 %package -n python3-coverage
 Summary:        Code coverage testing module for Python 3
-Group:          System Environment/Libraries
 # As the "coverage" executable requires the setuptools at runtime (#556290),
 # so the "python3-coverage" executable requires python3-setuptools:
 Requires:       python3-setuptools
@@ -118,3 +116,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.0-0.8.a5
+- Rebuild for new 4.0 release.
+

@@ -1,9 +1,8 @@
 Name:           cmocka
 Version:        1.0.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 
 License:        ASL 2.0
-Group:          Development/Tools
 Summary:        Lightweight library to simplify and generalize unit tests for C
 Url:            http://cmocka.org
 
@@ -37,7 +36,6 @@ preferable.
 This is the successor of Google's Cmockery.
 
 %package -n libcmocka
-Group:          Development/Libraries
 Summary:        Lightweight library to simplify and generalize unit tests for C
 
 Conflicts: cmockery2
@@ -65,14 +63,12 @@ preferable.
 This is the successor of Google's Cmockery.
 
 %package -n libcmocka-static
-Group:          Development/Libraries
 Summary:        Lightweight library to simplify and generalize unit tests for C
 
 %description -n libcmocka-static
 Static version of the cmocka library.
 
 %package -n libcmocka-devel
-Group:          Development/Libraries
 Summary:        Development headers for the cmocka library
 Requires:       libcmocka = %{version}-%{release}
 
@@ -137,3 +133,6 @@ popd
 %{_libdir}/cmake/cmocka/cmocka-config.cmake
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.1-3
+- Rebuild for new 4.0 release.
+

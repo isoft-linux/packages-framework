@@ -1,8 +1,7 @@
 Name:           preload
 Version:        0.6.4
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        Preload is an adaptive readahead daemon
-Group:          Applications/System
 License:        GPLv2+
 URL:            http://preload.sf.net/
 
@@ -67,3 +66,6 @@ install -Dm644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.4-13
+- Rebuild for new 4.0 release.
+

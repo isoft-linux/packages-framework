@@ -2,7 +2,7 @@
 
 Name:           python-sphinx-theme-better
 Version:        0.1.5
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        A Better Sphinx Theme
 
 License:        BSD
@@ -71,3 +71,6 @@ This is a modified version of the default Sphinx theme with the following goals:
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.5-7
+- Rebuild for new 4.0 release.
+

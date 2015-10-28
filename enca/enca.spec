@@ -3,9 +3,8 @@
 Name: enca
 Summary: Character set analyzer and detector
 Version: 1.13
-Release: 1 
+Release: 2 
 License: GPLv2
-Group: Applications/Text
 Source: http://dl.cihar.com/enca/enca-%{version}.tar.bz2
 
 URL: http://gitorious.org/enca
@@ -29,7 +28,6 @@ and unknown encoding and convert them to some reasonable encoding.
 
 %package devel
 Summary: Header files and libraries for %{name} charset analyzer
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -96,6 +94,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 builder - 1.13-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

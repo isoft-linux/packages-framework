@@ -5,10 +5,9 @@
 
 Name:               python-%{modname}
 Version:            0.8.2
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            Test vectors for the cryptography package
 
-Group:              Development/Libraries
 License:            ASL 2.0 or BSD
 URL:                http://pypi.python.org/pypi/cryptography-vectors
 Source0:            https://pypi.python.org/packages/source/c/%{modname}/cryptography_vectors-%{version}.tar.gz
@@ -28,7 +27,6 @@ you really know what you are doing.
 
 %if 0%{?with_python3}
 %package -n  python3-%{modname}
-Group:          Development/Libraries
 Summary:        Test vectors for the cryptography package
 
 %description -n python3-%{modname}
@@ -78,5 +76,8 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.2-2
+- Rebuild for new 4.0 release.
+
 * Thu Oct 08 2015 Cjacker <cjacker@foxmail.com>
 - downgrade from yetist. 

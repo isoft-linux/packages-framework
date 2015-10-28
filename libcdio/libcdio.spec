@@ -1,8 +1,7 @@
 Name: libcdio
 Version: 0.92
-Release: 1
+Release: 2
 Summary: CD-ROM input and control library
-Group: System Environment/Libraries
 License: GPLv3+
 URL: http://www.gnu.org/software/libcdio/
 Source0: http://ftp.gnu.org/gnu/libcdio/libcdio-0.92.tar.gz
@@ -24,7 +23,6 @@ devices.
 
 %package devel
 Summary: Header files and libraries for %{name}
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -129,3 +127,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.92-2
+- Rebuild for new 4.0 release.
+

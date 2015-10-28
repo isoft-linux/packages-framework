@@ -1,9 +1,10 @@
+%define debug_package %{nil}
+
 Name:	    unrar	
 Version:	5.2.2
-Release:	1
+Release:	2
 Summary:	unRAR is a utility to extract, view, and test the contents of an RAR archive
 
-Group:		Extra/Runtime/Utility
 License:	Unrar License
 URL:		http://www.rarlab.com/rar_add.htm
 Source0:	http://www.rarlab.com/rar/unrarsrc-%{version}.tar.gz
@@ -28,4 +29,7 @@ install -m0755 unrar $RPM_BUILD_ROOT%{_bindir}
 %{_bindir}/unrar
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.2.2-2
+- Rebuild for new 4.0 release.
+
 

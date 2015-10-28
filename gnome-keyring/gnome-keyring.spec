@@ -7,7 +7,7 @@
 Summary: Framework for managing passwords and other secrets
 Name: gnome-keyring
 Version: 3.18.0
-Release: 1
+Release: 2
 License: GPLv2+ and LGPLv2+
 #VCS: git:git://git.gnome.org/gnome-keyring
 Source: http://download.gnome.org/sources/gnome-keyring/2.32/gnome-keyring-%{version}.tar.xz
@@ -122,6 +122,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas >/dev/null 2>&1 ||:
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-2
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 3.18.0
 

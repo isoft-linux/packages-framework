@@ -2,7 +2,7 @@
 
 Name:    openjpeg
 Version: 1.5.2
-Release: 6 
+Release: 7 
 Summary: JPEG 2000 command line tools
 
 License: BSD
@@ -111,7 +111,6 @@ ln -s openjpeg-1.5/openjpeg.h %{buildroot}%{_includedir}/openjpeg.h
 rm -rfv %{buildroot}%{_docdir}/openjpeg-1.5/
 rm -fv  %{buildroot}%{_libdir}/lib*.la
 
-rpmclean
 %check
 test -f %{buildroot}%{_includedir}/openjpeg.h
 ## known failures (on rex's f16/x86_64 box anyway)
@@ -151,6 +150,9 @@ make test -C %{_target_platform}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5.2-7
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

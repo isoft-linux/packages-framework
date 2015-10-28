@@ -3,9 +3,8 @@
 
 Name:           python-beautifulsoup4
 Version:        4.4.0
-Release:        1
+Release:        2
 Summary:        HTML/XML parser for quick-turnaround applications like screen-scraping
-Group:          Development/Languages
 License:        MIT
 URL:            http://www.crummy.com/software/BeautifulSoup/
 Source0:        https://pypi.python.org/packages/source/b/beautifulsoup4/beautifulsoup4-%{version}.tar.gz
@@ -50,7 +49,6 @@ minutes with Beautiful Soup.
 %if 0%{?with_python3}
 %package -n     python3-beautifulsoup4
 Summary:        HTML/XML parser for quick-turnaround applications like screen-scraping
-Group:          Development/Languages
 Requires:       python3-html5lib
 Requires:       python3-lxml
 Obsoletes:      python3-BeautifulSoup < 1:3.2.1-2
@@ -133,3 +131,6 @@ pushd %{py3dir}
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.4.0-2
+- Rebuild for new 4.0 release.
+

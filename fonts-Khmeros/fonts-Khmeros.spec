@@ -1,6 +1,7 @@
 Name: fonts-Khmeros
+Summary: Khmer font set created by Danh Hong of the Cambodian Open Institute 
 Version: 5.0 
-Release: 1
+Release: 2
 License:        LGPLv2+
 URL:            http://www.khmeros.info/en/fonts
 Source0:        http://downloads.sourceforge.net/khmer/All_KhmerOS_5.0.zip
@@ -11,7 +12,8 @@ Source4:        65-0-khmeros-base.conf
 Source5:        65-0-khmeros-metal-chrieng.conf
 Source6:        65-0-khmeros-muol.conf
 Source7:        65-0-khmeros-siemreap.conf
-Summary: Khmer font set created by Danh Hong of the Cambodian Open Institute 
+
+BuildArch: noarch
 
 %description
 The Khmer OS fonts include Khmer and Latin alphabets, and they have equivalent 
@@ -52,4 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/fonts/conf.d/*
 %{_datadir}/fontconfig/conf.avail/*
 %{_datadir}/fonts/*.ttf
+
+
+%changelog
+* Sat Oct 24 2015 builder - 5.0-2
+- Rebuild for new 4.0 release.
 

@@ -1,9 +1,8 @@
 Summary: An HTTP and WebDAV client library
 Name: neon
 Version: 0.30.1
-Release: 8 
+Release: 9 
 License: LGPLv2+
-Group: System Environment/Libraries
 URL: http://www.webdav.org/neon/
 Source0: http://www.webdav.org/neon/neon-%{version}.tar.gz
 BuildRequires: expat-devel, gnutls-devel, zlib-devel
@@ -19,7 +18,6 @@ Kerberos authentication, and has complete SSL support.
 
 %package devel
 Summary: Development libraries and C header files for the neon library
-Group: Development/Libraries
 Requires: neon = %{version}-%{release}, gnutls-devel, zlib-devel, expat-devel
 Requires: pkgconfig
 # Documentation is GPLv2+
@@ -50,7 +48,6 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
 %find_lang %{name}
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,11 +66,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %{_includedir}/*
 %{_libdir}/pkgconfig/neon.pc
+%{_docdir}/neon-%{version}
 %{_mandir}/man1/*
 %{_mandir}/man3/*
 %{_libdir}/*.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.30.1-9
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

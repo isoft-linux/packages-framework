@@ -11,9 +11,8 @@
 Summary: Creates a common metadata repository
 Name: createrepo
 Version: 0.10.3
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPLv2
-Group: System Environment/Base
 Source: http://createrepo.baseurl.org/download/%{name}-%{version}.tar.gz
 Patch1: ten-changelog-limit.patch
 Patch2: createrepo-HEAD.patch
@@ -56,3 +55,6 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitelib}/createrepo
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.10.3-4
+- Rebuild for new 4.0 release.
+

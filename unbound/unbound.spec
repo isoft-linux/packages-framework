@@ -21,7 +21,7 @@
 Summary: Validating, recursive, and caching DNS(SEC) resolver
 Name: unbound
 Version: 1.5.4
-Release: 3%{?extra_version:.%{extra_version}}%{?dist}
+Release: 4%{?extra_version:.%{extra_version}}%{?dist}
 License: BSD
 Url: http://www.nlnetlabs.nl/unbound/
 Source: http://www.unbound.net/downloads/%{name}-%{version}%{?extra_version}.tar.gz
@@ -44,7 +44,6 @@ Source15: unbound-anchor.timer
 Source16: unbound-munin.README
 Source17: unbound-anchor.service
 
-Group: System Environment/Daemons
 BuildRequires: flex, openssl-devel
 BuildRequires: libevent-devel expat-devel
 %if 0%{with_python}
@@ -78,7 +77,6 @@ as a server, but are linked into an application) are easily possible.
 %if %{with_munin}
 %package munin
 Summary: Plugin for the munin / munin-node monitoring package
-Group:     System Environment/Daemons
 Requires: munin-node
 Requires: %{name} = %{version}-%{release}, bc
 BuildArch: noarch
@@ -89,7 +87,6 @@ Plugin for the munin / munin-node monitoring package
 
 %package devel
 Summary: Development package that includes the unbound header files
-Group: Development/Libraries
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}, openssl-devel
 
 %description devel
@@ -97,7 +94,6 @@ The devel package contains the unbound library and the include files
 
 %package libs
 Summary: Libraries used by the unbound server and client applications
-Group: Applications/System
 Requires(post): /sbin/ldconfig
 Requires(post): systemd
 Requires(postun): /sbin/ldconfig
@@ -112,7 +108,6 @@ Contains libraries used by the unbound server and client applications
 %if 0%{with_python}
 %package -n python-unbound
 Summary: Python 2 modules and extensions for unbound
-Group: Applications/System
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}
 Provides: unbound-python = %{version}-%{release}
 Obsoletes: unbound-python < %{version}-%{release}
@@ -124,7 +119,6 @@ Python 2 modules and extensions for unbound
 %if 0%{with_python3}
 %package -n python3-unbound
 Summary: Python 3 modules and extensions for unbound
-Group: Applications/System
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}
 
 %description -n python3-unbound
@@ -429,3 +423,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5.4-4
+- Rebuild for new 4.0 release.
+

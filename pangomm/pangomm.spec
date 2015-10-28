@@ -4,10 +4,9 @@
 
 Name:           pangomm
 Version:        2.38.1
-Release:        1 
+Release:        2 
 Summary:        C++ interface for Pango
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.gtkmm.org/
 Source0:        http://ftp.gnome.org/pub/GNOME/sources/pangomm/%{release_version}/%{name}-%{version}.tar.xz
@@ -27,7 +26,6 @@ quickly create complex user interfaces.
 
 %package devel
 Summary:        Headers for developing programs that will use %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description devel
@@ -37,7 +35,6 @@ developing pangomm applications.
 
 %package          doc
 Summary:          Developer's documentation for the pangomm library
-Group:            Documentation
 BuildArch:        noarch
 Requires:         %{name} = %{version}-%{release}
 Requires:         libsigc++-doc
@@ -64,7 +61,6 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -88,6 +84,9 @@ rpmclean
 %{_datadir}/devhelp/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.38.1-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

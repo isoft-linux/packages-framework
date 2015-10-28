@@ -1,22 +1,19 @@
 Name:    liblogging
 Version: 1.0.4
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: An easy to use logging library
 License: BSD
-Group:   System Environment/Libraries
 URL:     http://www.liblogging.org/
 Source0: http://download.rsyslog.com/liblogging/liblogging-%{version}.tar.gz
 
 %package stdlog
 Summary: An easy to use logging library - stdlog component
-Group:   System Environment/Libraries
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires: dos2unix
 
 %package stdlog-devel
 Summary: An easy to use logging library - stdlog development files
-Group:   Development/Libraries
 Requires: %{name}-stdlog%{_isa} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -76,3 +73,6 @@ rm -f \
 %{_mandir}/man3/stdlog.3.gz
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-6
+- Rebuild for new 4.0 release.
+

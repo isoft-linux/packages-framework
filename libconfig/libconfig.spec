@@ -1,7 +1,7 @@
 Name:                   libconfig
 Summary:                C/C++ configuration file library
 Version:                1.5
-Release:                2%{?dist}
+Release:                3%{?dist}
 License:                LGPLv2+
 Source0:                http://www.hyperrealm.com/libconfig/libconfig-%{version}.tar.gz
 URL:                    http://www.hyperrealm.com/libconfig/
@@ -53,3 +53,6 @@ rm -rf $RPM_BUILD_ROOT%{_infodir}
 %{_libdir}/pkgconfig/libconfig*.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5-3
+- Rebuild for new 4.0 release.
+

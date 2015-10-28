@@ -10,7 +10,7 @@
 
 Name:           openjpeg2
 Version:        2.1.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        C-Library for JPEG 2000
 
 # windirent.h is MIT, the rest is BSD
@@ -339,3 +339,6 @@ make test -C %{_target_platform}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.1.0-6
+- Rebuild for new 4.0 release.
+

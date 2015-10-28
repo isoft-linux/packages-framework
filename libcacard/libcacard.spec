@@ -6,7 +6,7 @@
 Summary: Common Access Card (CAC) Emulation Development library
 Name:    libcacard 
 Version: 2.4.0
-Release: 1
+Release: 2
 License: GPLv2+ and LGPLv2+ and BSD
 URL: http://www.qemu.org/
 Source0: qemu-%{version}.tar.bz2
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/cacard/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.4.0-2
+- Rebuild for new 4.0 release.
+
 * Wed Aug 12 2015 Cjacker <cjacker@foxmail.com>
 - update to 2.4.0
 %{_includedir}/cacard/*

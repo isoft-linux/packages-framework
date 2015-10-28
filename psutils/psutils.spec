@@ -1,7 +1,7 @@
 Summary: PostScript Utilities
 Name:    psutils
 Version: 1.23
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: psutils
 
 # We can't follow https://fedoraproject.org/wiki/Packaging:SourceURL#Github
@@ -79,3 +79,6 @@ sed -i -e 's,/usr/bin/env perl,%{__perl},' \
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.23-9
+- Rebuild for new 4.0 release.
+

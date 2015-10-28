@@ -4,9 +4,8 @@ Name:           libx86emu
 BuildRequires:  xz
 Summary:        A small x86 emulation library.
 License:        BSD-3-Clause
-Group:          System/Libraries
 Version:        1.5
-Release:        1.2
+Release:        2.2
 PreReq:         /sbin/ldconfig
 Source:         %{name}-%{version}.tar.xz
 Url:            https://github.com/wfeldt/libx86emu
@@ -18,7 +17,6 @@ execution logging functions.
 
 %package -n     libx86emu-devel
 Summary:        A small x86 emulation library.
-Group:          System/Libraries
 Requires:       %{name} = %version
 
 %description -n libx86emu-devel
@@ -50,3 +48,6 @@ make install DESTDIR=%{buildroot} LIBDIR=%{_libdir}
 %{_includedir}/x86emu.h
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5-2.2
+- Rebuild for new 4.0 release.
+

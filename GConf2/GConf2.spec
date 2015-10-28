@@ -5,9 +5,8 @@
 Summary: A process-transparent configuration system
 Name: GConf2
 Version: 3.2.6 
-Release: 1 
+Release: 2 
 License: LGPL
-Group: System Environment/Base
 URL: http://www.gnome.org
 Source: ftp://ftp.gnome.org/pub/GNOME/unstable/sources/GConf/GConf-%{version}.tar.xz
 Patch0: 01_xml-gettext-domain.patch  
@@ -26,7 +25,6 @@ support workgroup administration.
 
 %package devel
 Summary: Headers and libraries for GConf development
-Group: Development/Libraries
 Requires: %{name} = %{version}
 Requires: libxml2-devel >= %{libxml2_version}
 Requires: glib2-devel >= %{glib2_version}
@@ -55,7 +53,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %find_lang GConf2
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -104,3 +101,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/gconf
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.2.6-2
+- Rebuild for new 4.0 release.
+

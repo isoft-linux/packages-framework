@@ -2,10 +2,9 @@
 Summary: Musepack audio decoding library
 Name:	 libmpcdec
 Version: 1.2.6
-Release: 15%{?dist}
+Release: 16%{?dist}
 
 License: BSD 
-Group: 	 System Environment/Libraries
 URL: 	 http://www.musepack.net/
 Source0: http://files.musepack.net/source/libmpcdec-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -21,7 +20,6 @@ heavily optimized and patentless code.
 
 %package devel
 Summary: Development files for the Musepack audio decoding library
-Group:	 Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description devel
 %{summary}.
@@ -65,3 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.6-16
+- Rebuild for new 4.0 release.
+

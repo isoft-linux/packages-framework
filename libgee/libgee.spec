@@ -1,9 +1,8 @@
 Name:           libgee
 Version:        0.18.0
-Release:        1
+Release:        2
 Summary:        GObject collection library
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://live.gnome.org/Libgee
 #VCS:           git:git://git.gnome.org/libgee
@@ -56,7 +55,6 @@ library. It's planned to provide bindings for further languages.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
 
@@ -86,7 +84,6 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -111,3 +108,6 @@ rpmclean
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.18.0-2
+- Rebuild for new 4.0 release.
+

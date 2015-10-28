@@ -3,7 +3,7 @@
 
 Name:  anthy
 Version: 9100h
-Release: 28%{?dist}
+Release: 29%{?dist}
 # The entire source code is LGPLv2+ and dictionaries is GPLv2. the corpus data is under Public Domain.
 License: LGPLv2+ and GPLv2 and Public Domain
 URL:  http://sourceforge.jp/projects/anthy/
@@ -18,7 +18,6 @@ Patch12: %{name}-aarch64.patch
 Patch13: %{name}-fix-segfault.patch
 
 Summary: Japanese character set input library
-Group:  System Environment/Libraries
 
 %description
 Anthy provides the library to input Japanese on the applications, such as
@@ -28,7 +27,6 @@ So Anthy is secure than other conversion server.
 
 %package devel
 Summary: Header files and library for developing programs which uses Anthy
-Group:  Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -137,3 +135,6 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/lib*.{la,a}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 9100h-29
+- Rebuild for new 4.0 release.
+

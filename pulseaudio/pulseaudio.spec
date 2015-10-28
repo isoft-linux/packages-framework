@@ -1,7 +1,7 @@
 Name:           pulseaudio
 Summary:        Improved Linux Sound Server
 Version:        7.0 
-Release:        2 
+Release:        3 
 License:        LGPLv2+
 
 Source0: http://freedesktop.org/software/pulseaudio/releases/pulseaudio-%{version}.tar.xz
@@ -454,5 +454,8 @@ exit 0
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 7.0-3
+- Rebuild for new 4.0 release.
+
 * Mon Oct 19 2015 Cjacker <cjacker@foxmail.com>
 - rebuild.

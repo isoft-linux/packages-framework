@@ -1,6 +1,6 @@
 Name:           at-spi2-atk
 Version:        2.18.1
-Release:        2
+Release:        3
 Summary:        A GTK+ module that bridges ATK to D-Bus at-spi
 
 License:        LGPLv2+
@@ -91,6 +91,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.18.1-3
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to
 

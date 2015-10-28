@@ -1,6 +1,6 @@
 Name:		libchardet
 Version:	1.0.4
-Release:	1
+Release:	2
 Summary:	Mozilla's Universal Charset Detector C/C++ API
 
 License:    MPL	
@@ -13,7 +13,6 @@ Mozilla's Universal Charset Detector C/C++ API
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -45,5 +44,8 @@ rm -rf $RPM_BUILD_ROOT%{_mandir}/ko
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-2
+- Rebuild for new 4.0 release.
+
 * Sun Jul 19 2015 Cjacker <cjacker@foxmail.com>
 - first build

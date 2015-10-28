@@ -1,8 +1,7 @@
 Name:           perl-Config-IniFiles
 Version:        2.88
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A module for reading .ini-style configuration files
-Group:          Development/Libraries
 # LICENSE:                              GPL+ or Artistic
 # lib/Config/IniFiles.pm:               GPL+ or Artistic
 ## Not distributed in a binary package
@@ -80,3 +79,6 @@ perl Build.PL installdirs=vendor
 %{_mandir}/man3/*.3pm*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.88-2
+- Rebuild for new 4.0 release.
+

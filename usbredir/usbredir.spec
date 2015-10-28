@@ -1,8 +1,7 @@
 Name:           usbredir
 Version:        0.7
-Release:        1
+Release:        2
 Summary:        USB network redirection protocol libraries
-Group:          System Environment/Libraries
 License:        LGPLv2+
 # I've requested a fedorahosted project once that is in place these 2 should
 # be updated to point there
@@ -29,7 +28,6 @@ All that an application wishing to implement an usb-host needs to do is:
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -39,7 +37,6 @@ developing applications that use %{name}.
 
 %package        server
 Summary:        Simple usb-host tcp server
-Group:          System Environment/Daemons
 License:        GPLv2+
 Requires:       %{name} = %{version}-%{release}
 
@@ -52,8 +49,6 @@ A simple usb-host tcp server, using libusbredirhost.
 
 
 %build
-export CC=clang
-export CXX=clang++
 %configure
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" \
   PREFIX=%{_prefix} LIBDIR=%{_libdir}
@@ -87,3 +82,6 @@ make install PREFIX=%{_prefix} LIBDIR=%{_libdir} DESTDIR=$RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.7-2
+- Rebuild for new 4.0 release.
+

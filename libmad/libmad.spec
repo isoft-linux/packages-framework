@@ -4,9 +4,8 @@
 Summary: MPEG audio decoding library
 Name: libmad
 Version: 0.15.1b
-Release: 2
+Release: 3
 License: GPL
-Group: System Environment/Libraries
 URL: http://www.underbit.com/products/mad/
 Source: ftp://ftp.mars.org/pub/mpeg/%{name}-%{version}.tar.gz
 Patch0: libmad-clang.patch
@@ -26,7 +25,6 @@ backward compatible with such streams) nor does it currently support AAC.
 
 %package devel
 Summary: Header and library for developing programs that will use libmad
-Group: Development/Libraries
 Requires: %{name} = %{version}, pkgconfig
 
 %description devel
@@ -101,6 +99,9 @@ CFLAGS="-fPIC $RPM_OPT_FLAGS" CXXFLAGS="-fPIC $RPM_OPT_FLAGS" %configure \
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.15.1b-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

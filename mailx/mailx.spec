@@ -3,10 +3,9 @@
 Summary: Enhanced implementation of the mailx command
 Name: mailx
 Version: 12.5
-Release: 11 
+Release: 12 
 # MPLv1.1 .. nss.c, nsserr.c
 License: BSD with advertising and MPLv1.1
-Group: Applications/Internet
 URL: http://heirloom.sourceforge.net/mailx.html
 # Mailx's upstream provides only the CVS method of downloading source code.
 # Use get-upstream-tarball.sh script to download current version of mailx.
@@ -135,3 +134,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 12.5-12
+- Rebuild for new 4.0 release.
+

@@ -21,9 +21,8 @@
 Summary: A widely used Mail Transport Agent (MTA)
 Name: sendmail
 Version: 8.15.1
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: Sendmail
-Group: System Environment/Daemons
 URL: http://www.sendmail.org/
 Source0: ftp://ftp.sendmail.org/pub/sendmail/sendmail.%{version}.tar.gz
 # Systemd Service file
@@ -129,7 +128,6 @@ Sendmail, you can install the sendmail-doc package.
 
 %package doc
 Summary: Documentation about the Sendmail Mail Transport Agent program
-Group: Documentation
 BuildArch: noarch
 Requires: sendmail = %{version}-%{release}
 
@@ -140,7 +138,6 @@ contributed scripts and tools for use with Sendmail.
 
 %package devel
 Summary: Extra development include files and development files
-Group: Development/Libraries
 Requires: sendmail = %{version}-%{release}
 Requires: sendmail-milter = %{version}-%{release}
 
@@ -150,7 +147,6 @@ of sendmail.
 
 %package cf
 Summary: The files needed to reconfigure Sendmail
-Group: System Environment/Daemons
 Requires: sendmail = %{version}-%{release}
 BuildArch: noarch
 Requires: m4
@@ -163,7 +159,6 @@ your sendmail.cf file.
 
 %package milter
 Summary: The sendmail milter library
-Group: System Environment/Libraries
 
 %description milter
 The sendmail Mail Filter API (Milter) is designed to allow third-party
@@ -664,3 +659,6 @@ exit 0
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 8.15.1-7
+- Rebuild for new 4.0 release.
+

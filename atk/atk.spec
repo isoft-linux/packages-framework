@@ -1,9 +1,8 @@
 Summary: Interfaces for accessibility support.
 Name: atk
 Version: 2.18.0
-Release: 1
+Release: 2
 License: LGPL
-Group: System Environment/Libraries
 Source: atk-%{version}.tar.xz
 URL: http://developer.gnome.org/projects/gap/
 BuildPreReq: glib2-devel
@@ -17,7 +16,6 @@ devices.
 
 %package devel
 Summary: System for layout and rendering of internationalized text.
-Group: Development/Libraries
 Requires: atk = %{version}
 Requires: glib2-devel
 
@@ -40,7 +38,6 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -64,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-?.?/*.gir
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.18.0-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

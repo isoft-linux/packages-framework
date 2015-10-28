@@ -1,9 +1,8 @@
 Name:           libass
 Version:        0.12.3
-Release:        1 
+Release:        2 
 Summary:        Portable library for SSA/ASS subtitles rendering
 
-Group:          System Environment/Libraries
 License:        ISC
 URL:            http://code.google.com/p/libass/
 Source0:        https://github.com/libass/libass/releases/download/%{version}/libass-%{version}.tar.xz
@@ -19,7 +18,6 @@ Libass is a portable library for SSA/ASS subtitles rendering.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
 
@@ -40,7 +38,6 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/libass.pc
 
 %changelog
+* Sat Oct 24 2015 builder - 0.12.3-2
+- Rebuild for new 4.0 release.
+
 * Fri Jul 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 0.12.3
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>

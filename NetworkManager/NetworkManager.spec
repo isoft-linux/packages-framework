@@ -15,8 +15,7 @@ Name: NetworkManager
 Summary: Network connection manager and user applications
 Epoch: 1
 Version: 1.0.2 
-Release: 4 
-Group: System Environment/Base
+Release: 5 
 License: GPLv2+
 URL: http://www.gnome.org/projects/NetworkManager/
 
@@ -82,7 +81,6 @@ provides VPN integration with a variety of different VPN services.
 
 %package devel
 Summary: Libraries and headers for adding NetworkManager support to applications
-Group: Development/Libraries
 Requires: %{name} = %{epoch}:%{version}-%{release}
 Requires: dbus-devel >= %{dbus_version}
 Requires: dbus-glib >= %{dbus_glib_version}
@@ -94,7 +92,6 @@ from applications.
 
 %package glib
 Summary: Libraries for adding NetworkManager support to applications that use glib.
-Group: Development/Libraries
 Requires: dbus >= %{dbus_version}
 Requires: dbus-glib >= %{dbus_glib_version}
 
@@ -105,7 +102,6 @@ functionality from applications that use glib.
 
 %package glib-devel
 Summary: Header files for adding NetworkManager support to applications that use glib.
-Group: Development/Libraries
 Requires: %{name}-devel = %{epoch}:%{version}-%{release}
 Requires: %{name}-glib = %{epoch}:%{version}-%{release}
 Requires: glib2-devel
@@ -119,7 +115,6 @@ NetworkManager functionality from applications that use glib.
 
 %package tui 
 Summary: Newt based console ui for Networkmanager 
-Group:   System Environment/Base 
 
 %description tui
 Newt based console ui for Networkmanager
@@ -196,7 +191,6 @@ install -m 0755 %{SOURCE3} $RPM_BUILD_ROOT/etc/rc.d/init.d/NetworkManager
 %endif
 
 
-rpmclean
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
@@ -318,6 +312,9 @@ fi
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.0.2-5
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -5,9 +5,8 @@
 
 Name:           python-iniparse
 Version:        0.4
-Release:        15
+Release:        16
 Summary:        Python Module for Accessing and Modifying Configuration Data in INI files
-Group:          Development/Libraries
 License:        MIT and Python
 URL:            http://code.google.com/p/iniparse/
 Source0:        http://iniparse.googlecode.com/files/iniparse-%{version}.tar.gz
@@ -44,7 +43,6 @@ use.
 %if 0%{?with_python3}
 %package -n python3-iniparse
 Summary:        Python 3 Module for Accessing and Modifying Configuration Data in INI files
-Group:          Development/Libraries
 Requires:       python3-six
 
 %description -n python3-iniparse
@@ -123,5 +121,8 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4-16
+- Rebuild for new 4.0 release.
+
 * Wed Aug 26 2015 Cjacker <cjacker@foxmail.com>
 - initial build from fedora.

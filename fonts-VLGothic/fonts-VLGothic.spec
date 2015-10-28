@@ -1,13 +1,17 @@
 Name:       fonts-VLGothic
 Summary:    VL Gothic Japanese fonts
 Version:    20141206 
-Release:    1
+Release:    2
 License:    mplus and BSD
 Source0:    http://osdn.dl.sourceforge.jp/vlgothic/62375/VLGothic-20141206.tar.bz2
 Source1:    65-0-vlgothic-pgothic.conf  
 Source2:    65-1-vlgothic-gothic.conf
+
+BuildArch: noarch
+
 %description
 VL Gothic Japanese fonts
+
 %prep
 %setup -n VLGothic 
 %build
@@ -32,3 +36,8 @@ popd
 %{_sysconfdir}/fonts/conf.d/*
 %{_datadir}/fontconfig/conf.avail/*
 %{_datadir}/fonts/*.ttf
+
+%changelog
+* Sat Oct 24 2015 builder - 20141206-2
+- Rebuild for new 4.0 release.
+

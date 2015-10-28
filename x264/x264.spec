@@ -3,9 +3,8 @@
 Summary: Library for encoding and decoding H264/AVC video streams
 Name: x264
 Version: 0
-Release: 0.8.%{snapshot}
+Release: 0.9.%{snapshot}
 License: GPL
-Group: System Environment/Libraries
 URL: http://developers.videolan.org/x264.html
 Source0: last_x264.tar.bz2
 BuildRequires: gettext
@@ -22,7 +21,6 @@ scratch.
 
 %package devel
 Summary: Development files for the x264 library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -52,7 +50,6 @@ scratch.
 %install
 %{__rm} -rf %{buildroot}
 %{__make} DESTDIR=%{buildroot} install
-rpmclean
 %clean
 %{__rm} -rf %{buildroot}
 
@@ -73,4 +70,9 @@ rpmclean
 %{_includedir}/*.h
 %{_libdir}/libx264.so
 %{_libdir}/pkgconfig/%{name}.pc
+
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0-0.9.20150713
+- Rebuild for new 4.0 release.
 

@@ -1,9 +1,8 @@
 Name:		wavpack
 Summary:	A completely open audiocodec
 Version:	4.70.0
-Release:    1	
+Release:    2	
 License:	BSD
-Group:		Applications/Multimedia
 Url:		http://www.wavpack.com/
 Source:		http://www.wavpack.com/%{name}-%{version}.tar.bz2
 
@@ -16,7 +15,6 @@ performance and functionality.
 
 %package devel
 Summary:	WavPack - development files
-Group:		Development/Libraries
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	pkgconfig
 
@@ -34,7 +32,6 @@ make %{?_smp_mflags}
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/%{_libdir}/*.la
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -53,3 +50,6 @@ rpmclean
 %{_libdir}/libwavpack.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.70.0-2
+- Rebuild for new 4.0 release.
+

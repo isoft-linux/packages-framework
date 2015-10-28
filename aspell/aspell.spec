@@ -1,7 +1,7 @@
 Summary: Spell checker
 Name: aspell
 Version: 0.60.6.1
-Release: 12%{?dist}
+Release: 13%{?dist}
 Epoch: 12
 # LGPLv2+ .. common/gettext.h
 # LGPLv2  .. modules/speller/default/phonet.hpp,
@@ -10,7 +10,6 @@ Epoch: 12
 # GPLv2+  .. ltmain.sh, misc/po-filter.c
 # BSD     .. myspell/munch.c
 License: LGPLv2+ and LGPLv2 and GPLv2+ and BSD
-Group: Applications/Text
 URL: http://aspell.net/
 Source: ftp://ftp.gnu.org/gnu/aspell/aspell-%{version}.tar.gz
 
@@ -39,7 +38,6 @@ than one Aspell process is open at once.
 
 %package devel
 Summary: Libraries and header files for Aspell development
-Group: Development/Libraries
 Requires: %{name} = %{epoch}:%{version}-%{release}
 Requires: pkgconfig
 
@@ -125,3 +123,6 @@ rm -rf ${RPM_BUILD_ROOT}%{_infodir}
 %{_mandir}/man1/pspell-config.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 12:0.60.6.1-13
+- Rebuild for new 4.0 release.
+

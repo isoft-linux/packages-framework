@@ -1,6 +1,6 @@
 Name:           celt051
 Version:        0.5.1.3
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        An audio codec for use in low-delay speech and audio communication
 
 License:        BSD
@@ -61,3 +61,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/libcelt051.la
 %{_libdir}/libcelt051.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.5.1.3-11
+- Rebuild for new 4.0 release.
+

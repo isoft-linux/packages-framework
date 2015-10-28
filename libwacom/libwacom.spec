@@ -2,11 +2,10 @@
 
 Name:           libwacom
 Version:        0.15
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
-Group:          System Environment/Libraries
 License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
@@ -81,3 +80,6 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.15-2
+- Rebuild for new 4.0 release.
+

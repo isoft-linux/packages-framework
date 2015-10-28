@@ -1,8 +1,7 @@
 Name:           libsecret
 Version:        0.18.3
-Release:        1
+Release:        2
 Summary:        Library for storing and retrieving passwords and other secrets
-Group:          System Environment/Libraries 
 License:        LGPLv2+
 URL:            https://live.gnome.org/Libsecret
 Source0:        libsecret-%{version}.tar.xz
@@ -24,7 +23,6 @@ KSecretService are both implementations of a Secret Service.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries 
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -44,7 +42,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rpmclean
 
 %find_lang libsecret
 
@@ -72,6 +69,9 @@ rpmclean
 %{_datadir}/vala/vapi/libsecret-1.vapi
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.18.3-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

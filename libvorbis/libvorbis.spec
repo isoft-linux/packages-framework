@@ -1,9 +1,8 @@
 Summary:	The Vorbis General Audio Compression Codec.
 Name:		libvorbis
 Version:	1.3.5
-Release:  	3	
+Release:  	4	
 Epoch:		1
-Group:		System Environment/Libraries
 License:	BSD
 URL:		http://www.xiph.org/
 Source:		http://downloads.xiph.org/releases/vorbis/libvorbis-%{version}.tar.xz
@@ -20,7 +19,6 @@ that support Ogg Vorbis.
 
 %package devel
 Summary: Development tools for Vorbis applications.
-Group: Development/Libraries
 Requires:	libogg-devel >= 2:1.1
 Requires:	libvorbis = %{epoch}:%{version}-%{release}
 Obsoletes:	vorbis-devel
@@ -44,7 +42,6 @@ make DESTDIR=$RPM_BUILD_ROOT install
 # create a cleaned up (Makefile free) copy of doc for -devel %doc
 cp -a doc _doc
 rm `find _doc -name 'Makefile*'`
-rpmclean
 
 %files
 %defattr(-,root,root)
@@ -56,6 +53,7 @@ rpmclean
 %files devel
 %defattr(-,root,root)
 %doc _doc/*
+%{_docdir}/%{name}-%{version}
 %{_includedir}/vorbis
 %{_libdir}/libvorbis.so
 %{_libdir}/libvorbisfile.so
@@ -71,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.3.5-4
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

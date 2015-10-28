@@ -1,9 +1,8 @@
 Summary: 	Advanced Linux Sound Architecture (ALSA) utilities
 Name: 		alsa-utils
 Version: 	1.0.29
-Release:  	2	
+Release:  	3	
 License: 	GPL
-Group: 		Applications/Multimedia
 URL: 		http://www.alsa-project.org/
 Source: 	ftp://ftp.alsa-project.org/pub/utils/alsa-utils-%{version}.tar.bz2
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -31,7 +30,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 #own this dir. otherwise alsactl store will failed.
 mkdir -p $RPM_BUILD_ROOT/var/lib/alsa
 
-rpmclean
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
@@ -52,6 +50,9 @@ rpmclean
 /var/lib/alsa
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

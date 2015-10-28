@@ -1,9 +1,8 @@
 Name:           perl-Pod-LaTeX
 Version:        0.61
-Release:        296%{?dist}
+Release:        297%{?dist}
 Summary:        Convert POD data to formatted LaTeX
 License:        GPL+ or Artistic
-Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Pod-LaTeX/
 Source0:        http://www.cpan.org/authors/id/T/TJ/TJENNESS/Pod-LaTeX-%{version}.tar.gz
 BuildArch:      noarch
@@ -59,3 +58,6 @@ perl Build.PL installdirs=vendor
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.61-297
+- Rebuild for new 4.0 release.
+

@@ -1,9 +1,8 @@
 Summary:  The Advanced Linux Sound Architecture (ALSA) library
 Name:     alsa-lib
 Version:  1.0.29
-Release:  2
+Release:  3
 License:  LGPLv2+
-Group:    System Environment/Libraries
 URL:      http://www.alsa-project.org/
 
 Source:   ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}%{?prever}%{?postver}.tar.bz2
@@ -27,7 +26,6 @@ the older OSS API, providing binary compatibility for most OSS programs.
 
 %package  devel
 Summary:  Development files from the ALSA library
-Group:    Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -40,7 +38,6 @@ against the ALSA libraries and interfaces.
 
 %package  -n alsa-ucm
 Summary:  ALSA Universal Configuration Manager
-Group:    System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description -n alsa-ucm
@@ -115,3 +112,6 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/alsa/ucm
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-3
+- Rebuild for new 4.0 release.
+

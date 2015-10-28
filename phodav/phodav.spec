@@ -1,9 +1,8 @@
 Name:		phodav
 Version:	2.0
-Release:	1
+Release:	2
 Summary:	phodav is a WebDav server implementation using libsoup (RFC 4918). 
 
-Group:	    Framework/Utilities	
 License:	GPL
 URL:		https://wiki.gnome.org/phodav
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/phodav/2.0/phodav-2.0.tar.xz
@@ -17,14 +16,12 @@ Requires:   lib%{name} = %{version}-%{release}
 
 %package -n libphodav 
 Summary:        Libraries for %{name}
-Group:          System Environment/Libraries
 
 %description -n libphodav
 %{summary}
 
 %package -n libphodav-devel 
 Summary:        Development files for lib%{name}
-Group:          Development/Libraries
 Requires:       lib%{name} = %{version}-%{release}
 
 %description -n libphodav-devel
@@ -33,7 +30,6 @@ developing applications that use lib%{name}.
 
 %package -n spice-webdavd
 Summary: Spice webdavd
-Group: Applications/Internet
 
 %description -n spice-webdavd
 Spice webdavd
@@ -71,4 +67,7 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/udev/rules.d/70-spice-webdavd.rules
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0-2
+- Rebuild for new 4.0 release.
+
 

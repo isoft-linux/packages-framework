@@ -6,10 +6,9 @@
 Summary: A library for viewing source files
 Name: gtksourceview2
 Version: 2.10.5
-Release: 20%{?dist}
+Release: 21%{?dist}
 License: LGPLv2+ and GPLv2+
 # the library itself is LGPL, some .lang files are GPL
-Group: System Environment/Libraries
 URL: http://gtksourceview.sourceforge.net/
 #VCS: git:git://git.gnome.org/gtksourceview
 Source0: http://download.gnome.org/sources/gtksourceview/2.11/gtksourceview-%{version}.tar.bz2
@@ -31,7 +30,6 @@ This package contains version 2 of GtkSourceView. The older version
 
 %package devel
 Summary: Files to compile applications that use gtksourceview2
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: gtk2-devel >= %{gtk2_version}
 Requires: libxml2-devel
@@ -78,3 +76,6 @@ rm -f $RPM_BUILD_ROOT%{_datadir}/gtksourceview-2.0/language-specs/convert.py
 #%{_datadir}/gir-1.0/GtkSource-2.0.gir
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.10.5-21
+- Rebuild for new 4.0 release.
+

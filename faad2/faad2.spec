@@ -1,9 +1,8 @@
 Summary: 	Advanced Audio Decoder
 Name: 		faad2
 Version: 	2.7
-Release: 	1
+Release: 	2
 License: 	GPL
-Group: 		System Environment/Libraries
 URL: 		http://faac.sourceforge.net/
 Source0:        http://resare.com/noa/livna/faad2-%{version}.tar.gz
 #BuildRequires:	id3lib-devel
@@ -11,7 +10,6 @@ BuildRequires:	autoconf automake libtool
 
 %package devel
 Summary:	Development files for the faad library
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 # --------------------------------------------------------------------
@@ -38,7 +36,6 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 # --------------------------------------------------------------------
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.7-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,9 +1,8 @@
 Summary: Library for working with files using the mp4 container format
 Name:    mp4v2
 Version: 2.0.0 
-Release: 1 
+Release: 2 
 License: MPL
-Group: System Environment/Libraries
 URL: http://resare.com/libmp4v2/
 Source0: http://resare.com/libmp4v2/dist/mp4v2-%{version}.tar.bz2
 
@@ -15,7 +14,6 @@ and is an exact copy of the library distributed in the mpeg4ip package.
 
 %package devel
 Summary: Development files for the mp4v2 library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -37,7 +35,6 @@ using the libmp4v2 library.
 %{__make} install DESTDIR=%{buildroot}
 %{__rm} -rf %{buildroot}%{_mandir}/manm/
 
-rpmclean
 %clean
 %{__rm} -rf %{buildroot}
 
@@ -60,6 +57,9 @@ rpmclean
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0.0-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

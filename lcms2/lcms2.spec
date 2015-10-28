@@ -1,6 +1,6 @@
 Name:           lcms2
 Version:        2.7
-Release:        6
+Release:        7
 Summary:        Color Management Engine
 License:        MIT
 URL:            http://www.littlecms.com/
@@ -17,14 +17,12 @@ parallel installed with the original (deprecated) lcms.
 
 %package        utils
 Summary:        Utility applications for %{name}
-Group:          Applications/Productivity
 
 %description    utils
 The %{name}-utils package contains utility applications for %{name}.
 
 %package        devel
 Summary:        Development files for LittleCMS
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Provides:       littlecms-devel = %{version}-%{release}
 
@@ -50,7 +48,6 @@ find ${RPM_BUILD_ROOT} -type f -name "*.la" -exec rm -f {} ';'
 install -D -m 644 include/lcms2.h $RPM_BUILD_ROOT/usr/include/lcms2.h
 install -D -m 644 include/lcms2_plugin.h $RPM_BUILD_ROOT/usr/include/lcms2_plugin.h
 
-rpmclean
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
@@ -77,6 +74,9 @@ LD_LIBRARY_PATH=`pwd`/src/.libs make check
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.7-7
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

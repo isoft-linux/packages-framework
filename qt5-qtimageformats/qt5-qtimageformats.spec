@@ -1,6 +1,6 @@
 Name: qt5-qtimageformats
 Version: 5.5.1
-Release: 2 
+Release: 3 
 Summary: Image Format Plugin of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -55,6 +55,9 @@ make install_docs INSTALL_ROOT=%{buildroot}
 %{_docdir}/qt5/*
 
 %changelog
+* Sat Oct 24 2015 builder - 5.5.1-3
+- Rebuild for new 4.0 release.
+
 * Fri Oct 16 2015 Cjacker <cjacker@foxmail.com>
 - update to 5.5.1
 

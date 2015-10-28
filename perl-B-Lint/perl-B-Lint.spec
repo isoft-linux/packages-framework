@@ -1,9 +1,8 @@
 Name:           perl-B-Lint
 Version:        1.20
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Perl lint
 License:        GPL+ or Artistic
-Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/B-Lint/
 Source0:        http://www.cpan.org/authors/id/R/RJ/RJBS/B-Lint-%{version}.tar.gz
 # Work around for Perl 5.22, bug #1231112, CPAN RT#101115
@@ -66,3 +65,6 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.20-6
+- Rebuild for new 4.0 release.
+

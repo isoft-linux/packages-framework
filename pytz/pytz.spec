@@ -2,10 +2,9 @@
 
 Name:           pytz
 Version:        2012d
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        World Timezone Definitions for Python
 
-Group:          Development/Languages
 License:        MIT
 URL:            http://pytz.sourceforge.net/
 Source0:        http://pypi.python.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
@@ -36,7 +35,6 @@ Amost all (over 540) of the Olson timezones are supported.
 Requires:   python3
 Summary:    World Timezone Definitions for Python
 
-Group:      Development/Languages
 %description -n python3-%{name}
 pytz brings the Olson tz database into Python. This library allows accurate
 and cross platform timezone calculations using Python 2.3 or higher. It
@@ -96,3 +94,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2012d-9
+- Rebuild for new 4.0 release.
+

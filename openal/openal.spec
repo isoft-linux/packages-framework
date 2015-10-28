@@ -1,9 +1,8 @@
 Name:		openal
 Version:	1.15.1
-Release:	1
+Release:	2
 Summary:    OpenAL Soft is an LGPL-licensed, cross-platform, software implementation of the OpenAL 3D audio API	
 
-Group:		System Environment/Libraries
 License:	LGPL
 URL:		http://kcat.strangesoft.net/openal.html
 Source0:	%{name}-soft-%{version}.tar.bz2
@@ -50,4 +49,7 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.15.1-2
+- Rebuild for new 4.0 release.
+
 

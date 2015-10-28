@@ -1,6 +1,6 @@
 Name:           libxspf
 Version:        1.2.0
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        XSPF playlist library
 
 License:        BSD and LGPL
@@ -85,3 +85,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.0-10
+- Rebuild for new 4.0 release.
+

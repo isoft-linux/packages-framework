@@ -1,9 +1,8 @@
 Name:          opus
 Version:       1.1.1
-Release:       0.3.beta%{?dist}
+Release:       0.4.beta%{?dist}
 Summary:       An audio codec for use in low-delay speech and audio communication
 
-Group:         System Environment/Libraries
 License:       BSD
 URL:           http://www.opus-codec.org/
 Source0:       http://downloads.xiph.org/releases/%{name}/%{name}-%{version}-beta.tar.gz
@@ -19,7 +18,6 @@ technology from Skype's SILK codec and Xiph.Org's CELT codec.
 
 %package devel
 Summary: Development package for opus
-Group: Development/Libraries
 Requires: libogg-devel
 Requires: opus = %{version}-%{release}
 
@@ -69,3 +67,6 @@ rm -rf %{buildroot}
 %{_datadir}/man/man3/opus_*.3.gz
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.1-0.4.beta
+- Rebuild for new 4.0 release.
+

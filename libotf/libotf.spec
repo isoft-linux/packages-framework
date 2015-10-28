@@ -1,9 +1,8 @@
 Name:		libotf
 Version:	0.9.13
-Release:	6%{?dist}
+Release:	7%{?dist}
 Summary:	A Library for handling OpenType Font
 
-Group:		System Environment/Libraries
 License:	LGPLv2+
 URL:            http://www.nongnu.org/m17n/
 Source0:        http://download.savannah.gnu.org/releases/m17n/%{name}-%{version}.tar.gz
@@ -25,7 +24,6 @@ developed this one.
 
 %package	devel
 Summary:	Development files for %{name}
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}, pkgconfig
 
 %description	devel
@@ -70,3 +68,6 @@ rm $RPM_BUILD_ROOT/usr/bin/libotf-config
 %{_libdir}/pkgconfig/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.13-7
+- Rebuild for new 4.0 release.
+

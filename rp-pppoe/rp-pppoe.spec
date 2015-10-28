@@ -1,9 +1,8 @@
 Name: rp-pppoe
 Version: 3.11
-Release: 14%{?dist}
+Release: 15%{?dist}
 Summary: A PPP over Ethernet client (for xDSL support).
 License: GPLv2+
-Group: System Environment/Daemons
 Url: http://www.roaringpenguin.com/pppoe/
 
 Source: http://www.roaringpenguin.com/files/download/rp-pppoe-%{version}.tar.gz
@@ -97,3 +96,6 @@ rm -rf %{buildroot}/etc/ppp/pppoe.conf \
 %{_mandir}/man?/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.11-15
+- Rebuild for new 4.0 release.
+

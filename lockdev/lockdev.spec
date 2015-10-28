@@ -7,9 +7,8 @@
 Summary: A library for locking devices
 Name: lockdev
 Version: 1.0.4
-Release: 0.20.%{checkout}%{?dist}
+Release: 0.21.%{checkout}%{?dist}
 License: LGPLv2
-Group: System Environment/Libraries
 URL: https://alioth.debian.org/projects/lockdev/
 
 # This is a nightly snapshot downloaded via
@@ -36,7 +35,6 @@ using both FSSTND and SVr4 methods.
 
 %package devel
 Summary: The header files for the lockdev library
-Group: System Environment/Libraries
 Requires: lockdev = %{version}-%{release}
 
 %description devel
@@ -102,3 +100,6 @@ fi
 %{_includedir}/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-0.21.20111007git
+- Rebuild for new 4.0 release.
+

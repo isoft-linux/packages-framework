@@ -1,13 +1,12 @@
 Name:		libhangul
 Version:	0.1.0
-Release:	11%{?dist}
+Release:	12%{?dist}
 
 License:	LGPLv2+
 URL:		https://code.google.com/p/libhangul/
 Source0:	https://libhangul.googlecode.com/files/libhangul-%{version}.tar.gz
 
 Summary:	Hangul input library
-Group:		System Environment/Libraries
 Requires(post):	/sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:	  gettext-devel, automake, libtool
@@ -19,7 +18,6 @@ libhangul provides common features for Hangul input method programs.
 
 %package devel
 Summary:	Development files for libhangul
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	pkgconfig
 %description devel
@@ -65,3 +63,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/%{name}.la
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.0-12
+- Rebuild for new 4.0 release.
+

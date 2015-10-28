@@ -2,12 +2,11 @@
 
 Name:           alsa-plugins
 Version:        1.0.29
-Release:        2
+Release:        3
 Summary:        The Advanced Linux Sound Architecture (ALSA) Plugins
 # All packages are LGPLv2+ with the exception of samplerate which is GPLv2+
 # pph plugin is BSD-like licensed
 License:        GPLv2+ and LGPLv2+ and BSD
-Group:          System Environment/Libraries
 URL:            http://www.alsa-project.org/
 Source0:        ftp://ftp.alsa-project.org/pub/plugins/%{name}-%{version}.tar.bz2
 Source1:        50-jack.conf
@@ -33,7 +32,6 @@ Requires:       alsa-utils
 Requires:       jack-audio-connection-kit
 BuildRequires:  jack-audio-connection-kit-devel
 Summary:        Jack PCM output plugin for ALSA
-Group:          System Environment/Libraries
 License:        LGPLv2+
 %description jack
 This plugin converts the ALSA API over JACK (Jack Audio Connection
@@ -46,7 +44,6 @@ This plugin provides the PCM type "jack"
 Requires:       alsa-utils
 BuildRequires:  alsa-lib-devel
 Summary:        Oss PCM output plugin for ALSA
-Group:          System Environment/Libraries
 License:        LGPLv2+ 
 %description oss
 This plugin converts the ALSA API over OSS API.  With this plugin,
@@ -59,7 +56,6 @@ Requires:       alsa-utils
 Requires:       pulseaudio
 BuildRequires:  pulseaudio-libs-devel
 Summary:        Alsa to PulseAudio backend
-Group:          System Environment/Libraries
 License:        LGPLv2+
 %description pulseaudio
 This plugin allows any program that uses the ALSA API to access a PulseAudio
@@ -71,7 +67,6 @@ one for mixer control.
 Requires:       alsa-utils
 BuildRequires:  libsamplerate-devel
 Summary:        External rate converter plugin for ALSA
-Group:          System Environment/Libraries
 License:        GPLv2+
 %description samplerate
 This plugin is an external rate converter using libsamplerate by Erik de
@@ -81,7 +76,6 @@ Castro Lopo.
 Requires:       alsa-utils
 BuildRequires:  libsamplerate-devel
 Summary:        Upmixer channel expander plugin for ALSA
-Group:          System Environment/Libraries
 License:        LGPLv2+
 %description upmix
 The upmix plugin is an easy-to-use plugin for upmixing to 4 or
@@ -92,7 +86,6 @@ by the slave PCM or explicitly via channel option.
 Requires:       alsa-utils
 BuildRequires:  libsamplerate-devel
 Summary:        Downmixer to stereo plugin for ALSA
-Group:          System Environment/Libraries
 License:        LGPLv2+
 %description vdownmix
 The vdownmix plugin is a downmixer from 4-6 channels to 2-channel
@@ -102,7 +95,6 @@ surround".
 
 %package usbstream
 Summary:        USB stream plugin for ALSA
-Group:          System Environment/Libraries
 License:        LGPLv2+
 %description usbstream
 The usbstream plugin is for snd-usb-us122l driver. It converts PCM
@@ -110,7 +102,6 @@ stream to USB specific stream.
 
 %package arcamav
 Summary:        Arcam AV amplifier plugin for ALSA
-Group:          System Environment/Libraries
 License:        LGPLv2+
 %description arcamav
 This plugin exposes the controls for an Arcam AV amplifier
@@ -120,7 +111,6 @@ This plugin exposes the controls for an Arcam AV amplifier
 Requires:       libspeex libspeexdsp
 BuildRequires:  libspeex-devel libspeexdsp-devel
 Summary:        Rate Converter Plugin Using Speex Resampler
-Group:          System Environment/Libraries
 License:        LGPLv2+
 %description speex
 The rate plugin is an external rate converter using the Speex resampler
@@ -131,7 +121,6 @@ pre-processing of a mono stream like denoise using libspeex DSP API.
 #BuildRequires:  alsa-lib-devel = %{version}
 BuildRequires:  dbus-devel
 Summary:        Maemo plugin for ALSA
-Group:          System Environment/Libraries
 License:        LGPLv2+
 %description maemo
 This plugin converts the ALSA API over PCM task nodes protocol. In this way,
@@ -246,3 +235,6 @@ find $RPM_BUILD_ROOT -name "*.la" -exec rm {} \;
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-3
+- Rebuild for new 4.0 release.
+

@@ -3,9 +3,8 @@
 Name:			python-ply
 Summary: 		Python Lex-Yacc
 Version:		3.4
-Release:		8%{?dist}
+Release:		9%{?dist}
 License:		BSD
-Group:			System Environment/Libraries
 URL:			http://www.dabeaz.com/ply/
 Source0:		http://www.dabeaz.com/ply/ply-%{version}.tar.gz
 BuildRoot:		%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -34,7 +33,6 @@ essential features:
 %if 0%{?with_python3}
 %package -n python3-ply
 Summary:        Python Lex-Yacc
-Group:          System Environment/Libraries
 Requires:       python3-setuptools
 
 %description -n python3-ply
@@ -111,3 +109,6 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.4-9
+- Rebuild for new 4.0 release.
+

@@ -1,11 +1,10 @@
 Name:           hwinfo
 Summary:        Hardware Library
 License:        GPL-2.0+
-Group:          Hardware/Other
 # Until migration to github this should be correct url
 Url:            http://gitorious.org/opensuse/hwinfo
 Version:        21.17
-Release:        1.1
+Release:        2.1
 Source:         %{name}-%{version}.tar.xz
 BuildRequires:  doxygen
 BuildRequires:  flex
@@ -27,7 +26,6 @@ library.
 
 %package      devel
 Summary:        Hardware Detection Library
-Group:          Development/Libraries/C and C++
 Provides:       libhddev
 Obsoletes:      libhddev
 Requires:       %name = %version
@@ -100,3 +98,6 @@ rm -rf %{buildroot}
 %doc doc/libhd/html
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 21.17-2.1
+- Rebuild for new 4.0 release.
+

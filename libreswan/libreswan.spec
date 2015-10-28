@@ -17,11 +17,10 @@
 Name: libreswan
 Summary: IPsec implementation with IKEv1 and IKEv2 keying protocols
 Version: 3.13
-Release: %{?prever:0.}2%{?prever:.%{prever}}%{?dist}
+Release: %{?prever:0.}2%{?prever:.%{prever}}%{?dist}.1
 License: GPLv2
 Url: https://www.libreswan.org/
 Source: https://download.libreswan.org/%{name}-%{version}%{?prever}.tar.gz
-Group: System Environment/Daemons
 BuildRequires: gmp-devel bison flex pkgconfig
 BuildRequires: systemd
 Requires(post): coreutils bash systemd
@@ -198,3 +197,6 @@ if [ ! -f %{_sysconfdir}/ipsec.d/cert8.db ] ; then
 fi
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.13-2.1
+- Rebuild for new 4.0 release.
+

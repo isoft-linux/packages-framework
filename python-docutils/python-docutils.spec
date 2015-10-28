@@ -4,10 +4,9 @@
 
 Name:           python-%{srcname}
 Version:        0.12
-Release:        0.3.20140510svn7747%{?dist}
+Release:        0.4.20140510svn7747%{?dist}
 Summary:        System for processing plaintext documentation
 
-Group:          Development/Languages
 # See COPYING.txt for information
 License:        Public Domain and BSD and Python and GPLv3+
 URL:            http://docutils.sourceforge.net
@@ -47,7 +46,6 @@ Python inline documentation modules and packages.
 %if 0%{?with_python3}
 %package -n python3-%{srcname}
 Summary:        System for processing plaintext documentation for python3
-Group:          Development/Languages
 # This module is optional and not yet available for python3
 Requires: python3-imaging
 
@@ -154,3 +152,6 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.12-0.4.20140510svn7747
+- Rebuild for new 4.0 release.
+

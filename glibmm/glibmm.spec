@@ -3,10 +3,9 @@
 
 Name:           glibmm
 Version:        2.46.1
-Release:        1
+Release:        2
 Summary:        C++ interface for the GLib library
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.gtkmm.org/
 Source0:        http://ftp.gnome.org/pub/GNOME/sources/glibmm/%{release_version}/glibmm-%{version}.tar.xz
@@ -22,7 +21,6 @@ C++ and makes it possible for gtkmm to wrap GObject-based APIs.
 
 %package devel
 Summary:        Headers for developing programs that will use %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       glib2-devel
 Requires:       libsigc++-devel
@@ -34,7 +32,6 @@ developing glibmm applications.
 
 %package        doc
 Summary:        Documentation for %{name}, includes full API docs
-Group:          Documentation
 BuildArch:      noarch
 Requires:       %{name} = %{version}-%{release}
 Requires:       libsigc++-doc
@@ -60,7 +57,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -86,6 +82,9 @@ rpmclean
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.46.1-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

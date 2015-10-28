@@ -1,9 +1,8 @@
 Name:           vala
 Version:        0.30.0
-Release:        1
+Release:        2
 Summary:        A modern programming language for GNOME
 
-Group:          Development/Languages
 # Most files are LGPLv2.1+, curses.vapi is 2-clause BSD
 License:        LGPLv2+ and BSD
 URL:            http://live.gnome.org/Vala
@@ -29,7 +28,6 @@ type system.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
 
@@ -45,7 +43,6 @@ using the %{name} compiler.
 
 %package        tools
 Summary:        Tools for creating projects and bindings for %{name}
-Group:          Development/Languages
 License:        LGPLv2+
 Requires:       %{name} = %{version}-%{release}
 Provides:       %{name}-vapigen = %{version}-%{release}
@@ -63,7 +60,6 @@ from existing C libraries, allowing access from Vala programs.
 
 %package        doc
 Summary:        Documentation for %{name}
-Group:          Documentation
 License:        LGPLv2+
 Requires:       %{name} = %{version}-%{release}
 Provides:       %{name}-docs = %{version}-%{release}
@@ -138,6 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.30.0-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

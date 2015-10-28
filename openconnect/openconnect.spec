@@ -12,10 +12,9 @@
 
 Name:		openconnect
 Version:	7.06
-Release:	2%{?relsuffix}%{?dist}
+Release:	3%{?relsuffix}%{?dist}
 Summary:	Open client for Cisco AnyConnect VPN
 
-Group:		Applications/Internet
 License:	LGPLv2+
 URL:		http://www.infradead.org/openconnect.html
 Source0:	ftp://ftp.infradead.org/pub/openconnect/openconnect-%{version}%{?gitsuffix}.tar.gz
@@ -44,7 +43,6 @@ is based on HTTPS and DTLS.
 
 %package devel
 Summary: Development package for OpenConnect VPN authentication tools
-Group: Applications/Internet
 Requires: %{name}%{?_isa} = %{version}-%{release}
 # RHEL5 needs these spelled out because it doesn't automatically infer from pkgconfig
 %if 0%{?rhel} && 0%{?rhel} <= 5
@@ -100,3 +98,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/openconnect.pc
 %{_datadir}/doc/openconnect
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 7.06-3
+- Rebuild for new 4.0 release.
+

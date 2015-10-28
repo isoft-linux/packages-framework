@@ -1,6 +1,6 @@
 Name:		tigervnc
 Version:	1.5.0
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	A TigerVNC remote display system
 
 License:	GPLv2+
@@ -144,5 +144,8 @@ fi
 %{_mandir}/man1/vncviewer.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5.0-4
+- Rebuild for new 4.0 release.
+
 * Sun Oct 18 2015 Cjacker <cjacker@foxmail.com>
 - initial build. only client.

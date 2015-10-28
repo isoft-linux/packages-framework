@@ -1,7 +1,7 @@
 Summary: Tools for using the foomatic database of printers and printer drivers
 Name:       foomatic
 Version:    4.0.12
-Release:    4%{?dist}
+Release:    5%{?dist}
 License:    GPLv2+
 
 # printer-filters package has gone (bug #967316, bug #1035450).
@@ -137,3 +137,6 @@ exit 0
 %{_var}/cache/foomatic
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.0.12-5
+- Rebuild for new 4.0 release.
+

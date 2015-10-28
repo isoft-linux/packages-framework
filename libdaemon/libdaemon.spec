@@ -1,9 +1,8 @@
 Name: libdaemon
 Version: 0.14
-Release: 4
+Release: 5
 Summary: library for writing UNIX daemons
 
-Group: System Environment/Libraries
 License: GPL 
 URL: http://0pointer.de/lennart/projects/libdaemon/
 Source0: http://0pointer.de/lennart/projects/libdaemon/%{name}-%{version}.tar.gz
@@ -25,7 +24,6 @@ It consists of the following parts:
   to syslog.
 
 %package devel
-Group: Development/Libraries
 Summary: libraries and header files for libdaemon development
 Requires: libdaemon = %{version}
 
@@ -46,7 +44,6 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -66,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.14-5
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

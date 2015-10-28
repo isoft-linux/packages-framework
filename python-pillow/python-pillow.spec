@@ -23,7 +23,7 @@
 
 Name:           python-pillow
 Version:        2.8.2
-Release:        2%{?snap}%{?dist}
+Release:        3%{?snap}%{?dist}
 Summary:        Python image processing library
 
 # License: see http://www.pythonware.com/products/pil/license.htm
@@ -90,7 +90,6 @@ devel (development) and doc (documentation).
 
 %package devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Requires:       python-devel, libjpeg-devel, zlib-devel
 Provides:       python-imaging-devel = %{version}-%{release}
@@ -102,7 +101,6 @@ Development files for %{name}.
 
 %package doc
 Summary:        Documentation for %{name}
-Group:          Documentation
 Requires:       %{name} = %{version}-%{release}
 BuildArch:      noarch
 
@@ -143,7 +141,6 @@ Provides:       python3-imaging = %{version}-%{release}
 
 %package -n %{name3}-devel
 Summary:        Development files for %{name3}
-Group:          Development/Libraries
 Requires:       %{name3}%{?_isa} = %{version}-%{release}
 Requires:       python3-devel, libjpeg-devel, zlib-devel
 
@@ -153,7 +150,6 @@ Development files for %{name3}.
 
 %package -n %{name3}-doc
 Summary:        Documentation for %{name3}
-Group:          Documentation
 Requires:       %{name3} = %{version}-%{release}
 BuildArch:      noarch
 
@@ -337,3 +333,6 @@ popd
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.8.2-3
+- Rebuild for new 4.0 release.
+

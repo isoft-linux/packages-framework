@@ -1,9 +1,8 @@
 Name:		orc
 Version:	0.4.24
-Release:    1	
+Release:    2	
 Summary:	The Oil Run-time Compiler
 
-Group:		System Environment/Libraries
 License:	BSD
 URL:		http://cgit.freedesktop.org/gstreamer/orc/
 Source0:	http://code.entropywave.com/download/orc/orc-%{version}.tar.xz
@@ -19,7 +18,6 @@ subtraction, and many arithmetic operations.
 
 %package doc
 Summary:	Documentation for Orc
-Group:		Development/Languages
 Requires:	%{name} = %{version}-%{release}
 BuildArch:	noarch
 
@@ -28,7 +26,6 @@ Documentation for Orc.
 
 %package devel
 Summary:	Development files and libraries for Orc
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-compiler
 Requires:	pkgconfig
@@ -39,7 +36,6 @@ on orc.
 
 %package compiler
 Summary:	Orc compiler
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	pkgconfig
 
@@ -110,6 +106,9 @@ make check
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4.24-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

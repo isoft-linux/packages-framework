@@ -1,9 +1,8 @@
 Summary:  Thai language support routines
 Name: libthai
 Version: 0.1.21
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
-Group: System Environment/Libraries
 Source: ftp://linux.thai.net/pub/thailinux/software/libthai/libthai-%{version}.tar.xz
 Patch: libthai-0.1.9-multilib.patch
 URL: http://linux.thai.net
@@ -20,7 +19,6 @@ output methods as well as basic character and string supports.
 
 %package devel
 Summary:  Thai language support routines
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -73,3 +71,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.21-3
+- Rebuild for new 4.0 release.
+

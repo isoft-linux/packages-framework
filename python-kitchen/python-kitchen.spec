@@ -2,10 +2,9 @@
 
 Name:           python-kitchen
 Version:        1.2.1
-Release:        3
+Release:        4
 Summary:        Small, useful pieces of code to make python coding easier
 
-Group:          Development/Languages
 License:        LGPLv2+
 URL:            https://pypi.python.org/pypi/kitchen/
 Source0:        https://fedorahosted.org/releases/k/i/kitchen/kitchen-%{version}.tar.gz
@@ -59,7 +58,6 @@ python-2 version of the kitchen library.
 %if 0%{?with_python3}
 %package -n python3-kitchen
 Summary:    Small, useful pieces of code to make python 3 coding easier
-Group:      Development/Languages
 
 Requires:   python3
 Requires:   python3-chardet
@@ -167,3 +165,6 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.1-4
+- Rebuild for new 4.0 release.
+

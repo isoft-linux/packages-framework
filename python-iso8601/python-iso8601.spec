@@ -4,10 +4,9 @@
 
 Name:           python-%{srcname}
 Version:        0.1.10
-Release:        5
+Release:        6
 Summary:        Simple module to parse ISO 8601 dates
 
-Group:          Development/Languages
 License:        MIT
 URL:            http://pypi.python.org/pypi/%{srcname}/
 Source0:        http://pypi.python.org/packages/source/i/%{srcname}/%{srcname}-%{version}.tar.gz
@@ -26,7 +25,6 @@ This module parses the most common forms of ISO 8601 date strings
 %if 0%{?with_python3}
 %package -n python3-%{srcname}
 Summary:        Simple module to parse ISO 8601 dates
-Group:          Development/Languages
 
 %description -n python3-%{srcname}
 This module parses the most common forms of ISO 8601 date strings
@@ -72,3 +70,6 @@ popd
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.10-6
+- Rebuild for new 4.0 release.
+

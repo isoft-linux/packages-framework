@@ -5,9 +5,8 @@
 Summary:  An archiving tool with ACL support
 Name: star
 Version: 1.5.3
-Release: 5
+Release: 6
 License: CDDL
-Group: Applications/Archiving
 URL: http://freecode.com/projects/star
 Source: http://downloads.sourceforge.net/s-tar/%{name}-%{version}.tar.bz2
 
@@ -49,7 +48,6 @@ and can restore individual files from the archive. Star supports ACL.
 
 %package -n     spax
 Summary:        Portable archive exchange
-Group:          Applications/Archiving
 Requires(post):  %{ALTERNATIVES}
 Requires(preun): %{ALTERNATIVES}
 
@@ -60,7 +58,6 @@ archive files and copy directory hierarchies as is defined in IEEE Std 1003.1.
 
 %package -n     scpio
 Summary:        Copy file archives in and out (LEGACY)
-Group:          Applications/Archiving
 
 %description -n scpio
 The scpio utility, depending on the options used: copies files to an archive
@@ -69,7 +66,6 @@ copies files from one directory tree to another.
 
 %package -n     rmt
 Summary: Provides certain programs with access to remote tape devices
-Group: Applications/Archiving
 # we need to be greater than the version from 'dump' package
 Epoch: 2
 
@@ -208,3 +204,6 @@ fi
 %{_sysconfdir}/rmt
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5.3-6
+- Rebuild for new 4.0 release.
+

@@ -1,6 +1,6 @@
 Name:    fonts-Sazanami
 Version: 20040629 
-Release: 3 
+Release: 4 
 Summary: Sazanami Janpanese TrueType fonts
 License: BSD 
 
@@ -11,6 +11,8 @@ Source2: 65-4-sazanami-mincho.conf
 
 Source10: sazanami-gothic.ttf  
 Source11: sazanami-mincho.ttf
+
+BuildArch: noarch
 
 %description
 Sazanami Japanese TrueType fonts
@@ -46,3 +48,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/fonts/conf.d/*
 %{_datadir}/fontconfig/conf.avail/*
 %{_datadir}/fonts/*.ttf
+
+%changelog
+* Sat Oct 24 2015 builder - 20040629-4
+- Rebuild for new 4.0 release.
+

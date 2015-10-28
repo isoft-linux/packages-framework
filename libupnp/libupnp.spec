@@ -1,9 +1,8 @@
 Version: 1.6.19
 Summary: Universal Plug and Play (UPnP) SDK
 Name: libupnp
-Release: 1 
+Release: 2 
 License: BSD
-Group: System Environment/Libraries
 URL: http://www.libupnp.org/
 Source: http://downloads.sourceforge.net/pupnp/%{name}-%{version}.tar.bz2
 
@@ -16,7 +15,6 @@ support for building UPnP-compliant control points, devices,
 and bridges on Linux.
 
 %package devel
-Group: Development/Libraries
 Summary: Include files needed for development with libupnp
 Requires: libupnp = %{version}-%{release}
 
@@ -61,3 +59,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 rm -rf %{buildroot}
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.19-2
+- Rebuild for new 4.0 release.
+

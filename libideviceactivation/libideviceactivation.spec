@@ -1,9 +1,8 @@
 Name:          libideviceactivation 
 Version:       1.0.0
-Release:       5
+Release:       6
 Summary:       A library to manage the activation process of Apple iOS devices.
 
-Group:         System Environment/Libraries
 License:       LGPLv2+
 URL:           http://www.libimobiledevice.org/
 Source0:       http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
@@ -15,7 +14,6 @@ A library to manage the activation process of Apple iOS devices.
 
 %package devel
 Summary: Development package for %{name} 
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -34,7 +32,6 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 
 rm -rf $RPM_BUILD_ROOT%{_libdir}/*.a
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -54,6 +51,9 @@ rpmclean
 %{_includedir}/libideviceactivation.h
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.0-6
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

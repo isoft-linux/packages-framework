@@ -1,9 +1,8 @@
 Summary: Mail processing program
 Name: procmail
 Version: 3.22
-Release: 38
+Release: 39
 License: GPLv2+ or Artistic
-Group: Applications/Internet
 # Source: ftp://ftp.procmail.org/pub/procmail/procmail-%{version}.tar.gz
 # The original source doesn't seem to be available anymore, using mirror
 Source: ftp://ftp.ucsb.edu/pub/mirrors/procmail/procmail-%{version}.tar.gz
@@ -72,3 +71,6 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_mandir}/man[15]/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.22-39
+- Rebuild for new 4.0 release.
+

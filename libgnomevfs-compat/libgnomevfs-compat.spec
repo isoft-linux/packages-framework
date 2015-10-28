@@ -9,7 +9,7 @@
 Summary: The GNOME virtual file-system libraries
 Name: 	libgnomevfs-compat
 Version: 2.24.4
-Release: 19%{?dist}
+Release: 20%{?dist}
 License: LGPLv2+ and GPLv2+
 Source0: http://download.gnome.org/sources/gnome-vfs/2.24/gnome-vfs-%{version}.tar.bz2
 URL: http://www.gnome.org/
@@ -130,3 +130,6 @@ rm -rf %{buildroot}%{_libdir}/lib*.so
 %{_libdir}/libgnomevfs-2.so.0*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.24.4-20
+- Rebuild for new 4.0 release.
+

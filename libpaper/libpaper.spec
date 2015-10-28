@@ -2,9 +2,8 @@
 
 Name:		libpaper
 Version:	1.1.24
-Release:	11%{?dist}
+Release:	12%{?dist}
 Summary:	Library and tools for handling papersize
-Group:		System Environment/Libraries
 License:	GPLv2
 URL:		http://packages.qa.debian.org/libp/libpaper.html
 Source0:	http://ftp.debian.org/debian/pool/main/libp/libpaper/%{name}_%{version}%{nmu}.tar.gz
@@ -23,7 +22,6 @@ applications can immediately integrate.
 
 %package devel
 Summary:	Headers/Libraries for developing programs that use libpaper
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
@@ -79,3 +77,6 @@ done
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.24-12
+- Rebuild for new 4.0 release.
+

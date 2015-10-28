@@ -1,9 +1,8 @@
 Summary: An Enchanting Spell Checking Library
 Name: enchant
 Version: 1.6.0
-Release: 2
+Release: 3
 Epoch: 1
-Group: System Environment/Libraries
 License: LGPL
 Source: http://www.abisource.com/downloads/enchant/%{version}/enchant-%{version}.tar.gz
 URL: http://www.abisource.com/
@@ -16,7 +15,6 @@ A library that wraps other spell checking backends.
 
 %package devel
 Summary: Support files necessary to compile applications with libenchant.
-Group: Development/Libraries
 Requires: enchant = %{epoch}:%{version}-%{release}
 Requires: glib2-devel
 
@@ -35,7 +33,7 @@ rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
 rm -f $RPM_BUILD_ROOT/%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT/%{_libdir}/enchant/*.la
-rpmclean
+
 %files
 %defattr(-,root,root)
 %doc AUTHORS COPYING.LIB README
@@ -58,10 +56,10 @@ rpmclean
 
 %postun -p /sbin/ldconfig
 
-%clean
-rm -r $RPM_BUILD_ROOT
-
 %changelog
+* Sat Oct 24 2015 builder - 1:1.6.0-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

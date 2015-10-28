@@ -1,9 +1,8 @@
 Summary: A GTK2 widget for VNC clients
 Name: gtk-vnc
 Version: 0.5.4
-Release: 3
+Release: 4
 License: LGPLv2+
-Group: Development/Libraries
 Source: http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.5/%{name}-%{version}.tar.xz
 URL: http://live.gnome.org/gtk-vnc
 BuildRequires: gtk3-devel >= 3.0 
@@ -16,7 +15,6 @@ allowing it to be completely asynchronous while remaining single threaded.
 
 %package devel
 Summary: Development files to build GTK2 applications with gtk-vnc
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 Requires: gtk3-devel
@@ -29,7 +27,6 @@ Libraries, includes, etc. to compile with the gtk-vnc library
 
 %package python
 Summary: Python bindings for the gtk-vnc library
-Group: Development/Libraries
 Requires: %{name} = %{version}
 
 %description python
@@ -39,7 +36,6 @@ allowing it to be completely asynchronous while remaining single threaded.
 A module allowing use of the GTK-VNC widget from python
 
 %package -n gvnc
-Group: Development/Libraries
 Summary: A GObject for VNC connections
 
 %description -n gvnc
@@ -49,7 +45,6 @@ with the raw protocol itself.
 
 %package -n gvnc-devel
 Summary: Libraries, includes, etc. to compile with the gvnc library
-Group: Development/Libraries
 Requires: gvnc = %{version}-%{release}
 Requires: pkgconfig
 
@@ -62,7 +57,6 @@ Libraries, includes, etc. to compile with the gvnc library
 
 %package -n gvnc-tools
 Summary: Command line VNC tools
-Group: Applications/Internet
 
 %description -n gvnc-tools
 Provides useful command line utilities for interacting with
@@ -71,7 +65,6 @@ screenshots of a VNC desktop
 
 %package -n gtk-vnc2
 Summary: A GTK3 widget for VNC clients
-Group: Applications/Internet
 
 %description -n gtk-vnc2
 gtk-vnc is a VNC viewer widget for GTK2. It is built using coroutines
@@ -79,7 +72,6 @@ allowing it to be completely asynchronous while remaining single threaded.
 
 %package -n gtk-vnc2-devel
 Summary: Development files to build GTK3 applications with gtk-vnc
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 Requires: gtk3-devel
@@ -161,3 +153,6 @@ rm -fr %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.5.4-4
+- Rebuild for new 4.0 release.
+

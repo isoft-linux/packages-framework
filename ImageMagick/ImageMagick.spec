@@ -3,9 +3,8 @@
 
 Name:		ImageMagick
 Version:		%{VER}.%{Patchlevel}
-Release:		0.beta.3%{?dist}.2
+Release:		0.beta.3%{?dist}.3
 Summary:		An X application for displaying and manipulating images
-Group:		Applications/Multimedia
 License:		ImageMagick
 Url:			http://www.imagemagick.org/
 Source0:		ftp://ftp.ImageMagick.org/pub/%{name}/beta/%{name}-%{VER}-%{Patchlevel}.tar.bz2
@@ -43,7 +42,6 @@ ImageMagick-devel as well.
 
 %package devel
 Summary:	Library links and header files for ImageMagick app development
-Group:	Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libX11-devel, libXext-devel, libXt-devel, ghostscript-devel
 Requires:	bzip2-devel, freetype-devel, libtiff-devel, libjpeg-devel, lcms2-devel
@@ -63,7 +61,6 @@ however.
 
 %package libs
 Summary: ImageMagick libraries to link with
-Group: Applications/Multimedia
 
 %description libs
 This packages contains a shared libraries to use within other applications.
@@ -71,7 +68,6 @@ This packages contains a shared libraries to use within other applications.
 
 %package djvu
 Summary: DjVu plugin for ImageMagick
-Group: Applications/Multimedia
 Requires: %{name} = %{version}-%{release}
 
 %description djvu
@@ -81,7 +77,6 @@ save and load DjvU files from ImageMagick and libMagickCore using applications.
 
 %package doc
 Summary: ImageMagick html documentation
-Group: Documentation
 
 %description doc
 ImageMagick documentation, this package contains usage (for the
@@ -92,7 +87,6 @@ http://www.imagemagick.org/
 
 %package perl
 Summary: ImageMagick perl bindings
-Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
@@ -105,7 +99,6 @@ ImageMagick.
 
 %package c++
 Summary: ImageMagick Magick++ library (C++ bindings)
-Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description c++
@@ -117,7 +110,6 @@ Install ImageMagick-c++ if you want to use any applications that use Magick++.
 
 %package c++-devel
 Summary: C++ bindings for the ImageMagick library
-Group: Development/Libraries
 Requires: %{name}-c++ = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 
@@ -310,5 +302,8 @@ rm -rf %{buildroot}
 %doc PerlMagick/demo/ PerlMagick/Changelog PerlMagick/README.txt
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 6.9.1.3-0.beta.3.3
+- Rebuild for new 4.0 release.
+
 * Wed Oct 21 2015 Cjacker <cjacker@foxmail.com>
 - Update.

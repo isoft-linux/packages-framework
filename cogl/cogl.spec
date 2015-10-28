@@ -2,10 +2,9 @@
 
 Name:          cogl
 Version:       1.22.0
-Release:       1 
+Release:       2 
 Summary:       A library for using 3D graphics hardware to draw pretty pictures
 
-Group:         Development/Libraries
 License:       LGPLv2+
 URL:           http://www.clutter-project.org/
 Source0:       http://download.gnome.org/sources/cogl/1.18/cogl-%{version}.tar.xz
@@ -54,7 +53,6 @@ options we are interested in for the future.
 
 %package devel
 Summary:       %{name} development environment
-Group:         Development/Libraries
 Requires:      %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -62,7 +60,6 @@ Header files and libraries for building and developing apps with %{name}.
 
 %package       doc
 Summary:       Documentation for %{name}
-Group:         Documentation
 Requires:      %{name} = %{version}-%{release}
 BuildArch:     noarch
 
@@ -104,7 +101,6 @@ rm %{buildroot}%{_datadir}/cogl/examples-data/crate.jpg
 
 %find_lang %{name}
 
-rpmclean
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
@@ -127,6 +123,9 @@ rpmclean
 %{_datadir}/gtk-doc/html/cogl-2.0-experimental
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.22.0-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

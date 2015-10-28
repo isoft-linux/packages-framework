@@ -1,10 +1,9 @@
 
 Name:	 ilmbase 
 Version: 1.0.3
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: Abstraction/convenience libraries
 
-Group:	 System Environment/Libraries
 License: BSD
 URL:	 http://www.openexr.com/
 Source0: https://github.com/downloads/openexr/openexr/ilmbase-%{version}.tar.gz
@@ -41,7 +40,6 @@ Iex is an exception-handling library.
 
 %package devel
 Summary: Headers and libraries for building apps that use %{name} 
-Group:	 Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description devel
 %{summary}.
@@ -109,6 +107,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.3-6
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

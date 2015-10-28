@@ -3,11 +3,10 @@
 Summary: PDF rendering library
 Name: poppler
 Version: 0.37.0
-Release: 2 
+Release: 3 
 License: GPLv2 and Redistributable, no modification permitted
 # the code is GPLv2
 # the charmap data in /usr/share/poppler is redistributable
-Group: Development/Libraries
 URL:     http://poppler.freedesktop.org/
 Source0: http://poppler.freedesktop.org/poppler-%{version}.tar.xz
 Source1: http://poppler.freedesktop.org/poppler-data-%{dataversion}.tar.gz
@@ -28,7 +27,6 @@ viewer developed by Derek Noonburg of Glyph and Cog, LLC.
 
 %package devel
 Summary: Libraries and headers for poppler
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -41,7 +39,6 @@ compile applications based on poppler.
 
 %package glib
 Summary: Glib wrapper for poppler
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description glib
@@ -49,7 +46,6 @@ Requires: %{name} = %{version}-%{release}
 
 %package cpp
 Summary: cpp STL library for poppler
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description cpp 
@@ -57,7 +53,6 @@ Requires: %{name} = %{version}-%{release}
 
 %package glib-devel
 Summary: Development files for glib wrapper
-Group: Development/Libraries
 Requires: %{name}-glib = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 Requires: pkgconfig
@@ -67,7 +62,6 @@ Requires: pkgconfig
 
 %package cpp-devel
 Summary: CPP Development files for cpp stl library 
-Group: Development/Libraries
 Requires: %{name}-cpp = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 Requires: pkgconfig
@@ -77,14 +71,12 @@ Requires: pkgconfig
 
 %package qt4
 Summary: Qt4 wrapper for poppler
-Group:   System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 %description qt4
 %{summary}.
 
 %package qt4-devel
 Summary: Development files for Qt4 wrapper
-Group:   Development/Libraries
 Requires: %{name}-qt4 = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 %description qt4-devel
@@ -92,14 +84,12 @@ Requires: %{name}-devel = %{version}-%{release}
 
 %package qt5
 Summary: Qt5 wrapper for poppler
-Group:   System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 %description qt5
 %{summary}.
 
 %package qt5-devel
 Summary: Development files for Qt5 wrapper
-Group:   Development/Libraries
 Requires: %{name}-qt5 = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 %description qt5-devel 
@@ -107,7 +97,6 @@ Requires: %{name}-devel = %{version}-%{release}
 
 %package utils
 Summary: Command line utilities for converting PDF files.
-Group: Applications/Text
 Requires: %{name} = %{version}-%{release}
 Conflicts: xpdf <= 1:3.01-8
 # There's an extras package that provides pdftohtml
@@ -157,7 +146,6 @@ make -C %{name}-data-%{dataversion} \
 
 rm -rf $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -229,6 +217,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.37.0-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,8 +1,7 @@
 Name:           perl-Test-Pod-Coverage
 Version:        1.10
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Check for pod coverage in your distribution
-Group:          Development/Libraries
 License:        Artistic 2.0
 URL:            http://search.cpan.org/dist/Test-Pod-Coverage/
 Source0:        http://www.cpan.org/authors/id/N/NE/NEILB/Test-Pod-Coverage-%{version}.tar.gz
@@ -50,3 +49,6 @@ make test
 %{_mandir}/man3/*.3pm*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.10-5
+- Rebuild for new 4.0 release.
+

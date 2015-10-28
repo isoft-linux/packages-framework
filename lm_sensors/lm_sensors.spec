@@ -1,8 +1,7 @@
 Name: lm_sensors
 Version: 3.3.5
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: Hardware monitoring tools
-Group: Applications/System
 License: LGPLv2+ and GPLv3+ and GPLv2+ and Verbatim and Public Domain
 
 URL: http://www.lm-sensors.org/
@@ -33,7 +32,6 @@ access and hardware monitoring.
 
 %package libs
 Summary: Lm_sensors core libraries
-Group: System Environment/Libraries
 
 %description libs
 Core libraries for lm_sensors applications
@@ -41,7 +39,6 @@ Core libraries for lm_sensors applications
 
 %package devel
 Summary: Development files for programs which will use lm_sensors
-Group: Development/System
 Requires: %{name}-libs = %{version}-%{release}
 
 %description devel
@@ -51,7 +48,6 @@ when building applications that make use of sensor data.
 
 %package sensord
 Summary: Daemon that periodically logs sensor readings
-Group: System Environment/Daemons
 Requires: %{name} = %{version}-%{release}
 
 %description sensord
@@ -177,3 +173,6 @@ fi
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.3.5-7
+- Rebuild for new 4.0 release.
+

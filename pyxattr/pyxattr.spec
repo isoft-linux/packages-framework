@@ -2,9 +2,8 @@
 Name:		pyxattr
 Summary:	Extended attributes library wrapper for Python
 Version:	0.5.3
-Release:	4
+Release:	5
 License:	LGPLv2+
-Group:		Development/Libraries
 URL:		http://pyxattr.k1024.org/
 Source:		https://pypi.python.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
 Patch0:		0001-use-Py_ssize_t.patch
@@ -87,5 +86,8 @@ popd
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.5.3-5
+- Rebuild for new 4.0 release.
+
 * Wed Aug 26 2015 Cjacker <cjacker@foxmail.com>
 - initial build, from fedora.

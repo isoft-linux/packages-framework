@@ -1,10 +1,9 @@
 Name:           lib3ds
 Version:        1.3.0
-Release:        19%{?dist}
+Release:        20%{?dist}
 
 Summary:        3D Studio file format library
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://lib3ds.sourceforge.net
 Source:         http://downloads.sourceforge.net/lib3ds/lib3ds-%{version}.zip
@@ -27,7 +26,6 @@ conversion tools are included.
 
 %package        tools
 Summary:        %summary
-Group:          Applications/Multimedia
 
 %description    tools
 Some tools to process 3ds files.
@@ -40,7 +38,6 @@ Some tools to process 3ds files.
 
 %package        devel
 Summary:        %summary
-Group:          Development/Libraries
 Requires:	pkgconfig
 Requires:	lib3ds = %{version}-%{release}
 
@@ -98,3 +95,6 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/aclocal/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.0-20
+- Rebuild for new 4.0 release.
+

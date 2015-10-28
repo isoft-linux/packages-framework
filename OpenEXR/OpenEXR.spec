@@ -1,9 +1,8 @@
 Name:	 OpenEXR
 Version: 1.7.1
-Release: 1 
+Release: 2 
 Summary: A high dynamic-range (HDR) image file format
 
-Group:	 System Environment/Libraries
 License: BSD
 URL:	 http://www.openexr.com/
 Source0: https://github.com/downloads/openexr/openexr/openexr-%{version}.tar.gz
@@ -27,7 +26,6 @@ libraries and sample applications for handling the format.
 
 %package devel
 Summary: Headers and libraries for building apps that use %{name} 
-Group:	 Development/Libraries
 Obsoletes: openexr-devel < %{version}-%{release}
 Provides:  openexr-devel = %{version}-%{release}
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}
@@ -38,7 +36,6 @@ Requires: pkgconfig
 
 %package libs
 Summary: %{name} runtime libraries
-Group:   System Environment/Libraries
 %description libs
 %{summary}.
 
@@ -95,6 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.7.1-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

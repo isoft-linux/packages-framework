@@ -6,9 +6,8 @@
 
 Name:		python-jinja2
 Version:	2.7.3
-Release:	3
+Release:	4
 Summary:	General purpose template engine
-Group:		Development/Languages
 License:	BSD
 URL:		http://jinja.pocoo.org/
 Source0:	http://pypi.python.org/packages/source/J/Jinja2/Jinja2-%{version}.tar.gz
@@ -46,7 +45,6 @@ environments.
 %if 0%{?with_python3}
 %package -n python3-jinja2
 Summary:	General purpose template engine
-Group:		Development/Languages
 Requires:	python3-markupsafe
 Requires:	python3-setuptools
 # babel isn't py3k ready yet, and is only a weak dependency
@@ -148,3 +146,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.7.3-4
+- Rebuild for new 4.0 release.
+

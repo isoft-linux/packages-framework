@@ -3,7 +3,7 @@
 Summary: Support for using OpenSSL in python scripts
 Name: m2crypto
 Version: 0.21.1
-Release: 20%{?dist}
+Release: 21%{?dist}
 Source0: http://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-%{version}.tar.gz
 # https://bugzilla.osafoundation.org/show_bug.cgi?id=2341
 Patch0: m2crypto-0.21.1-timeouts.patch
@@ -51,7 +51,6 @@ Patch20: m2crypto-0.21.1-tests-no-ssl23-2.patch
 Patch21: m2crypto-0.21.1-tests-smime-sha256.patch
 
 License: MIT
-Group: System Environment/Libraries
 URL: http://wiki.osafoundation.org/bin/view/Projects/MeTooCrypto
 BuildRequires: openssl, openssl-devel, python2-devel, python-setuptools
 BuildRequires: perl, pkgconfig, swig, which
@@ -146,3 +145,6 @@ rm tests/*.{pem,py}.* # Patch backup files
 %{python_sitearch}/M2Crypto-*.egg-info
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.21.1-21
+- Rebuild for new 4.0 release.
+

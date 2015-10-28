@@ -1,4 +1,5 @@
-%global with_python3 1
+#in main python
+%global with_python3 0 
 %global build_wheel 0 
 %global with_tests 0
 
@@ -12,10 +13,9 @@
 
 Name:           python-%{srcname}
 Version:        7.0.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A tool for installing and managing Python packages
 
-Group:          Development/Libraries
 License:        MIT
 URL:            http://www.pip-installer.org
 Source0:        http://pypi.python.org/packages/source/p/pip/%{srcname}-%{version}.tar.gz
@@ -58,7 +58,6 @@ easy_installable should be pip-installable as well.
 %if 0%{?with_python3}
 %package -n python3-pip
 Summary:        A tool for installing and managing Python3 packages
-Group:          Development/Libraries
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
@@ -166,3 +165,6 @@ popd
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 7.0.3-3
+- Rebuild for new 4.0 release.
+

@@ -3,7 +3,7 @@
 
 Name:           m17n-lib
 Version:        1.7.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Multilingual text library
 
 License:        LGPLv2+
@@ -113,3 +113,6 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %{_libdir}/libm17n-gui.so.*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.7.0-4
+- Rebuild for new 4.0 release.
+

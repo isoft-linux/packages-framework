@@ -1,9 +1,8 @@
 Summary: Fast compression and decompression utilities
 Name: ncompress
 Version: 4.2.4.4
-Release: 5
+Release: 6
 License: Public Domain
-Group:  Applications/File
 URL:    http://ncompress.sourceforge.net/
 Source: http://prdownloads.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 
@@ -92,3 +91,6 @@ ln -sf compress.1 $RPM_BUILD_ROOT%{_mandir}/man1/uncompress.1
 %doc LZW.INFO README
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.2.4.4-6
+- Rebuild for new 4.0 release.
+

@@ -4,10 +4,9 @@
 Name:           python-simplejson
 
 Version:        3.5.3
-Release:        3
+Release:        4
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
-Group:          System Environment/Libraries
 # The main code is licensed MIT.
 # The docs include jquery which is licensed MIT or GPLv2
 License: (MIT or AFL) and (MIT or GPLv2)
@@ -50,7 +49,6 @@ python stdlib.
 %if 0%{?with_python3}
 %package -n python3-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
-Group:          System Environment/Libraries
 
 %description -n python3-simplejson
 simplejson is a simple, fast, complete, correct and extensible JSON
@@ -129,6 +127,9 @@ rm -rf %{buildroot}
 %endif # python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.5.3-4
+- Rebuild for new 4.0 release.
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.5.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 

@@ -19,7 +19,7 @@
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 Name: gtk3
 Version: %{base_version}
-Release: 18
+Release: 19
 License: LGPLv2+
 Source: http://download.gnome.org/sources/gtk+/3.0/gtk+-%{version}.tar.xz
 #By Cjacker
@@ -251,6 +251,9 @@ glib-compile-schemas /usr/share/glib-2.0/schemas >/dev/null 2>&1 ||:
 %{_includedir}/gail*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.2-19
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 3.18.2
 

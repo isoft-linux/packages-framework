@@ -1,9 +1,8 @@
 Summary: A library for interfacing IEEE 1284-compatible devices
 Name: libieee1284
 Version: 0.2.11
-Release: 15
+Release: 16
 License: GPLv2+
-Group: System Environment/Libraries
 URL: http://cyberelk.net/tim/libieee1284/
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 Patch1: libieee1284-strict-aliasing.patch
@@ -17,7 +16,6 @@ The libieee1284 library is for communicating with parallel port devices.
 %package devel
 Summary: Files for developing applications that use libieee1284
 Requires: %{name} = %{version}-%{release}
-Group: Development/Libraries
 
 %description devel
 The header files, static library, libtool library and man pages for
@@ -26,7 +24,6 @@ developing applications that use libieee1284.
 %package python
 Summary: Python extension module for libieee1284
 Requires: %{name} = %{version}-%{release}
-Group: System Environment/Libraries
 
 %description python
 Python extension module for libieee1284.  To use libieee1284 with Python,
@@ -76,6 +73,9 @@ rm -rf %{buildroot}
 %postun -p /sbin/ldconfig
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.2.11-16
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

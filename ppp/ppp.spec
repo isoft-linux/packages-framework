@@ -6,9 +6,8 @@
 Summary: The Point-to-Point Protocol daemon
 Name: ppp
 Version: 2.4.6
-Release: 4
+Release: 5
 License: BSD and LGPLv2+ and GPLv2+ and Public Domain
-Group:  Framework/Runtime/Utility 
 URL: http://www.samba.org/ppp
 Source0: ftp://ftp.samba.org/pub/ppp/ppp-%{version}.tar.gz
 Source1: ppp-pam.conf
@@ -71,7 +70,6 @@ organization over a modem and phone line.
 
 %package devel
 Summary: Headers for ppp plugin development
-Group:  Framework/Development/Library
 
 %description devel
 This package contains the header files for building plugins for ppp.
@@ -208,3 +206,6 @@ install -p %{SOURCE11} %{buildroot}%{_sysconfdir}/sysconfig/network-scripts/ifdo
 %doc PLUGINS
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.4.6-5
+- Rebuild for new 4.0 release.
+

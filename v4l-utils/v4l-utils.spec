@@ -1,8 +1,7 @@
 Name:           v4l-utils
 Version:        1.6.3
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Utilities for video4linux and DVB devices
-Group:          Applications/System
 # libdvbv5, dvbv5 utils, ir-keytable and v4l2-sysfs-path are GPLv2 only
 License:        GPLv2+ and GPLv2
 URL:            http://www.linuxtv.org/downloads/v4l-utils/
@@ -41,7 +40,6 @@ QT v4l2 test control and streaming test application.
 
 %package -n     libv4l
 Summary:        Collection of video4linux support libraries 
-Group:          System Environment/Libraries
 # Some of the decompression helpers are GPLv2, the rest is LGPLv2+
 License:        LGPLv2+ and GPLv2
 URL:            http://hansdegoede.livejournal.com/3636.html
@@ -66,7 +64,6 @@ application transparent libv4lconvert conversion where necessary.
 
 %package -n     libdvbv5
 Summary:        Libraries to control, scan and zap on Digital TV channels
-Group:          Development/Libraries
 License:        GPLv2
 
 %description -n libdvbv5
@@ -74,7 +71,6 @@ Libraries to control, scan and zap on Digital TV channels
 
 %package -n     libv4l-devel
 Summary:        Development files for libv4l
-Group:          Development/Libraries
 License:        LGPLv2+
 URL:            http://hansdegoede.livejournal.com/3636.html
 Requires:       libv4l%{?_isa} = %{version}-%{release}
@@ -86,7 +82,6 @@ developing applications that use libv4l.
 
 %package -n     libdvbv5-devel
 Summary:        Development files for libdvbv5
-Group:          Development/Libraries
 License:        GPLv2
 Requires:       libdvbv5%{?_isa} = %{version}-%{release}
 
@@ -195,3 +190,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.3-5
+- Rebuild for new 4.0 release.
+

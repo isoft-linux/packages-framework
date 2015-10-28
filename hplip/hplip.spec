@@ -10,7 +10,7 @@
 Summary: HP Linux Imaging and Printing Project
 Name: hplip
 Version: 3.15.6
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPLv2+ and MIT
 
 Url: http://hplip.sourceforge.net/
@@ -76,7 +76,6 @@ drivers for HP printers and multi-function peripherals.
 
 %package common
 Summary: Files needed by the HPLIP printer and scanner drivers
-Group: System Environment/Libraries
 License: GPLv2+
 # /usr/lib/udev/rules.d
 Requires: systemd
@@ -86,7 +85,6 @@ Files needed by the HPLIP printer and scanner drivers.
 
 %package libs
 Summary: HPLIP libraries
-Group: System Environment/Libraries
 License: GPLv2+ and MIT
 Requires: %{name}-common%{?_isa} = %{version}-%{release}
 Requires: python3
@@ -108,7 +106,6 @@ Python 2 modules needed by HP plugin.
 
 %package gui
 Summary: HPLIP graphical tools
-Group: Applications/System
 License: BSD
 Requires: python3-PyQt4
 Requires: python3-reportlab
@@ -122,7 +119,6 @@ HPLIP graphical tools.
 
 %package -n hpijs
 Summary: HP Printer Drivers
-Group: Applications/Publishing
 License: BSD
 Epoch: %{hpijs_epoch}
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}
@@ -136,7 +132,6 @@ PhotoSmart, DeskJet 990C, and PhotoSmart 100 series.
 
 %package -n libsane-hpaio
 Summary: SANE driver for scanners in HP's multi-function devices
-Group: System Environment/Daemons
 License: GPLv2+
 Obsoletes: libsane-hpoj < 0.91
 Provides: libsane-hpoj = 0.91
@@ -534,3 +529,6 @@ rm -f ppds-all
 %postun libs -p /sbin/ldconfig
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.15.6-4
+- Rebuild for new 4.0 release.
+

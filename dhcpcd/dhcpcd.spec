@@ -1,9 +1,8 @@
 Summary:	DHCP Client Daemon
 Name:		dhcpcd
 Version:    6.9.0
-Release:    1	
+Release:    2	
 License:	BSD-Like
-Group:		System/Servers
 URL:		http://roy.marples.name/projects/dhcpcd/
 Source0:	http://roy.marples.name/downloads/dhcpcd/%{name}-%{version}.tar.bz2
 %description
@@ -43,6 +42,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 6.9.0-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -1,7 +1,7 @@
 Summary:SPICE: Simple Protocol for Independent Computing Environments
 Name: spice
 Version: 0.12.5
-Release: 1
+Release: 2
 License: LGPLv2+
 Source: %{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -55,3 +55,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 %{_includedir}/spice-server
 %{_libdir}/pkgconfig/*.pc
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.12.5-2
+- Rebuild for new 4.0 release.
+

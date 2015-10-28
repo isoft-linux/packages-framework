@@ -1,9 +1,8 @@
 Name:	    vcdimager	
 Version:	0.7.24
-Release:	1
+Release:	2
 Summary:    VideoCD authoring solution for mastering, extracting and analyzing Video CDs and Super Video CDs	
 
-Group:		Extra/Runtime/Library
 License:	GPLv2+
 URL:        http://www.vcdimager.org	
 Source0:	%name-%version.tar.gz
@@ -16,7 +15,6 @@ Requires:	libcdio
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -36,7 +34,6 @@ make install DESTDIR=%{buildroot}
 
 rm -rf $RPM_BUILD_ROOT%{_libdir}/*.a
 rm -rf $RPM_BUILD_ROOT%{_infodir}
-rpmclean
 
 %files
 %{_bindir}/*
@@ -48,4 +45,7 @@ rpmclean
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libvcdinfo.pc
 %changelog
+* Sat Oct 24 2015 builder - 0.7.24-2
+- Rebuild for new 4.0 release.
+
 

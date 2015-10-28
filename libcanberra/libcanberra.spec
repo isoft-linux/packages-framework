@@ -1,8 +1,7 @@
 Name: libcanberra
 Version: 0.30
-Release: 3
+Release: 4
 Summary: Portable Sound Event Library
-Group: System Environment/Libraries
 Source0: http://0pointer.de/lennart/projects/libcanberra/libcanberra-%{version}.tar.xz
 
 License: LGPLv2+
@@ -28,7 +27,6 @@ A small and lightweight implementation of the XDG Sound Theme Specification
 
 %package gtk2
 Summary: Gtk+ 2.x Bindings for libcanberra
-Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description gtk2
@@ -36,7 +34,6 @@ Gtk+ 2.x bindings for libcanberra
 
 %package gtk2-devel
 Summary: Gtk+ 2.x Bindings for libcanberra
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 
@@ -46,7 +43,6 @@ Gtk+ 2.x bindings for libcanberra
 
 %package gtk3
 Summary: Gtk+ 3.x Bindings for libcanberra
-Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description gtk3
@@ -54,7 +50,6 @@ Gtk+ 3.x bindings for libcanberra
 
 %package gtk3-devel
 Summary: Gtk+ 3.x Bindings for libcanberra
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 
@@ -63,7 +58,6 @@ Gtk+ 3.x bindings for libcanberra
 
 %package devel
 Summary: Development Files for libcanberra Client Development
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: gtk2-devel
 
@@ -105,7 +99,6 @@ make %{?_smp_mflags}
 make DESTDIR=$RPM_BUILD_ROOT install
 find $RPM_BUILD_ROOT \( -name *.a -o -name *.la \) -exec rm {} \;
 rm $RPM_BUILD_ROOT%{_docdir}/libcanberra/README
-rpmclean
 
 %files
 %defattr(-,root,root)
@@ -159,6 +152,9 @@ rpmclean
 %{_datadir}/vala/vapi/libcanberra-gtk.vapi
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.30-4
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

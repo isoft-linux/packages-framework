@@ -1,6 +1,6 @@
 Name:           stoken
 Version:        0.81
-Release:        5
+Release:        6
 Summary:        Token code generator compatible with RSA SecurID 128-bit (AES) token
 
 License:        LGPLv2+
@@ -128,3 +128,6 @@ EOF
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.81-6
+- Rebuild for new 4.0 release.
+

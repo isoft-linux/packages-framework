@@ -2,10 +2,9 @@
 
 Name:           gsettings-desktop-schemas
 Version:        3.18.0
-Release:        1
+Release:        2
 Summary:        A collection of GSettings schemas
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://bugzilla.gnome.org/enter_bug.cgi?product=gsettings-desktop-schemas
 Source:         http://download.gnome.org/sources/%{name}/3.13/%{name}-%{version}.tar.xz
@@ -24,7 +23,6 @@ settings shared by various components of a desktop.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -69,6 +67,9 @@ fi
 %{_datadir}/gir-1.0/GDesktopEnums-3.0.gir
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-2
+- Rebuild for new 4.0 release.
+
 * Thu Sep 24 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome 3.18
 

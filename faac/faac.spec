@@ -1,9 +1,8 @@
 Name:           faac
 Version:        1.28
-Release:        2
+Release:        3
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
-Group:          Applications/Multimedia
 License:        LGPL
 URL:            http://www.audiocoding.com/
 Source0:        http://download.sourceforge.net/sourceforge/faac/faac-%{version}.tar.bz2
@@ -25,7 +24,6 @@ multichannel and gapless encoding.
 
 %package devel
 Summary:        Development libraries of the FAAC AAC encoder
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description devel
@@ -51,7 +49,6 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -73,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*.h
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.28-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

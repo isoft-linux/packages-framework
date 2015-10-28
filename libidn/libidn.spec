@@ -1,11 +1,10 @@
 Summary: Internationalized Domain Name support library
 Name: libidn
 Version: 1.30
-Release: 1.1
+Release: 2.1
 URL: http://www.gnu.org/software/libidn
 License: LGPL
 Source0: http://ftp.gnu.org/gnu/libidn/libidn-%{version}.tar.gz
-Group: System Environment/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: pkgconfig, gettext
 Requires(postun): /sbin/ldconfig
@@ -19,7 +18,6 @@ names.
 
 %package devel
 Summary: Development files for the libidn library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -47,7 +45,6 @@ find doc -name "Makefile*" | xargs rm
 rm -rf $RPM_BUILD_ROOT%{_datadir}/info
 
 %find_lang %{name}
-rpmclean
 
 %check
 LC_MESSAGES=en_US make %{?_smp_mflags} -C tests check
@@ -75,5 +72,8 @@ rm -rf %{buildroot}
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.30-2.1
+- Rebuild for new 4.0 release.
+
 * Mon Jul 30 2007 Cjacker <cjacker@gmail.com>
 - prepare for 0.5

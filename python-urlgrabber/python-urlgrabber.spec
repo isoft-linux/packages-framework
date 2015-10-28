@@ -3,13 +3,12 @@
 Summary: A high-level cross-protocol url-grabber
 Name: python-urlgrabber
 Version: 3.10.1
-Release: 7
+Release: 8
 Source0: http://urlgrabber.baseurl.org/download/urlgrabber-%{version}.tar.gz
 Patch1: urlgrabber-HEAD.patch
 Patch2: BZ-1051554-speed-on-404-mirror.patch
 
 License: LGPLv2+
-Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
 BuildRequires: python-devel, python-pycurl
@@ -48,3 +47,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0755,root,root) %{_libexecdir}/urlgrabber-ext-down
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.10.1-8
+- Rebuild for new 4.0 release.
+

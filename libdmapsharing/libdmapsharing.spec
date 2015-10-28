@@ -1,6 +1,6 @@
 Name: libdmapsharing
 Version: 2.9.30
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 Source: http://www.flyn.org/projects/libdmapsharing/%{name}-%{version}.tar.gz
 URL: http://www.flyn.org/projects/libdmapsharing/
@@ -64,5 +64,8 @@ rm -f ${RPM_BUILD_ROOT}%{_libdir}/libdmapsharing-3.0.la
 %postun -p /sbin/ldconfig
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.9.30-4
+- Rebuild for new 4.0 release.
+
 * Sun Oct 18 2015 Cjacker <cjacker@foxmail.com>
 - initial build.

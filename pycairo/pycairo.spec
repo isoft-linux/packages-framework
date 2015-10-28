@@ -7,9 +7,8 @@
 
 Name: pycairo
 Version: 1.10.0
-Release: 1 
+Release: 2 
 License: MPLv1.1 or LGPLv2
-Group: Development/Languages
 Summary: Python bindings for the cairo library
 URL: http://cairographics.org/pycairo
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -26,7 +25,6 @@ Python bindings for the cairo library.
 
 %package devel
 Summary: Libraries and headers for pycairo
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: cairo-devel
 Requires: pkgconfig
@@ -69,3 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/pycairo.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.10.0-2
+- Rebuild for new 4.0 release.
+

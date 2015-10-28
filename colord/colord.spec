@@ -17,7 +17,7 @@
 Summary:   Color daemon
 Name:      colord
 Version:   1.2.11
-Release:   1
+Release:   2
 License:   GPLv2+ and LGPLv2+
 URL:       http://www.freedesktop.org/software/colord/
 Source0:   http://www.freedesktop.org/software/colord/releases/%{name}-%{version}.tar.xz
@@ -161,7 +161,6 @@ EOF
 
 %find_lang %{name}
 
-rpmclean
 %check
 # known failure as of 1.1.5: colorhug/device-queue
 make check || \
@@ -246,3 +245,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/gtk-doc/html/colord/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.11-2
+- Rebuild for new 4.0 release.
+

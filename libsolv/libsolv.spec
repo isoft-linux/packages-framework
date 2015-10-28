@@ -7,13 +7,12 @@
 
 Name:		libsolv
 Version:	0.6.10
-Release:	3
+Release:	4
 License:	BSD
 Url:		https://github.com/openSUSE/libsolv
 Source:		https://github.com/openSUSE/libsolv/archive/%{gitrev}.tar.gz
 Patch0:		libsolv-rubyinclude.patch
 Patch1:		libsolv-ruby22-rbconfig.patch
-Group:		Development/Libraries
 Summary:	Package dependency solver
 BuildRequires:	cmake libdb-devel expat-devel librpm-devel zlib-devel
 BuildRequires:	swig perl perl-devel ruby ruby-devel python-devel
@@ -30,7 +29,6 @@ library is based on two major, but independent, blocks:
 
 %package devel
 Summary:	A new approach to package dependency solving
-Group:		Development/Libraries
 Requires:	libsolv-tools%{?_isa} = %{version}-%{release}
 Requires:	libsolv%{?_isa} = %{version}-%{release}
 Requires:	librpm-devel%{?_isa}
@@ -41,7 +39,6 @@ Development files for libsolv,
 
 %package tools
 Summary:	A new approach to package dependency solving
-Group:		Development/Libraries
 Requires:	gzip bzip2 coreutils
 Requires:	libsolv%{?_isa} = %{version}-%{release}
 
@@ -50,7 +47,6 @@ Package dependency solver tools.
 
 %package demo
 Summary:	Applications demoing the libsolv library
-Group:		Development/Libraries
 Requires:	curl gnupg2
 
 %description demo
@@ -58,14 +54,12 @@ Applications demoing the libsolv library.
 
 %package -n ruby-solv
 Summary:	Ruby bindings for the libsolv library
-Group:		Development/Languages
 
 %description -n ruby-solv
 Ruby bindings for sat solver.
 
 %package -n python-solv
 Summary:	Python bindings for the libsolv library
-Group:		Development/Languages
 Requires:	python
 
 %description -n python-solv
@@ -73,7 +67,6 @@ Python bindings for sat solver.
 
 %package -n perl-solv
 Summary:	Perl bindings for the libsolv library
-Group:		Development/Languages
 Requires:	perl
 
 %description -n perl-solv
@@ -154,3 +147,6 @@ rm $RPM_BUILD_ROOT/usr/bin/testsolv
 /usr/lib/python3.4/site-packages/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.10-4
+- Rebuild for new 4.0 release.
+

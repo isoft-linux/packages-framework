@@ -1,6 +1,6 @@
 Name:          sbc
 Version:       1.3
-Release:       1
+Release:       2
 Summary:       Sub Band Codec used by bluetooth A2DP
 
 License:       GPLv2 and LGPLv2+
@@ -17,7 +17,6 @@ an adaptive block PCM quantizers.
 
 %package devel
 Summary: Development package for %{name}
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -52,3 +51,6 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_libdir}/libsbc.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3-2
+- Rebuild for new 4.0 release.
+

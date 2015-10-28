@@ -1,9 +1,8 @@
 Name:           perl-Text-Soundex
 Version:        3.04
-Release:        296%{?dist}
+Release:        297%{?dist}
 Summary:        Implementation of the soundex algorithm
 License:        Copyright only
-Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Text-Soundex/
 Source0:        http://www.cpan.org/authors/id/R/RJ/RJBS/Text-Soundex-%{version}.tar.gz
 BuildRequires:  perl
@@ -56,3 +55,6 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.04-297
+- Rebuild for new 4.0 release.
+

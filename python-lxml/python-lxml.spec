@@ -6,10 +6,9 @@
 
 Name:           python-lxml
 Version:        3.3.6
-Release:        1
+Release:        2
 Summary:        ElementTree-like Python bindings for libxml2 and libxslt
 
-Group:          Development/Libraries
 License:        BSD
 URL:            http://lxml.de
 Source0:        http://lxml.de/files/lxml-%{version}.tgz
@@ -44,7 +43,6 @@ unlike the default bindings.
 
 %package docs
 Summary:        Documentation for %{name}
-Group:          Documentation
 BuildArch:      noarch
 %description docs
 This package provides the documentation for %{name}, e.g. the API as html.
@@ -53,7 +51,6 @@ This package provides the documentation for %{name}, e.g. the API as html.
 %if 0%{?with_python3}
 %package -n python3-lxml
 Summary:        ElementTree-like Python 3 bindings for libxml2 and libxslt
-Group:          Development/Libraries
 %if 0%{?with_python3_cssselect}
 Requires:       python3-cssselect
 %endif
@@ -155,3 +152,6 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.3.6-2
+- Rebuild for new 4.0 release.
+

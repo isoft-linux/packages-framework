@@ -5,10 +5,9 @@
 
 Name:           osbs
 Version:        0.14
-Release:        1
+Release:        2
 
 Summary:        Python command line client for OpenShift Build Service
-Group:          Development/Tools
 License:        BSD
 URL:            https://github.com/DBuildService/osbs-client
 Source0:        https://github.com/DBuildService/osbs-client/archive/%{commit}/osbs-client-%{commit}.tar.gz
@@ -32,7 +31,6 @@ This package contains osbs command line client.
 
 %package -n python-osbs
 Summary:        Python 2 module for OpenShift Build Service
-Group:          Development/Tools
 License:        BSD
 Requires:       python-pycurl
 Requires:       python-setuptools
@@ -46,7 +44,6 @@ This package contains osbs Python 2 bindings.
 %if 0%{?with_python3}
 %package -n python3-osbs
 Summary:        Python 3 module for OpenShift Build Service
-Group:          Development/Tools
 License:        BSD
 Requires:       python3-pycurl
 Requires:       python3-setuptools
@@ -127,3 +124,6 @@ ln -s  %{_bindir}/osbs2 %{buildroot}%{_bindir}/osbs
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.14-2
+- Rebuild for new 4.0 release.
+

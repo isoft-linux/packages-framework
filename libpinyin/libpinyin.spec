@@ -2,7 +2,7 @@
 
 Name:           libpinyin
 Version:        1.1.0
-Release:        3
+Release:        4
 Summary:        Library to deal with pinyin
 
 License:        GPLv2+
@@ -92,3 +92,6 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.0-4
+- Rebuild for new 4.0 release.
+

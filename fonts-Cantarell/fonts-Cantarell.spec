@@ -1,10 +1,12 @@
 Name:           fonts-Cantarell
 Version:        0.0.17.2
-Release:        3 
+Release:        4 
 Summary:        Gnome cantarell font
 License:        GPL
 Source:	        cantarell-fonts-%{version}.tar.xz
 Provides:       abattis-cantarell-fonts
+
+BuildArch: noarch
 
 %description
 Gnome cantarell TrueType font
@@ -33,5 +35,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/fonts/*.otf
 
 %changelog
+* Sat Oct 24 2015 builder - 0.0.17.2-4
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 0.0.17.2

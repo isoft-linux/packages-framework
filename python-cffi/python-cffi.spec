@@ -2,8 +2,7 @@
 
 Name:           python-cffi
 Version:        1.1.2 
-Release:        1%{?dist}
-Group:          Development/Libraries
+Release:        2%{?dist}
 Summary:        Foreign Function Interface for Python to call C code
 License:        BSD
 URL:            http://cffi.readthedocs.org/
@@ -29,7 +28,6 @@ based on LuaJIT’s FFI.
 %if 0%{?with_python3}
 %package -n python3-cffi
 Summary:        Foreign Function Interface for Python 3 to call C code
-Group:          Development/Libraries
 Requires:       python3-pycparser
 
 %description -n python3-cffi
@@ -40,7 +38,6 @@ based on LuaJIT’s FFI.
 
 %package doc
 Summary:        Documentation for CFFI
-Group:          Documentation
 BuildArch:      noarch
 Requires:       %{name} = %{version}-%{release}
 
@@ -96,5 +93,8 @@ popd
 %doc doc/build/html
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.2-2
+- Rebuild for new 4.0 release.
+
 * Mon Sep 07 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.1.2

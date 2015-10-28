@@ -1,7 +1,7 @@
 Summary:   Library for AppStream metadata
 Name:      appstream-glib
 Version:   0.4.1
-Release:   1
+Release:   2
 License:   LGPLv2+
 URL:       http://people.freedesktop.org/~hughsient/appstream-glib/
 Source0:   http://people.freedesktop.org/~hughsient/appstream-glib/releases/%{name}-%{version}.tar.xz
@@ -19,6 +19,7 @@ BuildRequires: gcab
 
 Requires: gcab
 
+Provides: libappstream-glib = %{version}-%{release}
 %description
 This library provides GObjects and helper methods to make it easy to read and
 write AppStream metadata. It also provides a simple DOM implementation that
@@ -29,6 +30,7 @@ representation.
 %package devel
 Summary: GLib Libraries and headers for appstream-glib
 Requires: %{name}%{?_isa} = %{version}-%{release}
+Provides: libappstream-glib-devel = %{version}-%{release}
 
 %description devel
 GLib headers and libraries for appstream-glib.
@@ -85,3 +87,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_datadir}/aclocal/appstream-xml.m4
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4.1-2
+- Rebuild for new 4.0 release.
+

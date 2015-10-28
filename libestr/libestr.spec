@@ -1,6 +1,6 @@
 Name:           libestr
 Version:        0.1.9
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        String handling essentials library
 
 License:        LGPLv2+
@@ -46,3 +46,6 @@ rm -f %{buildroot}/%{_libdir}/*.{a,la}
 %{_libdir}/pkgconfig/libestr.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.9-6
+- Rebuild for new 4.0 release.
+

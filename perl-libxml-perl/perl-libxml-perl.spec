@@ -1,8 +1,7 @@
 Name:           perl-libxml-perl
 Version:        0.08
-Release:        19
+Release:        20
 Summary:        A collection of Perl modules for working with XML
-Group:          Development/Libraries
 License:        (GPL+ or Artistic) and Public Domain
 URL:            http://search.cpan.org/dist/libxml-perl/
 Source0:        http://www.cpan.org/authors/id/K/KM/KMACLEOD/libxml-perl-%{version}.tar.gz
@@ -44,6 +43,9 @@ make test
 %{_mandir}/man3/*.3*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.08-20
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

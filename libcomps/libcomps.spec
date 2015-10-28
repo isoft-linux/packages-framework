@@ -3,10 +3,9 @@
 
 Name:           libcomps
 Version:        0.1.6
-Release:        14
+Release:        15
 Summary:        Comps XML file manipulation library
 
-Group:          Development/Libraries
 License:        GPLv2+
 URL:            https://github.com/midnightercz/libcomps/
 Source0:        https://github.com/midnightercz/libcomps/archive/libcomps-%{version}.tar.gz
@@ -21,7 +20,6 @@ comps XML files. Supports read/write XML file, structure(s) modification.
 
 %package doc
 Summary:        Documentation files for libcomps library
-Group:          Documentation
 Requires:       %{name} = %{version}-%{release}
 BuildArch:      noarch
 BuildRequires:  doxygen
@@ -31,7 +29,6 @@ Documentation files for libcomps library
 
 %package -n python-libcomps-doc
 Summary:        Documentation files for python bindings libcomps library
-Group:          Documentation
 Requires:       %{name} = %{version}-%{release}
 BuildArch:      noarch
 BuildRequires:  python-sphinx
@@ -41,7 +38,6 @@ Documentation files for python bindings libcomps library
 
 %package devel
 Summary:        Development files for libcomps library
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -49,7 +45,6 @@ Development files for libcomps library
 
 %package -n python-libcomps
 Summary:        Python2 bindings for libcomps library
-Group:          Development/Libraries
 BuildRequires:  python-devel
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
@@ -59,7 +54,6 @@ Python2 bindings for libcomps library
 %if %python3_build
 %package -n python3-libcomps
 Summary:        Python3 bindings for libcomps library
-Group:          Development/Libraries
 BuildRequires:  python3-devel
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
@@ -140,3 +134,6 @@ rm -rf $buildroot
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.6-15
+- Rebuild for new 4.0 release.
+

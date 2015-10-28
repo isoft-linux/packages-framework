@@ -4,7 +4,7 @@
 Summary: Debian package management system.	
 Name: dpkg 
 Version: 1.18.1
-Release: 6 
+Release: 7 
 License: GPLv2 and GPLv2+ and LGPLv2+ and Public Domain and BSD
 Source: http://ftp.de.debian.org/debian/pool/main/d/dpkg/dpkg_%{version}.tar.xz
 #dummy file.
@@ -41,7 +41,6 @@ because packages dependencies will likely be unmet.
 
 %package devel
 Summary: Debian package management static library
-Group:    Development/System
 Provides: dpkg-static = %{version}-%{release}
 
 %description devel
@@ -54,7 +53,6 @@ at any time, use at your own risk.
 
 %package dev
 Summary:  Debian package development tools
-Group:    Development/System
 Requires: dpkg-perl = %{version}-%{release}
 Requires: patch, make, binutils, bzip2, lzma, xz
 Obsoletes: dpkg-devel < 1.16
@@ -66,7 +64,6 @@ Required to unpack, build and upload Debian source packages
 
 %package perl
 Summary: Dpkg perl modules
-Group:   System Environment/Base
 Requires: dpkg = %{version}-%{release}
 Requires: perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
 Requires: perl, perl-TimeDate
@@ -95,7 +92,6 @@ there are the following modules:
 
 %package -n dselect
 Summary:  Debian package management front-end
-Group:    System Environment/Base
 Requires: %{name} = %{version}-%{release}
 Requires: perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
 
@@ -336,6 +332,9 @@ create_logfile
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.18.1-7
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

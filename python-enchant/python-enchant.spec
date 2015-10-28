@@ -2,10 +2,9 @@
 
 Name:           python-enchant
 Version:        1.6.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python bindings for Enchant spellchecking library
 
-Group:          Development/Languages
 License:        LGPLv2+
 URL:            http://packages.python.org/pyenchant/
 Source0:        http://pypi.python.org/packages/source/p/pyenchant/pyenchant-%{version}.tar.gz
@@ -44,7 +43,6 @@ library by Dom Lachowicz.
 %if 0%{?with_python3}
 %package -n python3-enchant
 Summary:        Python 3 bindings for Enchant spellchecking library
-Group:          Development/Languages
 
 %description -n python3-enchant
 PyEnchant is a spellchecking library for Python 3, based on the Enchant
@@ -137,3 +135,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.6-3
+- Rebuild for new 4.0 release.
+

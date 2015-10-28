@@ -1,6 +1,6 @@
 Name:           accountsservice
 Version:        0.6.40
-Release:        2
+Release:        3
 Summary:        D-Bus interfaces for querying and manipulating user account information
 
 License:        GPLv3+
@@ -64,7 +64,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 
 %find_lang accounts-service
 
-rpmclean
 
 %post libs -p /sbin/ldconfig
 
@@ -106,3 +105,6 @@ rpmclean
 %{_datadir}/gtk-doc/html/libaccountsservice/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.40-3
+- Rebuild for new 4.0 release.
+

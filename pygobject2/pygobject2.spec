@@ -2,9 +2,8 @@
 
 Name: pygobject2
 Version: 2.28.6
-Release: 9
+Release: 10
 License: LGPLv2+
-Group: Development/Languages
 Summary: Python 2 bindings for GObject 
 URL: http://www.pygtk.org/
 Source: http://ftp.gnome.org/pub/GNOME/sources/pygobject/2.28/pygobject-%{version}.tar.bz2
@@ -32,14 +31,12 @@ for use in Python programs.
 
 %package codegen
 Summary: The code generation program for PyGObject
-Group: Development/Languages
 
 %description codegen
 The package contains the C code generation program for PyGObject.
 
 %package devel
 Summary: Development files for building add-on libraries
-Group: Development/Languages
 Requires: %{name} = %{version}-%{release}
 Requires: %{name}-codegen = %{version}-%{release}
 Requires: %{name}-doc = %{version}-%{release}
@@ -53,7 +50,6 @@ libraries such as pygtk2.
 
 %package doc
 Summary: Documentation files for %{name}
-Group: Development/Languages
 
 %description doc
 This package contains documentation files for %{name}.
@@ -81,7 +77,6 @@ find $RPM_BUILD_ROOT -name '*.a' -delete
 
 rm examples/Makefile*
 
-rpmclean
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -123,6 +118,9 @@ rpmclean
 %{_datadir}/pygobject/xsl
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.28.6-10
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

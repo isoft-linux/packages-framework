@@ -1,9 +1,8 @@
 Name:           mpeg2dec
 Version:        0.4.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        MPEG-2 decoder library and program
 
-Group:          System Environment/Libraries
 License:        LGPL
 URL:            http://libmpeg2.sourceforge.net/
 Source:         http://libmpeg2.sourceforge.net/files/mpeg2dec-%{version}.tar.gz
@@ -19,7 +18,6 @@ streams. It is released under the terms of the GPL license.
 
 %package        devel
 Summary:        MPEG-2 decoder library development files
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}, pkgconfig
 
 %description    devel
@@ -48,7 +46,6 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -79,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/libmpeg2convert.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4.1-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

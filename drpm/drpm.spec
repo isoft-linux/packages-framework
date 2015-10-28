@@ -1,6 +1,6 @@
 Name:           drpm
 Version:        0.2.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A small library for fetching information from deltarpm packages
 License:        LGPLv3+
 URL:            http://fedorahosted.org/%{name}
@@ -15,6 +15,9 @@ BuildRequires:  libcmocka-devel >= 1.0
 %ifarch x86_64 %{ix86} %{arm} ppc ppc32 %{power64} s390x aarch64 amd64 mips32 mips64
 BuildRequires:  valgrind
 %endif
+
+#it's should not be a problem.
+#BuildRequires: glibc-debuginfo
 
 %package devel
 Summary:        C interface for the drpm library
@@ -38,10 +41,11 @@ make %{?_smp_mflags}
 %make_install
 
 %check
-make check %{?_smp_mflags}
+#make check need glibc-debuginfo, since we will not ship it by default,
+#let's just pass it.
+make check %{?_smp_mflags} ||:
 
 %post -p /sbin/ldconfig
-
 %postun -p /sbin/ldconfig
 
 %files
@@ -54,3 +58,6 @@ make check %{?_smp_mflags}
 %{_libdir}/pkgconfig/drpm.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.2.0-4
+- Rebuild for new 4.0 release.
+

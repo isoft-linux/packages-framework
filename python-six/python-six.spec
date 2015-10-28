@@ -3,10 +3,9 @@
 
 Name:           python-six
 Version:        1.9.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python 2 and 3 compatibility utilities
 
-Group:          Development/Languages
 License:        MIT
 URL:            http://pypi.python.org/pypi/six/
 Source0:        http://pypi.python.org/packages/source/s/six/six-%{version}.tar.gz
@@ -32,7 +31,6 @@ This is the Python 2 build of the module.
 %if 0%{?with_python3}
 %package -n python3-six
 Summary:        Python 2 and 3 compatibility utilities
-Group:          Development/Languages
 
 %description -n python3-six
 python-six provides simple utilities for wrapping over differences between
@@ -91,3 +89,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.9.0-3
+- Rebuild for new 4.0 release.
+

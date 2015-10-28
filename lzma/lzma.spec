@@ -1,9 +1,8 @@
 Summary: 	LZMA utils
 Name: 		lzma
 Version: 	4.32.7
-Release: 	14
+Release: 	15
 License: 	GPLv2+
-Group:		Applications/File
 Source0:	http://tukaani.org/%{name}/%{name}-%{version}.tar.lzma
 URL:		http://tukaani.org/%{name}/
 
@@ -16,7 +15,6 @@ tools.
 
 %package 	libs
 Summary:	Libraries for decoding LZMA compression
-Group:		System Environment/Libraries
 License:	LGPLv2+
 
 %description 	libs
@@ -24,7 +22,6 @@ Libraries for decoding LZMA compression.
 
 %package 	devel
 Summary:	Devel libraries & headers for liblzmadec
-Group:		Development/Libraries
 License:	LGPLv2+
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 
@@ -68,3 +65,6 @@ rm -rf %{buildroot}
 %{_libdir}/*.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.32.7-15
+- Rebuild for new 4.0 release.
+

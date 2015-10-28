@@ -1,7 +1,7 @@
 
 Name:    pinentry
 Version: 0.9.2
-Release: 2
+Release: 3
 Summary: Collection of simple PIN or passphrase entry dialogs
 
 # qt & qt4 subpackage have different license, see subpackage definitions
@@ -101,3 +101,6 @@ rm -rf $RPM_BUILD_ROOT%{_infodir}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.2-3
+- Rebuild for new 4.0 release.
+

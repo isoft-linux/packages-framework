@@ -3,7 +3,7 @@
 Summary: NFSv4 User and Group ID Mapping Library
 Name: libnfsidmap
 Version: 0.26
-Release: 3.2%{?dist}
+Release: 4.2%{?dist}
 Provides: nfs-utils-lib
 Obsoletes: nfs-utils-lib
 URL: http://linux-nfs.org/wiki/index.php/Main_Page
@@ -11,7 +11,6 @@ License: BSD
 
 Source0:  https://fedorapeople.org/~steved/%{name}/%{version}/%{name}-%{version}.tar.bz2
 
-Group: System Environment/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: pkgconfig, openldap-devel
 BuildRequires: automake, libtool
@@ -24,7 +23,6 @@ Library that handles mapping between names and ids for NFSv4.
 
 %package devel
 Summary: Development files for the libnfsidmap library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -82,3 +80,6 @@ rm -rf %{buildroot}
 %{_root_libdir}/*.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.26-4.2
+- Rebuild for new 4.0 release.
+

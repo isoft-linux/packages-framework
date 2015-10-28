@@ -1,9 +1,8 @@
 Summary: Xt / Motif OpenGL widgets
 Name: mesa-libGLw
 Version: 8.0.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: MIT
-Group: System Environment/Libraries
 URL: http://www.mesa3d.org
 Source0: ftp://ftp.freedesktop.org/pub/mesa/glw/glw-%{version}.tar.bz2
 
@@ -18,7 +17,6 @@ Mesa libGLw runtime library.
 
 %package devel
 Summary: Mesa libGLw development package
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: libGL-devel
 Requires: openmotif-devel
@@ -63,3 +61,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/GL/GLwMDrawAP.h
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 8.0.0-7
+- Rebuild for new 4.0 release.
+

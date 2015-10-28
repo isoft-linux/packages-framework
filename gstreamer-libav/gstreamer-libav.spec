@@ -4,9 +4,8 @@
 
 Name: 		%{gstreamer}-libav
 Version: 	1.6.0
-Release:	1	
+Release:	2	
 Summary: 	GStreamer Streaming-media framework plug-in using libav (FFmpeg).
-Group: 		Libraries/Multimedia
 License: 	LGPL
 URL:		http://gstreamer.net/
 Vendor:		GStreamer Backpackers Team <package@gstreamer.net>
@@ -56,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
+- Rebuild for new 4.0 release.
+
 * Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.6.0
 

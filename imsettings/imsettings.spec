@@ -1,6 +1,6 @@
 Name:		imsettings
 Version:	1.6.8
-Release:	6
+Release:	7
 License:	LGPLv2+
 URL:		https://tagoh.bitbucket.org/%{name}/
 BuildRequires:	desktop-file-utils
@@ -22,7 +22,6 @@ Patch3:		%{name}-force-enable-for-cinnamon.patch
 Patch4:		%{name}-fix-configure.patch
 
 Summary:	Delivery framework for general Input Method configuration
-Group:		Applications/System
 Requires:	xorg-x11-xinit >= 1.0.2-22.fc8
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 Requires:	%{name}-desktop-module%{?_isa} = %{version}-%{release}
@@ -40,7 +39,6 @@ This package contains the core DBus services and some utilities.
 
 %package	libs
 Summary:	Libraries for imsettings
-Group:		Development/Libraries
 
 %description	libs
 IMSettings is a framework that delivers Input Method
@@ -52,7 +50,6 @@ This package contains the shared library for imsettings.
 
 %package	devel
 Summary:	Development files for imsettings
-Group:		Development/Libraries
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 Requires:	pkgconfig
 Requires:	glib2-devel >= 2.32.0
@@ -68,7 +65,6 @@ applications with imsettings.
 
 %package	xim
 Summary:	XIM support on imsettings
-Group:		Applications/System
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	im-chooser
 
@@ -82,7 +78,6 @@ This package contains a module to get this working with XIM.
 
 %package	gsettings
 Summary:	GSettings support on imsettings
-Group:		Applications/System
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	dconf
 Provides:	imsettings-desktop-module%{?_isa} = %{version}-%{release}
@@ -101,7 +96,6 @@ own XSETTINGS daemons.
 
 %package	qt
 Summary:	Qt support on imsettings
-Group:		Applications/System
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	im-chooser
 Provides:	imsettings-desktop-module%{?_isa} = %{version}-%{release}
@@ -280,3 +274,6 @@ fi
 #%{_libdir}/imsettings/libimsettings-cinnamon-gsettings.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.8-7
+- Rebuild for new 4.0 release.
+

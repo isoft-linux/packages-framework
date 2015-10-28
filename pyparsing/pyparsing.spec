@@ -3,7 +3,7 @@
 
 Name:           pyparsing
 Version:        1.5.6
-Release:        6
+Release:        7
 Summary:        An object-oriented approach to text processing
 License:        MIT
 URL:            http://pyparsing.wikispaces.com/
@@ -93,3 +93,6 @@ rm -rf %{buildroot}
 %doc CHANGES README LICENSE docs/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5.6-7
+- Rebuild for new 4.0 release.
+

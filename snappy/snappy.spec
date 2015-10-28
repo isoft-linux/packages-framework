@@ -1,9 +1,8 @@
 Name:           snappy
 Version:        1.1.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Fast compression and decompression library
 
-Group:          System Environment/Libraries
 License:        BSD
 URL:            http://code.google.com/p/snappy/
 Source0:        https://github.com/google/snappy/releases/download/%{version}/%{name}-%{version}.tar.gz
@@ -20,7 +19,6 @@ bigger.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description    devel
@@ -68,3 +66,6 @@ make check
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.3-2
+- Rebuild for new 4.0 release.
+

@@ -2,7 +2,7 @@
 
 Name:           glib-networking
 Version:        2.46.1
-Release:        1
+Release:        2
 Summary:        Networking support for GLib
 
 License:        LGPLv2+
@@ -61,6 +61,9 @@ gio-querymodules %{_libdir}/gio/modules
 %{_datadir}/dbus-1/services/org.gtk.GLib.PACRunner.service
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.46.1-2
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 2.46.1
 

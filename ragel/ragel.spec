@@ -1,9 +1,8 @@
 Name:           ragel   
 Version:        6.8
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Finite state machine compiler
 
-Group:          Development/Tools
 License:        GPLv2+
 URL:            http://www.complang.org/%{name}/
 Source0:        http://www.complang.org/%{name}/%{name}-%{version}.tar.gz
@@ -55,3 +54,6 @@ rm -rf %{buildroot}
 %{_mandir}/*/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 6.8-6
+- Rebuild for new 4.0 release.
+

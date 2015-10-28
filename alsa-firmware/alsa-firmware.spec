@@ -62,6 +62,13 @@ mv ca0132/creative.txt LICENSE.creative_txt
 make install DESTDIR=%{buildroot}
 
 
+rm -rf %{buildroot}/lib/firmware/ess/maestro3_assp_kernel.fw
+rm -rf %{buildroot}/lib/firmware/ess/maestro3_assp_minisrc.fw
+rm -rf %{buildroot}/lib/firmware/korg/k1212.dsp
+rm -rf %{buildroot}/lib/firmware/yamaha/ds1_ctrl.fw
+rm -rf %{buildroot}/lib/firmware/yamaha/ds1_dsp.fw
+rm -rf %{buildroot}/lib/firmware/yamaha/ds1e_ctrl.fw
+
 %files
 %doc COPYING README* LICENSE*
 %doc aica_dreamcast_sound.txt

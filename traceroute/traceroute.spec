@@ -1,10 +1,9 @@
 Summary: Traces the route taken by packets over a TCP/IP network.
 Name: traceroute
 Version: 1.0.4
-Release: 1.2
+Release: 2.2
 Epoch: 2
 License: GPL
-Group: Applications/Internet
 Source: ftp://ftp.lst.de/pub/people/okir/traceroute/%{name}-%{version}.tar.bz2
 Patch0: traceroute-1.0.4-compat.patch
 BuildRoot: %{_tmppath}/%{name}-root
@@ -56,3 +55,6 @@ rm -rf %{buildroot}
 %{_mandir}/man8/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2:1.0.4-2.2
+- Rebuild for new 4.0 release.
+

@@ -1,9 +1,8 @@
 Summary: The lrz and lsz modem communications programs
 Name: lrzsz
 Version: 0.12.20
-Release: 38%{?dist}
+Release: 39%{?dist}
 License: GPLv2+
-Group: Applications/Communications
 Source: http://www.ohse.de/uwe/releases/%{name}-%{version}.tar.gz
 Patch1: lrzsz-0.12.20-glibc21.patch
 Patch2: lrzsz-0.12.20.patch
@@ -44,3 +43,6 @@ make %{?_smp_mflags}
 %{_mandir}/*/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.12.20-39
+- Rebuild for new 4.0 release.
+

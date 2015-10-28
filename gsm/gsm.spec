@@ -1,9 +1,8 @@
 Name:           gsm
 Version:        1.0.13
-Release:        13%{?dist}
+Release:        14%{?dist}
 Summary:        Shared libraries for GSM speech compressor
 
-Group:          System Environment/Libraries
 License:        MIT
 URL:            http://www.quut.com/gsm/
 Source:         http://www.quut.com/gsm/%{name}-%{version}.tar.gz
@@ -36,7 +35,6 @@ ETSI standard test patterns.
 
 %package        tools
 Summary:        GSM speech compressor tools
-Group:          Applications/Multimedia
 
 %description    tools
 Contains command line utilities for libgsm, an implementation of
@@ -46,7 +44,6 @@ excitation/long term prediction) coding at 13 kbit/s.
 
 %package        devel
 Summary:        Header files and development libraries for libgsm
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -121,3 +118,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.13-14
+- Rebuild for new 4.0 release.
+

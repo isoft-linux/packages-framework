@@ -4,7 +4,7 @@
 
 Name:           python-%{pypi_name}
 Version:        0.8.0
-Release:        3
+Release:        4
 Summary:        The new features in unittest backported to Python 2.4+
 
 License:        BSD
@@ -106,3 +106,6 @@ popd
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.0-4
+- Rebuild for new 4.0 release.
+

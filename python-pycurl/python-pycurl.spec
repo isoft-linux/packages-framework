@@ -3,10 +3,9 @@
 
 Name:           python-pycurl
 Version:        7.19.5.1
-Release:        5
+Release:        6
 Summary:        A Python interface to libcurl
 
-Group:          Development/Languages
 License:        LGPLv2+ or MIT
 URL:            http://pycurl.sourceforge.net/
 Source0:        http://pycurl.sourceforge.net/download/pycurl-%{version}.tar.gz
@@ -94,3 +93,6 @@ rm -rf %{buildroot}%{_datadir}/doc/pycurl
 %{python3_sitearch}/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 7.19.5.1-6
+- Rebuild for new 4.0 release.
+

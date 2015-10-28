@@ -5,10 +5,9 @@ Summary:   NetworkManager VPN plugin for PPTP
 Name:      NetworkManager-pptp
 Epoch:     1
 Version:   1.1.0
-Release:   2%{snapshot}%{?dist}
+Release:   3%{snapshot}%{?dist}
 License:   GPLv2+
 URL:       http://www.gnome.org/projects/NetworkManager/
-Group:     System Environment/Base
 Source0:   https://download.gnome.org/sources/NetworkManager-pptp/1.0/%{name}-%{version}%{snapshot}.tar.bz2
 
 BuildRequires: gtk3-devel
@@ -41,7 +40,6 @@ the PPTP server with NetworkManager.
 
 %package -n NetworkManager-pptp-gnome
 Summary: NetworkManager VPN plugin for PPTP - GNOME files
-Group:   System Environment/Base
 
 Requires: NetworkManager-pptp = %{epoch}:%{version}-%{release}
 Requires: network-manager-applet
@@ -91,3 +89,6 @@ rm -f %{buildroot}%{_libdir}/pppd/%{ppp_version}/*.la
 %{_datadir}/gnome-vpn-properties/pptp/nm-pptp-dialog.ui
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.1.0-3.20150428git695d4f2
+- Rebuild for new 4.0 release.
+

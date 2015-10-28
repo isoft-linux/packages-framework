@@ -1,9 +1,8 @@
 Name:          opus-tools
 Version:       0.1.7
-Release:       4%{?dist}
+Release:       5%{?dist}
 Summary:       A set of tools for the opus audio codec
 
-Group:         System Environment/Libraries
 License:       BSD and GPLv2
 URL:           http://www.opus-codec.org/
 Source0:       http://downloads.xiph.org/releases/opus/%{name}-%{version}.tar.gz
@@ -49,3 +48,6 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/opus*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.7-5
+- Rebuild for new 4.0 release.
+

@@ -1,7 +1,7 @@
 Summary: Collection of performance monitoring tools for Linux
 Name: sysstat
 Version: 11.1.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+
 URL: http://sebastien.godard.pagesperso-orange.fr/
 Source: http://pagesperso-orange.fr/sebastien.godard/%{name}-%{version}.tar.xz
@@ -73,5 +73,8 @@ fi
 %{_localstatedir}/log/sa
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 11.1.5-2
+- Rebuild for new 4.0 release.
+
 * Tue Aug 25 2015 Cjacker <cjacker@foxmail.com>
 - initial build.

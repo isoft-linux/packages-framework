@@ -1,6 +1,6 @@
 Name: libicns
 Version: 0.8.1
-Release: 7%{?dist}
+Release: 8%{?dist}
 Summary: Library for manipulating Macintosh icns files
 
 # libicns, icns2png and icontainer2icns are under LGPLv2+
@@ -82,5 +82,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.1-8
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - initial build.

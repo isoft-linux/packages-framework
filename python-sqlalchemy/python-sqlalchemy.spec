@@ -3,10 +3,9 @@
 
 Name:           python-sqlalchemy
 Version:        1.0.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Modular and flexible ORM library for python
 
-Group:          Development/Libraries
 License:        MIT
 URL:            http://www.sqlalchemy.org/
 Source0:        http://pypi.python.org/packages/source/S/%{srcname}/%{srcname}-%{version}.tar.gz
@@ -37,7 +36,6 @@ This package includes the python 2 version of the module.
 %if 0%{?with_python3}
 %package -n python3-sqlalchemy
 Summary:        Modular and flexible ORM library for python
-Group:          Development/Libraries
 
 %description -n python3-sqlalchemy
 SQLAlchemy is an Object Relational Mappper (ORM) that provides a flexible,
@@ -115,3 +113,6 @@ popd
 %endif # with_python3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.6-2
+- Rebuild for new 4.0 release.
+

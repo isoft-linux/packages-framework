@@ -5,9 +5,8 @@ Summary: English dictionaries for Aspell
 Name: aspell-%{lang}
 Epoch: 50
 Version: 7.1
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: MIT and BSD
-Group: Applications/Text
 URL: http://aspell.net/
 Source: ftp://ftp.gnu.org/gnu/aspell/dict/%{lang}/aspell%{aspellversion}-%{lang}-%{version}-%{langrelease}.tar.bz2
 Buildrequires: aspell >= 12:0.60
@@ -42,3 +41,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/aspell-0.60/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 50:7.1-10
+- Rebuild for new 4.0 release.
+

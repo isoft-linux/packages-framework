@@ -2,9 +2,8 @@
 
 Name:			libtirpc
 Version:		0.3.2
-Release:		3.0%{?dist}
+Release:		4.0%{?dist}
 Summary:		Transport Independent RPC Library
-Group:		  	System Environment/Libraries
 License:		SISSL and BSD
 URL:  			http://nfsv4.bullopensource.org/
 BuildRoot:		%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -29,7 +28,6 @@ by almost 70 vendors on all major operating systems.  TS-RPC source code
 
 %package devel
 Summary:		Development files for the libtirpc library
-Group:			Development/Libraries
 Requires:		%{name}%{?_isa} = %{version}-%{release}
 Requires:		pkgconfig man
 
@@ -134,3 +132,6 @@ rm -rf %{buildroot}
 %{_mandir}/*/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.3.2-4.0
+- Rebuild for new 4.0 release.
+

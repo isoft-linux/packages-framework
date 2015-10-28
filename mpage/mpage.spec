@@ -1,10 +1,9 @@
 Summary: A tool for printing multiple pages of text on each printed page
 Name: mpage
 Version: 2.5.6
-Release: 16 
+Release: 17 
 License: GPLv2+
 Url: http://www.mesa.nl/pub/mpage/
-Group: Applications/Publishing
 Source: ftp://ftp.mesa.nl/pub/mpage/mpage-%{version}.tgz
 Patch0: mpage25-config.patch
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX) 
@@ -44,3 +43,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mpage
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.5.6-17
+- Rebuild for new 4.0 release.
+

@@ -6,10 +6,9 @@
 
 Name:           %{gstreamer}-plugins-good
 Version:        0.10.31
-Release:        15%{?dist}
+Release:        16%{?dist}
 Summary:        GStreamer plug-ins with good code and licensing
 
-Group:          Applications/Multimedia
 License:        LGPLv2+
 URL:            http://gstreamer.freedesktop.org/
 #Source:         http://gstreamer.freedesktop.org/src/gst-plugins-good/pre/gst-plugins-good-%{version}.tar.xz
@@ -81,7 +80,6 @@ good quality and under the LGPL license.
 
 %package devel-docs
 Summary:        Documentation for gstreamer-plugins-good
-Group:          Development/Libraries
 
 Requires:       %{name} = %{version}-%{release}
 # for /usr/share/gtk-doc/html
@@ -250,3 +248,6 @@ export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
 gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gstreamer-%{majorminor}.schemas > /dev/null || :
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.10.31-16
+- Rebuild for new 4.0 release.
+

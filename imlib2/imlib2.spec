@@ -1,9 +1,8 @@
 Summary:        Image loading, saving, rendering, and manipulation library
 Name:           imlib2
 Version:        1.4.7
-Release:        1
+Release:        2
 License:        Imlib2
-Group:          System Environment/Libraries
 URL:            http://docs.enlightenment.org/api/imlib2/html/
 Source0:        http://downloads.sourceforge.net/enlightenment/%{name}-%{version}.tar.bz2
 BuildRequires:  libjpeg-devel libpng-devel libtiff-devel
@@ -22,7 +21,6 @@ flexible.
 
 %package devel
 Summary:        Development package for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       libX11-devel libXext-devel freetype-devel >= 2.1.9-4 pkgconfig
 
@@ -69,7 +67,6 @@ sed -i "s#@my_libs@##g" $RPM_BUILD_ROOT%{_bindir}/imlib2-config
 rm $RPM_BUILD_ROOT%{_bindir}/imlib2_*
 rm -rf $RPM_BUILD_ROOT%{_datadir}/imlib2/data/
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -98,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.7-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

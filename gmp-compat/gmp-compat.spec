@@ -1,6 +1,6 @@
 Name: gmp-compat 
 Version: 4.3.2
-Release: 1
+Release: 2
 Summary: Compatible gmp library 
 
 License: LGPL 
@@ -69,5 +69,8 @@ cd ..
 %{_libdir}/libgmp.so.*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.3.2-2
+- Rebuild for new 4.0 release.
+
 * Wed Aug 05 2015 Cjacker <cjacker@foxmail.com>
 - initial build.

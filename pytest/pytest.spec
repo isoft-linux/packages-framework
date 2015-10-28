@@ -4,10 +4,9 @@
 
 Name:           pytest
 Version:        2.7.2
-Release:        1
+Release:        2
 Summary:        Simple powerful testing with Python
 
-Group:          Development/Languages
 License:        MIT
 URL:            http://pytest.org
 Source0:        http://pypi.python.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
@@ -48,7 +47,6 @@ py.test provides simple, yet powerful testing for Python.
 %if 0%{?with_python3}
 %package -n python3-pytest
 Summary:        Simple powerful testing with Python
-Group:          Development/Languages
 Requires:       python3-setuptools
 Requires:       python3-py >= %{pylib_version}
 
@@ -137,9 +135,7 @@ popd
 
 
 %files
-%doc python2/CHANGELOG
-%doc python2/README.html
-%doc python2/_htmldocs/html
+# %doc python2/_htmldocs/html
 %if 0%{?_licensedir:1}
 %license python2/LICENSE
 %else
@@ -152,10 +148,7 @@ popd
 
 %if 0%{?with_python3}
 %files -n python3-pytest
-%doc python3/CHANGELOG
-# HTML docs generated with Python2 for now
-%doc python2/README.html
-%doc python2/_htmldocs/html
+# %doc python2/_htmldocs/html
 %if 0%{?_licensedir:1}
 %license python3/LICENSE
 %else
@@ -167,3 +160,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.7.2-2
+- Rebuild for new 4.0 release.
+

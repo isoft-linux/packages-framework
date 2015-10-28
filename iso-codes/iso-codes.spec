@@ -4,9 +4,8 @@ Name:	iso-codes
 Summary:	ISO code lists and translations
 
 Version:    3.58	
-Release:	1
+Release:	2
 License:	LGPLv2+
-Group:	System Environment/Base
 URL:	http://alioth.debian.org/projects/pkg-isocodes/
 Source:	http://ftp.debian.org/debian/pool/main/i/iso-codes/iso-codes-%{version}.tar.xz
 BuildRequires:	gettext
@@ -20,7 +19,6 @@ translations in gettext .po form.
 
 %package devel
 Summary:	Files for development using %{name}
-Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 # for /usr/share/pkgconfig
 Requires:	pkgconfig
@@ -57,6 +55,9 @@ make %{?_smp_mflags}
 %{_datadir}/pkgconfig/iso-codes.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.58-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

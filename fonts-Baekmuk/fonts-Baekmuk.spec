@@ -1,6 +1,6 @@
 Name:       fonts-Baekmuk
 Version:    2.2
-Release:    1 
+Release:    2 
 Summary:    Free Korean TrueType fonts
 License:    Baekmuk
 URL:        http://kldp.net/projects/baekmuk/
@@ -10,6 +10,8 @@ Source1:    65-2-baekmuk-ttf-batang.conf
 Source2:    65-2-baekmuk-ttf-dotum.conf   
 Source3:    65-2-baekmuk-ttf-gulim.conf   
 Source4:    65-2-baekmuk-ttf-hline.conf 
+
+BuildArch: noarch
 
 %description
 This package provides the free Korean TrueType fonts.
@@ -48,4 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/fontconfig/conf.avail/*
 %{_datadir}/fonts/*.ttf
 
+
+
+%changelog
+* Sat Oct 24 2015 builder - 2.2-2
+- Rebuild for new 4.0 release.
 

@@ -1,7 +1,7 @@
 Summary: OpenPrinting CUPS filters and backends
 Name:    cups-filters
 Version: 1.0.71
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 # For a breakdown of the licensing, see COPYING file
 # GPLv2:   filters: commandto*, imagetoraster, pdftops, rasterto*,
@@ -87,14 +87,12 @@ Obsoletes: foomatic-filters < 4.0.9-8
 
 %package libs
 Summary: OpenPrinting CUPS filters and backends - cupsfilters and fontembed libraries
-Group:   System Environment/Libraries
 # LGPLv2: libcupsfilters
 # MIT:    libfontembed
 License: LGPLv2 and MIT
 
 %package devel
 Summary: OpenPrinting CUPS filters and backends - development environment
-Group:   Development/Libraries
 License: LGPLv2 and MIT
 Requires: cups-filters-libs%{?_isa} = %{version}-%{release}
 
@@ -247,3 +245,6 @@ fi
 %{_libdir}/libfontembed.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.71-4
+- Rebuild for new 4.0 release.
+

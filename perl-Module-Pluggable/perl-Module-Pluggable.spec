@@ -4,10 +4,9 @@ Name:           perl-Module-Pluggable
 Epoch:          1
 # Keep two digit decimal part
 Version:        %{cpan_version}0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Automatically give your module the ability to have plugins
 License:        GPL+ or Artistic
-Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Module-Pluggable/
 Source0:        http://www.cpan.org/authors/id/S/SI/SIMONW/Module-Pluggable-%{cpan_version}.tar.gz
 BuildArch:      noarch
@@ -77,3 +76,6 @@ perl Build.PL installdirs=vendor
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:5.10-7
+- Rebuild for new 4.0 release.
+

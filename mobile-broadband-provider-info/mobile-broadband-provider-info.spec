@@ -3,7 +3,7 @@
 Summary: Mobile broadband provider database
 Name: mobile-broadband-provider-info
 Version: 1.%{upstream_version}
-Release: 2%{?dist}
+Release: 3%{?dist}
 #
 # Source from git://git.gnome.org/mobile-broadband-provider-info
 # tarball built with:
@@ -14,7 +14,6 @@ Release: 2%{?dist}
 # http://ftp.gnome.org/pub/gnome/sources/mobile-broadband-provider-info/%{upstream_version}/mobile-broadband-provider-info-%{upstream_version}.tar.xz
 Source: mobile-broadband-provider-info-%{upstream_version}.tar.bz2
 License: Public Domain
-Group: System Environment/Base
 
 BuildArch: noarch
 URL: http://live.gnome.org/NetworkManager/MobileBroadband/ServiceProviders
@@ -27,7 +26,6 @@ broadband (3G) providers and associated network and plan information.
 
 %package devel
 Summary: Development files for %{name}
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -62,3 +60,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.20150421git-3
+- Rebuild for new 4.0 release.
+

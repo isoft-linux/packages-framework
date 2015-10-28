@@ -1,9 +1,8 @@
 Summary: DjVu viewers, encoders, and utilities
 Name: djvulibre
 Version: 3.5.25.3
-Release: 9
+Release: 10
 License: GPLv2+
-Group: Applications/Publishing
 URL: http://djvu.sourceforge.net/
 Source0: http://downloads.sourceforge.net/djvu/%{name}-%{version}.tar.gz
 Patch0: djvulibre-3.5.22-cdefs.patch
@@ -29,7 +28,6 @@ separate sub-package.
 
 %package libs
 Summary: Library files for DjVuLibre
-Group: System Environment/Libraries
 
 %description libs
 Library files for DjVuLibre.
@@ -37,7 +35,6 @@ Library files for DjVuLibre.
 
 %package devel
 Summary: Development files for DjVuLibre
-Group: Development/Libraries
 Requires: %{name}-libs = %{version}-%{release}
 Requires: pkgconfig
 
@@ -123,6 +120,9 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.5.25.3-10
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -4,7 +4,7 @@
 
 Name:           weston
 Version:        1.9.0
-Release:        4%{?gitdate:.git%{gitdate}} 
+Release:        5%{?gitdate:.git%{gitdate}} 
 Summary:        Reference compositor for Wayland
 License:        BSD and CC-BY-SA
 URL:            http://wayland.freedesktop.org/
@@ -163,6 +163,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_bindir}/weston-simple-dmabuf
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.9.0-5
+- Rebuild for new 4.0 release.
+
 * Thu Sep 03 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.8.92
 

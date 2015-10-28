@@ -2,10 +2,9 @@
 %global pcsc_lite_ver 1.8.3
 Name:           pcsc-lite-ccid
 Version:        1.4.19
-Release:        1
+Release:        2
 Summary:        Generic USB CCID smart card reader driver
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://pcsclite.alioth.debian.org/ccid.html
 Source0:        https://alioth.debian.org/frs/download.php/file/4132/ccid-%{version}.tar.bz2 
@@ -54,6 +53,9 @@ cp -p src/openct/LICENSE LICENSE.openct
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.19-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

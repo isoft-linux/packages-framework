@@ -1,9 +1,8 @@
 Summary:        Theme engines for GTK+ 2.0
 Name:           gtk2-engines
 Version:        2.20.2
-Release: 	 	4	
+Release: 	 	5	
 License:        GPL
-Group:          System Environment/Libraries
 Source:         gtk-engines-%{version}.tar.bz2
 
 Requires:       gtk2 >= 2.8.20
@@ -60,7 +59,6 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/themes/Redmond
 rm -rf $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/engines/libredmond95.so
 
 %find_lang gtk-engines
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -82,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.20.2-5
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

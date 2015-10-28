@@ -1,9 +1,8 @@
 Name:		libproxy
 Version:	0.4.11
-Release:	1
+Release:	2
 Summary:	A library that provides automatic proxy configuration management.
 
-Group:		Framework/Runtime/Library
 License:	LGPLv2+
 URL:		https://code.google.com/p/libproxy/
 Source0:	https://code.google.com/p/libproxy/downloads/detail?name=libproxy-0.4.11.tar.gz
@@ -17,7 +16,6 @@ BuildRequires:  NetworkManager-devel
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Framework/Development/Library
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -26,7 +24,6 @@ developing applications that use %{name}.
 
 %package    -n  python-libproxy 
 Summary:        Python module of libproxy
-Group:          Framework/Runtime/Library/Python
 Requires:       %{name} = %{version}-%{release}
 
 %description  -n python-libproxy 
@@ -67,3 +64,6 @@ popd
 %{_libdir}/python?.?/site-packages/libproxy.py
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4.11-2
+- Rebuild for new 4.0 release.
+

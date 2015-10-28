@@ -2,7 +2,7 @@
 
 Name:           botan
 Version:        %{major_version}.9
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Crypto library written in C++
 
 License:        BSD
@@ -159,6 +159,9 @@ LD_LIBRARY_PATH=%{buildroot}%{_libdir} ./check --validate
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.10.9-9
+- Rebuild for new 4.0 release.
+
 * Thu Sep 03 2015 Cjacker <cjacker@foxmail.com>
 - rebuilt with new boost
 

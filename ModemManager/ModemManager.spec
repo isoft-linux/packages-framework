@@ -3,12 +3,11 @@
 Summary: Mobile broadband modem management service
 Name: ModemManager
 Version: 1.4.10
-Release: 1
+Release: 2
 Source: %{name}-%{version}.tar.xz
 Patch0: modemmanager-remove-unused-var-fix-clang-build.patch
 
 License: GPLv2+
-Group: System Environment/Base
 
 URL:    http://www.freedesktop.org/software/ModemManager/ 
 
@@ -25,7 +24,6 @@ BuildRequires: vala-tools
 
 %package devel
 Summary: Development files for %{name}
-Group:   Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -115,6 +113,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
 %{_datadir}/vala/vapi/libmm-glib.vapi
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.10-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

@@ -4,9 +4,8 @@
 Summary:   Cron daemon for executing programs at set times
 Name:      cronie
 Version:   1.5.0
-Release:   2%{?dist}
+Release:   3%{?dist}
 License:   MIT and BSD and ISC and GPLv2+
-Group:     System Environment/Base
 URL:       https://fedorahosted.org/cronie
 Source0:   https://fedorahosted.org/releases/c/r/cronie/%{name}-%{version}.tar.gz
 
@@ -35,7 +34,6 @@ SELinux.
 %package anacron
 Summary:   Utility for running regular jobs
 Requires:  crontabs
-Group:     System Environment/Base
 Provides:  dailyjobs
 Provides:  anacron = 2.4
 Obsoletes: anacron <= 2.3
@@ -55,7 +53,6 @@ for better utilization of resources shared among multiple systems.
 
 %package noanacron
 Summary:   Utility for running simple regular jobs in old cron style
-Group:     System Environment/Base
 Provides:  dailyjobs
 Requires:  crontabs
 Requires:  %{name} = %{version}-%{release}
@@ -186,3 +183,6 @@ exit 0
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/cron.d/dailyjobs
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5.0-3
+- Rebuild for new 4.0 release.
+

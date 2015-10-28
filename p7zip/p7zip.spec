@@ -1,10 +1,9 @@
 Summary: Very high compression ratio file archiver
 Name: p7zip
 Version: 9.20.1
-Release: 10
+Release: 11
 # Files under C/Compress/Lzma/ are dual LGPL or CPL
 License: LGPLv2 and (LGPLv2+ or CPL)
-Group: Applications/Archiving
 URL: http://p7zip.sourceforge.net/
 # RAR sources removed since their license is incompatible with the LGPL
 #Source: http://downloads.sf.net/p7zip/p7zip_%{version}_src_all.tar.bz2
@@ -34,7 +33,6 @@ compression ratio. The original version can be found at http://www.7-zip.org/.
 
 %package plugins
 Summary: Additional plugins for p7zip
-Group: Applications/Archiving
 
 %description plugins
 Additional plugins that can be used with 7z to extend its abilities.
@@ -111,3 +109,6 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 9.20.1-11
+- Rebuild for new 4.0 release.
+

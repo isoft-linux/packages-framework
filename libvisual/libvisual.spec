@@ -2,10 +2,9 @@
 
 Name:           libvisual
 Version:        0.4.0
-Release:        18%{?dist}
+Release:        19%{?dist}
 Epoch:		1
 Summary:        Abstraction library for audio visualisation plugins
-Group:          Applications/Multimedia
 License:        LGPLv2+
 URL:            http://libvisual.sf.net
 Source0:        http://dl.sf.net/libvisual/libvisual-%{version}.tar.gz
@@ -29,7 +28,6 @@ anywhere he wants.
 
 %package        devel
 Summary:        Development files for libvisual
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{epoch}:%{version}-%{release}
 
 %description    devel
@@ -75,3 +73,6 @@ find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:0.4.0-19
+- Rebuild for new 4.0 release.
+

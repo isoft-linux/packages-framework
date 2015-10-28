@@ -2,9 +2,8 @@
 Summary: Library for encoding H265/MPEG-H HEVC video streams
 Name: x265
 Version: 0
-Release: 0.1.%{snapshot}
+Release: 0.2.%{snapshot}
 License: GPL
-Group: System Environment/Libraries
 URL: http://www.videolan.org/developers/x265.html
 #hg clone http://hg.videolan.org/x265
 Source0: x265.tar.gz
@@ -21,7 +20,6 @@ x265 is a free software library and application for encoding video streams into 
 
 %package devel
 Summary: Development files for the x265 library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 
@@ -62,4 +60,9 @@ rm -rf %{buildroot}%{_libdir}/*.a
 %{_includedir}/*.h
 %{_libdir}/libx265.so
 %{_libdir}/pkgconfig/%{name}.pc
+
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0-0.2.20150714
+- Rebuild for new 4.0 release.
 

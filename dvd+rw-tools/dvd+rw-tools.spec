@@ -1,9 +1,8 @@
 Summary:	Toolchain to master DVD+RW/+R media
 Name:		dvd+rw-tools
 Version:	7.1
-Release:	19%{?dist}
+Release:	20%{?dist}
 License:	GPLv2
-Group:		Applications/Multimedia
 Source:		http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
 Source1:	index.html
 Patch1:		dvd+rw-tools-7.0.manpatch
@@ -56,3 +55,6 @@ make WARN="-DDEFAULT_BUF_SIZE_MB=16 -DRLIMIT_MEMLOCK" %{?_smp_mflags}
 %{_mandir}/man1/*.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 7.1-20
+- Rebuild for new 4.0 release.
+

@@ -3,10 +3,9 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 3.4.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: GPLv2+
-Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 BuildRequires: python python-devel
@@ -25,7 +24,6 @@ Extensions: http://www.selenic.com/mercurial/wiki/index.cgi/CategoryExtension
 
 %package hgk
 Summary:	Hgk interface for mercurial
-Group:		Development/Tools
 Requires:	hg = %{version}-%{release}, tk
 
 
@@ -108,5 +106,8 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && %{__python} run-tests.py
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.4.2-3
+- Rebuild for new 4.0 release.
+
 * Tue Jul 14 2015 Cjacker <cjacker@foxmail.com>
 - update to 3.4.2

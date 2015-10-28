@@ -1,9 +1,8 @@
 Summary:       Hardware lister
 Name:          lshw
 Version:       B.02.17
-Release:       7%{?dist}
+Release:       8%{?dist}
 License:       GPLv2
-Group:         Applications/System
 URL:           http://ezix.org/project/wiki/HardwareLiSter
 Source0:       http://www.ezix.org/software/files/lshw-%{version}.tar.gz
 Source1:       lshw.desktop
@@ -24,7 +23,6 @@ Information can be output in plain text, XML or HTML.
 
 %package       gui
 Summary:       Graphical hardware lister
-Group:         Applications/System
 Requires:      polkit
 Requires:      %{name} = %{version}-%{release}
 BuildRequires: gtk2-devel >= 2.4
@@ -111,3 +109,6 @@ rm -rf %{buildroot}%{_datadir}/locale/fr/
 %{_datadir}/polkit-1/actions/org.ezix.lshw.gui.policy
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - B.02.17-8
+- Rebuild for new 4.0 release.
+

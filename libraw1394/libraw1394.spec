@@ -1,9 +1,8 @@
 Summary:        Library providing low-level IEEE-1394 access
 Name:           libraw1394
 Version:        2.1.0
-Release:        1
+Release:        2
 License:        LGPLv2+
-Group:          System Environment/Libraries
 Source:         http://www.kernel.org/pub/linux/libs/ieee1394/%{name}-%{version}.tar.xz
 Patch0:         libraw1394-fix-types.patch
 URL:            http://www.dennedy.org/libraw1394/
@@ -16,7 +15,6 @@ intererface are included, with run-time detection of the active stack.
 
 %package devel
 Summary:       Development libs for libraw1394
-Group:         Development/Libraries
 Requires:      %{name} = %{version}-%{release}, pkgconfig
 
 %description devel
@@ -34,7 +32,6 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -64,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.1.0-2
+- Rebuild for new 4.0 release.
+
 * Thu Dec 12 2013 Cjacker <cjacker@gmail.com>
 - first build for new release.
 

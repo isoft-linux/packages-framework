@@ -1,9 +1,8 @@
 Name:          gypsy
 Version:       0.9
-Release:       5%{?dist}
+Release:       6%{?dist}
 Summary:       A GPS multiplexing daemon
 
-Group:         System Environment/Libraries
 # See LICENSE file for details
 License:       LGPLv2 and GPLv2
 URL:           http://gypsy.freedesktop.org/
@@ -27,7 +26,6 @@ access GPS data from multiple GPS sources concurrently.
 
 %package devel
 Summary: Development package for gypsy
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: dbus-glib-devel
 Requires: pkgconfig
@@ -37,7 +35,6 @@ Header files for development with gypsy.
 
 %package docs
 Summary: Documentation files for %{name}
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
@@ -79,3 +76,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/libgypsy.la
 %doc %{_datadir}/gtk-doc/html/gypsy
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9-6
+- Rebuild for new 4.0 release.
+

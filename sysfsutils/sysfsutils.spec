@@ -1,9 +1,8 @@
 Name:           sysfsutils
 URL:            http://sourceforge.net/projects/linux-diag/
 License:        GPLv2
-Group:          Development/Tools
 Version:        2.1.0
-Release:        18%{?dist}
+Release:        19%{?dist}
 
 Summary:        Utilities for interfacing with sysfs
 Source0:        http://prdownloads.sourceforge.net/linux-diag/%{name}-%{version}.tar.gz
@@ -19,7 +18,6 @@ with sysfs.
 
 %package -n libsysfs
 Summary: Shared library for interfacing with sysfs
-Group: System Environment/Libraries
 License: LGPLv2+
 
 %description -n libsysfs
@@ -27,7 +25,6 @@ Library used in handling linux kernel sysfs mounts and their various files.
 
 %package -n libsysfs-devel
 Summary: Static library and headers for libsysfs
-Group: Development/Libraries
 License: LGPLv2+
 Requires: libsysfs = %{version}-%{release}
 
@@ -83,3 +80,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.1.0-19
+- Rebuild for new 4.0 release.
+

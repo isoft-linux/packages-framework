@@ -1,9 +1,8 @@
 Name:       ibus-qt
 Version:    1.3.3
-Release:    7
+Release:    8
 Summary:    Qt IBus library and Qt input method plugin
 License:    GPLv2+
-Group:      System Environment/Libraries
 URL:        http://code.google.com/p/ibus/
 Source0:    https://github.com/ibus/ibus-qt/releases/download/%{version}/%{name}-%{version}-Source.tar.gz
 
@@ -20,7 +19,6 @@ Qt IBus library and Qt input method plugin.
 
 %package devel
 Summary:    Development tools for ibus qt
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -28,7 +26,6 @@ The ibus-qt-devel package contains the header files for ibus qt library.
 
 %package docs
 Summary:    Development documents for ibus qt
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description docs
@@ -67,3 +64,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %files devel
 %{_includedir}/*
 %{_libdir}/libibus-qt.so
+
+%changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.3-8
+- Rebuild for new 4.0 release.
+

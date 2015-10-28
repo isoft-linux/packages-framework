@@ -2,10 +2,9 @@
 
 Name:           GitPython
 Version:        1.0.1
-Release:        2
+Release:        3
 Summary:        Python Git Library
 
-Group:          Development/Languages
 License:        BSD
 URL:            http://pypi.python.org/pypi/GitPython/
 Source0:        http://pypi.python.org/packages/source/G/%{name}/%{name}-%{version}.tar.gz
@@ -87,3 +86,6 @@ popd
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.1-3
+- Rebuild for new 4.0 release.
+

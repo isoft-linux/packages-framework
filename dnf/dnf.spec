@@ -11,7 +11,7 @@
 
 Name:		dnf
 Version:	1.1.0
-Release:	4%{?snapshot}
+Release:	5%{?snapshot}
 Summary:	Package manager forked from Yum, using libsolv as a dependency resolver
 # For a breakdown of the licensing, see PACKAGE-LICENSING
 License:	GPLv2+ and GPLv2 and GPL
@@ -252,3 +252,6 @@ exit 0
 %systemd_postun_with_restart dnf-automatic.timer
 
 %changelog
+* Sun Oct 25 2015 Cjacker <cjacker@foxmail.com> - 1.1.0-5
+- Rebuild for new 4.0 release
+

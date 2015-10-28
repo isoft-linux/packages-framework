@@ -6,10 +6,9 @@
 #%%define prerelease dr1
 
 Name:           strongswan
-Release:        2%{?prerelease:.%{prerelease}}%{?dist}
+Release:        3%{?prerelease:.%{prerelease}}%{?dist}
 Version:        5.3.2
 Summary:        An OpenSource IPsec-based VPN and TNC solution
-Group:          System Environment/Daemons
 License:        GPLv2+
 URL:            http://www.strongswan.org/
 Source0:        http://download.strongswan.org/%{name}-%{version}%{?prerelease}.tar.bz2
@@ -41,21 +40,18 @@ Linux kernel.
 
 %package libipsec
 Summary: Strongswan's libipsec backend
-Group: System Environment/Daemons
 %description libipsec
 The kernel-libipsec plugin provides an IPsec backend that works entirely
 in userland, using TUN devices and its own IPsec implementation libipsec.
 
 %package charon-nm
 Summary:        NetworkManager plugin for Strongswan
-Group:          System Environment/Daemons
 %description charon-nm
 NetworkManager plugin integrates a subset of Strongswan capabilities
 to NetworkManager.
 
 %package tnc-imcvs
 Summary: Trusted network connect (TNC)'s IMC/IMV functionality
-Group: Applications/System
 Requires: %{name} = %{version}
 %description tnc-imcvs
 This package provides Trusted Network Connect's (TNC) architecture support.
@@ -317,3 +313,6 @@ done
 %{_libexecdir}/%{name}/charon-nm
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.3.2-3
+- Rebuild for new 4.0 release.
+

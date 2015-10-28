@@ -2,7 +2,7 @@
 
 Name:           gdk-pixbuf2
 Version:        2.32.1
-Release:        1
+Release:        2
 Summary:        An image loading library
 
 License:        LGPLv2+
@@ -127,6 +127,9 @@ fi
 
 
 %changelog
+* Sat Oct 24 2015 builder - 2.32.1-2
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to gnome-3.18.1
 

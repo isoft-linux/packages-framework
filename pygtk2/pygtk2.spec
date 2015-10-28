@@ -15,9 +15,8 @@
 
 Name: pygtk2
 Version: 2.24.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: LGPLv2+
-Group: Development/Languages
 Summary: Python bindings for GTK+
 URL: http://www.pygtk.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
@@ -61,14 +60,12 @@ high-level scripting language.
 
 %package codegen
 Summary: The code generation program for PyGTK
-Group: Development/Languages
 
 %description codegen
 This package contains the C code generation program for PyGTK.
 
 %package libglade
 Summary: A wrapper for the libglade library for use with PyGTK
-Group: Development/Languages
 Requires: %{name} = %{version}-%{release}
 
 %description libglade
@@ -78,7 +75,6 @@ allows the programmer to keep the UI and program logic separate.
 
 %package devel
 Summary: Development files for building add-on libraries
-Group: Development/Languages
 Requires: %{name} = %{version}-%{release}
 Requires: %{name}-codegen = %{version}-%{release}
 Requires: %{name}-doc = %{version}-%{release}
@@ -92,7 +88,6 @@ libraries so that they interoperate with pygtk.
 
 %package doc
 Summary: Documentation files for %{name}
-Group: Development/Languages
 BuildArch: noarch
 
 %description doc
@@ -104,8 +99,6 @@ This package contains documentation files for %{name}.
 
 %build
 export LDFLAGS="`python-config --ldflags`"
-export CC=clang
-export CXX=clang++
 %configure --enable-thread
 export tagname=CC
 make LIBTOOL=/usr/bin/libtool
@@ -120,7 +113,6 @@ sed -i 's@#! /bin/python@#!/usr/bin/python@g' $RPM_BUILD_ROOT%{_bindir}/pygtk-de
 sed -i 's@#! /bin/python@#!/usr/bin/python@g' examples/pygtk-demo/pygtk-demo 
 chmod 644 examples/pygtk-demo/pygtk-demo 
 
-rpmclean
 %clean
 rm -fr $RPM_BUILD_ROOT
 
@@ -169,6 +161,9 @@ rm -fr $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/pygtk
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.24.0-8
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

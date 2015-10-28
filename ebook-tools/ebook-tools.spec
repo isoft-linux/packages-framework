@@ -1,9 +1,8 @@
 Name:		ebook-tools
 Version:	0.2.2
-Release:	5
+Release:	6
 Summary:	Tools for accessing and converting various ebook file formats
 
-Group:		Applications/Publishing
 License:	MIT
 URL:		http://sourceforge.net/projects/ebook-tools/
 
@@ -24,7 +23,6 @@ Tools for accessing and converting various ebook file formats.
 
 %package devel
 Summary:	Development files for %{name}
-Group:		Development/Libraries
 
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 
@@ -34,7 +32,6 @@ developing applications that use %{name}.
 
 %package libs
 Summary:	Libraries for %{name}
-Group:		System Environment/Libraries
 
 %description libs
 The %{name}-libs package contains libraries to be used by 
@@ -82,3 +79,6 @@ rm -rf %{buildroot}
 %{_libdir}/libepub.so.0*
 
 %changelog
+* Sat Oct 24 2015 builder - 0.2.2-6
+- Rebuild for new 4.0 release.
+

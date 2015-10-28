@@ -1,9 +1,8 @@
 Summary:     	libspectre is a small library for rendering Postscript documents	
 Name:           libspectre
 Version:       	0.2.7
-Release:       	1
+Release:       	2
 License:        GPLv2+
-Group:          System Environment/Libraries
 URL:            http://www.freedesktop.org/wiki/Software/libspectre/
 Source0:       	http://libspectre.freedesktop.org/releases/%{name}-%{version}.tar.gz 
 BuildRequires:  libtool automake autoconf 
@@ -15,7 +14,6 @@ Requires:	    ghostscript
 libspectre is a small library for rendering Postscript documents.
 %package devel
 Summary: Files needed for development using %{name}
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -35,7 +33,6 @@ rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 rm $RPM_BUILD_ROOT%{_libdir}/*.la
 
-rpmclean
 %clean
 rm -rf %{buildroot}
 
@@ -52,6 +49,9 @@ rm -rf %{buildroot}
 %{_includedir}
 %{_libdir}/pkgconfig/*
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.2.7-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

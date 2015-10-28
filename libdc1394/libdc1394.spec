@@ -1,9 +1,8 @@
 Summary: 1394-based digital camera control library
 Name: libdc1394
 Version: 2.2.1
-Release: 1
+Release: 2
 License: LGPLv2+
-Group: System Environment/Libraries
 URL: http://sourceforge.net/projects/libdc1394/
 Source: http://downloads.sourceforge.net/project/libdc1394/libdc1394-2/%{version}/libdc1394-%{version}.tar.gz
 
@@ -17,7 +16,6 @@ cameras that conform to the 1394-based Digital Camera Specification.
 
 %package devel
 Summary: Header files and libraries for %{name}
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}, libraw1394-devel
 Requires: pkgconfig
 
@@ -28,7 +26,6 @@ you will need to install %{name}-devel.
 
 %package tools
 Summary: Tools for use with %{name}
-Group: Applications/System
 Requires: %{name} = %{version}-%{release}
 
 %description tools
@@ -74,6 +71,9 @@ make install DESTDIR=%{buildroot} INSTALL="%{__install} -p"
 %{_mandir}/man1/dc1394_*.1.gz
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.2.1-2
+- Rebuild for new 4.0 release.
+
 * Thu Dec 12 2013 Cjacker <cjacker@gmail.com>
 - first build for new release.
 

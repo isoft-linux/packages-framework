@@ -6,7 +6,7 @@
 
 Name:             avahi
 Version:          0.6.32
-Release:          2.rc
+Release:          2.rc.1
 Summary:          Local network service discovery
 License:          LGPLv2+
 URL:              http://avahi.org
@@ -678,6 +678,9 @@ fi
 %{python3_sitelib}/avahi/
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.32-2.rc.1
+- Rebuild for new 4.0 release.
+
 * Sun Oct 18 2015 Cjacker <cjacker@foxmail.com>
 - update to 0.6.32-rc
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>

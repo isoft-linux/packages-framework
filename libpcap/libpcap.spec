@@ -1,8 +1,7 @@
 Name: libpcap
 Version: 1.7.4
-Release: 1 
+Release: 2 
 Summary: A system-independent interface for user-level packet capture
-Group: Development/Libraries
 License: BSD with advertising
 URL: http://www.tcpdump.org
 BuildRequires: bison flex
@@ -23,7 +22,6 @@ on your network.
 
 %package devel
 Summary: Libraries and header files for the libpcap library
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -52,7 +50,6 @@ make %{?_smp_mflags}
 make DESTDIR=$RPM_BUILD_ROOT install
 rm -f $RPM_BUILD_ROOT%{_libdir}/libpcap.a
 
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -74,5 +71,8 @@ rpmclean
 %{_mandir}/man5/pcap*.5*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.7.4-2
+- Rebuild for new 4.0 release.
+
 * Mon Jul 20 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.7.4

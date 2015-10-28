@@ -1,6 +1,6 @@
 Name:       pcre2
 Version:    10.20
-Release:    2
+Release:    3
 Summary:    Perl-compatible regular expression library
 # the library:                          BSD
 # pcre2test (linked to GNU readline):   BSD (linked to GPLv3+)
@@ -143,5 +143,8 @@ make %{?_smp_mflags} check VERBOSE=yes
 %{_mandir}/man1/pcre2test.*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 10.20-3
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - initial build.

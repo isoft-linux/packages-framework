@@ -1,9 +1,8 @@
 Name: libusb-compat
 Epoch: 1
 Version: 0.1.5
-Release: 1
+Release: 2
 Summary: A library which allows userspace access to USB devices
-Group: System Environment/Libraries
 License: LGPLv2+
 URL: http://sourceforge.net/projects/libusb/
 Source0: http://prdownloads.sourceforge.net/libusb/libusb-compat-%{version}.tar.bz2
@@ -18,7 +17,6 @@ applications written for libusb-0.1 to work with libusb-1.0.
 
 %package devel
 Summary: Development files for libusb
-Group: Development/Libraries
 Requires: %{name} = %{epoch}:%{version}-%{release}
 Requires: pkgconfig
 
@@ -29,7 +27,6 @@ libusb-1.0 library instead of this one.
 
 %package static
 Summary: Static development files for libusb
-Group: Development/Libraries
 Requires: %{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
@@ -73,5 +70,8 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 24 2015 builder - 1:0.1.5-2
+- Rebuild for new 4.0 release.
+
 * Wed Dec 04 2013 Cjacker <cjacker@gmail.com>
 - first build for new OS

@@ -5,10 +5,9 @@
 
 Name: 		%{gstreamer}
 Version: 	1.6.0
-Release: 	1
+Release: 	2
 Summary: 	GStreamer streaming media framework runtime
 
-Group: 		Applications/Multimedia
 License: 	LGPL
 URL:		http://gstreamer.freedesktop.org/
 Source: 	http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
@@ -42,7 +41,6 @@ plugins.
 
 %package devel
 Summary: 	Libraries/include files for GStreamer streaming media framework
-Group: 		Development/Libraries
 
 Requires: 	%{name} = %{version}-%{release}
 Requires: 	glib2-devel >= %{_glib2}
@@ -130,6 +128,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
+- Rebuild for new 4.0 release.
+
 * Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.6.0
 

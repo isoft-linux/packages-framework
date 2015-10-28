@@ -1,10 +1,9 @@
 Summary: glibc plugin for .local name resolution
 Name: nss-mdns
 Version: 0.10
-Release: 16
+Release: 17
 License: LGPLv2+
 URL: http://0pointer.de/lennart/projects/nss-mdns/
-Group: System Environment/Libraries
 Source: http://0pointer.de/lennart/projects/nss-mdns/nss-mdns-%{version}.tar.gz
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 Requires: avahi
@@ -61,3 +60,6 @@ fi
 /%{_lib}/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.10-17
+- Rebuild for new 4.0 release.
+

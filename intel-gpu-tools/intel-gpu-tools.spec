@@ -1,6 +1,6 @@
 Name: intel-gpu-tools
 Version: 1.12
-Release: 1
+Release: 2
 Summary: Tools for development and testing of the Intel DRM driver
 
 License: MIT
@@ -14,7 +14,6 @@ BuildRequires:  libdrm-devel cairo-devel libpciaccess-devel python3 swig xorg-x1
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -45,5 +44,8 @@ make install DESTDIR=%{buildroot}
 %{_mandir}/man1/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.12-2
+- Rebuild for new 4.0 release.
+
 * Sat Sep 12 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.12

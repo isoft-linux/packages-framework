@@ -1,9 +1,8 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.3
-Release:        1
+Release:        2
 License:        GPLv2+
-Group:          Framework/Runtime/Utility 
 URL:            http://upower.freedesktop.org/
 Source0:        http://upower.freedesktop.org/releases/upower-%{version}.tar.xz
 BuildRequires:  sqlite-devel
@@ -29,7 +28,6 @@ line tools for managing power devices attached to the system.
 
 %package devel
 Summary: Headers and libraries for UPower
-Group:  Framwork/Development/Library
 Requires: %{name} = %{version}-%{release}
 Obsoletes: DeviceKit-power-devel < 1:0.9.0-2
 
@@ -53,7 +51,6 @@ make install DESTDIR=$RPM_BUILD_ROOT DATADIRNAME=share
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang upower
-rpmclean
 
 %post -p /sbin/ldconfig
 
@@ -87,6 +84,9 @@ rpmclean
 %{_datadir}/gir-1.0/*
 %{_datadir}/man/man7/UPower.7.gz
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.99.3-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

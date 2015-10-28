@@ -1,8 +1,7 @@
 Name: sound-theme-freedesktop
 Version: 0.8
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: freedesktop.org sound theme
-Group: User Interface/Desktops
 Source0: http://people.freedesktop.org/~mccann/dist/sound-theme-freedesktop-%{version}.tar.bz2
 # For details on the licenses used, see CREDITS
 License: GPLv2+ and LGPLv2+ and CC-BY-SA and CC-BY
@@ -49,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/sounds/freedesktop/stereo/*.oga
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8-4
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

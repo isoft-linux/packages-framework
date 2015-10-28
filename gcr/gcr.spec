@@ -1,6 +1,6 @@
 Name:           gcr
 Version:        3.18.0
-Release:        1
+Release:        2
 Summary:        A library for bits of crypto UI and parsing
 
 License:        LGPLv2+
@@ -122,6 +122,9 @@ fi
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-2
+- Rebuild for new 4.0 release.
+
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 3.18.0 
 

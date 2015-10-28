@@ -1,9 +1,8 @@
 Name: trousers
 Summary: TCG's Software Stack v1.2
 Version: 0.3.13
-Release: 5
+Release: 6
 License: BSD
-Group: System Environment/Libraries
 Url: http://trousers.sourceforge.net
 
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
@@ -27,7 +26,6 @@ state using cryptographic hashes and more.
 
 %package lib
 Summary: TrouSerS libtspi library
-Group: Development/Libraries
 # Needed obsoletes due to the -lib subpackage split
 Obsoletes: trousers < 0.3.13-4
 
@@ -36,7 +34,6 @@ The libtspi library for use in Trusted Computing enabled applications.
 
 %package static
 Summary: TrouSerS TCG Device Driver Library
-Group: Development/Libraries
 Requires: %{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
@@ -47,7 +44,6 @@ https://www.trustedcomputinggroup.org/specs/TSS.
 
 %package devel
 Summary: TrouSerS header files and documentation
-Group: Development/Libraries
 Requires: %{name}-lib%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -118,3 +114,6 @@ exit 0
 %{_libdir}/libtddl.a
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.3.13-6
+- Rebuild for new 4.0 release.
+

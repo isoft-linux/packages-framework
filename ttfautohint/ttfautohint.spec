@@ -1,6 +1,6 @@
 Name:           ttfautohint
 Version:        1.3
-Release:        3
+Release:        4
 Summary:        Automated hinting utility for TrueType fonts
 License:        FTL or GPLv2
 URL:            http://www.freetype.org/ttfautohint
@@ -49,3 +49,6 @@ make %{?_smp_mflags}
 #%{_bindir}/ttfautohintGUI
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3-4
+- Rebuild for new 4.0 release.
+

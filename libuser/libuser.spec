@@ -1,7 +1,6 @@
 Name: libuser
 Version: 0.62
-Release: 2%{?dist}
-Group: System Environment/Base
+Release: 3%{?dist}
 License: LGPLv2+
 URL: https://fedorahosted.org/libuser/
 Source: https://fedorahosted.org/releases/l/i/libuser/libuser-%{version}.tar.xz
@@ -20,7 +19,6 @@ Sample applications modeled after those included with the shadow password
 suite are included.
 
 %package devel
-Group: Development/Libraries
 Summary: Files needed for developing applications which use libuser
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: glib2-devel%{?_isa}
@@ -31,7 +29,6 @@ files useful for developing applications with libuser.
 
 %package python
 Summary: Python 2 bindings for the libuser library
-Group: Development/Libraries
 Requires: libuser%{?_isa} = %{version}-%{release}
 
 %description python
@@ -41,7 +38,6 @@ administering user and group accounts.
 
 %package python3
 Summary: Python 3 bindings for the libuser library
-Group: Development/Libraries
 Requires: libuser%{?_isa} = %{version}-%{release}
 
 %description python3
@@ -135,6 +131,9 @@ LC_ALL=en_US.UTF-8 python3 -c "import libuser"
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.62-3
+- Rebuild for new 4.0 release.
+
 * Sat Jul 25 2015 Cjacker <cjacker@foxmail.com>
 - Update to libuser-0.62
 - Resolves: #1246225 (CVE-2015-3245, CVE-2015-3246)

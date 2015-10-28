@@ -1,9 +1,8 @@
 Summary: Bluetooth utilities
 Name: bluez
 Version: 5.34
-Release: 1
+Release: 2
 License: GPLv2+
-Group: Applications/System
 URL: http://www.bluez.org/
 
 Source0: http://www.kernel.org/pub/linux/bluetooth/bluez-%{version}.tar.xz
@@ -67,22 +66,18 @@ The BLUETOOTH trademarks are owned by Bluetooth SIG, Inc., U.S.A.
 
 %package libs
 Summary: Libraries for use in Bluetooth applications
-Group: System Environment/Libraries
 
 %package libs-devel
 Summary: Development libraries for Bluetooth applications
-Group: Development/Libraries
 Requires: bluez-libs%{?_isa} = %{version}-%{release}
 
 %package cups
 Summary: CUPS printer backend for Bluetooth printers
-Group: System Environment/Daemons
 Requires: bluez%{?_isa} = %{version}-%{release}
 Requires: cups
 
 %package hid2hci
 Summary: Put HID proxying bluetooth HCI's into HCI mode
-Group: System Environment/Daemons
 Requires: bluez%{?_isa} = %{version}-%{release}
 
 %description cups
@@ -222,3 +217,6 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/bluetooth/
 /lib/udev/rules.d/97-hid2hci.rules
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.34-2
+- Rebuild for new 4.0 release.
+

@@ -1,9 +1,8 @@
 %global udevdir %(pkg-config --variable=udevdir udev)
 Name:           libgphoto2
 Version:        2.5.8
-Release:        1
+Release:        2
 Summary:        Library for accessing digital cameras
-Group:          Development/Libraries
 License:        GPLv2+ and GPLv2
 URL:            http://www.gphoto.org/
 Source0:        http://downloads.sourceforge.net/gphoto/libgphoto2-%{version}.tar.bz2
@@ -24,7 +23,6 @@ however, such as gtkam for example.
 
 %package devel
 Summary:        Headers and links to compile against the libgphoto2 library
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       libusbx-devel >= 1.0 
 Obsoletes:      gphoto2-devel < 2.4.0-11
@@ -117,6 +115,9 @@ cat libgphoto2*.lang >> %{name}.lang
 %{_mandir}/man3/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.5.8-2
+- Rebuild for new 4.0 release.
+
 * Thu Jul 23 2015 Cjacker <cjacker@foxmail.com>
 - update to 2.5.8
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>

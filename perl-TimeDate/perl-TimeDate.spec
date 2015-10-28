@@ -1,9 +1,8 @@
 Name:           perl-TimeDate
 Version:        2.30
 Epoch:          1
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        A Perl module for time and date manipulation
-Group:          Development/Libraries
 License:        GPL+ or Artistic
 URL:            http://search.cpan.org/dist/TimeDate/
 Source0:        http://www.cpan.org/authors/id/G/GB/GBARR/TimeDate-%{version}.tar.gz
@@ -54,3 +53,6 @@ make test
 %{_mandir}/man3/*.3*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:2.30-8
+- Rebuild for new 4.0 release.
+

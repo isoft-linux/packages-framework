@@ -1,8 +1,7 @@
 Name: virt-viewer
 Version: 2.0 
-Release: 2 
+Release: 3 
 Summary: Virtual Machine Viewer
-Group: Applications/System
 License: GPLv2+
 URL: http://virt-manager.org/
 Source0: http://virt-manager.org/download/sources/%{name}/%{name}-%{version}.tar.gz
@@ -75,10 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/remote-viewer
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/ui/
-%{_datadir}/%{name}/ui/virt-viewer.xml
-%{_datadir}/%{name}/ui/virt-viewer-auth.xml
-%{_datadir}/%{name}/ui/virt-viewer-about.xml
+%{_datadir}/%{name}/ui/*.xml
 %{_datadir}/icons/hicolor/*/apps/*
+%{_datadir}/icons/hicolor/*/devices/*
 %{_datadir}/applications/remote-viewer.desktop
 %{_datadir}/mime/packages/virt-viewer-mime.xml
 %{_libexecdir}/spice-xpi-client
@@ -87,3 +85,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/remote-viewer.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0-3
+- Rebuild for new 4.0 release.
+

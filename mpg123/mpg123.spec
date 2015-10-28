@@ -2,9 +2,8 @@
 
 Name:           mpg123
 Version:        1.19.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        MPEG audio player
-Group:          Applications/Multimedia
 License:        GPLv2+ and LGPLv2
 URL:            http://mpg123.org/
 Source:         http://downloads.sourceforge.net/mpg123/mpg123-%{version}.tar.bz2
@@ -20,7 +19,6 @@ Real time command line MPEG audio player for Layer 1, 2 and Layer3.
 
 %package -n libmpg123
 Summary:        MPEG audio Layer 1, 2 and Layer3 library
-Group:          System Environment/Libraries
 
 %description -n libmpg123
 MPEG audio Layer 1, 2 and Layer3 library.
@@ -28,7 +26,6 @@ MPEG audio Layer 1, 2 and Layer3 library.
 
 %package -n libmpg123-devel
 Summary:        Development files for mpg123
-Group:          Development/Libraries
 Requires:       libmpg123%{?_isa} = %{version}-%{release}
 
 %description -n libmpg123-devel
@@ -78,3 +75,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.19.0-3
+- Rebuild for new 4.0 release.
+

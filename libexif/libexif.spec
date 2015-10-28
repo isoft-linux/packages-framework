@@ -1,8 +1,7 @@
 Summary: Library for extracting extra information from image files
 Name: libexif
 Version: 0.6.21
-Release: 1
-Group: Framework/Runtime/Library
+Release: 2
 License: LGPL
 URL: http://libexif.sourceforge.net/
 Source0: http://umn.dl.sourceforge.net/sourceforge/libexif/%{name}-%{version}.tar.bz2
@@ -14,7 +13,6 @@ allows you to parse an EXIF file and read the data from those tags.
 
 %package devel
 Summary: Files needed for libexif application development
-Group: Framework/Development/Library
 Requires: libexif = %{version}-%{release}
 
 %description devel
@@ -55,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/libexif/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.21-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

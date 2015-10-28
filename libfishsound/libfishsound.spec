@@ -1,9 +1,8 @@
 Name:           libfishsound
 Version:        1.0.0
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        Simple programming interface for Xiph.Org codecs
 
-Group:          System Environment/Libraries
 License:        BSD
 URL:            http://www.xiph.org/fishsound/
 Source0:        http://downloads.xiph.org/releases/libfishsound/libfishsound-%{version}.tar.gz
@@ -26,7 +25,6 @@ and Ogg Vorbis files.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
 
@@ -36,7 +34,6 @@ developing applications that use %{name}.
 
 %package        doc
 Summary:        Documentation for %{name}
-Group:          Documentation
 # note: intentionally not noarch; contains a target-specific Makefile
 Requires:       %{name} = %{version}-%{release}
 
@@ -45,7 +42,6 @@ The %{name}-doc package contains the documentation for %{name}.
 
 %package        tools
 Summary:        Sample programs bundled with %{name}
-Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 
 %description    tools
@@ -115,3 +111,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.0-11
+- Rebuild for new 4.0 release.
+

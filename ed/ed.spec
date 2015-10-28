@@ -1,9 +1,8 @@
 Summary: The GNU line editor.
 Name: ed
 Version: 1.9 
-Release: 1
+Release: 2
 License: GPL
-Group:	Applications/Text
 Source: ftp://ftp.gnu.org/gnu/ed/%{name}-%{version}.tar.gz
 URL: 	http://www.gnu.org/software/ed/
 
@@ -36,11 +35,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc ChangeLog NEWS POSIX README THANKS TODO
+%doc ChangeLog NEWS README TODO
 %{_bindir}/*
 %{_mandir}/*/*
 
 
 %changelog
+* Sat Oct 24 2015 builder - 1.9-2
+- Rebuild for new 4.0 release.
+
 * Mon Jul 30 2007 Cjacker <cjacker@gmail.com>
 - prepare for 0.5

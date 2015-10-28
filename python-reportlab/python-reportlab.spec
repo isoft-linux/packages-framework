@@ -2,7 +2,7 @@
 
 Name:           python-reportlab
 Version:        3.1.8
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Python 2.x library for generating PDFs and graphics
 License:        BSD
 URL:            http://www.reportlab.org/
@@ -87,3 +87,6 @@ rm -rf %{buildroot}%{python2_sitearch}/reportlab/fonts
 #%doc docs/*.pdf
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.1.8-6
+- Rebuild for new 4.0 release.
+

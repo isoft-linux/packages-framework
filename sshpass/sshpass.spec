@@ -1,9 +1,8 @@
 Summary:    Non-interactive SSH authentication utility
 Name:       sshpass
 Version:    1.05
-Release:    8%{?dist}
+Release:    9%{?dist}
 License:    GPLv2
-Group:      Applications/Internet
 Url:        http://sshpass.sourceforge.net/
 Source0:    http://downloads.sourceforge.net/sshpass/sshpass-%{version}.tar.gz
 
@@ -28,3 +27,6 @@ make DESTDIR=%{buildroot} install
 %doc AUTHORS COPYING ChangeLog NEWS
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.05-9
+- Rebuild for new 4.0 release.
+

@@ -1,12 +1,9 @@
-%{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
-
 Name:           libmtp
 Version:        1.1.9
-Release:        1 
+Release:        2 
 Summary:        A software library for MTP media players
 URL:            http://libmtp.sourceforge.net/
 
-Group:          System Environment/Libraries
 Source0:        http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 License:        LGPLv2+
 Requires:       udev
@@ -21,7 +18,6 @@ players etc.
 
 %package examples
 Summary:        Example programs for libmtp
-Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 
 %description examples
@@ -30,7 +26,6 @@ devices.
 
 %package devel
 Summary:        Development files for libmtp
-Group:          System Environment/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
 Requires:       libusb1-devel
@@ -97,9 +92,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_libdir}/libmtp.so
 %{_pkgdocdir}/*
+%{_docdir}/%{name}-%{version}
 %exclude %{_pkgdocdir}/COPYING
 %{_includedir}/*.h
 %{_libdir}/pkgconfig/libmtp.pc
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.9-2
+- Rebuild for new 4.0 release.
+

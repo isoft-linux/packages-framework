@@ -1,6 +1,6 @@
 Name:           npth
 Version:        1.2
-Release:        2
+Release:        3
 Summary:        The New GNU Portable Threads library
 License:        LGPLv3+ or GPLv2+ or (LGPLv3+ and GPLv2+)
 URL:            http://git.gnupg.org/cgi-bin/gitweb.cgi?p=npth.git
@@ -55,3 +55,6 @@ make check
 %{_datadir}/aclocal/*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2-3
+- Rebuild for new 4.0 release.
+

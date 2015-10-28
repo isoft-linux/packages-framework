@@ -3,9 +3,8 @@
 Summary:	Job spooling tools
 Name:		at
 Version:	3.1.16
-Release:	6
+Release:	7
 License:	GPLv3+ and GPLv2+ and ISC and MIT and Public Domain
-Group:		System Environment/Daemons
 URL:		http://ftp.debian.org/debian/pool/main/a/at
 
 Source:		http://ftp.debian.org/debian/pool/main/a/at/at_%{version}.orig.tar.gz
@@ -172,3 +171,6 @@ chown daemon:daemon %{_localstatedir}/spool/at/.SEQ
 %attr(0644,root,root)		/%{_unitdir}/atd.service
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.1.16-7
+- Rebuild for new 4.0 release.
+

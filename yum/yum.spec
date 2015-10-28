@@ -29,9 +29,8 @@ BuildRequires: bash-completion
 Summary: RPM package installer/updater/manager
 Name: yum
 Version: 3.4.3
-Release: 508
+Release: 509
 License: GPLv2+
-Group: System Environment/Base
 Source0: http://yum.baseurl.org/download/3.4/%{name}-%{version}.tar.gz
 Source1: yum.conf.fedora
 Source2: yum-updatesd.conf.fedora
@@ -129,7 +128,6 @@ automatically, prompting the user for permission as necessary.
 
 %package updatesd
 Summary: Update notification daemon
-Group: Applications/System
 Requires: yum = %{version}-%{release}
 Requires: dbus-python
 Requires: pygobject2
@@ -147,7 +145,6 @@ can notify you when they are available via email, syslog or dbus.
 
 %package cron
 Summary: RPM package installer/updater/manager cron service
-Group: System Environment/Base
 Requires: yum >= 3.4.3-84 cronie crontabs findutils
 Requires: yum-cron-BE = %{version}-%{release}
 # We'd probably like a suggests for yum-cron-daily here.
@@ -169,7 +166,6 @@ These are the files needed to run any of the yum-cron update services.
 
 %package cron-daily
 Summary: Files needed to run yum updates as a daily cron job
-Group: System Environment/Base
 Provides: yum-cron-BE = %{version}-%{release}
 Requires: yum-cron > 3.4.3-131
 
@@ -182,7 +178,6 @@ By default this just downloads updates and does not apply them.
 
 %package cron-hourly
 Summary: Files needed to run yum updates as an hourly cron job
-Group: System Environment/Base
 Provides: yum-cron-BE = %{version}-%{release}
 Requires: yum-cron > 3.4.3-131
 
@@ -194,7 +189,6 @@ cron (or something else, via. changing the configuration).
 
 %package cron-security
 Summary: Files needed to run security yum updates as once a day
-Group: System Environment/Base
 Provides: yum-cron-BE = %{version}-%{release}
 Requires: yum-cron > 3.4.3-131
 
@@ -480,3 +474,6 @@ exit 0
 %endif
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.4.3-509
+- Rebuild for new 4.0 release.
+

@@ -1,8 +1,7 @@
 Name:			graphviz
 Summary:		Graph Visualization Tools
 Version:		2.38.0
-Release:	 	1	
-Group:			Applications/Multimedia
+Release:	 	2	
 License:		CPL
 URL:			http://www.graphviz.org/
 Source0:		http://www.graphviz.org/pub/graphviz/ARCHIVE/%{name}-%{version}.tar.gz
@@ -23,7 +22,6 @@ A collection of tools for the manipulation and layout of graphs (as in nodes
 and edges, not as in barcharts).
 
 %package devel
-Group:			Development/Libraries
 Summary:		Development package for graphviz
 Requires:		%{name} = %{version}-%{release}, pkgconfig
 
@@ -34,21 +32,18 @@ graphviz.
 
 
 %package doc
-Group:			Documentation
 Summary:		PDF and HTML documents for graphviz
 
 %description doc
 Provides some additional PDF and HTML documentation for graphviz.
 
 %package graphs
-Group:			Applications/Multimedia
 Summary:		Demo graphs for graphviz
 
 %description graphs
 Some demo graphs for graphviz.
 
 %package perl
-Group:			Applications/Multimedia
 Summary:		Perl extension for graphviz
 Requires:		%{name} = %{version}-%{release}
 Requires:		perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
@@ -57,7 +52,6 @@ Requires:		perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Perl extension for graphviz.
 
 %package python
-Group:			Applications/Multimedia
 Summary:		Python extension for graphviz
 Requires:		%{name} = %{version}-%{release}, python
 
@@ -70,20 +64,18 @@ Python extension for graphviz.
 #%patch1 -p1
 
 %build
-export CC=clang
-export CXX=clang++
 %configure \
     --disable-static \
     --disable-dependency-tracking \
-	--disable-sharp \
-	--disable-go \
-	--disable-r \
-	--disable-ruby \
-	--disable-tcl \
-	--disable-java \
-	--disable-lua \
-	--disable-php \
-	--disable-ocaml \
+    --disable-sharp \
+    --disable-go \
+    --disable-r \
+    --disable-ruby \
+    --disable-tcl \
+    --disable-java \
+    --disable-lua \
+    --disable-php \
+    --disable-ocaml \
     --enable-perl \
     --enable-python \
     --with-x \
@@ -175,6 +167,9 @@ fi
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.38.0-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

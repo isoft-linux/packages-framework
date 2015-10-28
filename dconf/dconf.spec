@@ -2,10 +2,9 @@
 
 Name:           dconf
 Version:        0.24.0
-Release:        2 
+Release:        3 
 Summary:        A configuration system
 
-Group:          System Environment/Base
 License:        LGPLv2+
 URL:            http://live.gnome.org/dconf
 #VCS:		git:git://git.gnome.org/dconf
@@ -29,7 +28,6 @@ backend to the GSettings API in GLib.
 
 %package devel
 Summary: Header files and libraries for dconf development
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: glib2-devel >= %{glib2_version}
 
@@ -51,7 +49,6 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
-rpmclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -102,6 +99,9 @@ gio-querymodules %{_libdir}/gio/modules ||:
 ##%{_datadir}/gir-1.0/dconf-0.3.gir
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.24.0-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

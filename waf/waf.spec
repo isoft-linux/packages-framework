@@ -1,7 +1,4 @@
 %global with_python3 1
-# Turn off the brp-python-bytecompile script
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
-%{!?python3_version: %global python3_version %(%{__python3} -c "import sys; sys.stdout.write(sys.version[:3])")}
 
 # Enable building without html docs (e.g. in case no recent sphinx is
 # available)
@@ -11,8 +8,8 @@
 %undefine prerel
 
 Name:           waf
-Version:        1.8.11
-Release:        %{?prerel:0.}2%{?prerel:.%prerel}%{?dist}
+Version:        1.8.14
+Release:        %{?prerel:0.}1%{?prerel:.%prerel}%{?dist}.1
 Summary:        A Python-based build system
 Group:          Development/Tools
 # The entire source code is BSD apart from pproc.py (taken from Python 2.5)
@@ -146,8 +143,10 @@ popd
 
 # install the frontend
 install -m 0755 -p -D waf-light %{buildroot}%{_bindir}/waf-%{python2_version}
+ln -s waf-%{python2_version} %{buildroot}%{_bindir}/waf-2
 %if 0%{?with_python3}
 install -m 0755 -p -D waf-light %{buildroot}%{_bindir}/waf-%{python3_version}
+ln -s waf-%{python3_version} %{buildroot}%{_bindir}/waf-3
 %endif # with_python3
 ln -s waf-%{python2_version} %{buildroot}%{_bindir}/waf
 
@@ -178,12 +177,15 @@ rm -f docs/sphinx/build/html/.buildinfo
 %doc README TODO ChangeLog demos
 %{_bindir}/waf
 %{_bindir}/waf-%{python2_version}
+%{_bindir}/waf-2
 %{_datadir}/waf
 
 
 %if 0%{?with_python3}
 %files -n %{name}-python3
+%doc README TODO ChangeLog demos
 %{_bindir}/waf-%{python3_version}
+%{_bindir}/waf-3
 %{_datadir}/waf3
 %endif # with_python3
 
@@ -195,3 +197,6 @@ rm -f docs/sphinx/build/html/.buildinfo
 
 
 %changelog
+* Sun Oct 25 2015 Cjacker <cjacker@foxmail.com> - 1.8.14-1.1
+- Rebuild for new 4.0 release
+

@@ -1,9 +1,8 @@
 Summary: Library providing support for "XML Signature" and "XML Encryption" standards
 Name: xmlsec1
 Version: 1.2.20
-Release: 2
+Release: 3
 License: MIT
-Group: System Environment/Libraries
 Source0: http://www.aleksey.com/xmlsec/download/xmlsec1-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 URL: http://www.aleksey.com/xmlsec/
@@ -29,7 +28,6 @@ standards "XML Digital Signature" and "XML Encryption".
 
 %package devel
 Summary: Libraries, includes, etc. to develop applications with XML Digital Signatures and XML Encryption support.
-Group: Development/Libraries
 Requires: xmlsec1%{?_isa} = %{version}-%{release}
 Requires: libxml2-devel%{?_isa} >= 2.6.0
 Requires: libxslt-devel%{?_isa} >= 1.1.0
@@ -46,7 +44,6 @@ Signatures and XML Encryption support.
 
 %package openssl
 Summary: OpenSSL crypto plugin for XML Security Library
-Group: Development/Libraries
 Requires: xmlsec1%{?_isa} = %{version}-%{release}
 
 %description openssl
@@ -55,7 +52,6 @@ for the xmlsec library.
 
 %package openssl-devel
 Summary: OpenSSL crypto plugin for XML Security Library
-Group: Development/Libraries
 Requires: xmlsec1-devel%{?_isa} = %{version}-%{release}
 Requires: xmlsec1-openssl%{?_isa} = %{version}-%{release}
 
@@ -64,7 +60,6 @@ Libraries, includes, etc. for developing XML Security applications with OpenSSL
 
 %package gcrypt
 Summary: GCrypt crypto plugin for XML Security Library
-Group: Development/Libraries
 Requires: xmlsec1%{?_isa} = %{version}-%{release}
 
 %description gcrypt
@@ -73,7 +68,6 @@ for the xmlsec library.
 
 %package gcrypt-devel
 Summary: GCrypt crypto plugin for XML Security Library
-Group: Development/Libraries
 Requires: xmlsec1-devel%{?_isa} = %{version}-%{release}
 Requires: xmlsec1-gnutls-devel%{?_isa} = %{version}-%{release}
 
@@ -82,7 +76,6 @@ Libraries, includes, etc. for developing XML Security applications with GCrypt.
 
 %package gnutls
 Summary: GNUTls crypto plugin for XML Security Library
-Group: Development/Libraries
 Requires: xmlsec1%{?_isa} = %{version}-%{release}
 
 %description gnutls
@@ -91,7 +84,6 @@ for the xmlsec library.
 
 %package gnutls-devel
 Summary: GNUTls crypto plugin for XML Security Library
-Group: Development/Libraries
 Requires: xmlsec1-devel%{?_isa} = %{version}-%{release}
 Requires: xmlsec1-openssl-devel%{?_isa} = %{version}-%{release}
 Requires: libgcrypt-devel%{?_isa} >= 1.2.0
@@ -102,7 +94,6 @@ Libraries, includes, etc. for developing XML Security applications with GNUTls.
 
 %package nss
 Summary: NSS crypto plugin for XML Security Library
-Group: Development/Libraries
 Requires: xmlsec1%{?_isa} = %{version}-%{release}
 
 %description nss
@@ -111,7 +102,6 @@ for the xmlsec library
 
 %package nss-devel
 Summary: NSS crypto plugin for XML Security Library
-Group: Development/Libraries
 Requires: xmlsec1-devel%{?_isa} = %{version}-%{release}
 Requires: xmlsec1-nss%{?_isa} = %{version}-%{release}
 Requires: nss-devel%{?_isa} >= 3.2
@@ -210,3 +200,6 @@ rm -fr ${RPM_BUILD_ROOT}
 %{_libdir}/pkgconfig/xmlsec1-nss.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.20-3
+- Rebuild for new 4.0 release.
+

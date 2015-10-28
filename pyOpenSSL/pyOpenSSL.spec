@@ -3,12 +3,11 @@
 Summary: Python wrapper module around the OpenSSL library
 Name: pyOpenSSL
 Version: 0.15.1
-Release: 1
+Release: 2
 Source0: http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-%{version}.tar.gz
 
 BuildArch: noarch
 License: ASL 2.0
-Group: Development/Libraries
 Url: http://pyopenssl.sourceforge.net/
 
 BuildRequires: python-setuptools
@@ -94,3 +93,6 @@ popd
 %doc examples doc/_build/html
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.15.1-2
+- Rebuild for new 4.0 release.
+

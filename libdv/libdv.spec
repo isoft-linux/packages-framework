@@ -1,10 +1,9 @@
 Summary:	Software decoder for DV format video
 Name:		libdv
 Version:	1.0.0
-Release:	1
+Release:	2
 Epoch:		0
 License:	LGPL
-Group:		System Environment/Libraries
 URL:		http://libdv.sourceforge.net/
 Source:		http://dl.sf.net/libdv/libdv-%{version}.tar.gz
 Patch1:		libdv-0.104-no-exec-stack.patch
@@ -17,12 +16,10 @@ ExcludeArch:	s390 s390x
 
 %package	devel
 Summary:	Development package for libdv
-Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %package	tools
 Summary:	Basic tools to manipulate Digital Video streams
-Group:		Applications/Multimedia
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description
@@ -61,7 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
 rm $RPM_BUILD_ROOT%{_libdir}/libdv.a
 rm $RPM_BUILD_ROOT%{_libdir}/libdv.la
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -91,6 +87,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/libdv.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0:1.0.0-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

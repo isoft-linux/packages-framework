@@ -1,12 +1,14 @@
 Name:	    fonts-Unifont	
 Version:	7.0.06
-Release:	1
+Release:	2
 Summary:	GNU Unifont
 
 License:	GPLV2+
 URL:		http://unifoundry.com/unifont.html
 Source0:	http://unifoundry.com/pub/unifont-7.0.06/font-builds/unifont-%{version}.pcf.gz
 Requires(post):fontconfig
+
+BuildArch: noarch
 
 %description
 %{summary}
@@ -25,4 +27,7 @@ popd
 %{_datadir}/fonts/unifont/unifont-%{version}.pcf
 
 %changelog
+* Sat Oct 24 2015 builder - 7.0.06-2
+- Rebuild for new 4.0 release.
+
 

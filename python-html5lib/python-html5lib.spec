@@ -4,9 +4,8 @@
 Name:		python-%{modulename}
 Summary:	A python based HTML parser/tokenizer
 Version:	0.999
-Release:	6
+Release:	7
 Epoch:		1
-Group:		Development/Libraries
 License:	MIT
 URL:		https://pypi.python.org/pypi/%{modulename}
 
@@ -26,7 +25,6 @@ specification for maximum compatibility with major desktop web browsers.
 %if 0%{?with_python3}
 %package -n python3-%{modulename}
 Summary:	A python based HTML parser/tokenizer 
-Group:		Development/Libraries 
 
 Requires:	python3-six
 BuildRequires:	python3-devel
@@ -92,3 +90,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:0.999-7
+- Rebuild for new 4.0 release.
+

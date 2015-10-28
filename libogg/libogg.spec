@@ -1,9 +1,8 @@
 Summary: The Ogg bitstream file format library.
 Name:		libogg
 Version:	1.3.2
-Release:	1.2 
+Release:	2.2 
 Epoch:		2
-Group: System Environment/Libraries
 License:      BSD
 URL:		http://www.xiph.org/
 Source:		http://www.xiph.org/pub/ogg/vorbis/download/libogg-%{version}.tar.xz
@@ -17,7 +16,6 @@ Ogg bitstreams.
 
 %package devel
 Summary: Files needed for development using libogg.
-Group: Development/Libraries
 Requires: libogg = %{epoch}:%{version}
 
 %description devel
@@ -42,7 +40,6 @@ make DESTDIR=$RPM_BUILD_ROOT install
 # remove unpackaged files from the buildroot
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -rf $RPM_BUILD_ROOT/usr/share/doc
-rpmclean
 %files
 %defattr(-,root,root)
 #%doc AUTHORS CHANGES COPYING README
@@ -71,6 +68,9 @@ rpmclean
 %postun -p /sbin/ldconfig
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2:1.3.2-2.2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

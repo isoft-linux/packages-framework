@@ -4,10 +4,9 @@
 Summary: A PostScript interpreter and renderer
 Name: ghostscript
 Version: 9.14 
-Release: 1 
+Release: 2 
 License: AGPLv3+
 URL: http://www.ghostscript.com/
-Group: Applications/Publishing
 Source0: %{name}-%{version}.tar.gz
 
 Source2: CIDFnmap
@@ -58,7 +57,6 @@ non-PostScript printers, you should install ghostscript.
 %package devel
 Summary: Files for developing applications that use ghostscript
 Requires: %{name} = %{version}-%{release}
-Group: Development/Libraries
 
 %description devel
 The header files for developing applications that use ghostscript.
@@ -66,7 +64,6 @@ The header files for developing applications that use ghostscript.
 %package doc
 Summary: Documentation for ghostscript
 Requires: %{name} = %{version}-%{release}
-Group: Documentation
 BuildArch: noarch
 
 %description doc
@@ -75,7 +72,6 @@ The documentation files that come with ghostscript.
 %package gsx
 Summary: A PostScript interpreter and renderer
 Requires: %{name} = %{version}-%{release}
-Group: Applications/Publishing
 
 %description gsx 
 A PostScript interpreter and renderer
@@ -181,7 +177,6 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/fixmswrd.pl
 # Don't ship CMaps (instead poppler-data paths are in search path).
 rm -f $RPM_BUILD_ROOT%{_datadir}/ghostscript/%{version}/Resource/CMap/*
 
-rpmclean
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -228,3 +223,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgs.so
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 9.14-2
+- Rebuild for new 4.0 release.
+

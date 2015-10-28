@@ -1,9 +1,8 @@
 Name:           libdvdnav
 Version:        5.0.3
-Release:        1 
+Release:        2 
 Summary:        A library for reading DVD video discs based on Ogle code
 
-Group:          System Environment/Libraries
 License:        GPLv2+
 Source0:        http://download.videolan.org/videolan/libdvdnav/5.0.3/libdvdnav-%{version}.tar.bz2
 
@@ -15,7 +14,6 @@ The code is based on Ogle and used in, among others, the Xine dvdnav plug-in.
 
 %package        devel
 Summary:        Development files for libdvdnav
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       libdvdread-devel >= 4.1.3-0.3
 Requires:       pkgconfig
@@ -54,3 +52,6 @@ libdvdnav library.
 %{_libdir}/pkgconfig/dvdnav.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.0.3-2
+- Rebuild for new 4.0 release.
+

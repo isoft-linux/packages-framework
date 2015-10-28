@@ -5,7 +5,7 @@
 Summary: Exif and Iptc metadata manipulation library
 Name:	 exiv2
 Version: 0.25
-Release: 1
+Release: 2
 
 License: GPLv2+
 URL: 	 http://www.exiv2.org/
@@ -141,3 +141,6 @@ test -x %{buildroot}%{_libdir}/libexiv2.so
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.25-2
+- Rebuild for new 4.0 release.
+

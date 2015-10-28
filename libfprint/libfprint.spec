@@ -1,9 +1,8 @@
 Name:           libfprint
 Version:        0.6.0
-Release:        1
+Release:        2
 Summary:        Toolkit for fingerprint scanner
 
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://www.freedesktop.org/wiki/Software/fprint/libfprint
 # git://anongit.freedesktop.org/libfprint/libfprint
@@ -19,7 +18,6 @@ libfprint offers support for consumer fingerprint reader devices.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
 
@@ -67,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.0-2
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

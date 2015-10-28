@@ -1,11 +1,13 @@
 Name: fonts-Ethopic
 Version:    4.1 
-Release:    1 
+Release:    2 
 Summary:    ethopic fonts
-Group:      User Interface/X
 License:    OFL 
 URL:        http://www.senamirmir.org/projects/typography/typeface.html
 Source0:    washra_fonts-4.1.zip 
+
+BuildArch: noarch
+
 %description
 This file provides detailed information on the WashRa fonts. This information
 should be distributed along with the WashRa fonts and any derivative works.
@@ -40,4 +42,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %{_datadir}/fonts/*.ttf
+
+
+%changelog
+* Sat Oct 24 2015 builder - 4.1-2
+- Rebuild for new 4.0 release.
 

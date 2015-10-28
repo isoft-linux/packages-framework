@@ -1,9 +1,8 @@
 Name:          usbmuxd
 Version:       1.1.0
-Release:       10
+Release:       11
 Summary:       Daemon for communicating with Apple's iOS devices
 
-Group:         Applications/System
 # All code is dual licenses as GPLv3+ or GPLv2+, except libusbmuxd which is LGPLv2+.
 License:       GPLv3+ or GPLv2+ and LGPLv2+
 URL:           http://www.libimobiledevice.org/
@@ -52,9 +51,12 @@ exit 0
 %systemd_postun_with_restart usbmuxd.service 
 
 %files
-%doc AUTHORS README COPYING.GPLv2 COPYING.GPLv3 COPYING.LGPLv2.1 README.devel
+%doc AUTHORS README COPYING.GPLv2 COPYING.GPLv3
 %{_sbindir}/usbmuxd
 %{_libdir}/udev/rules.d/39-usbmuxd.rules
 %{_libdir}/systemd/system/usbmuxd.service
 %{_mandir}/man1/usbmuxd.1.gz
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.0-11
+- Rebuild for new 4.0 release.
+

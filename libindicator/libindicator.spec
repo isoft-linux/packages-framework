@@ -1,9 +1,8 @@
 Name:		libindicator
 Version:	12.10.1
-Release:	5%{?dist}
+Release:	6%{?dist}
 Summary:	Shared functions for Ayatana indicators
 
-Group:		System Environment/Libraries
 License:	GPLv3
 URL:		https://launchpad.net/libindicator
 Source0:	https://launchpad.net/libindicator/12.10/12.10.1/+download/%{name}-%{version}.tar.gz
@@ -25,7 +24,6 @@ likely to use.
 
 %package devel
 Summary:	Development files for %{name}
-Group:		Development/Libraries
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	pkgconfig
 
@@ -36,7 +34,6 @@ developing applications that use %{name}.
 
 %package tools
 Summary:	Shared functions for Ayatana indicators - Tools
-Group:		Development/Tools
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	pkgconfig
 
@@ -47,7 +44,6 @@ Ayatana indicators system.
 
 %package gtk3
 Summary:	GTK+3 build of %{name}
-Group:		System Environment/Libraries
 
 %description gtk3
 A set of symbols and convenience functions that all Ayatana indicators
@@ -57,7 +53,6 @@ by GTK+ 3 apps.
 
 %package gtk3-devel
 Summary:	Development files for %{name}-gtk3
-Group:		Development/Libraries
 
 Requires:	%{name}-gtk3%{?_isa} = %{version}-%{release}
 Requires:	pkgconfig
@@ -69,7 +64,6 @@ developing applications that use %{name}-gtk3.
 
 %package gtk3-tools
 Summary:	Shared functions for Ayatana indicators - GTK3 Tools
-Group:		Development/Tools
 
 Requires:	%{name}-gtk3%{?_isa} = %{version}-%{release}
 Requires:	pkgconfig
@@ -170,3 +164,6 @@ find %{buildroot} -type f -name '*.la' -delete
 %{_libexecdir}/indicator-loader3
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 12.10.1-6
+- Rebuild for new 4.0 release.
+

@@ -1,9 +1,8 @@
 Summary: Streaming library for IEEE1394
 Name: libiec61883
 Version: 1.1.0
-Release: 2
+Release: 3
 License: LGPL
-Group: Libraries
 Source: http://linux1394.org/dl/%{name}-%{version}.tar.gz
 Patch: libiec61883-1.1.0-installtests.patch
 URL: http://linux1394.org
@@ -25,7 +24,6 @@ down to isochronous packets, which are transmitted using libraw1394.
 
 %package devel
 Summary:  Development files for libiec61883
-Group:    Applications/Multimedia
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig, libraw1394-devel >= 1.2.1
 
@@ -34,7 +32,6 @@ Development files needed to build applications against libiec61883
 
 %package utils
 Summary:  Utilities for use with libiec61883
-Group:    Applications/Multimedia
 Requires: %{name} = %{version}-%{release}
 
 %description utils
@@ -55,7 +52,6 @@ rm -rf %{buildroot}
 make DESTDIR=%{buildroot} install
 rm $RPM_BUILD_ROOT%{_libdir}/libiec61883.a
 rm $RPM_BUILD_ROOT%{_libdir}/libiec61883.la
-rpmclean
 %clean
 rm -rf %{buildroot}
 
@@ -80,6 +76,9 @@ rm -rf %{buildroot}
 %{_mandir}/man1/*.1*
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.0-3
+- Rebuild for new 4.0 release.
+
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
 - first build, prepare for the new release.
 

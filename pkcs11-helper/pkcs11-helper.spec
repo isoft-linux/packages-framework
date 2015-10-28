@@ -1,9 +1,8 @@
 Name:           pkcs11-helper
 Version:        1.11
-Release:        6
+Release:        7
 Summary:        A library for using PKCS#11 providers
 
-Group:          System Environment/Libraries
 License:        GPLv2 or BSD
 URL:            http://www.opensc-project.org/opensc/wiki/pkcs11-helper
 Source0:        http://downloads.sourceforge.net/opensc/pkcs11-helper-%{version}.tar.bz2
@@ -24,7 +23,6 @@ using a simple API.
 
 %package        devel
 Summary:        Development files for pkcs11-helper
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       openssl-devel
 # for /usr/share/aclocal
@@ -77,3 +75,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.11-7
+- Rebuild for new 4.0 release.
+

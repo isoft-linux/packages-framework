@@ -2,10 +2,9 @@
 
 Name:           PyYAML
 Version:        3.11
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        YAML parser and emitter for Python
 
-Group:          Development/Libraries
 License:        MIT
 URL:            http://pyyaml.org/
 Source0:        http://pyyaml.org/download/pyyaml/%{name}-%{version}.tar.gz
@@ -43,7 +42,6 @@ configuration files to object serialization and persistance.
 %if 0%{?with_python3}
 %package -n python3-PyYAML
 Summary: YAML parser and emitter for Python
-Group: Development/Libraries
 
 %description -n python3-PyYAML
 YAML is a data serialization format designed for human readability and
@@ -123,3 +121,6 @@ popd
 
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.11-9
+- Rebuild for new 4.0 release.
+

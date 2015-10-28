@@ -1,8 +1,7 @@
 Name:           graphite2
 Version:        1.3.3
-Release:        1
+Release:        2
 Summary:        Font rendering capabilities for complex non-Roman writing systems
-Group:          Development/Tools
 
 License:        LGPLv2+ and (Netscape or GPLv2 or LGPLv2)
 URL:            http://sourceforge.net/projects/silgraphite/
@@ -28,7 +27,6 @@ system implementation.
 %package devel
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Summary: Files for developing with graphite2
-Group: Development/Libraries
 
 Obsoletes: silgraphite-devel < 2.3.1-5
 
@@ -68,5 +66,8 @@ ctest
 %{_libdir}/pkgconfig/graphite2.pc
 
 %changelog
+* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.3-2
+- Rebuild for new 4.0 release.
+
 * Fri Oct 09 2015 Cjacker <cjacker@foxmail.com>
 - update to 1.3.3
