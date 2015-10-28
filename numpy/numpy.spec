@@ -5,7 +5,7 @@
 
 Name:           numpy
 Version:        1.9.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Epoch:          1
 Summary:        A fast multidimensional array facility for Python
 
@@ -76,18 +76,15 @@ This package includes a version of f2py that works properly with NumPy.
 %prep
 %setup -q -n %{name}-%{version}%{?relc}
 
-# workaround for rhbz#849713
 # http://mail.scipy.org/pipermail/numpy-discussion/2012-July/063530.html
 rm numpy/distutils/command/__init__.py && touch numpy/distutils/command/__init__.py
 
 # Atlas 3.10 library names
-%if 0%{?fedora} >= 21
 cat >> site.cfg <<EOF
 [atlas]
 library_dirs = %{_libdir}/atlas
 atlas_libs = satlas
 EOF
-%endif
 
 %if 0%{?with_python3}
 rm -rf %{py3dir}
@@ -141,9 +138,6 @@ ln -s %{python_sitearch}/%{name}/core/include/numpy/ %{buildroot}/usr/include/nu
 %check
 pushd doc &> /dev/null
 PYTHONPATH="%{buildroot}%{python_sitearch}" %{__python} -c "import pkg_resources, numpy ; numpy.test()" \
-%ifarch s390 s390x
-|| :
-%endif
 # don't remove this comment
 popd &> /dev/null
 
@@ -151,12 +145,8 @@ popd &> /dev/null
 pushd doc &> /dev/null
 # there is no python3-nose yet
 PYTHONPATH="%{buildroot}%{python3_sitearch}" %{__python3} -c "import pkg_resources, numpy ; numpy.test()" \
-%ifarch s390 s390x
-|| :
-%endif
 # don't remove this comment
 popd &> /dev/null
-
 %endif # with_python3
 
 
@@ -215,6 +205,9 @@ popd &> /dev/null
 
 
 %changelog
+* Tue Oct 27 2015 Cjacker <cjacker@foxmail.com> - 1:1.9.2-4
+- Rebuild
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.9.2-3
 - Rebuild for new 4.0 release.
 

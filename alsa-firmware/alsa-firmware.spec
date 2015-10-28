@@ -5,7 +5,7 @@
 Summary:        Firmware for several ALSA-supported sound cards
 Name:           alsa-firmware
 Version:        1.0.29
-Release:        2%{?dist}
+Release:        3%{?dist}
 # See later in the spec for a breakdown of licensing
 License:        GPL+ and BSD and GPLv2+ and GPLv2 and LGPLv2+
 Group:          Applications/Multimedia
@@ -60,14 +60,6 @@ mv ca0132/creative.txt LICENSE.creative_txt
 
 %install
 make install DESTDIR=%{buildroot}
-
-
-rm -rf %{buildroot}/lib/firmware/ess/maestro3_assp_kernel.fw
-rm -rf %{buildroot}/lib/firmware/ess/maestro3_assp_minisrc.fw
-rm -rf %{buildroot}/lib/firmware/korg/k1212.dsp
-rm -rf %{buildroot}/lib/firmware/yamaha/ds1_ctrl.fw
-rm -rf %{buildroot}/lib/firmware/yamaha/ds1_dsp.fw
-rm -rf %{buildroot}/lib/firmware/yamaha/ds1e_ctrl.fw
 
 %files
 %doc COPYING README* LICENSE*
@@ -203,3 +195,6 @@ rm -rf %{buildroot}/lib/firmware/yamaha/ds1e_ctrl.fw
 
 
 %changelog
+* Tue Oct 27 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-3
+- Rebuild
+
