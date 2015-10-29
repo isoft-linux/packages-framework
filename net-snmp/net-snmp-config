@@ -13,7 +13,7 @@
 
 # Supported arches ix86 ia64 ppc ppc64 s390 s390x x86_64 alpha sparc sparc64
 
-arch=`arch`
+arch=`uname -m`
 echo $arch | grep -q i.86
 if [ $? -eq 0 ] ; then
     net-snmp-config-i386 $*

@@ -11,7 +11,7 @@
 Summary: A collection of SNMP protocol tools and libraries
 Name: net-snmp
 Version: 5.7.3
-Release: 6%{?dist}
+Release: 7%{?dist}
 Epoch: 1
 
 License: BSD
@@ -462,6 +462,10 @@ rm -rf ${RPM_BUILD_ROOT}
 
 
 %changelog
+* Thu Oct 29 2015 Cjacker <cjacker@foxmail.com> - 1:5.7.3-7
+- arch command provided by util-linux had been removed by upstream, use 'uname
+  -m' instead in net-snmp-config
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:5.7.3-6
 - Rebuild for new 4.0 release.
 
