@@ -65,6 +65,7 @@ BuildRequires: tcp_wrappers-devel
 %endif
 BuildRequires: autoconf, automake
 
+BuildRequires: gcc compiler-wrapper
 %description
 SNMP (Simple Network Management Protocol) is a protocol used for
 network management. The NET-SNMP project includes various SNMP tools:
@@ -191,8 +192,6 @@ rm testing/fulltests/default/T200*
 %endif
 
 %build
-export CC=cc
-export CXX=c++
 # Autoreconf to get autoconf 2.69 for ARM (#926223)
 autoreconf
 
