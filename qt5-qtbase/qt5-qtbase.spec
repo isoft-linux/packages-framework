@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 3 
+Release: 4 
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -36,7 +36,11 @@ Patch51: qtbase-opensource-src-5.5-disconnect_displays.patch
 
 Patch55: socket-readyread-stop-firing-BUG46552.patch
 
-Patch56: qtbase-do-not-exit-when-error-happened.patch
+# Followup https://codereview.qt-project.org/#/c/138201/ adapted for 5.5
+# XCB screen connection and disconnection bug fix
+Patch56: 138201.patch
+
+Patch57: qtbase-do-not-exit-when-error-happened.patch
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -117,13 +121,15 @@ developing applications that use %{name}.
 %prep
 %setup -q -n qtbase-opensource-src-%{version}
 
-%patch4 -p1 -b .QTBUG-35459
-%patch12 -p1 -b .enable_ft_lcdfilter
-%patch25 -p1 -b .qdbusconnection_no_debug
+%patch4 -p1 
+%patch12 -p1
+%patch25 -p1
 
 %patch51 -p1
 
 %patch56 -p1
+
+%patch57 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -271,6 +277,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Wed Oct 28 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-4
+- Add patch to fix xcb screen connect/disconnect issue
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-3
 - Rebuild for new 4.0 release.
 
