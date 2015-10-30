@@ -21,6 +21,9 @@ BuildRequires: libgpg-error-devel >= 1.8
 BuildRequires: pth-devel
 BuildRequires: libassuan-devel >= 2.0.2
 
+#make check
+BuildRequires: gnupg
+
 %define _with_gpg --with-gpg=%{_bindir}/gpg2
 Requires: gnupg2
 
