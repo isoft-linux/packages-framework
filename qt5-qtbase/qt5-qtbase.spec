@@ -81,13 +81,13 @@ BuildRequires: pkgconfig(libinput)
 BuildRequires: pkgconfig(xcb-xkb) >= 1.10
 BuildRequires: pkgconfig(xkbcommon) >= 0.4.1
 BuildRequires: pkgconfig(xkbcommon-x11) >= 0.4.1
-BuildRequires: libX11-devel libXext-devel libXi-devel libXrender-devel
 BuildRequires: pkgconfig(atspi-2)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gbm)
 BuildRequires: pkgconfig(glesv2)
 BuildRequires: pkgconfig(sqlite3) >= 3.7
+BuildRequires: pkgconfig(xkeyboard-config)
 
 BuildRequires: pkgconfig(harfbuzz) >= 0.9.31
 BuildRequires: pkgconfig(icu-i18n)
