@@ -1,11 +1,17 @@
+# we use gnupg v1 as default gpg
+
+%define default_to_gnupg2 0 
+
 Summary: Utility for secure communication and data storage
 Name:    gnupg2
-Version: 2.1.5
-Release: 3
+Version: 2.1.9
+Release: 8
 
 License: GPLv3+
 Source0: ftp://ftp.gnupg.org/gcrypt/%{?pre:alpha/}gnupg/gnupg-%{version}%{?pre}.tar.bz2
 Source1: ftp://ftp.gnupg.org/gcrypt/%{?pre:alpha/}gnupg/gnupg-%{version}%{?pre}.tar.bz2.sig
+
+Patch1:  gnupg-2.0.20-insttools.patch
 Patch3:  gnupg-2.0.20-secmem.patch
 # non-upstreamable patch adding file-is-digest option needed for Copr
 Patch4:  gnupg-2.1.3-file-is-digest.patch
@@ -31,7 +37,7 @@ BuildRequires: gnutls-devel
 
 Requires: pinentry
 
-%if 0%{?rhel} > 5
+%if %{default_to_gnupg2}
 # pgp-tools, perl-GnuPG-Interface requires 'gpg' (not sure why) -- Rex
 Provides: gpg = %{version}-%{release}
 # Obsolete GnuPG-1 package
@@ -67,6 +73,10 @@ to the base GnuPG package
 %prep
 %setup -q -n gnupg-%{version}
 
+%if %{default_to_gnupg2} 
+%patch1 -p1 -b .insttools
+%endif
+
 %patch3 -p1 -b .secmem
 %patch4 -p1 -b .file-is-digest
 %patch5 -p1 -b .keyusage
@@ -97,7 +107,7 @@ make %{?_smp_mflags}
 make install DESTDIR=%{buildroot} \
   INSTALL="install -p" 
 
-%if ! (0%{?rhel} > 5)
+%if ! %{default_to_gnupg2}
 # drop file conflicting with gnupg-1.x
 rm -f %{buildroot}%{_mandir}/man1/gpg-zip.1*
 # and rename another
@@ -105,6 +115,15 @@ rename gnupg.7 gnupg2.7 %{buildroot}%{_mandir}/man7/gnupg.7*
 %endif
 
 %find_lang %{name}
+
+%if %{default_to_gnupg2} 
+# compat symlinks
+ln -sf gpg2 %{buildroot}%{_bindir}/gpg
+ln -sf gpgv2 %{buildroot}%{_bindir}/gpgv
+ln -sf gpg2.1 %{buildroot}%{_mandir}/man1/gpg.1
+ln -sf gpgv2.1 %{buildroot}%{_mandir}/man1/gpgv.1
+ln -sf gnupg.7 %{buildroot}%{_mandir}/man7/gnupg2.7
+%endif
 
 # gpgconf.conf
 mkdir -p %{buildroot}%{_sysconfdir}/gnupg
@@ -134,7 +153,7 @@ make -k check
 %{_bindir}/g13
 %{_bindir}/dirmngr
 %{_bindir}/dirmngr-client
-%if 0%{?rhel} > 5
+%if %{default_to_gnupg2}
 %{_bindir}/gpg
 %{_bindir}/gpgv
 %{_bindir}/gpgsplit
@@ -161,8 +180,22 @@ make -k check
 %{_mandir}/man?/scdaemon*
 %{_datadir}/gnupg/com-certs.pem
 
-
 %changelog
+* Fri Oct 30 2015 Cjacker <cjacker@foxmail.com> - 2.1.9-8
+- Update
+
+* Fri Oct 30 2015 Cjacker <cjacker@foxmail.com>
+- Update
+
+* Fri Oct 30 2015 Cjacker <cjacker@foxmail.com>
+- Update
+
+* Fri Oct 30 2015 Cjacker <cjacker@foxmail.com>
+- Update
+
+* Fri Oct 30 2015 Cjacker <cjacker@foxmail.com>
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.1.5-3
 - Rebuild for new 4.0 release.
 
