@@ -14,9 +14,9 @@ BuildRequires: pkgconfig(libudev)
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
 #for qhelpgenerator
-BuildRequires: qt5-qttools
+BuildRequires: qt5-qttools-devel
 #for absolute path qdoc
-BuildRequires: qt5-qtbase
+BuildRequires: qt5-qtbase-devel
 
 
 %description
