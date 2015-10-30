@@ -66,12 +66,11 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 
 # unpackaged files
-rm -fv $RPM_BUILD_ROOT%{_infodir}/dir
 rm -fv $RPM_BUILD_ROOT%{_libdir}/lib*.la
 rm -rfv $RPM_BUILD_ROOT%{_datadir}/common-lisp/source/gpgme/
 
 #we do not ship info files
-rm -rf $RMP_BUILD_ROOT%{_infodir}
+rm -rf $RPM_BUILD_ROOT%{_infodir}
 
 %check 
 make check
