@@ -112,6 +112,7 @@ Base components of Qt
 %package devel
 Summary: Development files for %{name}
 Requires: %{name} = %{version}-%{release}
+Requires: pkgconfig(gl)
 Requires: pkgconfig(egl)
 
 %description devel
