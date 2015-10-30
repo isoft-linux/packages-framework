@@ -1,7 +1,7 @@
 Name:    gpgme
 Summary: GnuPG Made Easy - high level crypto API
-Version: 1.4.3
-Release: 7
+Version: 1.6.0
+Release: 8
 
 License: LGPLv2+
 URL:     http://www.gnupg.org/related_software/gpgme/
@@ -10,14 +10,8 @@ Source1: ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-%{version}.tar.bz2.sig
 
 Patch1: gpgme-1.3.2-config_extras.patch
 
-# gpgsm t-verify check/test hangs if using gnupg2 < 2.0.22
-# see http://bugs.g10code.com/gnupg/issue1493
-Patch2: gpgme-1.4.3-no_gpgsm_t-verify.patch
-
 # add -D_FILE_OFFSET_BITS... to gpgme-config, upstreamable
 Patch3:  gpgme-1.3.2-largefile.patch
-
-Patch4: gpgme-1.3.2-bufferoverflow.patch
 
 BuildRequires: gawk
 # see patch2 above, else we only need 2.0.4
@@ -50,11 +44,8 @@ Requires: libgpg-error-devel%{?_isa}
 
 %prep
 %setup -q
-
 %patch1 -p1 -b .config_extras
-#patch2 -p1 -b .no_gpgsm_t-verify
 %patch3 -p1 -b .largefile
-%patch4 -p1 -b .overflow
 
 ## HACK ALERT
 # The config script already suppresses the -L if it's /usr/lib, so cheat and
@@ -79,6 +70,8 @@ rm -fv $RPM_BUILD_ROOT%{_infodir}/dir
 rm -fv $RPM_BUILD_ROOT%{_libdir}/lib*.la
 rm -rfv $RPM_BUILD_ROOT%{_datadir}/common-lisp/source/gpgme/
 
+#we do not ship info files
+rm -rf $RMP_BUILD_ROOT%{_infodir}
 
 %check 
 make check
@@ -88,22 +81,22 @@ make check
 %postun -p /sbin/ldconfig
 
 %files
+%{_bindir}/gpgme-tool
 %{_libdir}/libgpgme.so.11*
 %{_libdir}/libgpgme-pthread.so.11*
 
 
 %files devel
 %{_bindir}/gpgme-config
-%ifarch %{multilib_arches}
-%{_bindir}/gpgme-config.%{_target_cpu}
-%{_includedir}/gpgme-%{__isa_bits}.h
-%endif
 %{_includedir}/gpgme.h
 %{_libdir}/libgpgme*.so
 %{_datadir}/aclocal/gpgme.m4
 
 
 %changelog
+* Fri Oct 30 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-8
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.3-7
 - Rebuild for new 4.0 release.
 
