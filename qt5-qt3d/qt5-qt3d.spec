@@ -17,9 +17,9 @@ BuildRequires: mesa-libGL-devel
 #for qhelpgenerator
 BuildRequires: qt5-qttools-devel
 #for absolute path qdoc
-BuildRequires: qt5-qtbase
+BuildRequires: qt5-qtbase-devel
 
-Requires:       qt5-qtimageformats >= %{version}
+Requires: qt5-qtimageformats >= %{version}
 
 
 %description
