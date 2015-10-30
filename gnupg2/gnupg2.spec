@@ -34,6 +34,8 @@ BuildRequires: npth-devel
 BuildRequires: readline-devel ncurses-devel
 BuildRequires: zlib-devel
 BuildRequires: gnutls-devel
+#for rename
+BuildRequires: util-linux
 
 Requires: pinentry
 
