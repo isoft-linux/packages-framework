@@ -103,6 +103,8 @@ BuildRequires: tslib-devel
 
 #wired but needed, if we want to build docs, we need qdoc in qt5-qtbase-devel
 #by Cjacker.
+
+#for absolute path qdoc
 BuildRequires: qt5-qtbase-devel
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
@@ -111,9 +113,7 @@ BuildRequires: qt5-qtbase-devel
 #then rebuild these two rpm package.
 
 #for qhelpgenerator
-BuildRequires: qt5-qttools
-#for absolute path qdoc
-BuildRequires: qt5-qtbase
+BuildRequires: qt5-qttools-devel
 
 %description
 Base components of Qt
