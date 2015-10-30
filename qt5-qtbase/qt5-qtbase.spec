@@ -59,13 +59,12 @@ BuildRequires: cmake
 BuildRequires: cups-devel
 BuildRequires: desktop-file-utils
 BuildRequires: findutils
-BuildRequires: libjpeg-devel
+BuildRequires: libjpeg-turbo-devel
 BuildRequires: libmng-devel
 BuildRequires: libtiff-devel
 
 BuildRequires: pkgconfig(libdrm)
 BuildRequires: pkgconfig(fontconfig)
-BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(glib-2.0)
 BuildRequires: pkgconfig(gtk+-2.0)
 # xcb-sm
@@ -82,8 +81,9 @@ BuildRequires: pkgconfig(libinput)
 BuildRequires: pkgconfig(xcb-xkb) >= 1.10
 BuildRequires: pkgconfig(xkbcommon) >= 0.4.1
 BuildRequires: pkgconfig(xkbcommon-x11) >= 0.4.1
-
+BuildRequires: libX11-devel libXext-devel libXi-devel libXrender-devel
 BuildRequires: pkgconfig(atspi-2)
+BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gbm)
 BuildRequires: pkgconfig(glesv2)
@@ -95,6 +95,8 @@ BuildRequires: pkgconfig(libpcre) >= 8.30
 
 BuildRequires: pkgconfig(xcb) pkgconfig(xcb-glx) pkgconfig(xcb-icccm) pkgconfig(xcb-image) pkgconfig(xcb-keysyms) pkgconfig(xcb-renderutil)
 BuildRequires: pkgconfig(zlib)
+
+BuildRequires: libproxy-devel
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build without doc and install it, then buld qttools without doc and install it, 
