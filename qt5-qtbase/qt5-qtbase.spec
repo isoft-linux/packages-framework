@@ -98,6 +98,13 @@ BuildRequires: pkgconfig(zlib)
 
 BuildRequires: libproxy-devel
 
+BuildRequires: mtdev-devel
+BuildRequires: tslib-devel
+
+#wired but needed, if we want to build docs, we need qdoc in qt5-qtbase-devel
+#by Cjacker.
+BuildRequires: qt5-qtbase-devel
+
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build without doc and install it, then buld qttools without doc and install it, 
 #we can generate docs.
