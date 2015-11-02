@@ -1,6 +1,6 @@
 Name:       ibus-qt
 Version:    1.3.3
-Release:    8
+Release:    9
 Summary:    Qt IBus library and Qt input method plugin
 License:    GPLv2+
 URL:        http://code.google.com/p/ibus/
@@ -66,6 +66,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_libdir}/libibus-qt.so
 
 %changelog
+* Sun Nov 01 2015 Cjacker <cjacker@foxmail.com> - 1.3.3-9
+- Rebuild with icu 56.1
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.3-8
 - Rebuild for new 4.0 release.
 

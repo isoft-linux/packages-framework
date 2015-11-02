@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 5 
+Release: 6 
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -287,6 +287,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Sun Nov 01 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-6
+- Rebuild with icu 56.1
+
 * Fri Oct 30 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-5
 - Fix Requires to pkgconfig(gl) of devel package
 

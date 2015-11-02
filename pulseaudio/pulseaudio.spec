@@ -1,6 +1,6 @@
 Name:           pulseaudio
 Summary:        Improved Linux Sound Server
-Version:        7.0 
+Version:        7.1
 Release:        3 
 License:        LGPLv2+
 

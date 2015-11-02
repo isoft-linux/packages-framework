@@ -1,6 +1,6 @@
 Name:           harfbuzz
 Version:        1.0.4
-Release:        5 
+Release:        6 
 Summary:        Text shaping library
 
 License:        MIT
@@ -81,6 +81,9 @@ make check ||:
 %{_libdir}/libharfbuzz-icu.so.*
 
 %changelog
+* Sun Nov 01 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-6
+- Rebuild with icu 56.1
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-5
 - Rebuild for new 4.0 release.
 
