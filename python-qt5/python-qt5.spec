@@ -53,7 +53,6 @@ BuildRequires: pkgconfig(Qt5WebChannel)
 BuildRequires: pkgconfig(Qt5WebKit) pkgconfig(Qt5WebKitWidgets)
 BuildRequires: pkgconfig(Qt5WebSockets)
 BuildRequires: pkgconfig(Qt5WebEngineCore) pkgconfig(Qt5WebEngine) pkgconfig(Qt5WebEngineWidgets) 
-BuildRequires: pkgconfig(glesv2) pkgconfig(gl) pkgconfig(glu)
 BuildRequires: python2-devel
 BuildRequires: sip-devel >= 4.16.8
 %if 0%{?with_python3}
