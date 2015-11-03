@@ -4,7 +4,7 @@
 
 Name:           crypto-policies
 Version:        %{git_date}
-Release:        1.git%{git_commit_hash}%{?dist}
+Release:        2.git%{git_commit_hash}%{?dist}
 Summary:        Crypto policies package for Fedora
 
 License:        LGPLv2+
@@ -14,7 +14,6 @@ URL:            https://github.com/nmav/fedora-crypto-policies
 # directory.
 Source0:        crypto-policies-git%{git_commit_hash}.tar.gz
 Source1:	config
-Patch0: crypto-policies-asciidoc-path.patch
 
 BuildArch: noarch
 BuildRequires: asciidoc
@@ -34,7 +33,6 @@ used by these back-ends unless the application user configures them otherwise.
 
 %prep
 %setup -q -n %{aname}
-%patch0 -p1
 
 %build
 make %{?_smp_mflags} update-crypto-policies.8
@@ -71,3 +69,6 @@ make check %{?_smp_mflags}
 %license COPYING.LESSER
 
 %changelog
+* Tue Nov 03 2015 Cjacker <cjacker@foxmail.com> - 20151005-2.gitc8452f8
+- Remove patch0, we change asciidoc path instead
+
