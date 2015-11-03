@@ -20,7 +20,7 @@ BuildRequires: asciidoc
 BuildRequires: libxslt
 BuildRequires: openssl
 BuildRequires: gnutls-utils
-
+BuildRequires: docbook-style-xsl
 # for shell script
 Requires(post): coreutils
 
