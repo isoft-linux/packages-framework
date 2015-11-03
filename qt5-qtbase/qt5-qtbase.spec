@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 9 
+Release: 8 
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -85,7 +85,8 @@ BuildRequires: pkgconfig(atspi-2)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gbm)
-#BuildRequires: pkgconfig(glesv2)
+#It's ok, even we requires gles, it's still link to GL by default.
+BuildRequires: pkgconfig(glesv2)
 BuildRequires: pkgconfig(sqlite3) >= 3.7
 BuildRequires: pkgconfig(xkeyboard-config)
 
@@ -288,10 +289,6 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
-* Tue Nov 03 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-9
-- Remove gles build requires, we still use GL not GLES, it will cause critical
-  crash problem
-
 * Tue Nov 03 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-8
 - Bump version
 
