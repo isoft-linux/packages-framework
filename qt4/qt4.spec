@@ -2,7 +2,7 @@
 Summary:  Qt toolkit
 Name:	  qt4
 Version:  4.8.7
-Release:  12
+Release:  13
 License:  GPL/QPL
 Url:   	  http://www.trolltech.com/products/qt/
 
@@ -76,13 +76,39 @@ BuildRequires: desktop-file-utils
 BuildRequires: findutils
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
-BuildRequires: libjpeg-devel
 BuildRequires: libpng-devel
 BuildRequires: libungif-devel
+BuildRequires: libjpeg-devel
+BuildRequires: libmng-devel
+BuildRequires: libtiff-devel
+BuildRequires: pkgconfig
+BuildRequires: libxml2-devel
+
 BuildRequires: zlib-devel
 BuildRequires: glib2-devel
 
 BuildRequires: sqlite-devel
+
+BuildRequires: pkgconfig(alsa)
+BuildRequires: pkgconfig(dbus-1)
+BuildRequires: pkgconfig(fontconfig)
+BuildRequires: pkgconfig(glib-2.0)
+BuildRequires: pkgconfig(icu-i18n)
+BuildRequires: pkgconfig(NetworkManager)
+BuildRequires: pkgconfig(openssl)
+BuildRequires: pkgconfig(libpulse)
+BuildRequires: pkgconfig(xtst)
+BuildRequires: pkgconfig(zlib)
+BuildRequires: rsync
+
+%define gl_deps pkgconfig(gl) pkgconfig(glu)
+%define x_deps pkgconfig(ice) pkgconfig(sm) pkgconfig(xcursor) pkgconfig(xext) pkgconfig(xfixes) pkgconfig(xft) pkgconfig(xi) pkgconfig(xinerama) pkgconfig(xrandr) pkgconfig(xrender) pkgconfig(xt) pkgconfig(xv) pkgconfig(x11) pkgconfig(xproto)
+BuildRequires: %{gl_deps}
+BuildRequires: %{x_deps}
+BuildRequires: pkgconfig(gstreamer-0.10)
+BuildRequires: pkgconfig(gstreamer-plugins-base-0.10)
+BuildRequires: pkgconfig(gtk+-2.0)
+
 
 Obsoletes: %{name}-config < %{version}-%{release}
 Provides:  %{name}-config = %{version}-%{release}
@@ -401,6 +427,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Nov 03 2015 Cjacker <cjacker@foxmail.com> - 4.8.7-13
+- Rebuild
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.8.7-12
 - Rebuild for new 4.0 release.
 
