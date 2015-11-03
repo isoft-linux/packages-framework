@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 6 
+Release: 7 
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -123,6 +123,7 @@ Summary: Development files for %{name}
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig(gl)
 Requires: pkgconfig(egl)
+Requires: pkgconfig(glesv2)
 
 %description devel
 The %{name}-devel package contains libraries and header files for
@@ -287,6 +288,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Tue Nov 03 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-7
+- Add more requires for devel package
+
 * Sun Nov 01 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-6
 - Rebuild with icu 56.1
 
