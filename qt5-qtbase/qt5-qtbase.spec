@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 8 
+Release: 9 
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -40,7 +40,10 @@ Patch55: socket-readyread-stop-firing-BUG46552.patch
 # XCB screen connection and disconnection bug fix
 Patch56: 138201.patch
 
-Patch57: qtbase-do-not-exit-when-error-happened.patch
+Patch57: qt5-qtbase-fix-chromium-and-other-application-dnd.patch
+
+Patch60: qtbase-do-not-exit-when-error-happened.patch
+
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -142,6 +145,8 @@ developing applications that use %{name}.
 %patch56 -p1
 
 %patch57 -p1
+
+%patch60 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -289,6 +294,10 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Wed Nov 04 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-9
+- Add patch to fix 'https://code.google.com/p/chromium/issues/detail?id=543940'
+- Now support Xdnd Text/URL from Qt5 to chromium/chrome/emacs etc. 
+
 * Tue Nov 03 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-8
 - Bump version
 
