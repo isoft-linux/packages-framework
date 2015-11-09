@@ -10,6 +10,7 @@ Source0: qtconnectivity-opensource-src-%{version}.tar.xz
 #QTBUG-48481
 Patch0: qtconnectivity-bluetooth-prevent-null.patch
 
+BuildRequires: qt5-qtdeclarative-devel
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: bluez-libs-devel
 
