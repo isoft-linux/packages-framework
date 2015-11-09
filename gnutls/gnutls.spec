@@ -161,7 +161,8 @@ rm -f src/libopts/*.c src/libopts/*.h src/libopts/compat/*.c src/libopts/compat/
            --disable-libdane \
 %endif
            --disable-rpath
-make %{?_smp_mflags} V=1
+#_smp_mflags not work?
+make V=1
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
