@@ -1,6 +1,6 @@
 Name:           accountsservice
 Version:        0.6.40
-Release:        3
+Release:        4
 Summary:        D-Bus interfaces for querying and manipulating user account information
 
 License:        GPLv3+
@@ -53,7 +53,7 @@ of these interfaces, based on the useradd, usermod and userdel commands.
 
 %prep
 %setup -q
-%patch0: -p1
+%patch0 -p1
 
 %build
 %configure
