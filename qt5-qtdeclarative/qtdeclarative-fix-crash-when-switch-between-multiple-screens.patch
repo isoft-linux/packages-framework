@@ -1,0 +1,34 @@
+Image: fix crash when switching between multiple screens
+
+When moving a Qt Quick application containing Image delegates in a view
+(e.g. ListView, GridView, etc.) between multiple screens, it's possible
+that the amount of visible delegates changes due to potential
+differences in the screens' sizes.
+For example, moving an application using the Window + left/right arrow
+keys on Windows causes the window to snap to the side of the screen.
+If one screen is smaller than the other, moving the application back
+and forth in this manner will cause some delegates to be destroyed, as
+they are no longer visible in the smaller screen.
+However, between receiving the Component.destruction signal in QML and
+being actually destroyed in C++, the Images may try to reload their
+pixmaps (when the cache property is set to false, for example). Since
+the views had (correctly) already hidden those delegates and hence
+they had no associated QQmlEngine, the load() function would crash
+because of the assumption that there was a valid engine.
+This patch checks that there is a valid QQmlEngine with which to load
+pixmaps before doing so.
+Change-Id: I8a3f0ec5220fddfd79758985c1eb2b55b0baae47
+Task-number: QTBUG-45991
+Reviewed-by: Gunnar Sletta <gunnar@sletta.org>
+Reviewed-by: Simon Hausmann <simon.hausmann@theqtcompany.com>
+--- qtdeclarative-opensource-src-5.5.1/src/quick/items/qquickimagebase.cpp	2015-10-13 12:37:48.000000000 +0800
++++ qtdeclarative-opensource-src-5.5.1n/src/quick/items/qquickimagebase.cpp	2015-11-07 11:34:27.212900015 +0800
+@@ -308,7 +308,7 @@
+ void QQuickImageBase::handleScreenChanged(QScreen* screen)
+ {
+     // Screen DPI might have changed, reload images on screen change.
+-    if (screen && isComponentComplete())
++    if (qmlEngine(this) && screen && isComponentComplete())
+         load();
+ }
+ 

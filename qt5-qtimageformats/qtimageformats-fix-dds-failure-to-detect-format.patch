@@ -1,0 +1,17 @@
+DDS: Bail out on failure to detect the format.
+
+Task-number: QTBUG-48851
+Change-Id: Iaf2c2b36539412a341edb721a135f36a97be4b83
+Reviewed-by: aavit <eirik.aavitsland@theqtcompany.com>
+diff -Nur qtimageformats-opensource-src-5.5.1/src/plugins/imageformats/dds/qddshandler.cpp qtimageformats-opensource-src-5.5.1n/src/plugins/imageformats/dds/qddshandler.cpp
+--- qtimageformats-opensource-src-5.5.1/src/plugins/imageformats/dds/qddshandler.cpp	2015-10-13 12:36:59.000000000 +0800
++++ qtimageformats-opensource-src-5.5.1n/src/plugins/imageformats/dds/qddshandler.cpp	2015-11-07 10:50:20.309947416 +0800
+@@ -1569,6 +1569,8 @@
+         return false;
+ 
+     that->m_format = getFormat(m_header);
++    if (that->m_format == FormatUnknown)
++        return false;
+ 
+     m_scanState = ScanSuccess;
+     return true;

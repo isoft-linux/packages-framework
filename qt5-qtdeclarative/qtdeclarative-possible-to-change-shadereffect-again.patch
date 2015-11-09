@@ -1,0 +1,132 @@
+Make it possible to change sources of ShaderEffect again.
+
+92433623b31388e2e8c4d532033dad6189eaab24 introduced a bug where
+an unused material would clear its typeid pointer. This resulted
+in that a changed shadereffect would in all likelyhood get the
+same pointer for its changed shader which would result in using
+the same GL shader inside the renderer.
+This change rewrites the logic so that the cache is per render
+thread and the cache is cleaned up along with other GL/SG resources
+as part of scene graph invalidation.
+Task-number: QTBUG-48856
+Change-Id: Id2feb14f584b5f5c176e8176cc9f1b54abd0d079
+Reviewed-by: Michael Brasser <michael.brasser@live.com>
+Reviewed-by: Robert Griebl <robert.griebl@pelagicore.com>
+diff -Nur qtdeclarative-opensource-src-5.5.1/src/quick/items/qquickshadereffectnode.cpp qtdeclarative-opensource-src-5.5.1n/src/quick/items/qquickshadereffectnode.cpp
+--- qtdeclarative-opensource-src-5.5.1/src/quick/items/qquickshadereffectnode.cpp	2015-10-19 07:10:18.000000000 +0800
++++ qtdeclarative-opensource-src-5.5.1n/src/quick/items/qquickshadereffectnode.cpp	2015-10-20 05:41:06.000000000 +0800
+@@ -348,11 +348,22 @@
+     return hash;
+ }
+ 
+-
+-typedef QHash<QQuickShaderEffectMaterialKey, QWeakPointer<QSGMaterialType> > MaterialHash;
+-
+-Q_GLOBAL_STATIC(MaterialHash, materialHash)
+-Q_GLOBAL_STATIC(QMutex, materialHashMutex)
++class QQuickShaderEffectMaterialCache : public QObject
++{
++    Q_OBJECT
++public:
++    static QQuickShaderEffectMaterialCache *get(bool create = true) {
++        QOpenGLContext *ctx = QOpenGLContext::currentContext();
++        QQuickShaderEffectMaterialCache *me = ctx->findChild<QQuickShaderEffectMaterialCache *>(QStringLiteral("__qt_ShaderEffectCache"), Qt::FindDirectChildrenOnly);
++        if (!me && create) {
++            me = new QQuickShaderEffectMaterialCache();
++            me->setObjectName(QStringLiteral("__qt_ShaderEffectCache"));
++            me->setParent(ctx);
++        }
++        return me;
++    }
++    QHash<QQuickShaderEffectMaterialKey, QSGMaterialType *> cache;
++};
+ 
+ QQuickShaderEffectMaterial::QQuickShaderEffectMaterial(QQuickShaderEffectNode *node)
+     : cullMode(NoCulling)
+@@ -365,7 +376,7 @@
+ 
+ QSGMaterialType *QQuickShaderEffectMaterial::type() const
+ {
+-    return m_type.data();
++    return m_type;
+ }
+ 
+ QSGMaterialShader *QQuickShaderEffectMaterial::createShader() const
+@@ -423,30 +434,23 @@
+ 
+ void QQuickShaderEffectMaterial::setProgramSource(const QQuickShaderEffectMaterialKey &source)
+ {
+-    QMutexLocker locker(materialHashMutex);
+-    Q_UNUSED(locker);
+-
+     m_source = source;
+     m_emittedLogChanged = false;
+-    QWeakPointer<QSGMaterialType> weakPtr = materialHash->value(m_source);
+-    m_type = weakPtr.toStrongRef();
+ 
+-    if (m_type.isNull()) {
+-        m_type = QSharedPointer<QSGMaterialType>(new QSGMaterialType);
+-        materialHash->insert(m_source, m_type.toWeakRef());
++    QQuickShaderEffectMaterialCache *cache = QQuickShaderEffectMaterialCache::get();
++    m_type = cache->cache.value(m_source);
++    if (!m_type) {
++        m_type = new QSGMaterialType();
++        cache->cache.insert(source, m_type);
+     }
+ }
+ 
+ void QQuickShaderEffectMaterial::cleanupMaterialCache()
+ {
+-    QMutexLocker locker(materialHashMutex);
+-    Q_UNUSED(locker);
+-
+-    for (MaterialHash::iterator it = materialHash->begin(); it != materialHash->end(); ) {
+-        if (!it.value().toStrongRef())
+-            it = materialHash->erase(it);
+-        else
+-            ++it;
++    QQuickShaderEffectMaterialCache *cache = QQuickShaderEffectMaterialCache::get(false);
++    if (cache) {
++        qDeleteAll(cache->cache.values());
++        delete cache;
+     }
+ }
+ 
+@@ -499,4 +503,6 @@
+     static_cast<QQuickShaderEffectMaterial *>(material())->updateTextures();
+ }
+ 
++#include "qquickshadereffectnode.moc"
++
+ QT_END_NAMESPACE
+diff -Nur qtdeclarative-opensource-src-5.5.1/src/quick/items/qquickshadereffectnode_p.h qtdeclarative-opensource-src-5.5.1n/src/quick/items/qquickshadereffectnode_p.h
+--- qtdeclarative-opensource-src-5.5.1/src/quick/items/qquickshadereffectnode_p.h	2015-10-19 07:10:18.000000000 +0800
++++ qtdeclarative-opensource-src-5.5.1n/src/quick/items/qquickshadereffectnode_p.h	2015-10-20 05:41:06.000000000 +0800
+@@ -62,7 +62,6 @@
+ 
+ uint qHash(const QQuickShaderEffectMaterialKey &key);
+ 
+-
+ class QQuickCustomMaterialShader;
+ class QQuickShaderEffectNode;
+ class Q_QUICK_PRIVATE_EXPORT QQuickShaderEffectMaterial : public QSGMaterial
+@@ -106,13 +105,12 @@
+ protected:
+     friend class QQuickCustomMaterialShader;
+ 
+-    // The type pointer needs to be unique. It is not safe to let the type object be part of the
+-    // QQuickShaderEffectMaterial, since it can be deleted and a new one constructed on top of the old
+-    // one. The new QQuickShaderEffectMaterial would then get the same type pointer as the old one, and
+-    // CustomMaterialShaders based on the old one would incorrectly be used together with the new
+-    // one. To guarantee that the type pointer is unique, the type object must live as long as
+-    // there are any CustomMaterialShaders of that type.
+-    QSharedPointer<QSGMaterialType> m_type;
++    // Each material needs a unique type to ensure that the renderer has a one
++    // and exactly one GL program for every unique set of shader sources.
++    // setProgramSource() stores the sources in a cache along with the right
++    // type. The type is cleaned up in cleanupMaterialCache() which is called
++    // when the GL context is shut down.
++    QSGMaterialType *m_type;
+     QQuickShaderEffectMaterialKey m_source;
+ 
+     QQuickShaderEffectNode *m_node;

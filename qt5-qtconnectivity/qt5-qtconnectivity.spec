@@ -1,12 +1,14 @@
 Name: qt5-qtconnectivity 
 Version: 5.5.1
-Release: 3 
+Release: 4 
 Summary: Connectivity Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
 
 URL: http://qt-project.org 
 Source0: qtconnectivity-opensource-src-%{version}.tar.xz 
+#QTBUG-48481
+Patch0: qtconnectivity-bluetooth-prevent-null.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: bluez-libs-devel
@@ -14,9 +16,9 @@ BuildRequires: bluez-libs-devel
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
 #for qhelpgenerator
-BuildRequires: qt5-qttools-devel
+BuildRequires: qt5-qttools
 #for absolute path qdoc
-BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtbase
 
 
 %description
@@ -33,6 +35,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtconnectivity-opensource-src-%{version}
+%patch0 -p1
 
 %build
 qmake-qt5
@@ -96,6 +99,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Sat Nov 07 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-4
+- fix QTBUG 48481
+
 * Sat Oct 24 2015 builder - 5.5.1-3
 - Rebuild for new 4.0 release.
 

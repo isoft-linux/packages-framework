@@ -1,0 +1,32 @@
+QQuickItem: detect loop in KeyNavigation chain
+
+Task-number: QTBUG-47229
+Change-Id: I22dbe5ee1fff4e9a8de4fa69b43e4d9a87677192
+Reviewed-by: J-P Nurmi <jpnurmi@theqtcompany.com>
+diff -Nur qtdeclarative-opensource-src-5.5.1/src/quick/items/qquickitem.cpp qtdeclarative-opensource-src-5.5.1n/src/quick/items/qquickitem.cpp
+--- qtdeclarative-opensource-src-5.5.1/src/quick/items/qquickitem.cpp	2015-10-13 12:37:47.000000000 +0800
++++ qtdeclarative-opensource-src-5.5.1n/src/quick/items/qquickitem.cpp	2015-11-07 11:05:11.452931457 +0800
+@@ -724,6 +724,7 @@
+ {
+     QQuickItem *initialItem = currentItem;
+     bool isNextItem = false;
++    QVector<QQuickItem *> visitedItems;
+     do {
+         isNextItem = false;
+         if (currentItem->isVisible() && currentItem->isEnabled()) {
+@@ -734,13 +735,14 @@
+             if (attached) {
+                 QQuickItem *tempItem = qvariant_cast<QQuickItem*>(attached->property(dir));
+                 if (tempItem) {
++                    visitedItems.append(currentItem);
+                     currentItem = tempItem;
+                     isNextItem = true;
+                 }
+             }
+         }
+     }
+-    while (currentItem != initialItem && isNextItem);
++    while (currentItem != initialItem && isNextItem && !visitedItems.contains(currentItem));
+ }
+ 
+ struct SigMap {

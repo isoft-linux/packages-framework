@@ -1,0 +1,16 @@
+diff -Nur qtquickcontrols-opensource-src-5.5.1/src/controls/Private/qquickrangemodel_p_p.h qtquickcontrols-opensource-src-5.5.1n/src/controls/Private/qquickrangemodel_p_p.h
+--- qtquickcontrols-opensource-src-5.5.1/src/controls/Private/qquickrangemodel_p_p.h	2015-11-07 10:30:40.020968553 +0800
++++ qtquickcontrols-opensource-src-5.5.1n/src/controls/Private/qquickrangemodel_p_p.h	2015-11-07 10:30:16.590968972 +0800
+@@ -93,7 +93,11 @@
+             return minimum;
+ 
+         const qreal scale = (maximum - minimum) / posRange;
+-        return (pos - effectivePosAtMin()) * scale + minimum;
++        // Avoid perverse rounding glitches when at an end:
++        const qreal mid = (effectivePosAtMax() + effectivePosAtMin()) * 0.5;
++        if (pos < mid)
++            return (pos - effectivePosAtMin()) * scale + minimum;
++        return maximum - scale * (effectivePosAtMax() - pos);
+     }
+ 
+     qreal publicPosition(qreal position) const;
