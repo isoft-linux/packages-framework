@@ -10,14 +10,13 @@ Source0: qtquickcontrols-opensource-src-%{version}.tar.xz
 Patch0: qtquickcontrols-Avoid_real_rounding_glitches_near_ends_of_slider_range-qtbug-42358.patch
 Patch1: qtquickcontrols-manually-edit-to-fix-broken-inheritance-qtbug-49189.patch
 
-BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtdeclarative-devel >= %{version}
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
 #for qhelpgenerator
-BuildRequires: qt5-qttools
+BuildRequires: qt5-qttools-devel
 #for absolute path qdoc
-BuildRequires: qt5-qtbase
+BuildRequires: qt5-qtbase-devel
 
 
 
