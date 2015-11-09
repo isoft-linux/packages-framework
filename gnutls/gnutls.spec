@@ -3,7 +3,7 @@
 Summary: A TLS protocol implementation
 Name: gnutls
 Version: 3.4.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 # The libraries are LGPLv2.1+, utilities are GPLv3+
 License: GPLv3+ and LGPLv2+
 BuildRequires: p11-kit-devel >= 0.21.3, gettext-devel
@@ -259,6 +259,9 @@ fi
 %endif
 
 %changelog
+* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 3.4.6-3
+- Rebuild
+
 * Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 3.4.6-2
 - Remove Group from spec
 
