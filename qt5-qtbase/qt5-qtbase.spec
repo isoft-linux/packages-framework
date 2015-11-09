@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 9 
+Release: 10 
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -19,29 +19,34 @@ Source10: qt5.macros
 Source20: qt5-path.sh
 
 # fix QTBUG-35459 (too low entityCharacterLimit=1024 for CVE-2013-4549)
-Patch4: qtbase-opensource-src-5.3.2-QTBUG-35459.patch
+Patch1: qtbase-opensource-src-5.3.2-QTBUG-35459.patch
 
 # unconditionally enable freetype lcdfilter support
-Patch12: qtbase-opensource-src-5.2.0-enable_ft_lcdfilter.patch
-
+Patch2: qtbase-opensource-src-5.2.0-enable_ft_lcdfilter.patch
 
 # hack out largely useless (to users) warnings about qdbusconnection
 # (often in kde apps), keep an eye on https://git.reviewboard.kde.org/r/103699/
-Patch25: qtbase-opensource-src-5.5.1-qdbusconnection_no_debug.patch
+Patch3: qtbase-opensource-src-5.5.1-qdbusconnection_no_debug.patch
 
 # Qt5 application crashes when connecting/disconnecting displays
 # https://bugzilla.redhat.com/show_bug.cgi?id=1083664
-Patch51: qtbase-opensource-src-5.5-disconnect_displays.patch
-
-
-Patch55: socket-readyread-stop-firing-BUG46552.patch
+Patch10: qtbase-opensource-src-5.5-disconnect_displays.patch
 
 # Followup https://codereview.qt-project.org/#/c/138201/ adapted for 5.5
 # XCB screen connection and disconnection bug fix
-Patch56: 138201.patch
+Patch11: 138201.patch
 
-Patch57: qt5-qtbase-fix-chromium-and-other-application-dnd.patch
+#Already upstream, will be in 5.5.2
+#https://bugreports.qt.io/browse/QTBUG-48350
+Patch13: qtbase-fix-comparison-qbytearray-and-qstring.patch
+Patch14: qtbase-fix-qlinedit-visibility-handling-of-side-widgets.patch
+Patch15: qtbase-fix_reuse_address_problem_qtbug-47011.patch
+Patch16: qtbase-report-correct-networkaccessibility-qtbug-46323.patch
 
+#Already reported, https://bugreports.qt.io/browse/QTBUG-45812
+Patch30: qt5-qtbase-fix-chromium-and-other-application-dnd.patch
+
+#Wrong, but we do that!!
 Patch60: qtbase-do-not-exit-when-error-happened.patch
 
 
@@ -136,15 +141,18 @@ developing applications that use %{name}.
 %prep
 %setup -q -n qtbase-opensource-src-%{version}
 
-%patch4 -p1 
-%patch12 -p1
-%patch25 -p1
+%patch1 -p1 
+%patch2 -p1
+%patch3 -p1
 
-%patch51 -p1
+%patch10 -p1
+%patch11 -p1
 
-%patch56 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
 
-%patch57 -p1
+%patch30 -p1
 
 %patch60 -p1
 
@@ -294,6 +302,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Sat Nov 07 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-10
+- add patches, fix QTBUG-48350, QTBUG-48806, QTBUG-48899, QTBUG-39660, QTBUG-47011, QTBUG-46323
+
 * Wed Nov 04 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-9
 - Add patch to fix 'https://code.google.com/p/chromium/issues/detail?id=543940'
 - Now support Xdnd Text/URL from Qt5 to chromium/chrome/emacs etc. 
