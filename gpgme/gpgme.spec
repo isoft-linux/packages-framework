@@ -1,7 +1,7 @@
 Name:    gpgme
 Summary: GnuPG Made Easy - high level crypto API
 Version: 1.6.0
-Release: 8
+Release: 9
 
 License: LGPLv2+
 URL:     http://www.gnupg.org/related_software/gpgme/
@@ -96,6 +96,9 @@ make check
 
 
 %changelog
+* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-9
+- Rebuild
+
 * Fri Oct 30 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-8
 - Update
 
