@@ -1,0 +1,9 @@
+--- testtools-1.8.0/testtools/__init__.py.old_pbr	2015-05-05 05:47:42.000000000 +0700
++++ testtools-1.8.0/testtools/__init__.py	2015-07-28 23:41:39.881267500 +0700
+@@ -123,5 +123,5 @@
+ # Otherwise it is major.minor.micro~$(revno).
+ from pbr.version import VersionInfo
+ _version = VersionInfo('testtools')
+-__version__ = _version.semantic_version().version_tuple()
+ version = _version.release_string()
++__version__ = tuple(version.split('.') + ['final', 0])
