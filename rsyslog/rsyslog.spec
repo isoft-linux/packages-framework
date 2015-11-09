@@ -4,7 +4,7 @@
 
 Summary: Enhanced system logging and kernel message trapping daemon
 Name: rsyslog
-Version: 8.10.0
+Version: 8.14.0
 Release: 2%{?dist}
 License: (GPLv3+ and ASL 2.0)
 URL: http://www.rsyslog.com/
@@ -17,13 +17,6 @@ Source4: rsyslog.log
 Patch0: rsyslog-8.8.0-sd-service.patch
 # prevent modification of trusted properties (proposed upstream)
 Patch1: rsyslog-8.8.0-immutable-json-props.patch
-Patch2: rsyslog-8.8.0-missing-test-data.patch
-# https://github.com/rsyslog/rsyslog/pull/412
-Patch3: rsyslog-8.10.0-imjournal-empty-messages.patch
-# https://github.com/rsyslog/rsyslog/pull/413
-Patch4: rsyslog-8.10.0-resetconfigvariables.patch
-# https://github.com/rsyslog/rsyslog/pull/391
-Patch5: rsyslog-8.10.0-imfile-maxlinesatonce.patch
 
 BuildRequires: bison
 BuildRequires: dos2unix
@@ -34,7 +27,7 @@ BuildRequires: liblogging-stdlog-devel
 BuildRequires: libuuid-devel
 BuildRequires: pkgconfig
 BuildRequires: python-docutils
-# make sure systemd is in a version that isn't affected by rhbz#974132
+# make sure systemd version as we needed
 BuildRequires: systemd-devel >= 204-8
 BuildRequires: zlib-devel
 
@@ -65,10 +58,6 @@ mv build doc
 %setup -q -D
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %build
 %ifarch sparc64
@@ -117,6 +106,7 @@ export LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now"
 	--disable-relp \
 	--disable-snmp \
 	--disable-testbench \
+        --disable-libgcrypt \
 	--enable-unlimited-select \
 	--enable-usertools \
 
@@ -192,8 +182,6 @@ done
 %{_libdir}/rsyslog/imjournal.so
 %{_libdir}/rsyslog/imklog.so
 %{_libdir}/rsyslog/immark.so
-#%{_libdir}/rsyslog/impstats.so
-#%{_libdir}/rsyslog/imptcp.so
 %{_libdir}/rsyslog/imtcp.so
 %{_libdir}/rsyslog/imudp.so
 %{_libdir}/rsyslog/imuxsock.so
@@ -205,21 +193,20 @@ done
 %{_libdir}/rsyslog/lmtcpclt.so
 %{_libdir}/rsyslog/lmtcpsrv.so
 %{_libdir}/rsyslog/lmzlibw.so
-#%{_libdir}/rsyslog/mmanon.so
-#%{_libdir}/rsyslog/mmcount.so
 %{_libdir}/rsyslog/mmexternal.so
 %{_libdir}/rsyslog/omjournal.so
-#%{_libdir}/rsyslog/ommail.so
 %{_libdir}/rsyslog/omprog.so
 %{_libdir}/rsyslog/omstdout.so
 %{_libdir}/rsyslog/omtesting.so
-#%{_libdir}/rsyslog/omuxsock.so
 %{_libdir}/rsyslog/pmaixforwardedfrom.so
 %{_libdir}/rsyslog/pmcisconames.so
 %{_libdir}/rsyslog/pmlastmsg.so
 %{_libdir}/rsyslog/pmsnare.so
 
 %changelog
+* Sat Nov 07 2015 Cjacker <cjacker@foxmail.com> - 8.14.0-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 8.10.0-2
 - Rebuild for new 4.0 release.
 
