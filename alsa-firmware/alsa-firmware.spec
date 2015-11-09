@@ -5,7 +5,7 @@
 Summary:        Firmware for several ALSA-supported sound cards
 Name:           alsa-firmware
 Version:        1.0.29
-Release:        3%{?dist}
+Release:        4%{?dist}
 # See later in the spec for a breakdown of licensing
 License:        GPL+ and BSD and GPLv2+ and GPLv2 and LGPLv2+
 URL:            http://www.alsa-project.org/
@@ -194,6 +194,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-4
+- Remove Group from spec
+
 * Tue Oct 27 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-3
 - Rebuild
 

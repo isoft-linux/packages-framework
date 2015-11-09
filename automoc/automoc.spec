@@ -7,9 +7,8 @@
 
 Name:           automoc
 Version:        1.0
-Release:        0.25.%{?beta_tag}%{?dist}
+Release:        0.26.%{?beta_tag}%{?dist}
 Summary:        Automatic moc for Qt 4
-Group:          Development/Tools
 License:        BSD
 URL:            http://www.kde.org
 Source0:        ftp://ftp.kde.org/pub/kde/stable/automoc4/%{beta}/automoc4-%{beta}.tar.bz2
@@ -91,6 +90,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 1.0-0.26.rc3
+- Remove Group from spec
+
 * Wed Oct 21 2015 Cjacker <cjacker@foxmail.com> - 1.0-0.25.rc3
 - Update
 

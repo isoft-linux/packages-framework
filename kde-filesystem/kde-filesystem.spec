@@ -19,9 +19,8 @@
 Summary: KDE filesystem layout
 Name: kde-filesystem
 Version: 4
-Release: 52%{?dist}
+Release: 53%{?dist}
 
-Group: System Environment/Base
 License: Public Domain
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -185,3 +184,6 @@ rm -rf $RPM_BUILD_ROOT %{name}.list
 
 
 %changelog
+* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 4-53
+- Remove Group from spec
+

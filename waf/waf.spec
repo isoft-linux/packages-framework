@@ -9,9 +9,8 @@
 
 Name:           waf
 Version:        1.8.14
-Release:        %{?prerel:0.}1%{?prerel:.%prerel}%{?dist}.1
+Release:        %{?prerel:0.}1%{?prerel:.%prerel}%{?dist}.2
 Summary:        A Python-based build system
-Group:          Development/Tools
 # The entire source code is BSD apart from pproc.py (taken from Python 2.5)
 License:        BSD and Python
 URL:            https://github.com/waf-project/waf
@@ -197,6 +196,9 @@ rm -f docs/sphinx/build/html/.buildinfo
 
 
 %changelog
+* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 1.8.14-1.2
+- Remove Group from spec
+
 * Sun Oct 25 2015 Cjacker <cjacker@foxmail.com> - 1.8.14-1.1
 - Rebuild for new 4.0 release
 

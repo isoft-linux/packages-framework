@@ -8,13 +8,12 @@
 Name:		Cython
 Version:	0.23
 ##Release:	4.b3%{?dist}
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	A language for writing Python extension modules
 
 %define upstreamversion %{version}
 ##%%define upstreamversion %{version}b3
 
-Group:		Development/Tools
 License:	Python
 URL:		http://www.cython.org
 Source:		http://www.cython.org/release/Cython-%{upstreamversion}.tar.gz
@@ -44,7 +43,6 @@ For more info, see:
 %if 0%{?with_python3}
 %package -n python3-Cython
 Summary:	A language for writing Python extension modules
-Group:		Development/Tools
 
 %description -n python3-Cython
 This is a development version of Pyrex, a language
@@ -132,6 +130,9 @@ popd
 
 
 %changelog
+* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 0.23-3
+- Remove Group from spec
+
 * Sun Oct 25 2015 cjacker - 0.23-2
 - Rebuild for new 4.0 release
 
