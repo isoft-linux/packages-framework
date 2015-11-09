@@ -2,7 +2,7 @@
 
 Name:           python-keyring
 Version:        5.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python 2 library to store and access passwords safely
 License:        MIT and Python
 URL:            http://bitbucket.org/kang/python-keyring-lib/
@@ -117,3 +117,6 @@ popd
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 5.0-3
+- Rebuild with python 3.5
+

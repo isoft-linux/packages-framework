@@ -11,7 +11,7 @@
 Summary: A Scintilla port to Qt
 Name:    qscintilla
 Version: 2.9
-Release: 5%{?dist}
+Release: 6%{?dist}
 
 License: GPLv3
 Url:     http://www.riverbankcomputing.com/software/qscintilla/
@@ -313,6 +313,9 @@ test -x %{buildroot}%{python2_sitearch}/PyQt4/Qsci.so
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.9-6
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.9-5
 - Rebuild for new 4.0 release.
 

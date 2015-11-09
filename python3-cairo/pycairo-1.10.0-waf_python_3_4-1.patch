@@ -1,5 +1,13 @@
---- .waf3-1.6.4-e3c1e08604b18a10567cfcd2d02eb6e6/waflib/Tools/python.py.orig	2014-05-12 12:36:46.776004776 +0200
-+++ .waf3-1.6.4-e3c1e08604b18a10567cfcd2d02eb6e6/waflib/Tools/python.py	2014-05-12 12:36:53.994995779 +0200
+Submitted by:            Wayne Blaszczyk (wblaszcz at bigpond dot net dot au)
+Date:                    2014-03-27
+Initial Package Version: 1.10.0
+Upstream Status:         unknown
+Origin:                  Gentoo
+URL:                     https://bugs.gentoo.org/show_bug.cgi?id=504342
+Description:             Fix build with Python-3.4
+
+--- a/waflib/Tools/python.py
++++ b/waflib/Tools/python.py
 @@ -169,7 +169,7 @@
  		conf.find_program('python-config-%s'%num,var='PYTHON_CONFIG',mandatory=False)
  	includes=[]

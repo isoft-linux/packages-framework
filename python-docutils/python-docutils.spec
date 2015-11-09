@@ -4,7 +4,7 @@
 
 Name:           python-%{srcname}
 Version:        0.12
-Release:        0.4.20140510svn7747%{?dist}
+Release:        0.5.20140510svn7747%{?dist}
 Summary:        System for processing plaintext documentation
 
 # See COPYING.txt for information
@@ -152,6 +152,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.12-0.5.20140510svn7747
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.12-0.4.20140510svn7747
 - Rebuild for new 4.0 release.
 

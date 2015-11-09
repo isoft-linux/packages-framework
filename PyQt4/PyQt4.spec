@@ -16,7 +16,7 @@
 Summary: Python bindings for Qt4
 Name: 	 PyQt4
 Version: 4.11.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 # GPLv2 exceptions(see GPL_EXCEPTIONS*.txt)
 License: (GPLv3 or GPLv2 with exceptions) and BSD
@@ -359,6 +359,9 @@ diff -u ./sip/QtGui/opengl_types.sip.orig \
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 4.11.4-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.11.4-3
 - Rebuild for new 4.0 release.
 

@@ -8,7 +8,7 @@
 
 Name:           python-werkzeug
 Version:        0.9.6
-Release:        3
+Release:        4
 Summary:        The Swiss Army knife of Python web development 
 
 License:        BSD
@@ -155,6 +155,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.9.6-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.6-3
 - Rebuild for new 4.0 release.
 

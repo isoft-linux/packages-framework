@@ -2,7 +2,7 @@
 
 Name:           python-smmap
 Version:        0.9.0
-Release:        3
+Release:        4
 Summary:        Sliding window memory map manager
 
 License:        BSD
@@ -79,6 +79,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.9.0-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.0-3
 - Rebuild for new 4.0 release.
 

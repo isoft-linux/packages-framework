@@ -3,8 +3,8 @@
 
 Name:		python-%{modulename}
 Summary:	A python based HTML parser/tokenizer
-Version:	0.999
-Release:	7
+Version:        0.9999999 
+Release:	8
 Epoch:		1
 License:	MIT
 URL:		https://pypi.python.org/pypi/%{modulename}
@@ -90,6 +90,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1:0.999-8
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:0.999-7
 - Rebuild for new 4.0 release.
 

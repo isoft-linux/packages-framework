@@ -5,7 +5,7 @@
 
 Name:           python-iniparse
 Version:        0.4
-Release:        16
+Release:        17
 Summary:        Python Module for Accessing and Modifying Configuration Data in INI files
 License:        MIT and Python
 URL:            http://code.google.com/p/iniparse/
@@ -95,11 +95,11 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/python3-iniparse/LICENSE*
 rm -rf $RPM_BUILD_ROOT
 
 %check
-#%{__python2} runtests.py
+%{__python2} runtests.py
 
 %if 0%{?with_python3}
 pushd %{py3dir}
-#%{__python3} runtests.py
+%{__python3} runtests.py
 popd
 %endif
 
@@ -121,6 +121,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.4-17
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4-16
 - Rebuild for new 4.0 release.
 

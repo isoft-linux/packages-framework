@@ -2,7 +2,7 @@
 
 Name:           python-cryptography
 Version:        0.8.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        PyCA's cryptography library
 
 License:        ASL 2.0 or BSD
@@ -116,6 +116,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.8.2-3
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.2-2
 - Rebuild for new 4.0 release.
 

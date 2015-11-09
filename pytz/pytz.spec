@@ -1,25 +1,23 @@
 %global with_python3 1
 
 Name:           pytz
-Version:        2012d
-Release:        9%{?dist}
+Version:        2015.7
+Release:        2%{?dist}
 Summary:        World Timezone Definitions for Python
 
 License:        MIT
 URL:            http://pytz.sourceforge.net/
 Source0:        http://pypi.python.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
-Patch0:         pytz-2012d_zoneinfo.patch
+# Patch to use the system supplied zoneinfo files
+Patch0:         pytz-zoneinfo.patch
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
-
-%if 0%{?with_python3}
-BuildRequires:  python3-devel
-%endif
-
-Requires: tzdata
+BuildRequires:  pytest
+Requires:       tzdata
+Provides:       python2-pytz = %{version}-%{release}
 
 %description
 pytz brings the Olson tz database into Python. This library allows accurate
@@ -28,12 +26,15 @@ also solves the issue of ambiguous times at the end of daylight savings,
 which you can read more about in the Python Library Reference
 (datetime.tzinfo).
 
-Amost all (over 540) of the Olson timezones are supported.
+Almost all (over 540) of the Olson timezones are supported.
 
 %if 0%{?with_python3}
 %package -n python3-%{name}
-Requires:   python3
-Summary:    World Timezone Definitions for Python
+Summary:        World Timezone Definitions for Python
+BuildArch:      noarch
+BuildRequires:  python3-devel
+BuildRequires:  python3-pytest
+Requires:       tzdata
 
 %description -n python3-%{name}
 pytz brings the Olson tz database into Python. This library allows accurate
@@ -42,37 +43,37 @@ also solves the issue of ambiguous times at the end of daylight savings,
 which you can read more about in the Python Library Reference
 (datetime.tzinfo).
 
-Amost all (over 540) of the Olson timezones are supported.
+Almost all (over 540) of the Olson timezones are supported.
 %endif
 
 %prep
 %setup -q
-%patch0 -p0
+%patch0 -p1 -b .zoneinfo
 
-%if 0%{?with_python3}
-cp -a . %{py3dir}
-%endif
 
 %build
 %{__python} setup.py build
 %if 0%{?with_python3}
-pushd %{py3dir}
 %{__python3} setup.py build
-popd
 %endif # with_python3
-
 
 
 %install
 %{__python} setup.py install --skip-build --root %{buildroot}
-chmod +x %{buildroot}%{python_sitelib}/pytz/*.py
-rm -rf  %{buildroot}%{python_sitelib}/pytz/zoneinfo
+chmod +x %{buildroot}%{python2_sitelib}/pytz/*.py
+rm -r %{buildroot}%{python2_sitelib}/pytz/zoneinfo
 
 %if 0%{?with_python3}
-pushd %{py3dir}
 %{__python3} setup.py install --skip-build --root %{buildroot}
-popd
+rm -r %{buildroot}%{python3_sitelib}/pytz/zoneinfo
 %endif # with_python3
+
+
+%check
+PYTHONPATH=%{buildroot}%{python2_sitelib} py.test-%{python2_version} -v
+%if 0%{?with_python3}
+PYTHONPATH=%{buildroot}%{python2_sitelib} py.test-%{python3_version} -v
+%endif
 
 
 %clean
@@ -80,10 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root,-)
 %doc CHANGES.txt LICENSE.txt README.txt
-%{python_sitelib}/pytz/
-%{python_sitelib}/*.egg-info
+%{python2_sitelib}/pytz/
+%{python2_sitelib}/*.egg-info
 
 %if 0%{?with_python3}
 %files -n python3-pytz
@@ -94,6 +94,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2012d-9
-- Rebuild for new 4.0 release.
+* Fri Nov 06 2015 Cjacker <cjacker@foxmail.com> - 2015.7-2
+- Update
 

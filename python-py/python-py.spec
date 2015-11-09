@@ -9,7 +9,7 @@
 
 Name:           python-py
 Version:        1.4.29
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Library with cross-python path, ini-parsing, io, code, log facilities
 License:        MIT and Public Domain
 #               main package: MIT, except: doc/style.css: Public Domain
@@ -164,6 +164,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.4.29-3
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.29-2
 - Rebuild for new 4.0 release.
 

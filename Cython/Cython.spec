@@ -130,8 +130,8 @@ popd
 
 
 %changelog
-* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 0.23-3
-- Remove Group from spec
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.23-3
+- Rebuild with python 3.5
 
 * Sun Oct 25 2015 cjacker - 0.23-2
 - Rebuild for new 4.0 release

@@ -5,7 +5,7 @@
 
 Name:           numpy
 Version:        1.9.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 Epoch:          1
 Summary:        A fast multidimensional array facility for Python
 
@@ -205,6 +205,9 @@ popd &> /dev/null
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1:1.9.2-5
+- Rebuild with python 3.5
+
 * Tue Oct 27 2015 Cjacker <cjacker@foxmail.com> - 1:1.9.2-4
 - Rebuild
 

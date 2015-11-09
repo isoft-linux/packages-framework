@@ -1,8 +1,8 @@
-%global with_python3 1
+%global with_python3 0 
 
 Name:           python-enum34
 Version:        1.0.4
-Release:        3
+Release:        4
 Summary:        Backport of Python 3.4 Enum
 License:        BSD
 BuildArch:      noarch
@@ -96,6 +96,9 @@ rm -rf %{buildroot}%{python2_sitelib}/enum/{LICENSE,README,doc}
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-3
 - Rebuild for new 4.0 release.
 

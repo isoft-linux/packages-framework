@@ -6,7 +6,7 @@
 
 Name:           python-markdown
 Version:        2.6.2
-Release:        3
+Release:        4
 Summary:        Markdown implementation in Python
 License:        BSD
 URL:            https://pythonhosted.org/%{srcname}/
@@ -136,6 +136,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.6.2-4
+- Rebuild with python 3.5
+
 * Mon Oct 26 2015 Cjacker <cjacker@foxmail.com> - 2.6.2-3
 - Rebuild for new 4.0 release
 

@@ -2,7 +2,7 @@
 
 Name:           PyYAML
 Version:        3.11
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        YAML parser and emitter for Python
 
 License:        MIT
@@ -121,6 +121,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 3.11-10
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.11-9
 - Rebuild for new 4.0 release.
 

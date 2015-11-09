@@ -5,7 +5,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.4.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        An implementation of JSON Schema validation for Python
 
 License:        MIT
@@ -84,3 +84,6 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.4.0-3
+- Rebuild with python 3.5
+

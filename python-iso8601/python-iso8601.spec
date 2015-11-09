@@ -4,7 +4,7 @@
 
 Name:           python-%{srcname}
 Version:        0.1.10
-Release:        6
+Release:        7
 Summary:        Simple module to parse ISO 8601 dates
 
 License:        MIT
@@ -70,6 +70,9 @@ popd
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.1.10-7
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.10-6
 - Rebuild for new 4.0 release.
 

@@ -9,7 +9,7 @@
 
 Name:           python-pluggy
 Version:        0.3.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        The plugin manager stripped of pytest specific details
 
 License:        MIT
@@ -87,7 +87,7 @@ popd
 
 %if 0%{?with_python3}
 pushd python3
-py.test-3.4 test_pluggy.py
+py.test-3.5 test_pluggy.py
 popd
 %endif
 
@@ -105,7 +105,6 @@ popd
 %files -n python3-%{pypiname}
 %{python3_sitelib}/%{pypiname}.py
 %{python3_sitelib}/__pycache__/%{pypiname}.cpython-*.pyc
-%{python3_sitelib}/__pycache__/%{pypiname}.cpython-*.pyo
 %{python3_sitelib}/%{pypiname}-%{version}-py%{python3_version}.egg-info
 %doc README.rst
 %license LICENSE
@@ -113,6 +112,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.3.0-5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.3.0-4
 - Rebuild for new 4.0 release.
 

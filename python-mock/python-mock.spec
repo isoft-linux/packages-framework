@@ -2,8 +2,8 @@
 %global mod_name mock
 
 Name:           python-mock
-Version:        1.0.1
-Release:        6%{?dist}
+Version:        1.3.0
+Release:        7%{?dist}
 Summary:        A Python Mocking and Patching Library for Testing
 
 License:        BSD
@@ -15,6 +15,8 @@ BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  python-unittest2
+#test/runtime need.
+Requires: python-funcsigs
 
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
@@ -64,7 +66,13 @@ popd
 
 
 %check
-%{__python} setup.py test
+nosetests
+
+%if 0%{?with_python3}
+pushd %{py3dir}
+nosetests-%{python3_version}
+popd
+%endif
 
 
 %install
@@ -79,20 +87,20 @@ popd
 
  
 %files
-%doc docs/ README.txt PKG-INFO LICENSE.txt
 %{python_sitelib}/*.egg-info
-%{python_sitelib}/%{mod_name}.py*
+%{python_sitelib}/%{mod_name}
 
 %if 0%{?with_python3}
 %files -n python3-mock
-%doc docs/ README.txt PKG-INFO LICENSE.txt
 %{python3_sitelib}/*.egg-info
-%{python3_sitelib}/%{mod_name}.py*
-%{python3_sitelib}/__pycache__/%{mod_name}*
+%{python3_sitelib}/%{mod_name}
 %endif
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.0.1-7
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.1-6
 - Rebuild for new 4.0 release.
 

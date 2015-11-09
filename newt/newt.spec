@@ -4,7 +4,7 @@ Summary: A development library for text mode user interfaces.
 Name: newt
 %define version 0.52.18
 Version: %{version}
-release: 8 
+release: 9 
 License: LGPL
 Source: https://fedorahosted.org/releases/n/e/newt/newt-%{version}.tar.gz
 
@@ -117,6 +117,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libnewt.a
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.52.18-9
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.52.18-8
 - Rebuild for new 4.0 release.
 

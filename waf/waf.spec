@@ -1,5 +1,9 @@
 %global with_python3 1
 
+# Turn off the brp-python-bytecompile script
+%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+%{!?python3_version: %global python3_version %(%{__python3} -c "import sys; sys.stdout.write(sys.version[:3])")}
+
 # Enable building without html docs (e.g. in case no recent sphinx is
 # available)
 %global with_docs 1
@@ -8,8 +12,8 @@
 %undefine prerel
 
 Name:           waf
-Version:        1.8.14
-Release:        %{?prerel:0.}1%{?prerel:.%prerel}%{?dist}.2
+Version:        1.8.15
+Release:        %{?prerel:0.}2%{?prerel:.%prerel}%{?dist}
 Summary:        A Python-based build system
 # The entire source code is BSD apart from pproc.py (taken from Python 2.5)
 License:        BSD and Python
@@ -24,9 +28,12 @@ Source:         waf-%{version}%{?prerel}.stripped.tar.bz2
 Patch0:         waf-1.8.11-libdir.patch
 Patch1:         waf-1.6.9-logo.patch
 Patch2:         waf-1.8.11-sphinx-no-W.patch
+Patch3:         waf-1.8.15-sphinx-theme.patch
 
 BuildArch:      noarch
 
+#if waf/waf-python3 exist, build will fail
+BuildConflicts: waf waf-python3
 BuildRequires:  python2-devel
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
@@ -101,6 +108,8 @@ This package contains the HTML documentation for %{name}.
 %patch1 -p1
 # do not add -W when running sphinx-build
 %patch2 -p1
+# support sphinx < 1.3
+%patch3 -p1
 
 
 %build
@@ -196,9 +205,3 @@ rm -f docs/sphinx/build/html/.buildinfo
 
 
 %changelog
-* Mon Nov 09 2015 Cjacker <cjacker@foxmail.com> - 1.8.14-1.2
-- Remove Group from spec
-
-* Sun Oct 25 2015 Cjacker <cjacker@foxmail.com> - 1.8.14-1.1
-- Rebuild for new 4.0 release
-

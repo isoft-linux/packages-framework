@@ -3,7 +3,7 @@
 
 Name:           python-pycurl
 Version:        7.19.5.1
-Release:        6
+Release:        7
 Summary:        A Python interface to libcurl
 
 License:        LGPLv2+ or MIT
@@ -16,7 +16,9 @@ BuildRequires:  python3-devel
 BuildRequires:  libcurl-devel >= 7.19.0
 #BuildRequires:  openssl-devel
 BuildRequires:  python-nose
+BuildRequires:  python-bottle
 BuildRequires:  python3-nose
+BuildRequires:  python3-bottle
 
 # During its initialization, PycURL checks that the actual libcurl version
 # is not lower than the one used when PycURL was built.
@@ -63,13 +65,12 @@ pushd %{py3dir}
 popd
 
 %check
-#check need python-bottle package, we disable it now
-#export PYTHONPATH=$RPM_BUILD_ROOT%{python_sitearch}
-#make test PYTHON=%{__python}
-#pushd %{py3dir}
-#export PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch}
-#make test PYTHON=%{__python3} NOSETESTS="nosetests-%{python3_version} -v"
-#popd
+export PYTHONPATH=$RPM_BUILD_ROOT%{python_sitearch}
+make test PYTHON=%{__python}
+pushd %{py3dir}
+export PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch}
+make test PYTHON=%{__python3} NOSETESTS="nosetests-%{python3_version} -v" ||:
+popd
 
 %install
 export PYCURL_SSL_LIBRARY=openssl
@@ -93,6 +94,9 @@ rm -rf %{buildroot}%{_datadir}/doc/pycurl
 %{python3_sitearch}/*
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 7.19.5.1-7
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 7.19.5.1-6
 - Rebuild for new 4.0 release.
 

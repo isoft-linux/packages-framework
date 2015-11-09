@@ -3,7 +3,7 @@
 %global pylib_version 1.4.29
 
 Name:           pytest
-Version:        2.7.2
+Version:        2.7.3
 Release:        2
 Summary:        Simple powerful testing with Python
 
@@ -15,6 +15,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
+BuildRequires:  python-pluggy
 Requires:       python-setuptools
 BuildRequires:  python-py >= %{pylib_version}
 Requires:       python-py >= %{pylib_version}
@@ -23,6 +24,7 @@ BuildRequires:  python-docutils
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
+BuildRequires:  python3-pluggy
 BuildRequires:  python3-py >= %{pylib_version}
 %endif # with_python3
 # pytest was separated from pylib at that point
@@ -135,7 +137,9 @@ popd
 
 
 %files
-# %doc python2/_htmldocs/html
+%doc python2/CHANGELOG
+#%doc python2/README.html
+#%doc python2/_htmldocs/html
 %if 0%{?_licensedir:1}
 %license python2/LICENSE
 %else
@@ -148,7 +152,10 @@ popd
 
 %if 0%{?with_python3}
 %files -n python3-pytest
-# %doc python2/_htmldocs/html
+%doc python3/CHANGELOG
+# HTML docs generated with Python2 for now
+#%doc python2/README.html
+#%doc python2/_htmldocs/html
 %if 0%{?_licensedir:1}
 %license python3/LICENSE
 %else
@@ -160,6 +167,6 @@ popd
 
 
 %changelog
-* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.7.2-2
-- Rebuild for new 4.0 release.
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.7.3-2
+- build with python 3.5
 

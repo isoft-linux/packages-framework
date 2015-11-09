@@ -2,7 +2,7 @@
 
 Name:           python-gitdb
 Version:        0.6.4
-Release:        3
+Release:        4
 Summary:        A pure-Python git object database
 
 License:        BSD
@@ -91,6 +91,9 @@ popd
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.6.4-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.4-3
 - Rebuild for new 4.0 release.
 

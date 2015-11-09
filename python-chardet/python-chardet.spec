@@ -2,7 +2,7 @@
 %global pypi_name chardet
 Name:           python-%{pypi_name}
 Version:        2.2.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Character encoding auto-detection in Python
 
 License:        LGPLv2
@@ -79,6 +79,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.2.1-5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.2.1-4
 - Rebuild for new 4.0 release.
 

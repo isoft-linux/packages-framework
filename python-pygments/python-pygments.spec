@@ -4,8 +4,8 @@
 %global upstream_name Pygments
 
 Name:           python-pygments
-Version:        1.6
-Release:        5%{?dist}
+Version:        2.0.2 
+Release:        6%{?dist}
 Summary:        Syntax highlighting engine written in Python
 
 License:        BSD
@@ -89,12 +89,6 @@ popd
 %endif # with_python3
 
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
-pushd docs
-install -d %{buildroot}%{_mandir}/man1
-mv pygmentize.1 $RPM_BUILD_ROOT%{_mandir}/man1/pygmentize.1
-mv build html
-mv src reST
-popd
 
 
 %clean
@@ -107,28 +101,30 @@ make test
 # python3-nose is available from f15 on
 %if 0%{?with_python3}
 pushd %{py3dir}
-make test
+PYTHON=python3 make test
 popd
 %endif # with_python3
 
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS CHANGES docs/html docs/reST LICENSE TODO
+%doc AUTHORS CHANGES LICENSE
 # For noarch packages: sitelib
 %{python_sitelib}/*
 %{_bindir}/pygmentize
-%lang(en) %{_mandir}/man1/pygmentize.1.gz
 
 %if 0%{?with_python3}
 %files -n python3-pygments
 %defattr(-,root,root,-)
-%doc AUTHORS CHANGES docs/html docs/reST LICENSE TODO
+%doc AUTHORS CHANGES LICENSE
 %{python3_sitelib}/*
 %endif # with_python3
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.6-6
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6-5
 - Rebuild for new 4.0 release.
 

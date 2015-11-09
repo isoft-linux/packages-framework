@@ -4,8 +4,8 @@
 %global upstream_name Sphinx
 
 Name:       python-sphinx
-Version:    1.2.3
-Release:    3%{?dist}
+Version:    1.3.1
+Release:    4%{?dist}
 Summary:    Python documentation generator
 
 
@@ -18,6 +18,7 @@ URL:        http://sphinx.pocoo.org/
 Source0:    http://pypi.python.org/packages/source/S/%{upstream_name}/%{upstream_name}-%{version}.tar.gz
 Patch0:     Sphinx-1.2.1-mantarget.patch
 Patch1:     Sphinx-1.2.2-verbosetests.patch
+Patch2:     sphinx-with-python3.5.patch
 
 BuildArch:     noarch
 BuildRequires: python2-devel >= 2.4
@@ -25,14 +26,14 @@ BuildRequires: python-setuptools
 BuildRequires: python-docutils
 BuildRequires: python-jinja2
 BuildRequires: python-pygments
-
+BuildRequires: python-sphinx-theme-alabaster
 # for testing
 BuildRequires: python-nose
 BuildRequires: gettext
 BuildRequires: texinfo
 BuildRequires: python-sqlalchemy
 BuildRequires: python-whoosh
-
+BuildRequires: python-snowballstemmer
 
 %if 0%{?with_python3}
 BuildRequires: python3-devel
@@ -43,6 +44,8 @@ BuildRequires: python3-pygments
 BuildRequires: python3-nose
 BuildRequires: python3-sqlalchemy
 BuildRequires: python3-whoosh
+BuildRequires: python3-snowballstemmer
+BuildRequires: python3-sphinx-theme-alabaster
 %endif # with_python3
 
 Requires:      python-docutils
@@ -137,7 +140,8 @@ This package contains documentation in reST and HTML formats.
 %patch0 -p1 -b .mantarget
 # not backing up since every executable file in tests/ results in
 # an additional "skipped" test
-%patch1 -p1
+#%patch1 -p1
+%patch2 -p1
 sed '1d' -i sphinx/pycode/pgen2/token.py
 
 %if 0%{?with_python3}
@@ -237,7 +241,7 @@ popd
 
 %files -f sphinx.lang
 %license LICENSE
-%doc AUTHORS CHANGES EXAMPLES README.rst TODO
+%doc AUTHORS CHANGES EXAMPLES README.rst
 %exclude %{_bindir}/sphinx-*-3
 %exclude %{_bindir}/sphinx-*-%{python3_version}
 %{_bindir}/sphinx-*
@@ -251,7 +255,7 @@ popd
 %if 0%{?with_python3}
 %files -n python3-sphinx -f sphinx.lang
 %license LICENSE
-%doc AUTHORS CHANGES EXAMPLES README.rst TODO
+%doc AUTHORS CHANGES EXAMPLES README.rst
 %{_bindir}/sphinx-*-3
 %{_bindir}/sphinx-*-%{python3_version}
 %{python3_sitelib}/*
@@ -267,6 +271,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.2.3-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.3-3
 - Rebuild for new 4.0 release.
 

@@ -5,7 +5,7 @@
 
 Name:           python-pyasn1
 Version:        0.1.8
-Release:        3
+Release:        4
 Summary:        ASN.1 tools for Python
 License:        BSD
 Source0:        http://downloads.sourceforge.net/pyasn1/pyasn1-%{version}.tar.gz
@@ -132,6 +132,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.1.8-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.8-3
 - Rebuild for new 4.0 release.
 

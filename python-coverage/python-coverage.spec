@@ -15,7 +15,7 @@
 Name:           python-coverage
 Summary:        Code coverage testing module for Python
 Version:        4.0
-Release:        0.8.%{?prever}%{?dist}
+Release:        0.9.%{?prever}%{?dist}
 License:        BSD and (MIT or GPLv2)
 URL:            http://nedbatchelder.com/code/modules/coverage.html
 Source0:        http://pypi.python.org/packages/source/c/coverage/coverage-%{version}%{?prever}.tar.gz
@@ -116,6 +116,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 4.0-0.9.a5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.0-0.8.a5
 - Rebuild for new 4.0 release.
 

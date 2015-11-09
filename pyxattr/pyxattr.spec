@@ -2,7 +2,7 @@
 Name:		pyxattr
 Summary:	Extended attributes library wrapper for Python
 Version:	0.5.3
-Release:	5
+Release:	6
 License:	LGPLv2+
 URL:		http://pyxattr.k1024.org/
 Source:		https://pypi.python.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
@@ -78,7 +78,7 @@ popd
 %if %{?with_python3}
 %files -n python3-%{name}
 %defattr(0644,root,root,0755)
-%{python3_sitearch}/xattr.cpython-??m.so
+%{python3_sitearch}/xattr.cpython-*.so
 %{python3_sitearch}/*egg-info
 %{!?_licensedir:%global license %%doc}
 %license COPYING
@@ -86,6 +86,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.5.3-6
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.5.3-5
 - Rebuild for new 4.0 release.
 

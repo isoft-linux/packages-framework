@@ -2,8 +2,8 @@
 %bcond_without python3
 
 Name:           python-%{pypi_name}
-Version:        0.24.0
-Release:        5%{?dist}
+Version:        0.26.0
+Release:        6%{?dist}
 Summary:        A built-package format for Python
 
 License:        MIT
@@ -116,6 +116,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.24.0-6
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.24.0-5
 - Rebuild for new 4.0 release.
 

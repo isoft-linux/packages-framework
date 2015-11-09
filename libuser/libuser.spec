@@ -1,6 +1,6 @@
 Name: libuser
 Version: 0.62
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 URL: https://fedorahosted.org/libuser/
 Source: https://fedorahosted.org/releases/l/i/libuser/libuser-%{version}.tar.xz
@@ -131,6 +131,9 @@ LC_ALL=en_US.UTF-8 python3 -c "import libuser"
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.62-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.62-3
 - Rebuild for new 4.0 release.
 

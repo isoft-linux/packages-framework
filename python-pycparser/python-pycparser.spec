@@ -3,7 +3,7 @@
 Name:           python-pycparser
 Summary:        C parser and AST generator written in Python
 Version:        2.14
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        BSD
 URL:            http://github.com/eliben/pycparser
 Source0:        http://github.com/eliben/pycparser/archive/release_v%{version}.tar.gz
@@ -108,6 +108,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.14-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.14-3
 - Rebuild for new 4.0 release.
 

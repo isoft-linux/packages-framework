@@ -4,7 +4,7 @@
 Name:           python-simplejson
 
 Version:        3.5.3
-Release:        4
+Release:        5
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 # The main code is licensed MIT.
@@ -127,6 +127,9 @@ rm -rf %{buildroot}
 %endif # python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 3.5.3-5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.5.3-4
 - Rebuild for new 4.0 release.
 

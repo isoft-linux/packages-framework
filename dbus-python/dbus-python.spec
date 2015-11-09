@@ -1,7 +1,7 @@
 Summary: D-Bus Python Bindings 
 Name:    dbus-python
 Version: 1.2.0
-Release: 9
+Release: 10
 
 License: MIT
 URL:     http://www.freedesktop.org/wiki/Software/DBusBindings/
@@ -98,6 +98,9 @@ make check -k -C python3-build
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.2.0-10
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.0-9
 - Rebuild for new 4.0 release.
 

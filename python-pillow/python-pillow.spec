@@ -23,7 +23,7 @@
 
 Name:           python-pillow
 Version:        2.8.2
-Release:        3%{?snap}%{?dist}
+Release:        4%{?snap}%{?dist}
 Summary:        Python image processing library
 
 # License: see http://www.pythonware.com/products/pil/license.htm
@@ -333,6 +333,9 @@ popd
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.8.2-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.8.2-3
 - Rebuild for new 4.0 release.
 

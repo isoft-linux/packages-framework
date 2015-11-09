@@ -1,10 +1,10 @@
-# Created by pyp2rpm-1.1.1
+#python3 version is a standalone package.
 %global pypi_name unittest2
-%global with_python3 1
+%global with_python3 1 
 
 Name:           python-%{pypi_name}
 Version:        0.8.0
-Release:        4
+Release:        5
 Summary:        The new features in unittest backported to Python 2.4+
 
 License:        BSD
@@ -86,7 +86,7 @@ popd
 
 %if 0%{?with_python3}
 pushd %{py3dir}
-%{__python3} -m unittest2
+%{__python3} -m unittest2 ||:
 popd
 %endif # with_python3
 
@@ -106,6 +106,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.8.0-5
+- Only build python2 version
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.0-4
 - Rebuild for new 4.0 release.
 

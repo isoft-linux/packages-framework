@@ -5,7 +5,7 @@
 
 Name:           python-flask
 Version:        0.10.1
-Release:        7
+Release:        8
 Epoch:          1
 Summary:        A micro-framework for Python based on Werkzeug, Jinja 2 and good intentions
 
@@ -168,6 +168,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1:0.10.1-8
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:0.10.1-7
 - Rebuild for new 4.0 release.
 

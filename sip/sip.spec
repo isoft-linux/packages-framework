@@ -15,7 +15,7 @@
 Summary: SIP - Python/C++ Bindings Generator
 Name: sip
 Version: 4.16.8
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 # sipgen/parser.{c.h} is GPLv3+ with exceptions (bison)
 License: GPLv2 or GPLv3 and (GPLv3+ with exceptions)
@@ -172,6 +172,7 @@ install -D -p -m644 %{SOURCE1} %{buildroot}%{rpm_macros_dir}/macros.sip
 %files -n python3-sip
 %{python3_sitearch}/sip.so
 %{python3_sitearch}/sip*.py*
+%{python3_sitearch}/__pycache__/*
 
 %files -n python3-sip-devel
 # Note that the "sip" binary is invoked by name in a few places higher up
@@ -183,6 +184,9 @@ install -D -p -m644 %{SOURCE1} %{buildroot}%{rpm_macros_dir}/macros.sip
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 4.16.8-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.16.8-3
 - Rebuild for new 4.0 release.
 

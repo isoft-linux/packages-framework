@@ -7,7 +7,7 @@
 
 Name:		libsolv
 Version:	0.6.10
-Release:	4
+Release:	5
 License:	BSD
 Url:		https://github.com/openSUSE/libsolv
 Source:		https://github.com/openSUSE/libsolv/archive/%{gitrev}.tar.gz
@@ -144,9 +144,12 @@ rm $RPM_BUILD_ROOT/usr/bin/testsolv
 
 %files -n python-solv
 %doc examples/pysolv
-/usr/lib/python3.4/site-packages/*
+%{python3_sitearch}/*
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.6.10-5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.10-4
 - Rebuild for new 4.0 release.
 

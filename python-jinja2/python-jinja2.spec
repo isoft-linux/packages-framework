@@ -6,7 +6,7 @@
 
 Name:		python-jinja2
 Version:	2.7.3
-Release:	4
+Release:	6
 Summary:	General purpose template engine
 License:	BSD
 URL:		http://jinja.pocoo.org/
@@ -146,6 +146,12 @@ popd
 
 
 %changelog
+* Fri Nov 06 2015 Cjacker <cjacker@foxmail.com> - 2.7.3-6
+- Rebuild
+
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.7.3-5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.7.3-4
 - Rebuild for new 4.0 release.
 

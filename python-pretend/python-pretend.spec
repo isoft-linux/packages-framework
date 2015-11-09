@@ -4,7 +4,7 @@
 
 Name:           python-pretend
 Version:        1.0.8
-Release:        4
+Release:        5
 Summary:        A library for stubbing in Python
 
 License:        BSD
@@ -83,6 +83,9 @@ popd
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.0.8-5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.8-4
 - Rebuild for new 4.0 release.
 

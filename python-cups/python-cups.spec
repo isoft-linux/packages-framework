@@ -6,7 +6,7 @@
 Summary:       Python bindings for CUPS
 Name:          python-cups
 Version:       1.9.72
-Release:       3%{?dist}
+Release:       4%{?dist}
 URL:           http://cyberelk.net/tim/software/pycups/
 Source:        http://cyberelk.net/tim/data/pycups/pycups-%{version}.tar.bz2
 License:       GPLv2+
@@ -65,6 +65,9 @@ popd
 %{_rpmconfigdir}/postscriptdriver.prov
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.9.72-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.9.72-3
 - Rebuild for new 4.0 release.
 

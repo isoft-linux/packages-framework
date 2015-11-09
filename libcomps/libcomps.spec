@@ -3,7 +3,7 @@
 
 Name:           libcomps
 Version:        0.1.6
-Release:        15
+Release:        16
 Summary:        Comps XML file manipulation library
 
 License:        GPLv2+
@@ -134,6 +134,9 @@ rm -rf $buildroot
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.1.6-16
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.1.6-15
 - Rebuild for new 4.0 release.
 

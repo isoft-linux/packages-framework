@@ -2,7 +2,7 @@
 
 Name:           python-enchant
 Version:        1.6.6
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Python bindings for Enchant spellchecking library
 
 License:        LGPLv2+
@@ -88,17 +88,19 @@ rm -rf $RPM_BUILD_ROOT/%{python_sitelib}/enchant/share
 
 %check
 #need Xwindow support
-#pushd $RPM_BUILD_ROOT/%{python_sitelib}
-## There is no dictionary for language C, need to use en_US
-#LANG=en_US.UTF-8 /usr/bin/nosetests-2.*
-#popd
-#
-## Tests are failing in python3 because of collision between 
-## local and stdlib tokenize module
-#pushd $RPM_BUILD_ROOT/%{python3_sitelib}
-## There is no dictionary for language C, need to use en_US
-#LANG=en_US.UTF-8 /usr/bin/nosetests-3.*
-#popd
+pushd $RPM_BUILD_ROOT/%{python_sitelib}
+# There is no dictionary for language C, need to use en_US
+export LANG=en_US.UTF-8
+#xvfb-run /usr/bin/nosetests-2.*
+popd
+
+# Tests are failing in python3 because of collision between 
+# local and stdlib tokenize module
+pushd $RPM_BUILD_ROOT/%{python3_sitelib}
+# There is no dictionary for language C, need to use en_US
+export LANG=en_US.UTF-8
+#xvfb-run /usr/bin/nosetests-3.*
+popd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -135,6 +137,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.6.6-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.6-3
 - Rebuild for new 4.0 release.
 

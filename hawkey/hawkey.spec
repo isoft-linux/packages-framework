@@ -8,8 +8,8 @@
 %endif
 
 Name:		hawkey
-Version:	0.6.0
-Release:	3
+Version:	0.6.2
+Release:	4
 Summary:	Library providing simplified C and Python API to libsolv
 License:	LGPLv2+
 URL:		https://github.com/rpm-software-management/%{name}
@@ -132,6 +132,9 @@ popd
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.6.0-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.0-3
 - Rebuild for new 4.0 release.
 

@@ -2,7 +2,7 @@
 
 Name:           python-kitchen
 Version:        1.2.1
-Release:        4
+Release:        5
 Summary:        Small, useful pieces of code to make python coding easier
 
 License:        LGPLv2+
@@ -165,6 +165,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.2.1-5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.1-4
 - Rebuild for new 4.0 release.
 

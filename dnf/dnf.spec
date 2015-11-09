@@ -1,4 +1,4 @@
-%global hawkey_version 0.6.0
+%global hawkey_version 0.6.1
 %global librepo_version 1.7.16
 %global libcomps_version 0.1.6
 %global rpm_version 4.12.0
@@ -10,38 +10,48 @@
 %global py3pluginpath %{python3_sitelib}/dnf-plugins
 
 Name:		dnf
-Version:	1.1.0
-Release:	5%{?snapshot}
+Version:	1.1.3
+Release:	2%{?snapshot}%{?dist}
 Summary:	Package manager forked from Yum, using libsolv as a dependency resolver
 # For a breakdown of the licensing, see PACKAGE-LICENSING
 License:	GPLv2+ and GPLv2 and GPL
 URL:		https://github.com/rpm-software-management/dnf
-# The Source0 tarball can be generated using following commands:
-# git clone http://github.com/rpm-software-management/dnf.git
-# cd dnf/package
-# ./archive
-# tarball will be generated in $HOME/rpmbuild/sources/
-Source0:    http://rpm-software-management.fedorapeople.org/dnf-%{version}.tar.gz
-Patch0: dnf-1.1.0-1-to-dnf-1.1.0-2.patch
+Source0:    https://github.com/rpm-software-management/dnf/archive/%{name}-%{version}.tar.gz
 BuildArch:  noarch
 BuildRequires:  cmake
 BuildRequires:  gettext
 BuildRequires:  python-bugzilla
 BuildRequires:  python-sphinx
 BuildRequires:  systemd
-%if 1
 Requires:   python3-dnf = %{version}-%{release}
-%else
-Requires:   python-dnf = %{version}-%{release}
-%endif
 Requires(post):     systemd
 Requires(preun):    systemd
 Requires(postun):   systemd
+Provides:       dnf-command(autoremove)
+Provides:       dnf-command(check-update)
+Provides:       dnf-command(clean)
+Provides:       dnf-command(distro-sync)
+Provides:       dnf-command(downgrade)
+Provides:       dnf-command(group)
+Provides:       dnf-command(history)
+Provides:       dnf-command(info)
+Provides:       dnf-command(install)
+Provides:       dnf-command(list)
+Provides:       dnf-command(makecache)
+Provides:       dnf-command(mark)
+Provides:       dnf-command(provides)
+Provides:       dnf-command(reinstall)
+Provides:       dnf-command(remove)
+Provides:       dnf-command(repolist)
+Provides:       dnf-command(repository-packages)
+Provides:       dnf-command(search)
+Provides:       dnf-command(updateinfo)
+Provides:       dnf-command(upgrade)
+Provides:       dnf-command(upgrade-to)
 %description
 Package manager forked from Yum, using libsolv as a dependency resolver.
 
 %package conf
-#Requires:   libreport-filesystem
 Summary:    Configuration files for DNF.
 %description conf
 Configuration files for DNF.
@@ -55,6 +65,7 @@ As a Yum CLI compatibility layer, supplies /usr/bin/yum redirecting to DNF.
 
 %package -n python-dnf
 Summary:    Python 2 interface to DNF.
+%{?python_provide:%python_provide python-dnf}
 BuildRequires:  pygpgme
 BuildRequires:  pyliblzma
 BuildRequires:  python2
@@ -64,9 +75,7 @@ BuildRequires:  python-libcomps >= %{libcomps_version}
 BuildRequires:  python-librepo >= %{librepo_version}
 BuildRequires:  python-nose
 BuildRequires:  python-rpm >= %{rpm_version}
-%if 1
 Recommends: bash-completion
-%endif
 Requires:   dnf-conf = %{version}-%{release}
 Requires:   deltarpm
 Requires:   pygpgme
@@ -75,7 +84,7 @@ Requires:   python-hawkey >= %{hawkey_version}
 Requires:   python-iniparse
 Requires:   python-libcomps >= %{libcomps_version}
 Requires:   python-librepo >= %{librepo_version}
-#Requires:   rpm-plugin-systemd-inhibit
+Requires:   rpm
 Requires:   python-rpm >= %{rpm_version}
 Obsoletes:  dnf <= 0.6.4
 %description -n python-dnf
@@ -83,6 +92,7 @@ Python 2 interface to DNF.
 
 %package -n python3-dnf
 Summary:    Python 3 interface to DNF.
+%{?python_provide:%python_provide python3-dnf}
 BuildRequires:  python3
 BuildRequires:  python3-devel
 BuildRequires:  python3-hawkey >= %{hawkey_version}
@@ -92,9 +102,7 @@ BuildRequires:  python3-librepo >= %{librepo_version}
 BuildRequires:  python3-nose
 BuildRequires:  python3-pygpgme
 BuildRequires:  python3-rpm >= %{rpm_version}
-%if 1
 Recommends: bash-completion
-%endif
 Requires:   dnf-conf = %{version}-%{release}
 Requires:   deltarpm
 Requires:   python3-hawkey >= %{hawkey_version}
@@ -102,7 +110,7 @@ Requires:   python3-iniparse
 Requires:   python3-libcomps >= %{libcomps_version}
 Requires:   python3-librepo >= %{librepo_version}
 Requires:   python3-pygpgme
-#Requires:   rpm-plugin-systemd-inhibit
+Requires:   rpm
 Requires:   python3-rpm >= %{rpm_version}
 Obsoletes:  dnf <= 0.6.4
 %description -n python3-dnf
@@ -120,7 +128,6 @@ Alternative CLI to "dnf upgrade" suitable for automatic, regular execution.
 
 %prep
 %setup -q -n dnf-%{version}
-%patch0 -p1
 rm -rf py3
 mkdir ../py3
 cp -a . ../py3/
@@ -148,15 +155,9 @@ mkdir -p $RPM_BUILD_ROOT%{py3pluginpath}/__pycache__
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/log
 mkdir -p $RPM_BUILD_ROOT%{_var}/cache/dnf
 touch $RPM_BUILD_ROOT%{_localstatedir}/log/%{name}.log
-%if 1
 ln -sr $RPM_BUILD_ROOT%{_bindir}/dnf-3 $RPM_BUILD_ROOT%{_bindir}/dnf
 mv $RPM_BUILD_ROOT%{_bindir}/dnf-automatic-3 $RPM_BUILD_ROOT%{_bindir}/dnf-automatic
 rm $RPM_BUILD_ROOT%{_bindir}/dnf-automatic-2
-%else
-ln -sr $RPM_BUILD_ROOT%{_bindir}/dnf-2 $RPM_BUILD_ROOT%{_bindir}/dnf
-mv $RPM_BUILD_ROOT%{_bindir}/dnf-automatic-2 $RPM_BUILD_ROOT%{_bindir}/dnf-automatic
-rm $RPM_BUILD_ROOT%{_bindir}/dnf-automatic-3
-%endif
 
 %check
 make ARGS="-V" test
@@ -190,7 +191,7 @@ popd
 %config %{_sysconfdir}/bash_completion.d/dnf-completion.bash
 %{_mandir}/man5/dnf.conf.5.gz
 %{_tmpfilesdir}/dnf.conf
-#%{_sysconfdir}/libreport/events.d/collect_dnf.conf
+%{_sysconfdir}/libreport/events.d/collect_dnf.conf
 
 %files -n dnf-yum
 %doc AUTHORS README.rst COPYING PACKAGE-LICENSING
@@ -219,12 +220,8 @@ popd
 %{_mandir}/man8/dnf.automatic.8.gz
 %{_unitdir}/dnf-automatic.service
 %{_unitdir}/dnf-automatic.timer
-%if 1
 %{python3_sitelib}/dnf/automatic
-# %{python3_sitelib}/dnf/automatic/__pycache__/*
-%else
-%{python_sitelib}/dnf/automatic
-%endif
+%{python3_sitelib}/dnf/automatic/__pycache__/*
 
 %post
 %systemd_post dnf-makecache.timer
@@ -252,6 +249,6 @@ exit 0
 %systemd_postun_with_restart dnf-automatic.timer
 
 %changelog
-* Sun Oct 25 2015 Cjacker <cjacker@foxmail.com> - 1.1.0-5
-- Rebuild for new 4.0 release
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.1.3-2
+- Rebuild with py35
 

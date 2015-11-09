@@ -11,7 +11,7 @@
 
 Name:           python-%{srcname}
 Version:        1.10.4
-Release:        6.%{checkout}%{?dist}
+Release:        7.%{checkout}%{?dist}
 Summary:        Python HTTP library with thread-safe connection pooling and file post
 
 License:        MIT
@@ -80,10 +80,6 @@ rm -rf %{py3dir}
 cp -a . %{py3dir}
 %endif # with_python3
 
-%if 0%{?fedora} == 21
-%patch0 -p1
-%endif
-
 %build
 %{__python2} setup.py build
 
@@ -138,6 +134,14 @@ popd
 %endif # with_python3
 
 %check
+#check needs tornado
+#nosetests
+#
+#%if 0%{?with_python3}
+#pushd %{py3dir}
+#nosetests-%{python3_version}
+#popd
+#%endif
 
 %files
 %{!?_licensedir:%global license %%doc}
@@ -157,6 +161,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.10.4-7.20150503gita91975b
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.10.4-6.20150503gita91975b
 - Rebuild for new 4.0 release.
 

@@ -2,7 +2,7 @@
 
 Name:           babel
 Version:        1.3
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Tools for internationalizing Python applications
 
 License:        BSD
@@ -151,6 +151,9 @@ rm -rf %{buildroot}
 %doc docs/*
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.3-10
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3-9
 - Rebuild for new 4.0 release.
 

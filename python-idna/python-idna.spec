@@ -4,7 +4,7 @@
 
 Name:           python-%{srcname}
 Version:        2.0
-Release:        2
+Release:        3
 Summary:        Internationalized Domain Names in Applications (IDNA)
 
 License:        BSD and Python and Unicode
@@ -103,6 +103,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 2.0-3
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0-2
 - Rebuild for new 4.0 release.
 

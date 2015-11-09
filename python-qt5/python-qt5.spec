@@ -11,7 +11,7 @@
 Summary: Python bindings for Qt5
 Name: 	 python-qt5 
 Version: 5.4.2
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 # all BSD, except for GPLv2+ dbus bindings and examples
 License: BSD and GPLv2+
@@ -319,6 +319,9 @@ sed -i \
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 5.4.2-5
+- Rebuild with python 3.5
+
 * Tue Nov 03 2015 Cjacker <cjacker@foxmail.com> - 5.4.2-4
 - Rebuild
 

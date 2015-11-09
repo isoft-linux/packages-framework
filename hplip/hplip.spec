@@ -10,7 +10,7 @@
 Summary: HP Linux Imaging and Printing Project
 Name: hplip
 Version: 3.15.6
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPLv2+ and MIT
 
 Url: http://hplip.sourceforge.net/
@@ -529,6 +529,9 @@ rm -f ppds-all
 %postun libs -p /sbin/ldconfig
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 3.15.6-5
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.15.6-4
 - Rebuild for new 4.0 release.
 

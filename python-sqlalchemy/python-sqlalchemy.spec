@@ -3,7 +3,7 @@
 
 Name:           python-sqlalchemy
 Version:        1.0.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Modular and flexible ORM library for python
 
 License:        MIT
@@ -113,6 +113,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.0.6-3
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.6-2
 - Rebuild for new 4.0 release.
 

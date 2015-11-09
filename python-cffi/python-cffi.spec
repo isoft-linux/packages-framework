@@ -2,7 +2,7 @@
 
 Name:           python-cffi
 Version:        1.1.2 
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Foreign Function Interface for Python to call C code
 License:        BSD
 URL:            http://cffi.readthedocs.org/
@@ -64,10 +64,10 @@ cd doc
 make html
 rm build/html/.buildinfo
 
-#%check
-## The following test procedure works when I run it manually, but fails
-## from rpmbuild, complaining that it can't import _cffi_backend, and I'm
-## not sure how to make it work
+%check
+# The following test procedure works when I run it manually, but fails
+# from rpmbuild, complaining that it can't import _cffi_backend, and I'm
+# not sure how to make it work
 #python setup_base.py build
 #PYTHONPATH=build/lib.linux-* py.test c/ testing/
 
@@ -93,6 +93,9 @@ popd
 %doc doc/build/html
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.1.2-3
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.2-2
 - Rebuild for new 4.0 release.
 

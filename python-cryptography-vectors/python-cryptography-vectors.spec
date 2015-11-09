@@ -5,7 +5,7 @@
 
 Name:               python-%{modname}
 Version:            0.8.2
-Release:            2%{?dist}
+Release:            3%{?dist}
 Summary:            Test vectors for the cryptography package
 
 License:            ASL 2.0 or BSD
@@ -76,6 +76,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.8.2-3
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.8.2-2
 - Rebuild for new 4.0 release.
 

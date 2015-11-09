@@ -1,7 +1,7 @@
 Name:           lirc
 Version:        0.9.2a
 %global         src_vers  %(echo %{version} | sed 's/_/-/g' )
-Release:        3%{?dist}
+Release:        4%{?dist}
 
 Summary:        The Linux Infrared Remote Control package
 
@@ -265,6 +265,9 @@ find /etc/systemd -name lirc.service -xtype l -delete || :
 
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.9.2a-4
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.2a-3
 - Rebuild for new 4.0 release.
 

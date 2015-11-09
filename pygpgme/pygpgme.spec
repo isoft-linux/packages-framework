@@ -4,7 +4,7 @@
 
 Name:           pygpgme
 Version:        0.3
-Release:        14
+Release:        15
 Summary:        Python module for working with OpenPGP messages
 
 License:        LGPLv2+
@@ -118,6 +118,9 @@ find tests -name '*.pyc' -delete
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.3-15
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.3-14
 - Rebuild for new 4.0 release.
 

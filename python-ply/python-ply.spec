@@ -3,7 +3,7 @@
 Name:			python-ply
 Summary: 		Python Lex-Yacc
 Version:		3.4
-Release:		9%{?dist}
+Release:		10%{?dist}
 License:		BSD
 URL:			http://www.dabeaz.com/ply/
 Source0:		http://www.dabeaz.com/ply/ply-%{version}.tar.gz
@@ -109,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 3.4-10
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.4-9
 - Rebuild for new 4.0 release.
 

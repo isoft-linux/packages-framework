@@ -2,7 +2,7 @@
 
 Name:           python-bugzilla
 Version:        1.2.0
-Release:        2
+Release:        3
 Summary:        A python library and tool for interacting with Bugzilla
 
 License:        GPLv2+
@@ -90,6 +90,9 @@ popd
 %endif # with_python3
 
 %changelog
+* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.2.0-3
+- Rebuild with python 3.5
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.0-2
 - Rebuild for new 4.0 release.
 
