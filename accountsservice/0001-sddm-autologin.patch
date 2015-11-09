@@ -1,0 +1,27 @@
+diff --git a/src/daemon.c b/src/daemon.c
+index 01afd07..811a790 100644
+--- a/src/daemon.c
++++ b/src/daemon.c
+@@ -1330,18 +1330,18 @@ save_autologin (Daemon      *daemon,
+ 
+         keyfile = g_key_file_new ();
+         if (!g_key_file_load_from_file (keyfile,
+-                                        PATH_GDM_CUSTOM,
++                                        "/etc/sddm.conf",
+                                         G_KEY_FILE_KEEP_COMMENTS,
+                                         error)) {
+                 g_key_file_free (keyfile);
+                 return FALSE;
+         }
+ 
+-        g_key_file_set_string (keyfile, "daemon", "AutomaticLoginEnable", enabled ? "True" : "False");
+-        g_key_file_set_string (keyfile, "daemon", "AutomaticLogin", name);
++        g_key_file_set_string (keyfile, "Autologin", "Session", enabled ? "plasma.desktop" : "");
++        g_key_file_set_string (keyfile, "Autologin", "User", enabled ? name : "");
+ 
+         data = g_key_file_to_data (keyfile, NULL, NULL);
+-        result = g_file_set_contents (PATH_GDM_CUSTOM, data, -1, error);
++        result = g_file_set_contents ("/etc/sddm.conf", data, -1, error);
+ 
+         g_key_file_free (keyfile);
+         g_free (data);

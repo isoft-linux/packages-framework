@@ -8,6 +8,8 @@ URL:            http://www.freedesktop.org/wiki/Software/AccountsService/
 #VCS: git:git://git.freedesktop.org/accountsservice
 Source0:        http://www.freedesktop.org/software/accountsservice/accountsservice-%{version}.tar.xz
 
+# Autologin for sddm 
+Patch0: 0001-sddm-autologin.patch
 
 BuildRequires:  glib2-devel
 BuildRequires:  dbus-glib-devel
@@ -51,6 +53,7 @@ of these interfaces, based on the useradd, usermod and userdel commands.
 
 %prep
 %setup -q
+%patch0: -p1
 
 %build
 %configure
@@ -105,6 +108,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_datadir}/gtk-doc/html/libaccountsservice/*
 
 %changelog
+* Mon Nov 09 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn>
+- Add autologin for sddm. 
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.40-3
 - Rebuild for new 4.0 release.
 
