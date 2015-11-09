@@ -12,6 +12,7 @@ Patch0: qtimageformats-fix-dds-failure-to-detect-format.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: jasper-devel libtiff-devel libwebp-devel
+BuildRequires: zlib-devel
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.

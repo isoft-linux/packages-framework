@@ -8,7 +8,6 @@ Version:        1.0.29
 Release:        3%{?dist}
 # See later in the spec for a breakdown of licensing
 License:        GPL+ and BSD and GPLv2+ and GPLv2 and LGPLv2+
-Group:          Applications/Multimedia
 URL:            http://www.alsa-project.org/
 Source:         ftp://ftp.alsa-project.org/pub/firmware/%{name}-%{version}.tar.bz2
 
