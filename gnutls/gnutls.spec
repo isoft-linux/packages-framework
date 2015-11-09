@@ -15,6 +15,8 @@ BuildRequires: trousers-devel >= 0.3.11.2
 BuildRequires: libidn-devel
 BuildRequires: gperf
 BuildRequires: bison flex byacc
+BuildRequires: valgrind-devel
+
 Requires: crypto-policies
 Requires: p11-kit-trust
 Requires: libtasn1 >= 4.3
