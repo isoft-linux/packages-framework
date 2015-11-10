@@ -1,0 +1,30 @@
+Fix QImage::setDotsPerMeterX/Y for images with some orientations
+
+Rotation of images with orientation of 90 and 270 degrees dropped DPM
+values from rotated image.
+Task-number: QTBUG-49220
+Change-Id: I9c23153c49dd63b5f6958fdde72f466873b0a407
+Reviewed-by: Friedemann Kleint <Friedemann.Kleint@theqtcompany.com>
+Reviewed-by: Liang Qi <liang.qi@theqtcompany.com>
+Reviewed-by: aavit <eirik.aavitsland@theqtcompany.com>
+diff -Nur qtbase-opensource-src-5.5.1/src/gui/image/qimage.cpp qtbase-opensource-src-5.5.1n/src/gui/image/qimage.cpp
+--- qtbase-opensource-src-5.5.1/src/gui/image/qimage.cpp	2015-10-13 12:35:29.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/gui/image/qimage.cpp	2015-11-10 23:29:04.475731400 +0800
+@@ -4285,6 +4285,8 @@
+ 
+ static QImage rotated90(const QImage &image) {
+     QImage out(image.height(), image.width(), image.format());
++    out.setDotsPerMeterX(image.dotsPerMeterY());
++    out.setDotsPerMeterY(image.dotsPerMeterX());
+     if (image.colorCount() > 0)
+         out.setColorTable(image.colorTable());
+     int w = image.width();
+@@ -4353,6 +4355,8 @@
+ 
+ static QImage rotated270(const QImage &image) {
+     QImage out(image.height(), image.width(), image.format());
++    out.setDotsPerMeterX(image.dotsPerMeterY());
++    out.setDotsPerMeterY(image.dotsPerMeterX());
+     if (image.colorCount() > 0)
+         out.setColorTable(image.colorTable());
+     int w = image.width();

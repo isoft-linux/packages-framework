@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 10 
+Release: 11 
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -42,6 +42,7 @@ Patch13: qtbase-fix-comparison-qbytearray-and-qstring.patch
 Patch14: qtbase-fix-qlinedit-visibility-handling-of-side-widgets.patch
 Patch15: qtbase-fix_reuse_address_problem_qtbug-47011.patch
 Patch16: qtbase-report-correct-networkaccessibility-qtbug-46323.patch
+Patch17: qtbase-fix-qimage-DPM-value-with-some-orientations.patch
 
 #Already reported, https://bugreports.qt.io/browse/QTBUG-45812
 Patch30: qt5-qtbase-fix-chromium-and-other-application-dnd.patch
@@ -151,6 +152,7 @@ developing applications that use %{name}.
 %patch14 -p1
 %patch15 -p1
 %patch16 -p1
+%patch17 -p1
 
 %patch30 -p1
 
@@ -302,6 +304,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-11
+- Fix QTBUG-49220
+
 * Sat Nov 07 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-10
 - add patches, fix QTBUG-48350, QTBUG-48806, QTBUG-48899, QTBUG-39660, QTBUG-47011, QTBUG-46323
 
