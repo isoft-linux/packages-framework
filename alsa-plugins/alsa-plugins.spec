@@ -1,8 +1,8 @@
 %define with_jack 0
 
 Name:           alsa-plugins
-Version:        1.0.29
-Release:        3
+Version:        1.1.0
+Release:        2 
 Summary:        The Advanced Linux Sound Architecture (ALSA) Plugins
 # All packages are LGPLv2+ with the exception of samplerate which is GPLv2+
 # pph plugin is BSD-like licensed
@@ -235,6 +235,9 @@ find $RPM_BUILD_ROOT -name "*.la" -exec rm {} \;
 
 
 %changelog
+* Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 1.1.0-2
+- Update to 1.1.0
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-3
 - Rebuild for new 4.0 release.
 
