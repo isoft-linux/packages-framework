@@ -9,6 +9,7 @@ BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	alsa-lib-devel 
 BuildRequires:	ncurses-devel
 BuildRequires:	gettext-devel
+BuildRequires:  systemd-devel
 Conflicts:	udev < 062
 
 %description
