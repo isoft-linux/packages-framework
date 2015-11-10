@@ -1,21 +1,39 @@
 Summary: A cross-platform multimedia library
 Name: SDL
 Version: 1.2.15
-Release: 9
+Release: 10
 Source0: %{name}-%{version}.tar.gz
 Patch0: SDL-1.2.10-GrabNotViewable.patch  
 Patch1: SDL-1.2.15-const_XData32.patch
-Patch7: SDL-remove-esd.patch
+
+# Proposed to upstream as sdl1680, rh891973
+Patch2:     SDL-1.2.15-x11-Bypass-SetGammaRamp-when-changing-gamma.patch
+# Upstream fix for sdl1486, rh990677
+Patch5:     SDL-1.2.15-ignore_insane_joystick_axis.patch
+# Do not use backing store by default, sdl2383, rh1073057, rejected by
+# upstream
+Patch6:     SDL-1.2.15-no-default-backing-store.patch
+# Fix processing keyboard events if SDL_EnableUNICODE() is enabled, sdl2325,
+# rh1126136, in upstream after 1.2.15
+Patch7:     SDL-1.2.15-SDL_EnableUNICODE_drops_keyboard_events.patch
+Patch8: SDL-remove-esd.patch
 
 URL: http://www.libsdl.org/
 License: LGPLv2+
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: alsa-lib-devel
-BuildRequires: pulseaudio-libs-devel
-BuildRequires: libXext-devel libX11-devel
-BuildRequires: libGL-devel libGLU-devel
-BuildRequires: libXrender-devel libXrandr-devel gettext-devel
-BuildRequires: automake autoconf libtool
+BuildRequires:  coreutils
+BuildRequires:  mesa-libGL-devel
+BuildRequires:  mesa-libGLU-devel
+BuildRequires:  libXext-devel
+BuildRequires:  libX11-devel
+BuildRequires:  libXrandr-devel
+BuildRequires:  libXrender-devel
+BuildRequires:  make
+BuildRequires:  automake
+BuildRequires:  autoconf
+BuildRequires:  libtool
+
 %ifarch %{ix86}
 BuildRequires: nasm
 %endif
@@ -28,14 +46,13 @@ device.
 %package devel
 Summary: Files needed to develop Simple DirectMedia Layer applications
 Requires: SDL = %{version}-%{release} alsa-lib-devel
-Requires: libX11-devel
-Requires: libXext-devel
-Requires: libGL-devel
-Requires: libGLU-devel
-Requires: libXrender-devel
-Requires: libXrandr-devel
-Requires: pkgconfig
-Requires: automake
+Requires:   alsa-lib-devel
+Requires:   mesa-libGL-devel
+Requires:   mesa-libGLU-devel
+Requires:   libX11-devel
+Requires:   libXext-devel
+Requires:   libXrandr-devel
+Requires:   libXrender-devel
 
 %description devel
 Simple DirectMedia Layer (SDL) is a cross-platform multimedia library
@@ -57,14 +74,20 @@ static SDL applications.
 %setup -q -b0
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch5 -p1
+%patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 aclocal
 libtoolize
 autoconf
 %configure \
-   --disable-video-svga --disable-video-ggi --disable-video-aalib \
+   --disable-video-svga \
+   --disable-video-ggi \
+   --disable-video-aalib \
    --enable-sdl-dlopen \
    --enable-arts-shared \
    --enable-esd-shared \
@@ -109,6 +132,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 1.2.15-10
+- Rebuild
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.2.15-9
 - Rebuild for new 4.0 release.
 
