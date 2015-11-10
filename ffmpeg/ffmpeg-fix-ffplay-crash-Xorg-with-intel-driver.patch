@@ -1,0 +1,35 @@
+diff -Nur ffmpeg-2.8.1/ffplay.c ffmpeg-2.8.1n/ffplay.c
+--- ffmpeg-2.8.1/ffplay.c	2015-09-09 09:17:44.000000000 +0800
++++ ffmpeg-2.8.1n/ffplay.c	2015-11-10 22:49:43.326784536 +0800
+@@ -1192,7 +1192,7 @@
+     if (screen && is->width == screen->w && screen->w == w
+        && is->height== screen->h && screen->h == h && !force_set_video_mode)
+         return 0;
+-    screen = SDL_SetVideoMode(w, h, 0, flags);
++    screen = SDL_SetVideoMode(w, h, 24, flags);
+     if (!screen) {
+         av_log(NULL, AV_LOG_FATAL, "SDL: could not set video mode - exiting\n");
+         do_exit(is);
+@@ -3214,12 +3214,6 @@
+ 
+ static void toggle_full_screen(VideoState *is)
+ {
+-#if defined(__APPLE__) && SDL_VERSION_ATLEAST(1, 2, 14)
+-    /* OS X needs to reallocate the SDL overlays */
+-    int i;
+-    for (i = 0; i < VIDEO_PICTURE_QUEUE_SIZE; i++)
+-        is->pictq.queue[i].reallocate = 1;
+-#endif
+     is_full_screen = !is_full_screen;
+     video_open(is, 1, NULL);
+ }
+@@ -3722,9 +3716,6 @@
+         flags &= ~SDL_INIT_AUDIO;
+     if (display_disable)
+         SDL_putenv(dummy_videodriver); /* For the event queue, we always need a video driver. */
+-#if !defined(_WIN32) && !defined(__APPLE__)
+-    flags |= SDL_INIT_EVENTTHREAD; /* Not supported on Windows or Mac OS X */
+-#endif
+     if (SDL_Init (flags)) {
+         av_log(NULL, AV_LOG_FATAL, "Could not initialize SDL - %s\n", SDL_GetError());
+         av_log(NULL, AV_LOG_FATAL, "(Did you set the DISPLAY variable?)\n");

@@ -1,12 +1,10 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.8.1
-Release: 4 
+Release: 5 
 License: GPLv3
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch0: ffmpeg-fix-defines.patch
-Patch1: ffmpeg-configure-dlvsym.patch
-Patch2: ffmpeg-fix-libv4l2-errors.patch
+Patch0: ffmpeg-fix-ffplay-crash-Xorg-with-intel-driver.patch
  
 URL: http://ffmpeg.sourceforge.net/
 BuildRequires: freetype-devel, zlib-devel, bzip2-devel xz-devel
@@ -38,6 +36,8 @@ BuildRequires: libass-devel
 
 #for ffplay
 BuildRequires: SDL-devel
+
+BuildRequires: doxygen
 
 Requires: %{name}-libs = %{version}-%{release}
 
@@ -79,6 +79,7 @@ Development headers, libraries and pkgconfig files for ffmpeg.
 
 %prep
 %setup -q
+%patch3 -p1
 
 %build
 ./configure \
@@ -192,6 +193,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-5
+- Fix ffplay crash Xorg when using intel driver
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-4
 - Rebuild for new 4.0 release.
 
