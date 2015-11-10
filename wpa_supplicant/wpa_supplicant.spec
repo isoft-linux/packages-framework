@@ -5,7 +5,7 @@ Summary: WPA/WPA2/IEEE 802.1X Supplicant
 Name: wpa_supplicant
 Epoch: 1
 Version: 2.5
-Release: 7.git
+Release: 8.git
 License: BSD
 Source0: hostap.tar.gz
 #Source0: http://w1.fi/releases/%{name}-%{version}%{rcver}%{snapshot}.tar.gz
@@ -169,6 +169,9 @@ fi
 %endif
 
 %changelog
+* Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 1:2.5-8.git
+- Update to git f10ff62
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:2.5-7.git
 - Rebuild for new 4.0 release.
 
