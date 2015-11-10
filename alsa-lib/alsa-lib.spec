@@ -1,7 +1,7 @@
 Summary:  The Advanced Linux Sound Architecture (ALSA) library
 Name:     alsa-lib
-Version:  1.0.29
-Release:  3
+Version:  1.1.0
+Release:  2
 License:  LGPLv2+
 URL:      http://www.alsa-project.org/
 
@@ -14,6 +14,7 @@ Patch1:   alsa-lib-1.0.14-glibc-open.patch
 Patch2:   alsa-lib-1.0.16-no-dox-date.patch
 
 BuildRequires:  doxygen
+BuildRequires:  python-devel
 Requires(post): /sbin/ldconfig, coreutils
 
 %description
@@ -112,6 +113,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/alsa/ucm
 
 %changelog
+* Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 1.1.0-2
+- Update to 1.1.0
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.29-3
 - Rebuild for new 4.0 release.
 
