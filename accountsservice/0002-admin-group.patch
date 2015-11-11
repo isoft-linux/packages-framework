@@ -1,0 +1,15 @@
+diff --git a/src/user.c b/src/user.c
+index 94ef58c..6703b1e 100644
+--- a/src/user.c
++++ b/src/user.c
+@@ -1667,7 +1667,9 @@ user_change_account_type_authorized_cb (Daemon                *daemon,
+ 
+                 argv[0] = "/usr/sbin/usermod";
+                 argv[1] = "-G";
+-                argv[2] = str->str;
++                argv[2] = account_type == ACCOUNT_TYPE_ADMINISTRATOR ?
++                          "wheel,sys,video,audio,disk" :
++                          str->str;
+                 argv[3] = "--";
+                 argv[4] = user->user_name;
+                 argv[5] = NULL;

@@ -1,6 +1,6 @@
 Name:           accountsservice
 Version:        0.6.40
-Release:        4
+Release:        5
 Summary:        D-Bus interfaces for querying and manipulating user account information
 
 License:        GPLv3+
@@ -10,6 +10,8 @@ Source0:        http://www.freedesktop.org/software/accountsservice/accountsserv
 
 # Autologin for sddm 
 Patch0: 0001-sddm-autologin.patch
+# Administrator group set as firstboot
+Patch1: 0002-admin-group.patch
 
 BuildRequires:  glib2-devel
 BuildRequires:  dbus-glib-devel
@@ -54,6 +56,7 @@ of these interfaces, based on the useradd, usermod and userdel commands.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure
@@ -108,6 +111,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_datadir}/gtk-doc/html/libaccountsservice/*
 
 %changelog
+* Wed Nov 11 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn>
+- Administrator group set as firstboot.
+
 * Mon Nov 09 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn>
 - Add autologin for sddm. 
 
