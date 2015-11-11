@@ -188,7 +188,7 @@ rm -rf %{buildroot}
 %dir %{_docdir}/ffmpeg-devel
 %{_docdir}/ffmpeg-devel/*
 %{_datadir}/ffmpeg/examples/*
-%{_docdir}/ffmpeg
+%{_docdir}/ffmpeg-devel
 %{_mandir}/man3/*
 
 
