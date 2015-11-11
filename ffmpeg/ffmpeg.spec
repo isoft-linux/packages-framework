@@ -79,7 +79,7 @@ Development headers, libraries and pkgconfig files for ffmpeg.
 
 %prep
 %setup -q
-%patch3 -p1
+%patch0 -p1
 
 %build
 ./configure \
