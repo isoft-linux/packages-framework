@@ -1,7 +1,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.8.1
-Release: 5 
+Release: 6 
 License: GPLv3
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0: ffmpeg-fix-ffplay-crash-Xorg-with-intel-driver.patch
@@ -193,6 +193,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Nov 11 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-6
+- try to fix ffplay fullscreen crash
+
 * Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-5
 - Fix ffplay crash Xorg when using intel driver
 
