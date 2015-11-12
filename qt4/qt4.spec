@@ -2,7 +2,7 @@
 Summary:  Qt toolkit
 Name:	  qt4
 Version:  4.8.7
-Release:  13
+Release:  14
 License:  GPL/QPL
 Url:   	  http://www.trolltech.com/products/qt/
 
@@ -125,7 +125,10 @@ Requires: %{name} = %{version}-%{release}
 Requires: libpng-devel
 Requires: libjpeg-devel
 Requires: pkgconfig
-Requires: rpm
+Requires: pkgconfig(gl) pkgconfig(glu)
+Requires: pkgconfig(ice) pkgconfig(sm) pkgconfig(xcursor) pkgconfig(xext) pkgconfig(xfixes) pkgconfig(xft) 
+Requires: pkgconfig(xi) pkgconfig(xinerama) pkgconfig(xrandr) pkgconfig(xrender) pkgconfig(xt) pkgconfig(xv) pkgconfig(x11) pkgconfig(xproto)
+
 Obsoletes: %{name}-designer < %{version}-%{release}
 Provides:  %{name}-designer = %{version}-%{release}
 %description devel
@@ -427,6 +430,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Nov 12 2015 Cjacker <cjacker@foxmail.com> - 4.8.7-14
+- Fix devel package requires
+
 * Tue Nov 03 2015 Cjacker <cjacker@foxmail.com> - 4.8.7-13
 - Rebuild
 
