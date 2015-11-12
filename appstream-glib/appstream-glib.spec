@@ -19,6 +19,7 @@ BuildRequires: gtk3-devel
 BuildRequires: gettext
 BuildRequires: intltool
 BuildRequires: libgcab-devel
+BuildRequires: libyaml-devel
 
 # for the builder component
 BuildRequires: fontconfig-devel
