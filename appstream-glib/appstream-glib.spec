@@ -21,6 +21,9 @@ BuildRequires: intltool
 BuildRequires: libgcab-devel
 BuildRequires: libyaml-devel
 
+#for doc generation
+BuildRequires: vim
+
 # for the builder component
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
@@ -75,13 +78,12 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %files -f appstream-glib.lang
 %doc README.md AUTHORS NEWS COPYING
 %{_bindir}/appstream-util
-%{_bindir}/appdata-validate
 %{_bindir}/appstream-builder
 %{_libdir}/libappstream-glib.so.*
 %{_libdir}/libappstream-builder.so.*
 %{_libdir}/girepository-1.0/*.typelib
-%dir %{_libdir}/asb-plugins-2
-%{_libdir}/asb-plugins-2/*.so
+%dir %{_libdir}/asb-plugins-*
+%{_libdir}/asb-plugins-*/*.so
 %{_datadir}/bash-completion/completions/appstream-builder
 %{_datadir}/bash-completion/completions/appstream-util
 %{_datadir}/installed-tests/appstream-glib/appdata-validate.test
