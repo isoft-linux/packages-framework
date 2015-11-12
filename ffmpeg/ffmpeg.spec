@@ -1,7 +1,14 @@
+#build with sdl or not, sdl only used by ffplay.
+#ffplay had some issues with xorg intel driver.
+#Patch0 used to fix ffplay crash Xorg issue.
+#But not fix ffplay resize segfault issue.
+#So, add this option to enable or disable build with SDL.
+%define withsdl 0
+
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.8.1
-Release: 7 
+Release: 8 
 License: GPLv3
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0: ffmpeg-fix-ffplay-crash-Xorg-with-intel-driver.patch
@@ -35,7 +42,9 @@ BuildRequires: fontconfig-devel freetype-devel fribidi-devel
 BuildRequires: libass-devel
 
 #for ffplay
+%if %{withsdl}
 BuildRequires: SDL-devel
+%endif
 
 BuildRequires: doxygen
 
@@ -91,7 +100,11 @@ Development headers, libraries and pkgconfig files for ffmpeg.
 	--enable-runtime-cpudetect \
 	--enable-libbluray \
 	--enable-libcdio \
+%if %{withsdl}
 	--enable-sdl \
+%else
+        --disable-sdl \
+%endif
 	--enable-libdc1394 \
 	--enable-libpulse \
 	--enable-libspeex \
@@ -163,7 +176,12 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
+%{_bindir}/ffmpeg
+%{_bindir}/ffprobe
+%{_bindir}/ffserver
+%if %{withsdl}
+%{_bindir}/ffplay
+%endif
 %dir %{_datadir}/ffmpeg
 %{_datadir}/ffmpeg/*.ffpreset
 %{_datadir}/ffmpeg/ffprobe.xsd
@@ -193,6 +211,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Nov 12 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-8
+- Disable build with SDL, add an option to control it
+
 * Wed Nov 11 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-7
 - need setup VideoMode. but crash when resize video window
 
