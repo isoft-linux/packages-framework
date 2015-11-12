@@ -1,21 +1,36 @@
 Summary:   Library for AppStream metadata
 Name:      appstream-glib
-Version:   0.4.1
-Release:   2
+Version:   0.5.3
+Release:   2 
 License:   LGPLv2+
 URL:       http://people.freedesktop.org/~hughsient/appstream-glib/
 Source0:   http://people.freedesktop.org/~hughsient/appstream-glib/releases/%{name}-%{version}.tar.xz
 
-BuildRequires: glib2-devel >= 2.16.1
+BuildRequires: glib2-devel >= 2.45.8
 BuildRequires: libtool
 BuildRequires: docbook-utils
 BuildRequires: gtk-doc
 BuildRequires: gobject-introspection-devel
 BuildRequires: gperf
 BuildRequires: libarchive-devel
-BuildRequires: libsoup-devel
-BuildRequires: gdk-pixbuf2-devel
+BuildRequires: libsoup-devel >= 2.51.92
+BuildRequires: gdk-pixbuf2-devel >= 2.31.5
+BuildRequires: gtk3-devel
+BuildRequires: gettext
+BuildRequires: intltool
+BuildRequires: libgcab-devel
+
+# for the builder component
+BuildRequires: fontconfig-devel
+BuildRequires: freetype-devel
+BuildRequires: pango-devel
+BuildRequires: rpm-devel
+BuildRequires: sqlite-devel
 BuildRequires: gcab
+
+# for the manpages
+BuildRequires: libxslt
+BuildRequires: docbook-style-xsl
 
 Requires: gcab
 
@@ -87,6 +102,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_datadir}/aclocal/appstream-xml.m4
 
 %changelog
+* Thu Nov 12 2015 Cjacker <cjacker@foxmail.com> - 0.5.3-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.4.1-2
 - Rebuild for new 4.0 release.
 
