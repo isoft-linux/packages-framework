@@ -24,7 +24,7 @@ BuildRequires: libgcab-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 BuildRequires: pango-devel
-BuildRequires: rpm-devel
+BuildRequires: librpm-devel
 BuildRequires: sqlite-devel
 BuildRequires: gcab
 
