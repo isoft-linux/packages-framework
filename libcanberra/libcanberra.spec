@@ -1,6 +1,6 @@
 Name: libcanberra
 Version: 0.30
-Release: 4
+Release: 5
 Summary: Portable Sound Event Library
 Source0: http://0pointer.de/lennart/projects/libcanberra/libcanberra-%{version}.tar.xz
 
@@ -35,6 +35,7 @@ Gtk+ 2.x bindings for libcanberra
 %package gtk2-devel
 Summary: Gtk+ 2.x Bindings for libcanberra
 Requires: %{name} = %{version}-%{release}
+Requires: %{name}-gtk2 = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 
 %description gtk2-devel
@@ -51,6 +52,7 @@ Gtk+ 3.x bindings for libcanberra
 %package gtk3-devel
 Summary: Gtk+ 3.x Bindings for libcanberra
 Requires: %{name} = %{version}-%{release}
+Requires: %{name}-gtk3 = %{version}-%{release}
 Requires: %{name}-devel = %{version}-%{release}
 
 %description gtk3-devel
@@ -152,6 +154,9 @@ rm $RPM_BUILD_ROOT%{_docdir}/libcanberra/README
 %{_datadir}/vala/vapi/libcanberra-gtk.vapi
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 0.30-5
+- Fix libcanberra devel package requires
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.30-4
 - Rebuild for new 4.0 release.
 
