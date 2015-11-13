@@ -2,10 +2,12 @@ Name: libcanberra
 Version: 0.30
 Release: 5
 Summary: Portable Sound Event Library
-Source0: http://0pointer.de/lennart/projects/libcanberra/libcanberra-%{version}.tar.xz
-
 License: LGPLv2+
 Url: http://git.0pointer.de/?p=libcanberra.git;a=summary
+
+Source0: http://0pointer.de/lennart/projects/libcanberra/libcanberra-%{version}.tar.xz
+Patch0: 0001-gtk-Don-t-assume-all-GdkDisplays-are-GdkX11Displays-.patch
+
 BuildRequires: gtk2-devel
 BuildRequires: gtk3-devel
 BuildRequires: alsa-lib-devel
@@ -15,6 +17,8 @@ BuildRequires: pulseaudio-libs-devel >= 0.9.15
 BuildRequires: gstreamer-devel
 BuildRequires: gettext-devel
 BuildRequires: systemd-devel
+BuildRequires: libltdl-devel
+
 Requires: sound-theme-freedesktop
 Requires: pulseaudio-libs >= 0.9.15
 Requires(post): systemd
@@ -66,6 +70,26 @@ Requires: gtk2-devel
 %description devel
 Development Files for libcanberra Client Development
 
+%prep
+%setup -q
+%patch0 -p1
+
+%build
+%configure \
+    --disable-static \
+    --enable-pulse \
+    --enable-alsa \
+    --enable-null \
+    --disable-oss \
+    --with-builtin=dso \
+    --with-systemdsystemunitdir=%{_unitdir}
+make %{?_smp_mflags}
+
+%install
+make DESTDIR=$RPM_BUILD_ROOT install
+find $RPM_BUILD_ROOT \( -name *.a -o -name *.la \) -exec rm {} \;
+rm $RPM_BUILD_ROOT%{_docdir}/libcanberra/README
+
 %post
 /sbin/ldconfig
 %systemd_post canberra-system-bootup.service canberra-system-shutdown.service canberra-system-shutdown-reboot.service
@@ -83,24 +107,6 @@ Development Files for libcanberra Client Development
 %post gtk3 -p /sbin/ldconfig
 %postun gtk3 -p /sbin/ldconfig
 
-%prep
-%setup -q
-
-%build
-%configure \
-    --disable-static \
-    --enable-pulse \
-    --enable-alsa \
-    --enable-null \
-    --disable-oss \
-    --with-builtin=dso \
-    --with-systemdsystemunitdir=/usr/lib/systemd/system
-make %{?_smp_mflags}
-
-%install
-make DESTDIR=$RPM_BUILD_ROOT install
-find $RPM_BUILD_ROOT \( -name *.a -o -name *.la \) -exec rm {} \;
-rm $RPM_BUILD_ROOT%{_docdir}/libcanberra/README
 
 %files
 %defattr(-,root,root)
@@ -112,9 +118,9 @@ rm $RPM_BUILD_ROOT%{_docdir}/libcanberra/README
 %{_libdir}/libcanberra-%{version}/libcanberra-null.so
 %{_libdir}/libcanberra-%{version}/libcanberra-multi.so
 %{_libdir}/libcanberra-%{version}/libcanberra-gstreamer.so
-%{_prefix}/lib/systemd/system/canberra-system-bootup.service
-%{_prefix}/lib/systemd/system/canberra-system-shutdown-reboot.service
-%{_prefix}/lib/systemd/system/canberra-system-shutdown.service
+%{_unitdir}/canberra-system-bootup.service
+%{_unitdir}/canberra-system-shutdown-reboot.service
+%{_unitdir}/canberra-system-shutdown.service
 %{_bindir}/canberra-boot
 
 %files gtk2
@@ -143,6 +149,7 @@ rm $RPM_BUILD_ROOT%{_docdir}/libcanberra/README
 
 #some files is shared between gtk2/gtk3, put them all in devel package
 #let gtk2-devel/gtk3-devel require it.
+
 %files devel
 %defattr(-,root,root)
 %doc %{_datadir}/gtk-doc
