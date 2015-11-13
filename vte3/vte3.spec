@@ -12,6 +12,7 @@ BuildRequires: gettext
 BuildRequires: intltool
 BuildRequires: gobject-introspection-devel
 BuildRequires: vala-tools
+BuildRequires: vala-devel
 BuildRequires: pcre2-devel
 BuildRequires: gnutls-devel
 
