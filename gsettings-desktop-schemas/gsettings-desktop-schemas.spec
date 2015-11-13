@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           gsettings-desktop-schemas
-Version:        3.18.0
+Version:        3.18.1
 Release:        2
 Summary:        A collection of GSettings schemas
 
@@ -67,6 +67,9 @@ fi
 %{_datadir}/gir-1.0/GDesktopEnums-3.0.gir
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 3.18.1-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-2
 - Rebuild for new 4.0 release.
 
