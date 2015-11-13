@@ -13,6 +13,7 @@ BuildRequires: intltool
 BuildRequires: gobject-introspection-devel
 BuildRequires: vala-tools
 BuildRequires: pcre2-devel
+BuildRequires: gnutls-devel
 
 %description
 VTE is a terminal emulator widget for use with GTK+.
