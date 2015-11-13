@@ -15,12 +15,19 @@ BuildRequires:  libpng-devel
 BuildRequires:  libjpeg-devel
 BuildRequires:  libtiff-devel
 BuildRequires:  jasper-devel
+
+%if %with_x11
+BuildRequires:  pkgconfig(x11)
+%endif
+
 BuildRequires:  gobject-introspection-devel >= 0.9.3
 # gdk-pixbuf does a configure time check which uses the GIO mime
 # layer; we need to actually have the mime type database.
 BuildRequires:  shared-mime-info
 # Bootstrap requirements
-BuildRequires: autoconf automake libtool
+BuildRequires: autoconf automake libtool  gtk-doc
+
+BuildRequires: gettext
 
 # We also need MIME information at runtime
 Requires: shared-mime-info
