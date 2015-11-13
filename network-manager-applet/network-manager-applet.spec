@@ -1,7 +1,7 @@
 Name:network-manager-applet
 Summary: GNOME applications for use with NetworkManager
-Version: 1.0.4
-Release: 4 
+Version: 1.0.6
+Release: 2 
 License: GPLv2+
 URL: http://www.gnome.org/projects/NetworkManager/
 Source: %{name}-%{version}.tar.xz
@@ -13,12 +13,22 @@ Requires: NetworkManager
 Requires: libnm-gtk = %{version}-%{release}
 Requires(pre): gtk3
 
-BuildRequires: NetworkManager-glib-devel
 BuildRequires: NetworkManager-devel
+BuildRequires: NetworkManager-glib-devel
+BuildRequires: ModemManager-devel
+BuildRequires: glib2-devel
 BuildRequires: gtk3-devel
-BuildRequires: iso-codes-devel
-BuildRequires: gobject-introspection-devel
+BuildRequires: libsecret-devel
+BuildRequires: gobject-introspection-devel >= 0.10.3
+BuildRequires: gettext-devel
+BuildRequires: gettext 
+BuildRequires: pkgconfig
 BuildRequires: libnotify-devel
+BuildRequires: automake autoconf intltool libtool
+BuildRequires: gtk-doc
+BuildRequires: desktop-file-utils
+BuildRequires: iso-codes-devel
+BuildRequires: libgudev-devel
 BuildRequires: libsecret-devel
 
 %description
@@ -101,6 +111,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_mandir}/man1/*
 %{_datadir}/GConf/gsettings/nm-applet.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.nm-applet.gschema.xml
+%{_datadir}/appdata/*.appdata.xml
 
 %files -n libnm-gtk
 %defattr(-,root,root,0755)
@@ -119,6 +130,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 1.0.6-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-4
 - Rebuild for new 4.0 release.
 
