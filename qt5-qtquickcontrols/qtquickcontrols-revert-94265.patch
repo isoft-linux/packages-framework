@@ -1,0 +1,16 @@
+revert: https://codereview.qt-project.org/#/c/94265/
+diff -Nur qtquickcontrols-opensource-src-5.5.1/src/controls/qquickmenupopupwindow.cpp qtquickcontrols-opensource-src-5.5.1n/src/controls/qquickmenupopupwindow.cpp
+--- qtquickcontrols-opensource-src-5.5.1/src/controls/qquickmenupopupwindow.cpp	2015-10-13 12:35:06.000000000 +0800
++++ qtquickcontrols-opensource-src-5.5.1n/src/controls/qquickmenupopupwindow.cpp	2015-11-13 00:06:57.944685302 +0800
+@@ -80,8 +80,9 @@
+ 
+ void QQuickMenuPopupWindow::setParentWindow(QWindow *effectiveParentWindow, QQuickWindow *parentWindow)
+ {
+-    while (effectiveParentWindow && effectiveParentWindow->parent())
+-        effectiveParentWindow = effectiveParentWindow->parent();
++    //revert https://codereview.qt-project.org/#/c/94265/
++    /*while (effectiveParentWindow && effectiveParentWindow->parent())
++        effectiveParentWindow = effectiveParentWindow->parent();*/
+     if (transientParent() != effectiveParentWindow)
+         setTransientParent(effectiveParentWindow);
+     m_logicalParentWindow = parentWindow;

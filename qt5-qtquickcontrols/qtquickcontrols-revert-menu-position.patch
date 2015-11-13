@@ -1,0 +1,77 @@
+revert: https://github.com/qtproject/qtquickcontrols/commit/d70e5ebe11a8eb22fe5e71945982d81991dc9f09
+diff -Nur qtquickcontrols-opensource-src-5.5.1/src/controls/qquickmenupopupwindow.cpp qtquickcontrols-opensource-src-5.5.1n/src/controls/qquickmenupopupwindow.cpp
+--- qtquickcontrols-opensource-src-5.5.1/src/controls/qquickmenupopupwindow.cpp	2015-11-13 00:07:28.673684752 +0800
++++ qtquickcontrols-opensource-src-5.5.1n/src/controls/qquickmenupopupwindow.cpp	2015-11-13 00:09:01.499683089 +0800
+@@ -47,8 +47,8 @@
+ QT_BEGIN_NAMESPACE
+ 
+ QQuickMenuPopupWindow::QQuickMenuPopupWindow(QQuickMenu *menu) :
++    QQuickPopupWindow(),
+     m_itemAt(0),
+-    m_logicalParentWindow(0),
+     m_menu(menu)
+ {
+ }
+@@ -85,7 +85,6 @@
+         effectiveParentWindow = effectiveParentWindow->parent();*/
+     if (transientParent() != effectiveParentWindow)
+         setTransientParent(effectiveParentWindow);
+-    m_logicalParentWindow = parentWindow;
+     if (parentWindow) {
+         if (QQuickMenuPopupWindow *pw = qobject_cast<QQuickMenuPopupWindow *>(parentWindow)) {
+             connect(pw, SIGNAL(popupDismissed()), this, SLOT(dismissPopup()));
+@@ -154,10 +153,6 @@
+     // the popup will reposition at the last moment, so its
+     // initial position must be captured for updateSize().
+     m_initialPos = position();
+-    if (m_logicalParentWindow && m_logicalParentWindow->parent()) {
+-        // This must be a QQuickWindow embedded via createWindowContainer.
+-        m_initialPos += m_logicalParentWindow->geometry().topLeft();
+-    }
+     QQuickPopupWindow::exposeEvent(e);
+ 
+     if (isExposed())
+diff -Nur qtquickcontrols-opensource-src-5.5.1/src/controls/qquickmenupopupwindow_p.h qtquickcontrols-opensource-src-5.5.1n/src/controls/qquickmenupopupwindow_p.h
+--- qtquickcontrols-opensource-src-5.5.1/src/controls/qquickmenupopupwindow_p.h	2015-10-13 12:35:06.000000000 +0800
++++ qtquickcontrols-opensource-src-5.5.1n/src/controls/qquickmenupopupwindow_p.h	2015-11-13 00:09:08.100682971 +0800
+@@ -75,7 +75,6 @@
+     QQuickItem *m_itemAt;
+     QPointF m_oldItemPos;
+     QPointF m_initialPos;
+-    QQuickWindow *m_logicalParentWindow;
+     QQuickMenu *m_menu;
+ 
+ private:
+diff -Nur qtquickcontrols-opensource-src-5.5.1/src/controls/qquickpopupwindow.cpp qtquickcontrols-opensource-src-5.5.1n/src/controls/qquickpopupwindow.cpp
+--- qtquickcontrols-opensource-src-5.5.1/src/controls/qquickpopupwindow.cpp	2015-10-13 12:35:06.000000000 +0800
++++ qtquickcontrols-opensource-src-5.5.1n/src/controls/qquickpopupwindow.cpp	2015-11-13 00:10:35.452681407 +0800
+@@ -63,16 +63,23 @@
+ {
+     qreal posx = x();
+     qreal posy = y();
+-    // transientParent may not be a QQuickWindow when embedding into widgets
+-    if (QWindow *tp = transientParent()) {
++    if (QQuickWindow *parentWindow = qobject_cast<QQuickWindow *>(transientParent())) {
+         if (m_parentItem) {
+-            QPointF pos = m_parentItem->mapToItem(m_parentItem->window()->contentItem(), QPointF(posx, posy));
++            QPointF pos = m_parentItem->mapToItem(parentWindow->contentItem(), QPointF(posx, posy));
+             posx = pos.x();
+             posy = pos.y();
+         }
+-        QPoint tlwOffset = tp->mapToGlobal(QPoint());
+-        posx += tlwOffset.x();
+-        posy += tlwOffset.y();
++
++        if (parentWindow->parent()) {
++            // If the parent window is embedded in another window, the offset needs to be relative to
++            // its top-level window container, or to global coordinates, which is the same in the end.
++            QPoint parentWindowOffset = parentWindow->mapToGlobal(QPoint());
++            posx += parentWindowOffset.x();
++            posy += parentWindowOffset.y();
++        } else {
++            posx += parentWindow->geometry().left();
++            posy += parentWindow->geometry().top();
++        }
+     } else if (m_parentItem && m_parentItem->window()) {
+         QPoint offset;
+         QQuickWindow *quickWindow = m_parentItem->window();
