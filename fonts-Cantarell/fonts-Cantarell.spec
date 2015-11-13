@@ -1,5 +1,5 @@
 Name:           fonts-Cantarell
-Version:        0.0.17.2
+Version:        0.0.18.1
 Release:        2 
 Summary:        Gnome cantarell font
 License:        GPL
@@ -35,11 +35,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/fonts/*.otf
 
 %changelog
-* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 0.0.17.2-2
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 0.0.18.1-2
 - Update
-
-* Sat Oct 24 2015 builder - 0.0.17.2-4
-- Rebuild for new 4.0 release.
 
 * Sat Oct 17 2015 Cjacker <cjacker@foxmail.com>
 - update to 0.0.17.2
