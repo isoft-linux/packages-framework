@@ -1,5 +1,3 @@
-%global with_x11 1
-
 %define glib2_base_version 2.28.0
 %define glib2_version %{glib2_base_version}-1
 %define pango_base_version 1.28.3
@@ -11,17 +9,18 @@
 
 %define gobject_introspection_base_version 0.10.1 
 %define gobject_introspection_version %{gobject_introspection_base_version}-1
-%define libpng_version 2:1.2.2-16
 
-%define base_version 3.18.2
+%define base_version 3.18.4
 %define bin_version 3.0.0
 
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 Name: gtk3
 Version: %{base_version}
-Release: 19
+Release: 2 
 License: LGPLv2+
+URL: http://www.gtk.org
 Source: http://download.gnome.org/sources/gtk+/3.0/gtk+-%{version}.tar.xz
+
 #By Cjacker
 #gtk default to wayland backend now.
 #It's bad since we still use "Xorg" as our default Display Server.
@@ -30,26 +29,39 @@ Source: http://download.gnome.org/sources/gtk+/3.0/gtk+-%{version}.tar.xz
 #and GDK_BACKEND settings still works.
 Patch0: gtk-temp-fix-backend-selection.patch
 
-BuildRequires: atk-devel >= %{atk_version}
-BuildRequires: pango-devel >= %{pango_version}
-BuildRequires: glib2-devel >= %{glib2_version}
-BuildRequires: gobject-introspection-devel >= %{gobject_introspection_version}
-BuildRequires: libtiff-devel
-BuildRequires: libjpeg-devel
-BuildRequires: libpng-devel >= %{libpng_version}
-BuildRequires: automake autoconf libtool pkgconfig
+BuildRequires: gnome-common autoconf automake intltool gettext pkgconfig
+BuildRequires: pkgconfig(atk) >= %{atk_version}
+BuildRequires: pkgconfig(atk-bridge-2.0)
+BuildRequires: pkgconfig(glib-2.0) >= %{glib2_version}
+BuildRequires: pkgconfig(gobject-introspection-1.0)
+BuildRequires: pkgconfig(cairo) >= %{cairo_version}
+BuildRequires: pkgconfig(cairo-gobject) >= %{cairo_version}
+BuildRequires: pkgconfig(pango) >= %{pango_version}
+BuildRequires: pkgconfig(gdk-pixbuf-2.0) >= %{gdk_pixbuf_version}
+BuildRequires: pkgconfig(xi)
+BuildRequires: pkgconfig(xrandr)
+BuildRequires: pkgconfig(xrender)
+BuildRequires: pkgconfig(xrender)
+BuildRequires: pkgconfig(xcursor)
+BuildRequires: pkgconfig(xfixes)
+BuildRequires: pkgconfig(xinerama)
+BuildRequires: pkgconfig(xcomposite)
+BuildRequires: pkgconfig(xdamage)
+BuildRequires: pkgconfig(epoxy)
 BuildRequires: gettext
+BuildRequires: gtk-doc
 BuildRequires: cups-devel
-BuildRequires: cairo-devel >= %{cairo_version}
-BuildRequires: wayland-devel
-BuildRequires: colord-devel
+#cloudprint need these two requires.
+#BuildRequires: pkgconfig(rest-0.7)
+#BuildRequires: pkgconfig(json-glib-1.0)
+BuildRequires: pkgconfig(colord)
+BuildRequires: pkgconfig(avahi-gobject)
+BuildRequires: desktop-file-utils
+BuildRequires: pkgconfig(wayland-client) >= %{wayland_version}
+BuildRequires: pkgconfig(wayland-cursor) >= %{wayland_version}
+BuildRequires: pkgconfig(wayland-egl) >= %{wayland_version}
+BuildRequires: pkgconfig(xkbcommon)
 
-%if %with_x11
-BuildRequires: at-spi2-core-devel
-BuildRequires: at-spi2-atk-devel
-%endif
-
-URL: http://www.gtk.org
 
 # required for icon themes apis to work
 
@@ -57,8 +69,7 @@ URL: http://www.gtk.org
 Requires(post): glib2 >= %{glib2_version}
 Requires(post): atk >= %{atk_version}
 Requires(post): pango >= %{pango_version}
-# and these for gdk-pixbuf-query-loaders
-Requires(post): libtiff >= 3.6.1
+
 Requires: gail3
 
 
@@ -117,13 +128,8 @@ export CXX=c++
     --enable-introspection=auto \
     --enable-broadway-backend \
     --enable-wayland-backend \
-%if %with_x11
     --enable-x11-backend \
     --with-xinput \
-%else
-    --disable-x11-backend \
-    --without-xinput \
-%endif
     --enable-colord=yes \
     --disable-cloudprint
 
@@ -193,7 +199,6 @@ glib-compile-schemas /usr/share/glib-2.0/schemas >/dev/null 2>&1 ||:
 
 %doc AUTHORS COPYING NEWS README
 %{_bindir}/gtk-query-immodules-3.0*
-#%{_bindir}/gtk-update-icon-cache
 %{_bindir}/gtk3-update-icon-cache
 %{_bindir}/gtk3-icon-browser
 %{_bindir}/gtk-encode-symbolic-svg
@@ -241,7 +246,6 @@ glib-compile-schemas /usr/share/glib-2.0/schemas >/dev/null 2>&1 ||:
 %files -n gail3
 %defattr(-, root, root)
 %{_libdir}/libgail*.so.*
-#%{_libdir}/gtk-3.0/modules/*
 
 %files -n gail3-devel
 %defattr(-, root, root)
@@ -251,6 +255,9 @@ glib-compile-schemas /usr/share/glib-2.0/schemas >/dev/null 2>&1 ||:
 %{_includedir}/gail*
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 3.18.4-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.2-19
 - Rebuild for new 4.0 release.
 
