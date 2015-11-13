@@ -1,8 +1,8 @@
 %global with_x11 1
 
 Name:           gdk-pixbuf2
-Version:        2.32.1
-Release:        2
+Version:        2.33.1
+Release:        2 
 Summary:        An image loading library
 
 License:        LGPLv2+
@@ -127,6 +127,9 @@ fi
 
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 2.33.1-2
+- Update
+
 * Sat Oct 24 2015 builder - 2.32.1-2
 - Rebuild for new 4.0 release.
 
