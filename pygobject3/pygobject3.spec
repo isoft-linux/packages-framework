@@ -12,8 +12,8 @@
 %define python3_version                3.4
 
 Name: pygobject3
-Version: 3.18.0
-Release: 2
+Version: 3.18.2
+Release: 2 
 License: LGPLv2+ and MIT
 Summary: Python 2 bindings for GObject Introspection
 URL: https://live.gnome.org/PyGObject
@@ -146,6 +146,9 @@ find $RPM_BUILD_ROOT -name '*.a' -delete
 %endif # with_python3
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 3.18.2-2
+- Update
+
 * Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-2
 - Rebuild with python 3.5
 
