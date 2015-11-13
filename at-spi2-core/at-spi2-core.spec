@@ -70,7 +70,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/libatspi.la
 %{_libexecdir}/at-spi-bus-launcher
 %{_datadir}/dbus-1/services/org.a11y.Bus.service
 %{_datadir}/dbus-1/accessibility-services/org.a11y.atspi.Registry.service
-%{_userunitdir}/at-spi-dbus-bus.service
+#%{_userunitdir}/at-spi-dbus-bus.service
 
 %files devel
 %{_libdir}/libatspi.so
