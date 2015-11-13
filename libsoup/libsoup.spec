@@ -1,14 +1,21 @@
 Summary: Soup, an HTTP library implementation
 Name: libsoup
-Version: 2.52.1
-Release: 3 
+Version: 2.52.2
+Release: 2
 License: LGPL
 Source0: ftp://ftp.gnome.org/pub/gnome/sources/libsoup/2.2/%{name}-%{version}.tar.xz
 URL:  ftp://ftp.gnome.org/pub/gnome/sources/libsoup/
 
 Requires: glib2 >= 2.0, libxml2, gnutls
 Requires: glib-networking
-BuildRequires: glib2-devel, pkgconfig, libxml2-devel, gnutls-devel,glib-networking
+BuildRequires: pkgconfig, gnutls-devel
+BuildRequires: glib2-devel
+BuildRequires: glib-networking
+BuildRequires: intltool
+BuildRequires: pkgconfig(gobject-introspection-1.0)
+BuildRequires: pkgconfig(libxml-2.0)
+BuildRequires: pkgconfig(sqlite3)
+BuildRequires: vala-tools
 %description
 Libsoup is an HTTP library implementation in C. It was originally part
 of a SOAP (Simple Object Access Protocol) implementation called Soup, but
@@ -68,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/libsoup-*.vapi
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 2.52.2-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.52.1-3
 - Rebuild for new 4.0 release.
 
