@@ -1,0 +1,30 @@
+https://codereview.qt-project.org/#/c/89777/
+diff -Nur qtbase-opensource-src-5.5.1/src/gui/kernel/qwindow.cpp qtbase-opensource-src-5.5.1revert/src/gui/kernel/qwindow.cpp
+--- qtbase-opensource-src-5.5.1/src/gui/kernel/qwindow.cpp	2015-11-12 23:53:06.692700188 +0800
++++ qtbase-opensource-src-5.5.1revert/src/gui/kernel/qwindow.cpp	2015-11-12 23:54:40.453698509 +0800
+@@ -1152,10 +1152,10 @@
+ void QWindow::setTransientParent(QWindow *parent)
+ {
+     Q_D(QWindow);
+-    if (parent && !parent->isTopLevel()) {
++    /*if (parent && !parent->isTopLevel()) {
+         qWarning() << Q_FUNC_INFO << parent << "must be a top level window.";
+         return;
+-    }
++    }*/
+ 
+     d->transientParent = parent;
+ 
+diff -Nur qtbase-opensource-src-5.5.1/src/widgets/kernel/qwidget.cpp qtbase-opensource-src-5.5.1revert/src/widgets/kernel/qwidget.cpp
+--- qtbase-opensource-src-5.5.1/src/widgets/kernel/qwidget.cpp	2015-10-13 12:35:22.000000000 +0800
++++ qtbase-opensource-src-5.5.1revert/src/widgets/kernel/qwidget.cpp	2015-11-12 23:55:19.688697806 +0800
+@@ -1440,7 +1440,8 @@
+     if (QWidget *nativeParent = q->nativeParentWidget()) {
+         if (nativeParent->windowHandle()) {
+             if (flags & Qt::Window) {
+-                win->setTransientParent(nativeParent->window()->windowHandle());
++                //win->setTransientParent(nativeParent->window()->windowHandle());
++                win->setTransientParent(nativeParent->windowHandle());
+                 win->setParent(0);
+             } else {
+                 win->setTransientParent(0);

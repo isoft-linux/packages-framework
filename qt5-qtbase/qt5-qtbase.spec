@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 11 
+Release: 12
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -50,6 +50,10 @@ Patch30: qt5-qtbase-fix-chromium-and-other-application-dnd.patch
 #Wrong, but we do that!!
 Patch60: qtbase-do-not-exit-when-error-happened.patch
 
+#revert: https://codereview.qt-project.org/#/c/89777/
+#This is partial fix of "kcmshell5 kwineffects popup menu wrong position" issue.
+#another two revert happened in qtquickcontrols
+Patch61: qtbase-revert-89777.patch
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -157,6 +161,7 @@ developing applications that use %{name}.
 %patch30 -p1
 
 %patch60 -p1
+%patch61 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -304,6 +309,11 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Thu Nov 12 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-13
+- Revert Ensure transient parents are top level widgets
+- this is partial fix of "kcmshell5 kwineffects popup menu wrong position" issue.
+- another two revert happened in qtquickcontrols
+
 * Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-11
 - Fix QTBUG-49220
 
