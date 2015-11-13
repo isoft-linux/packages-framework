@@ -6,8 +6,8 @@
 
 Summary: Framework for managing passwords and other secrets
 Name: gnome-keyring
-Version: 3.18.0
-Release: 2
+Version: 3.18.3
+Release: 2 
 License: GPLv2+ and LGPLv2+
 #VCS: git:git://git.gnome.org/gnome-keyring
 Source: http://download.gnome.org/sources/gnome-keyring/2.32/gnome-keyring-%{version}.tar.xz
@@ -15,18 +15,21 @@ Patch0:   gnome-keyring-fix-header.patch
 
 URL: http://www.gnome.org
 
-BuildRequires: glib2-devel >= %{glib2_version}
-BuildRequires: dbus-devel >= %{dbus_version}
-BuildRequires: libgcrypt-devel >= %{gcrypt_version}
-BuildRequires: libtasn1-devel >= %{libtasn1_version}
+BuildRequires: pkgconfig(gcr-3)
+BuildRequires: pkgconfig(glib-2.0)
+BuildRequires: pkgconfig(p11-kit-1)
+BuildRequires: docbook-dtds
+BuildRequires: docbook-style-xsl
+BuildRequires: gettext
+BuildRequires: intltool
+BuildRequires: libcap-ng-devel
+BuildRequires: libgcrypt-devel
 BuildRequires: pam-devel
+BuildRequires: libxslt 
 BuildRequires: autoconf, automake, libtool
 BuildRequires: gettext
 BuildRequires: intltool
-BuildRequires: libtasn1-tools
 BuildRequires: gtk-doc
-BuildRequires: perl-XML-Parser
-BuildRequires: gcr-devel
 
 %description
 The gnome-keyring session daemon manages passwords and other types of
@@ -122,6 +125,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas >/dev/null 2>&1 ||:
 
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 3.18.3-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-2
 - Rebuild for new 4.0 release.
 
