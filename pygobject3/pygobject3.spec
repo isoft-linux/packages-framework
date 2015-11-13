@@ -27,6 +27,8 @@ BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: gobject-introspection-devel >= %{gobject_introspection_version}
 BuildRequires: python-devel >= %{python2_version}
 BuildRequires: pycairo-devel
+BuildRequires: cairo-gobject-devel
+
 %if 0%{?with_python3}
 BuildRequires: python3-devel >= %{python3_version}
 BuildRequires: python3-cairo-devel
