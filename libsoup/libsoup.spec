@@ -16,6 +16,7 @@ BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: pkgconfig(libxml-2.0)
 BuildRequires: pkgconfig(sqlite3)
 BuildRequires: vala-tools
+BuildRequires: vala-devel
 %description
 Libsoup is an HTTP library implementation in C. It was originally part
 of a SOAP (Simple Object Access Protocol) implementation called Soup, but
