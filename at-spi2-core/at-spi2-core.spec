@@ -1,5 +1,5 @@
 Name:           at-spi2-core
-Version:        2.18.1
+Version:        2.18.3
 Release:        2
 Summary:        Protocol definitions and daemon for D-Bus at-spi
 
@@ -12,10 +12,13 @@ BuildRequires:  dbus-glib-devel
 BuildRequires:  glib2-devel
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  libXtst-devel
+BuildRequires:  libXevie-devel
 BuildRequires:  libXext-devel
 BuildRequires:  libXi-devel
 BuildRequires:  autoconf automake libtool
 BuildRequires:  intltool
+#for _userunitdir macro
+BuildRequires:  systemd
 
 Requires:       dbus
 
@@ -67,6 +70,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/libatspi.la
 %{_libexecdir}/at-spi-bus-launcher
 %{_datadir}/dbus-1/services/org.a11y.Bus.service
 %{_datadir}/dbus-1/accessibility-services/org.a11y.atspi.Registry.service
+%{_userunitdir}/at-spi-dbus-bus.service
 
 %files devel
 %{_libdir}/libatspi.so
@@ -76,6 +80,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/libatspi.la
 %{_libdir}/pkgconfig/atspi-2.pc
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 2.18.3-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.18.1-2
 - Rebuild for new 4.0 release.
 
