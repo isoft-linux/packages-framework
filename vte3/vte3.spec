@@ -1,7 +1,7 @@
 %define api_version 2.91
 Name: vte3
-Version: 0.42.1
-Release: 2
+Version: 0.43.0
+Release: 2 
 Summary: A terminal emulator
 License: LGPLv2+
 Source: http://download.gnome.org/sources/vte/0.28/vte-%{version}.tar.xz
@@ -75,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/vte-%{api_version}.vapi
 
 %changelog
+* Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 0.43.0-2
+- Update
+
 * Sat Oct 24 2015 builder - 0.42.1-2
 - Rebuild for new 4.0 release.
 
