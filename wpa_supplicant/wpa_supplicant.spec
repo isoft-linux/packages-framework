@@ -5,7 +5,7 @@ Summary: WPA/WPA2/IEEE 802.1X Supplicant
 Name: wpa_supplicant
 Epoch: 1
 Version: 2.5
-Release: 8.git
+Release: 9.git
 License: BSD
 Source0: hostap.tar.gz
 #Source0: http://w1.fi/releases/%{name}-%{version}%{rcver}%{snapshot}.tar.gz
@@ -25,6 +25,20 @@ Patch0: wpa_supplicant-assoc-timeout.patch
 Patch1: wpa_supplicant-flush-debug-output.patch
 # disto specific customization for log paths, not suitable for upstream
 Patch2: wpa_supplicant-dbus-service-file-args.patch
+# quiet an annoying and frequent syslog message
+Patch3: wpa_supplicant-quiet-scan-results-message.patch
+# distro specific customization for Qt4 build tools, not suitable for upstream
+Patch6: wpa_supplicant-gui-qt4.patch
+# Less aggressive roaming; signal strength is wildly variable
+# dcbw states (2015-04):
+# "upstream doesn't like that patch so it's been discussed and I think rejected"
+Patch8: rh837402-less-aggressive-roaming.patch
+# Fix a security issue - rh #rh1241907
+# http://w1.fi/security/2015-5/0001-NFC-Fix-payload-length-validation-in-NDEF-record-par.patch
+Patch11: rh1241907-NFC-Fix-payload-length-validation-in-NDEF-record-par.patch
+# Don't override D-Bus policy for other daemons
+# http://lists.infradead.org/pipermail/hostap/2015-October/034036.html
+Patch12: 0001-wpa_supplicant-don-t-do-deny-send_interface-.-in-dbu.patch
 
 
 URL: http://w1.fi/wpa_supplicant/
@@ -78,6 +92,10 @@ Don't use this unless you know what you're doing.
 %patch0 -p1 -b .assoc-timeout
 %patch1 -p1 -b .flush-debug-output
 %patch2 -p1 -b .dbus-service-file
+#%patch3 -p1 -b .quiet-scan-results-msg
+#%patch6 -p1 -b .qt4
+%patch8 -p1 -b .rh837402-less-aggressive-roaming
+%patch12 -p1 -b .dbus-policy
 
 %build
 pushd wpa_supplicant
@@ -169,6 +187,9 @@ fi
 %endif
 
 %changelog
+* Sun Nov 15 2015 Cjacker <cjacker@foxmail.com> - 1:2.5-9.git
+- Update to latest git
+
 * Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 1:2.5-8.git
 - Update to git f10ff62
 
