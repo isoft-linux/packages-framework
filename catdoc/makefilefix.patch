@@ -1,0 +1,79 @@
+diff -upNr catdoc-0.94.2.orign/charsets/Makefile.in catdoc-0.94.2/charsets/Makefile.in
+--- catdoc-0.94.2.orign/charsets/Makefile.in	2006-02-24 18:44:06.000000000 +0100
++++ catdoc-0.94.2/charsets/Makefile.in	2007-11-11 10:24:47.000000000 +0100
+@@ -29,15 +29,15 @@ all: @charsetcheck@
+ clean:
+ install: install-dirs install-spc install-charsets
+ install-spc: tex.spc ascii.spc tex.rpl ascii.rpl
+-	    $(INSTALL) -m 644 ascii.spc $(installroot)$(LIB_DIR)/ascii$(SPEC_EXT) 
+-	    $(INSTALL) -m 644 tex.spc $(installroot)$(LIB_DIR)/tex$(SPEC_EXT) 
+-	    $(INSTALL) -m 644 ascii.rpl $(installroot)$(LIB_DIR)/ascii$(REPL_EXT)
+-	    $(INSTALL) -m 644 tex.rpl $(installroot)$(LIB_DIR)/tex$(REPL_EXT)
++	    $(INSTALL) -p -m 644 ascii.spc $(DESTDIR)$(installroot)$(LIB_DIR)/ascii$(SPEC_EXT) 
++	    $(INSTALL) -p -m 644 tex.spc $(DESTDIR)$(installroot)$(LIB_DIR)/tex$(SPEC_EXT) 
++	    $(INSTALL) -p -m 644 ascii.rpl $(DESTDIR)$(installroot)$(LIB_DIR)/ascii$(REPL_EXT)
++	    $(INSTALL) -p -m 644 tex.rpl $(DESTDIR)$(installroot)$(LIB_DIR)/tex$(REPL_EXT)
+ install-charsets:
+ 	for i in *.txt; do\
+-	   $(INSTALL) -m 0644 $$i $(installroot)$(LIB_DIR);\
++	   $(INSTALL) -p -m 0644 $$i $(DESTDIR)$(installroot)$(LIB_DIR);\
+ 	done
+ install-dirs:
+-	../mkinstalldirs $(installroot)$(LIB_DIR)
++	../mkinstalldirs $(DESTDIR)$(installroot)$(LIB_DIR)
+ distclean:
+ 	rm Makefile
+diff -upNr catdoc-0.94.2.orign/doc/Makefile.in catdoc-0.94.2/doc/Makefile.in
+--- catdoc-0.94.2.orign/doc/Makefile.in	2006-02-25 17:08:27.000000000 +0100
++++ catdoc-0.94.2/doc/Makefile.in	2007-11-11 10:24:49.000000000 +0100
+@@ -10,7 +10,7 @@ prefix = @prefix@
+ exec_prefix = @exec_prefix@
+ bindir = @bindir@
+ libdir = @libdir@
+-mandir = @man1dir@
++mandir = @mandir@
+ manext = @manext@ 
+ %.txt: %.1
+ 	nroff -mandoc $< |col -bx >$@
+@@ -25,13 +25,13 @@ clean:
+ 	rm build
+ install: @installtargets@
+ install-catdoc: catdoc.1 xls2csv.1 catppt.1
+-	../mkinstalldirs $(installroot)$(mandir)
+-	$(INSTALL) -m 644 catdoc.1 $(installroot)$(mandir)/catdoc$(manext)
+-	$(INSTALL) -m 644 xls2csv.1 $(installroot)$(mandir)/xls2csv$(manext)
+-	$(INSTALL) -m 644 catppt.1 $(installroot)$(mandir)/catppt$(manext)
++	../mkinstalldirs $(DESTDIR)$(installroot)$(mandir)/man1/
++	$(INSTALL) -p -m 644 catdoc.1 $(DESTDIR)$(installroot)$(mandir)/man1/catdoc$(manext)
++	$(INSTALL) -p -m 644 xls2csv.1 $(DESTDIR)$(installroot)$(mandir)/man1/xls2csv$(manext)
++	$(INSTALL) -p -m 644 catppt.1 $(DESTDIR)$(installroot)$(mandir)//man1/catppt$(manext)
+ install-wordview:	
+-	../mkinstalldirs $(installroot)$(mandir)
+-	$(INSTALL) -m 644 wordview.1 $(installroot)$(mandir)/wordview$(manext)
++	../mkinstalldirs $(DESTDIR)$(installroot)$(mandir)
++	$(INSTALL) -p -m 644 wordview.1 $(DESTDIR)$(installroot)$(mandir)/man1/wordview$(manext)
+ # Following rules are primarily for developers use. I doubt that you
+ # need to rebuild these versions of documentation
+ distclean: catppt.txt catppt.ps catdoc.1 catdoc.txt catdoc.ps xls2csv.1  xls2csv.txt xls2csv.ps
+diff -upNr catdoc-0.94.2.orign/src/Makefile.in catdoc-0.94.2/src/Makefile.in
+--- catdoc-0.94.2.orign/src/Makefile.in	2006-02-24 18:44:06.000000000 +0100
++++ catdoc-0.94.2/src/Makefile.in	2007-11-11 10:25:03.000000000 +0100
+@@ -83,13 +83,13 @@ catppt: $(OBJPPT)
+ 
+ install: @installtargets@
+ install-catdoc:catdoc xls2csv catppt 
+-	../mkinstalldirs $(installroot)$(bindir)
+-	$(INSTALL) -m 755 catdoc $(installroot)$(bindir)/catdoc
+-	$(INSTALL) -m 755 xls2csv $(installroot)$(bindir)/xls2csv
+-	$(INSTALL) -m 755 catppt $(installroot)$(bindir)/catppt
++	../mkinstalldirs $(DESTDIR)$(installroot)$(bindir)
++	$(INSTALL) -p -m 755 catdoc $(DESTDIR)$(installroot)$(bindir)/catdoc
++	$(INSTALL) -p -m 755 xls2csv $(DESTDIR)$(installroot)$(bindir)/xls2csv
++	$(INSTALL) -p -m 755 catppt $(DESTDIR)$(installroot)$(bindir)/catppt
+ install-wordview: wordview 
+ 	../mkinstalldirs $(installroot)$(bindir)
+-	$(INSTALL) -m 755 wordview $(installroot)$(bindir)/wordview
++	$(INSTALL) -p -m 755 wordview $(DESTDIR)$(installroot)$(bindir)/wordview
+ wordview: wordview.tcl
+ 	echo "#! $(WISH)" >wordview
+ 	echo set charset_lib "\"$(CHARSETPATH)\"">>wordview
