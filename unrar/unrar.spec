@@ -8,6 +8,7 @@ Summary:	unRAR is a utility to extract, view, and test the contents of an RAR ar
 License:	Unrar License
 URL:		http://www.rarlab.com/rar_add.htm
 Source0:	http://www.rarlab.com/rar/unrarsrc-%{version}.tar.gz
+Source1:        http://www.rarlabs.com/rar/rarlinux-x64-5.3.b6.tar.gz
 
 BuildRequires:	compiler-wrapper
 
@@ -15,7 +16,7 @@ BuildRequires:	compiler-wrapper
 %{summary}
 
 %prep
-%setup -q -n unrar
+%setup -q -n unrar -a1
 
 %build
 make
