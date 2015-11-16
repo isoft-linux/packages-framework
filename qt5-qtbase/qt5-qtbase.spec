@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 12
+Release: 13
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -54,6 +54,10 @@ Patch60: qtbase-do-not-exit-when-error-happened.patch
 #This is partial fix of "kcmshell5 kwineffects popup menu wrong position" issue.
 #another two revert happened in qtquickcontrols
 Patch61: qtbase-revert-89777.patch
+
+#https://bugreports.qt.io/browse/QTBUG-49061
+#it also should fix kmozillahelper segfault issue
+Patch62: qtbase-unload-plugin-QTBUG-49061.patch
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -162,6 +166,8 @@ developing applications that use %{name}.
 
 %patch60 -p1
 %patch61 -p1
+
+%patch62 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -309,6 +315,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Mon Nov 16 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-13
+- Should fix kmozillahelper segfault issue
+
 * Thu Nov 12 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-13
 - Revert Ensure transient parents are top level widgets
 - this is partial fix of "kcmshell5 kwineffects popup menu wrong position" issue.

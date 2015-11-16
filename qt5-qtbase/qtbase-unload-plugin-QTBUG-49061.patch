@@ -1,0 +1,56 @@
+Parent:     5956d871 (winrt: Make dialog and window behave similarly.)
+Author:     Thiago Macieira <thiago.macieira@intel.com>
+AuthorDate: 2015-11-12 10:14:51 -0800
+Commit:     Thiago Macieira <thiago.macieira@intel.com>
+CommitDate: 2015-11-12 13:41:20 -0800
+
+Stop unloading plugins in QPluginLoader and QFactoryLoader
+
+QPluginLoader hasn't unloaded in its destructor since Qt 5.0, but we
+missed the equivalent code in QFactoryLoader (which bypasses
+QPluginLoader). Besides, QPluginLoader::unload() was still doing
+unloading, which it won't anymore.
+
+Not unloading plugins is Qt's policy, as decided during the 5.0
+development process and reaffirmed now in 5.6. This is due to static
+data in plugins leaking out and remaining in use past the unloading of
+the plugin, causing crashes.
+
+This does not affect QLibrary and QLibrary::unload(). Those are meant
+for non-Qt loadable modules, so unloading them may be safe.
+
+Task-number: QTBUG-49061
+Discussed-on: http://lists.qt-project.org/pipermail/development/2015-November/023681.html
+Change-Id: I461e9fc7199748faa187ffff1416070f138df8db
+diff -Nur qtbase-opensource-src-5.5.1/src/corelib/plugin/qfactoryloader.cpp qtbase-opensource-src-5.5.1n/src/corelib/plugin/qfactoryloader.cpp
+--- qtbase-opensource-src-5.5.1/src/corelib/plugin/qfactoryloader.cpp	2015-10-13 12:35:30.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/corelib/plugin/qfactoryloader.cpp	2015-11-16 20:11:20.183921022 +0800
+@@ -85,7 +85,7 @@
+ {
+     for (int i = 0; i < libraryList.count(); ++i) {
+         QLibraryPrivate *library = libraryList.at(i);
+-        library->unload();
++        library->unload(QLibraryPrivate::NoUnloadSys);
+         library->release();
+     }
+ }
+diff -Nur qtbase-opensource-src-5.5.1/src/corelib/plugin/qpluginloader.cpp qtbase-opensource-src-5.5.1n/src/corelib/plugin/qpluginloader.cpp
+--- qtbase-opensource-src-5.5.1/src/corelib/plugin/qpluginloader.cpp	2015-10-13 12:35:30.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/corelib/plugin/qpluginloader.cpp	2015-11-16 20:11:59.506920318 +0800
+@@ -246,14 +246,14 @@
+ 
+     Don't try to delete the root component. Instead rely on
+     that unload() will automatically delete it when needed.
+-
++    \note QPluginLoader does not actually unload the plugin shared library/DLL.
+     \sa instance(), load()
+ */
+ bool QPluginLoader::unload()
+ {
+     if (did_load) {
+         did_load = false;
+-        return d->unload();
++        return d->unload(QLibraryPrivate::NoUnloadSys);
+     }
+     if (d)  // Ouch
+         d->errorString = tr("The plugin was not loaded.");
