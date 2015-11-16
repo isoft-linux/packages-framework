@@ -1,9 +1,9 @@
 Summary: Internationalized Domain Name support library
 Name: libidn
-Version: 1.30
-Release: 2.1
+Version: 1.32
+Release: 2 
 URL: http://www.gnu.org/software/libidn
-License: LGPL
+License: LGPLv2+ and GPLv3+ and GFDL 
 Source0: http://ftp.gnu.org/gnu/libidn/libidn-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: pkgconfig, gettext
@@ -72,6 +72,9 @@ rm -rf %{buildroot}
 %{_mandir}/man3/*
 
 %changelog
+* Sun Nov 15 2015 Cjacker <cjacker@foxmail.com> - 1.32-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.30-2.1
 - Rebuild for new 4.0 release.
 

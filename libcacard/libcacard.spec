@@ -1,51 +1,36 @@
-#it's part of qemu, since spice need libcacard and qemu need spice library.
-#here seperate it.
-
-%define _udevdir %{_libdir}/udev/rules.d
-
 Summary: Common Access Card (CAC) Emulation Development library
 Name:    libcacard 
-Version: 2.4.0
-Release: 2
+Version: 2.5.0
+Release: 2 
 License: GPLv2+ and LGPLv2+ and BSD
 URL: http://www.qemu.org/
-Source0: qemu-%{version}.tar.bz2
+Source0: %{name}-%{version}.tar.xz
 
-BuildRequires: zlib-devel which
-BuildRequires: ncurses-devel
-BuildRequires: nss-devel nspr-devel glib2-devel
+BuildRequires: nss-devel glib2-devel
+
+#if we need re-generate configure
+BuildRequires: autoconf automake libtool
 
 %description
 Common Access Card (CAC) Emulation
 
 %package devel
 Summary:   CAC Emulation devel
-Requires:  libcacard = %{version}-%{release}
+Requires:  %{name} = %{version}-%{release}
 
 %description devel
 Common Access Card (CAC) Emulation Development library
 
 %prep
-%setup -q -n qemu-%{version}
+%setup -q
 
 %build
-#if build with clang, should enable it.
-#--extra-cflags="$RPM_OPT_FLAGS -fno-integrated-as"
-./configure --prefix=%{_prefix} \
-            --sysconfdir=%{_sysconfdir} \
-            --libdir=%{_libdir} \
-            --sysconfdir=%{_sysconfdir} \
-            --localstatedir=%{_localstatedir} \
-            --extra-ldflags="$extraldflags -lrt"
-            
-
-make V=1 %{?_smp_mflags} libcacard
+%configure
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install-libcacard DESTDIR=$RPM_BUILD_ROOT
-
-chmod +x $RPM_BUILD_ROOT/%{_libdir}/*
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -55,6 +40,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
+%{_bindir}/vscclient
 %{_libdir}/libcacard.so.*
 
 
@@ -62,14 +48,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/libcacard.so
-%{_libdir}/libcacard.a
 %dir %{_includedir}/cacard
 %{_includedir}/cacard/*
 
 %changelog
+* Sun Nov 15 2015 Cjacker <cjacker@foxmail.com> - 2.5.0-2
+- libcacard now is seperated from qemu and released standalone.
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.4.0-2
 - Rebuild for new 4.0 release.
 
 * Wed Aug 12 2015 Cjacker <cjacker@foxmail.com>
 - update to 2.4.0
-%{_includedir}/cacard/*
