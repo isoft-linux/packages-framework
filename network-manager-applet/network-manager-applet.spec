@@ -1,17 +1,20 @@
 Name:network-manager-applet
 Summary: GNOME applications for use with NetworkManager
-Version: 1.0.6
-Release: 2 
+Version: 1.0.2
+Release: 2
+Epoch: 1 
 License: GPLv2+
 URL: http://www.gnome.org/projects/NetworkManager/
 Source: %{name}-%{version}.tar.xz
-Requires: dbus >= %{dbus_version}
-Requires: dbus-glib >= %{dbus_glib_version}
-Requires: glib2 >= %{glib2_version}
+Requires: dbus
+Requires: dbus-glib
+Requires: glib2
 Requires: NetworkManager
 #for password dialog
-Requires: libnm-gtk = %{version}-%{release}
+Requires: libnm-gtk = %{epoch}:%{version}-%{release}
 Requires(pre): gtk3
+
+Provides: nm-connection-editor = %{epoch}:%{version}-%{release}
 
 BuildRequires: NetworkManager-devel
 BuildRequires: NetworkManager-glib-devel
@@ -45,7 +48,7 @@ Requires: NetworkManager-glib
 
 %package -n libnm-gtk-devel 
 Summary: Libraries and headers of NetworkManager GTK+ binding.
-Requires: libnm-gtk = %{version}-%{release}
+Requires: libnm-gtk = %{epoch}:%{version}-%{release}
 Requires: gtk3-devel
 Requires: NetworkManager-glib-devel
 
@@ -54,16 +57,18 @@ Requires: NetworkManager-glib-devel
 
 %prep
 %setup -q
+
 %build
 %configure \
     --disable-static \
-	--without-bluetooth \
-	--enable-more-warnings=yes \
-	--with-gtkver=3 \
+    --without-bluetooth \
+    --enable-more-warnings=yes \
+    --with-gtkver=3 \
     --disable-maintainer-mode \
     --enable-introspection \
     --disable-migration
-	make %{?_smp_mflags}
+
+make %{?_smp_mflags}
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -73,10 +78,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/gnome-vpn-properties
 
 echo "NoDisplay=true" >>$RPM_BUILD_ROOT/%{_datadir}/applications/nm-connection-editor.desktop
-%find_lang nm-applet
 
-%clean
-%{__rm} -rf $RPM_BUILD_ROOT
+%find_lang nm-applet
 
 %postun
 if [ $1 -eq 0 ]; then
@@ -111,7 +114,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_mandir}/man1/*
 %{_datadir}/GConf/gsettings/nm-applet.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.nm-applet.gschema.xml
-%{_datadir}/appdata/*.appdata.xml
+#%{_datadir}/appdata/*.appdata.xml
 
 %files -n libnm-gtk
 %defattr(-,root,root,0755)
@@ -130,6 +133,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
 
 %changelog
+* Tue Nov 17 2015 Cjacker <cjacker@foxmail.com> - 1:1.0.2-2
+- Rebuild
+
 * Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 1.0.6-2
 - Update
 
