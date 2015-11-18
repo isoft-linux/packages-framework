@@ -1,10 +1,10 @@
-%global ppp_version %(rpm -q ppp --queryformat '%{VERSION}')
+%define ppp_version 2.4.6
 
 Summary:   NetworkManager VPN plugin for PPTP
 Name:      NetworkManager-pptp
 Epoch:     2
 Version:   1.0.2
-Release:   3%{?dist}
+Release:   4%{?dist}
 License:   GPLv2+
 URL:       http://www.gnome.org/projects/NetworkManager/
 Source0:   https://download.gnome.org/sources/NetworkManager-pptp/1.0/%{name}-%{version}.tar.xz
@@ -22,7 +22,7 @@ BuildRequires: libnm-gtk-devel >= 0.9
 Requires: dbus
 Requires: NetworkManager >= 1.0.2 
 Requires: pptp
-Requires: ppp
+Requires: ppp = %{ppp_version}
 
 %global _privatelibs libnm-pptp-properties[.]so.*
 %global __provides_exclude ^(%{_privatelibs})$
@@ -85,6 +85,9 @@ rm -f %{buildroot}%{_libdir}/pppd/%{ppp_version}/*.la
 %{_datadir}/gnome-vpn-properties/pptp/nm-pptp-dialog.ui
 
 %changelog
+* Wed Nov 18 2015 Cjacker <cjacker@foxmail.com> - 2:1.0.2-4
+- Rebuild
+
 * Tue Nov 17 2015 Cjacker <cjacker@foxmail.com> - 2:1.0.2-3
 - Rebuild
 

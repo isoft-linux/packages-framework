@@ -1,9 +1,9 @@
-%global ppp_version %(rpm -q ppp --queryformat '%{VERSION}')
+%define ppp_version 2.4.6
 
 Summary:   NetworkManager VPN plugin for l2tp
 Name:      NetworkManager-l2tp
 Version:   0.9.8.7
-Release:   7%{?dist}
+Release:   8%{?dist}
 # The most of code uses GPLv2+ license.
 # Only vpn-password-dialog has LGPLv2+.
 License:   GPLv2+ and LGPLv2+
@@ -73,6 +73,9 @@ rm -f %{buildroot}%{_libdir}/pppd/%{ppp_version}/nm-l2tp-pppd-plugin.a
 %{_datadir}/gnome-vpn-properties/l2tp
 
 %changelog
+* Wed Nov 18 2015 Cjacker <cjacker@foxmail.com> - 0.9.8.7-8
+- Rebuild
+
 * Wed Nov 18 2015 Cjacker <cjacker@foxmail.com> - 0.9.8.7-7
 - Rebuild
 
