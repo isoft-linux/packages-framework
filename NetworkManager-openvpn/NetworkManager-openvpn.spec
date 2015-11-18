@@ -5,7 +5,7 @@ Summary:   NetworkManager VPN plugin for OpenVPN
 Name:      NetworkManager-openvpn
 Epoch:     1
 Version:   1.0.2
-Release:   4%{?snapshot}%{?dist}
+Release:   5%{?snapshot}%{?dist}
 License:   GPLv2+
 URL:       http://www.gnome.org/projects/NetworkManager/
 # git clone git://git.gnome.org/network-manager-openvpn
@@ -92,6 +92,9 @@ rm -f %{buildroot}%{_libdir}/NetworkManager/lib*.la
 %{_datadir}/gnome-vpn-properties/openvpn/nm-openvpn-dialog.ui
 
 %changelog
+* Wed Nov 18 2015 Cjacker <cjacker@foxmail.com> - 1:1.0.2-5
+- Rebuild
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.0.2-4
 - Rebuild for new 4.0 release.
 
