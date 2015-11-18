@@ -5,7 +5,7 @@
 Summary: NetworkManager VPN plugin for SSH
 Name: NetworkManager-ssh
 Version: 0.9.4
-Release: 0.2.%{checkout}%{?dist}
+Release: 0.3.%{checkout}%{?dist}
 License: GPLv2+
 URL: https://github.com/danfruehauf/NetworkManager-ssh
 Source0: https://github.com/danfruehauf/NetworkManager-ssh/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
@@ -76,6 +76,9 @@ rm -f %{buildroot}%{_libdir}/NetworkManager/lib*.la
 %{_datadir}/gnome-vpn-properties/ssh/nm-ssh-dialog.ui
 
 %changelog
+* Wed Nov 18 2015 Cjacker <cjacker@foxmail.com> - 0.9.4-0.3.20150713git60f03fe
+- Rebuild
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.9.4-0.2.20150713git60f03fe
 - Rebuild for new 4.0 release.
 
