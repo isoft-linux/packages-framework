@@ -3,15 +3,13 @@
 %define gtk3_version        3.4.0
 %define openconnect_version 7.00
 
-%define realversion 1.0.2
-
 Summary:   NetworkManager VPN plugin for openconnect
 Name:      NetworkManager-openconnect
-Version:   %{realversion}
-Release:   3
+Version:   1.0.2
+Release:   5
 License:   GPLv2+, LGPLv2.1
 URL:       http://www.gnome.org/projects/NetworkManager/
-Source:    https://download.gnome.org/sources/NetworkManager-openconnect/1.0/%{name}-%{realversion}.tar.xz
+Source:    https://download.gnome.org/sources/NetworkManager-openconnect/1.0/%{name}-%{version}.tar.xz
 
 BuildRequires: gtk3-devel             >= %{gtk3_version}
 BuildRequires: dbus-devel             >= %{dbus_version}
@@ -30,17 +28,28 @@ Requires: openconnect      >= %{openconnect_version}
 Requires(pre): %{_sbindir}/useradd
 Requires(pre): %{_sbindir}/groupadd
 
-
 %description
 This package contains software for integrating the openconnect VPN software
 with NetworkManager and the GNOME desktop
 
+%package -n NetworkManager-openconnect-gnome
+Summary: NetworkManager VPN plugin for OpenConnect - GNOME files
+
+Requires: NetworkManager-openconnect = %{version}-%{release}
+Requires: network-manager-applet
+
+%description -n NetworkManager-openconnect-gnome
+This package contains software for integrating VPN capabilities with openconnect
+with NetworkManager (GNOME files).
+
+
 %prep
-%setup -q -n NetworkManager-openconnect-%{realversion}
+%setup -q
 
 %build
-autoreconf
-%configure --enable-more-warnings=yes
+autoreconf -ivf
+%configure \
+    --enable-more-warnings=yes
 make %{?_smp_mflags}
 
 %install
@@ -57,36 +66,27 @@ rm -f %{buildroot}%{_libdir}/NetworkManager/lib*.a
                      -c 'NetworkManager user for OpenConnect' \
                      -g nm-openconnect nm-openconnect &>/dev/null || :
 
-%post
-/usr/bin/update-desktop-database &> /dev/null || :
-touch --no-create %{_datadir}/icons/hicolor
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-      %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
-
-
-%postun
-/usr/bin/update-desktop-database &> /dev/null || :
-touch --no-create %{_datadir}/icons/hicolor
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-      %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
-
-
 %files -f %{name}.lang
-%defattr(-, root, root)
-
 %doc AUTHORS ChangeLog COPYING
-%{_libdir}/NetworkManager/lib*.so*
 %{_sysconfdir}/dbus-1/system.d/nm-openconnect-service.conf
 %{_sysconfdir}/NetworkManager/VPN/nm-openconnect-service.name
 %{_libexecdir}/nm-openconnect-service
 %{_libexecdir}/nm-openconnect-service-openconnect-helper
 %{_libexecdir}/nm-openconnect-auth-dialog
+
+%files -n NetworkManager-openconnect-gnome
+%doc COPYING AUTHORS ChangeLog
+%{_libdir}/NetworkManager/lib*.so*
 %dir %{_datadir}/gnome-vpn-properties/openconnect
 %{_datadir}/gnome-vpn-properties/openconnect/nm-openconnect-dialog.ui
 
 %changelog
+* Tue Nov 17 2015 Cjacker <cjacker@foxmail.com> - 1.0.2-5
+- Rebuild
+
+* Tue Nov 17 2015 Cjacker <cjacker@foxmail.com> - 1.0.2-4
+- Rebuild, sep gnome pkg
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.2-3
 - Rebuild for new 4.0 release.
 
