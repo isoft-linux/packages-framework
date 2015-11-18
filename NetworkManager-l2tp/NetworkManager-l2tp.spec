@@ -1,4 +1,4 @@
-%global ppp_version         %(rpm -q ppp --queryformat '%{VERSION}')
+%global ppp_version %(rpm -q ppp --queryformat '%{VERSION}')
 
 Summary:   NetworkManager VPN plugin for l2tp
 Name:      NetworkManager-l2tp
