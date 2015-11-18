@@ -1,14 +1,13 @@
-%global snapshot .20150428git695d4f2
 %global ppp_version %(rpm -q ppp --queryformat '%{VERSION}')
 
 Summary:   NetworkManager VPN plugin for PPTP
 Name:      NetworkManager-pptp
-Epoch:     1
-Version:   1.1.0
-Release:   3%{snapshot}%{?dist}
+Epoch:     2
+Version:   1.0.2
+Release:   3%{?dist}
 License:   GPLv2+
 URL:       http://www.gnome.org/projects/NetworkManager/
-Source0:   https://download.gnome.org/sources/NetworkManager-pptp/1.0/%{name}-%{version}%{snapshot}.tar.bz2
+Source0:   https://download.gnome.org/sources/NetworkManager-pptp/1.0/%{name}-%{version}.tar.xz
 
 BuildRequires: gtk3-devel
 BuildRequires: dbus-devel
@@ -18,17 +17,12 @@ BuildRequires: glib2-devel
 BuildRequires: ppp-devel
 BuildRequires: libtool intltool gettext
 BuildRequires: libsecret-devel
-BuildRequires: libnm-gtk-devel
+BuildRequires: libnm-gtk-devel >= 0.9
 
-Requires: gtk3
 Requires: dbus
-Requires: NetworkManager
+Requires: NetworkManager >= 1.0.2 
 Requires: pptp
 Requires: ppp
-Requires: shared-mime-info
-Requires: gnome-keyring
-Requires: libnm-gtk
-Obsoletes: NetworkManager-pptp < 1:0.9.8.2-3
 
 %global _privatelibs libnm-pptp-properties[.]so.*
 %global __provides_exclude ^(%{_privatelibs})$
@@ -37,6 +31,7 @@ Obsoletes: NetworkManager-pptp < 1:0.9.8.2-3
 %description
 This package contains software for integrating VPN capabilities with
 the PPTP server with NetworkManager.
+
 
 %package -n NetworkManager-pptp-gnome
 Summary: NetworkManager VPN plugin for PPTP - GNOME files
@@ -57,9 +52,10 @@ if [ ! -f configure ]; then
   ./autogen.sh
 fi
 %configure \
-	--disable-static \
-	--enable-more-warnings=yes \
-	--with-pppd-plugin-dir=%{_libdir}/pppd/%{ppp_version}
+    --disable-static \
+    --enable-more-warnings=yes \
+    --with-pppd-plugin-dir=%{_libdir}/pppd/%{ppp_version}
+
 make %{?_smp_mflags}
 
 %check
@@ -89,6 +85,12 @@ rm -f %{buildroot}%{_libdir}/pppd/%{ppp_version}/*.la
 %{_datadir}/gnome-vpn-properties/pptp/nm-pptp-dialog.ui
 
 %changelog
+* Tue Nov 17 2015 Cjacker <cjacker@foxmail.com> - 2:1.0.2-3
+- Rebuild
+
+* Tue Nov 17 2015 Cjacker <cjacker@foxmail.com> - 2:1.0.2-2
+- Downgrade to 1.0.2 official release, increase the Epoch
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:1.1.0-3.20150428git695d4f2
 - Rebuild for new 4.0 release.
 
