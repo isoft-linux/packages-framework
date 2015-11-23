@@ -1,101 +1,82 @@
-%global with_python3 1 
-%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print (get_python_lib())")}
+%global with_python3 1
 
-Name:           pyparsing
-Version:        1.5.6
-Release:        8
 Summary:        An object-oriented approach to text processing
+Name:           pyparsing
+Version:        2.0.6
+Release:        2%{?dist}
+Group:          Development/Libraries
 License:        MIT
 URL:            http://pyparsing.wikispaces.com/
 Source0:        http://downloads.sourceforge.net/pyparsing/pyparsing-%{version}.tar.gz
 BuildArch:      noarch
-
+BuildRequires:  dos2unix
 BuildRequires:  python-devel
-
 %if 0%{?with_python3}
-BuildRequires: python3-devel
-%endif # if with_python3
+BuildRequires:  python3-devel
+%endif
 
 %description
 pyparsing is a module that can be used to easily and directly configure syntax
 definitions for any number of text parsing applications.
 
-%package doc
+%package        doc
 Summary:        Documentation for pyparsing
+Group:          Development/Libraries
 
-%description doc
+%description    doc
 The package contains documentation for pyparsing.
 
 %if 0%{?with_python3}
-%package -n python3-pyparsing
+%package     -n python3-pyparsing
 Summary:        An object-oriented approach to text processing (Python 3 version)
+Group:          Development/Libraries
 
 %description -n python3-pyparsing
 pyparsing is a module that can be used to easily and directly configure syntax
 definitions for any number of text parsing applications.
 
 This is the Python 3 version.
-%endif # if with_python3
+%endif
 
 %prep
 %setup -q
 mv docs/pyparsingClassDiagram.PNG docs/pyparsingClassDiagram.png
 rm docs/pyparsingClassDiagram.JPG
-
-%if 0%{?with_python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-%endif # with_python3
+dos2unix -k CHANGES LICENSE README
 
 %build
-%{__python} setup.py build
-
+%{py2_build}
 %if 0%{?with_python3}
-pushd %{py3dir}
-%{__python3} setup.py build
-popd
-%endif # with_python3
+%{py3_build}
+%endif
 
 %install
-rm -rf %{buildroot}
-
 # Install python 3 first, so that python 2 gets precedence:
 %if 0%{?with_python3}
-pushd %{py3dir}
-%{__python3} setup.py install -O1 --skip-build --root %{buildroot}
-popd
-%endif # with_python3
-
-%{__python} setup.py install -O1 --skip-build --root %{buildroot}
-
-%clean
-rm -rf %{buildroot}
+%{py3_install}
+%endif
+%{py2_install}
 
 %files
-%defattr(-,root,root,-)
-%doc CHANGES README LICENSE
+%license LICENSE
+%doc CHANGES README
 %{python_sitelib}/pyparsing*egg-info
 %{python_sitelib}/pyparsing.py*
 
 %if 0%{?with_python3}
 %files -n python3-pyparsing
-%defattr(-,root,root,-)
+%license LICENSE
 %doc CHANGES README LICENSE
 %{python3_sitelib}/pyparsing*egg-info
 %{python3_sitelib}/pyparsing.py*
-%endif # with_python3
-%if 0%{?with_python3}
 %{python3_sitelib}/__pycache__/pyparsing*
-%endif # pycache
+%endif
 
 %files doc
-%defattr(-,root,root,-)
-%doc CHANGES README LICENSE docs/*
+%license LICENSE
+%doc CHANGES README HowToUsePyparsing.html docs examples htmldoc
 
 %changelog
-* Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.5.6-8
-- Rebuild with python 3.5
-
-* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.5.6-7
-- Rebuild for new 4.0 release.
+* Mon Nov 23 2015 Cjacker <cjacker@foxmail.com> - 2.0.6-2
+- Update
 
