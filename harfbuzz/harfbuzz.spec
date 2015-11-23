@@ -1,5 +1,5 @@
 Name:           harfbuzz
-Version:        1.0.4
+Version:        1.1.0
 Release:        6 
 Summary:        Text shaping library
 
@@ -12,6 +12,7 @@ BuildRequires:  freetype-devel
 BuildRequires:  glib2-devel
 BuildRequires:  libicu-devel
 BuildRequires:  graphite2-devel
+BuildRequires:  gtk-doc
 
 %description
 HarfBuzz is an implementation of the OpenType Layout engine.
