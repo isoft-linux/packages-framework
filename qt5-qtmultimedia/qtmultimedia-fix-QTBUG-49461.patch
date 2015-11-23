@@ -1,0 +1,51 @@
+Parent:     c106041b (GStreamer camerabin: always provide the zoom control.)
+Author:     Morten Minde Neergaard <mneergaa@cisco.com>
+AuthorDate: 2015-11-13 19:21:35 +0100
+Commit:     Yoann Lopes <yoann.lopes@theqtcompany.com>
+CommitDate: 2015-11-19 11:56:04 +0000
+
+Don't initialize volume on pulse audio input by default.
+
+Task-number: QTBUG-49461
+Change-Id: I32b707e19091ab8344175b2dc0cdd1747f1186b3
+Reviewed-by: Yoann Lopes <yoann.lopes@theqtcompany.com>
+diff -Nur qtmultimedia-opensource-src-5.5.1/src/plugins/pulseaudio/qaudioinput_pulse.cpp qtmultimedia-opensource-src-5.5.1n/src/plugins/pulseaudio/qaudioinput_pulse.cpp
+--- qtmultimedia-opensource-src-5.5.1/src/plugins/pulseaudio/qaudioinput_pulse.cpp	2015-10-13 12:35:42.000000000 +0800
++++ qtmultimedia-opensource-src-5.5.1n/src/plugins/pulseaudio/qaudioinput_pulse.cpp	2015-11-22 15:32:43.303022572 +0800
+@@ -150,6 +150,7 @@
+     , m_errorState(QAudio::NoError)
+     , m_deviceState(QAudio::StoppedState)
+     , m_volume(qreal(1.0f))
++    , m_customVolumeRequired(false)
+     , m_pullMode(true)
+     , m_opened(false)
+     , m_bytesAvailable(0)
+@@ -355,7 +356,8 @@
+     if (actualBufferAttr->tlength != (uint32_t)-1)
+         m_bufferSize = actualBufferAttr->tlength;
+ 
+-    setPulseVolume();
++    if (m_customVolumeRequired)
++        setPulseVolume();
+ 
+     pulseEngine->unlock();
+ 
+@@ -568,6 +570,7 @@
+     if (vol >= 0.0 && vol <= 1.0) {
+         QPulseAudioEngine *pulseEngine = QPulseAudioEngine::instance();
+         pulseEngine->lock();
++        m_customVolumeRequired = true;
+         if (!qFuzzyCompare(m_volume, vol)) {
+             m_volume = vol;
+             if (m_opened) {
+diff -Nur qtmultimedia-opensource-src-5.5.1/src/plugins/pulseaudio/qaudioinput_pulse.h qtmultimedia-opensource-src-5.5.1n/src/plugins/pulseaudio/qaudioinput_pulse.h
+--- qtmultimedia-opensource-src-5.5.1/src/plugins/pulseaudio/qaudioinput_pulse.h	2015-10-13 12:35:42.000000000 +0800
++++ qtmultimedia-opensource-src-5.5.1n/src/plugins/pulseaudio/qaudioinput_pulse.h	2015-11-22 15:33:06.471023619 +0800
+@@ -100,6 +100,7 @@
+     QAudio::Error m_errorState;
+     QAudio::State m_deviceState;
+     qreal m_volume;
++    bool m_customVolumeRequired;
+     pa_cvolume m_chVolume;
+ 
+ private slots:

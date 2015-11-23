@@ -2,13 +2,15 @@
 
 Name: qt5-qtmultimedia 
 Version: 5.5.1
-Release: 3 
+Release: 4 
 Summary: Multimedia Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
 
 URL: http://qt-project.org 
 Source0: qtmultimedia-opensource-src-%{version}.tar.xz
+
+Patch0: qtmultimedia-fix-QTBUG-49461.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtdeclarative-devel >= %{version} 
@@ -46,6 +48,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtmultimedia-opensource-src-%{version}
+%patch0 -p1
 
 %build
 #without git_build, some private header will have problems.
@@ -91,6 +94,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Mon Nov 23 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-4
+- Fix QTBUG 49461
+
 * Sat Oct 24 2015 builder - 5.5.1-3
 - Rebuild for new 4.0 release.
 
