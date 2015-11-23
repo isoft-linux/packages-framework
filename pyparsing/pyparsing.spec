@@ -11,6 +11,7 @@ Source0:        http://downloads.sourceforge.net/pyparsing/pyparsing-%{version}.
 BuildArch:      noarch
 BuildRequires:  dos2unix
 BuildRequires:  python-devel
+BuildRequires:  python-setuptools
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
 %endif
