@@ -1,7 +1,7 @@
 Summary: NetworkManager VPN plugin for iodine
 Name: NetworkManager-iodine
 Version: 0.0.5 
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPLv2+
 URL: https://honk.sigxcpu.org/piki/projects/network-manager-iodine
 Source0: http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.0/%{name}-%{version}.tar.xz
@@ -28,7 +28,6 @@ the iodine server and NetworkManager.
 
 %package -n NetworkManager-iodine-gnome
 Summary: NetworkManager VPN plugin for iodine - GNOME files
-Group: System Environment/Base
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: network-manager-applet 
 
@@ -64,6 +63,9 @@ rm -f %{buildroot}%{_libdir}/NetworkManager/lib*.la
 %{_sysconfdir}/NetworkManager/VPN/nm-iodine-service.name
 
 %changelog
+* Tue Nov 24 2015 Cjacker <cjacker@foxmail.com> - 0.0.5-5
+- Remove group from spec
+
 * Wed Nov 18 2015 Cjacker <cjacker@foxmail.com> - 0.0.5-4
 - Rebuild
 
