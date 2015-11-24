@@ -1,8 +1,53 @@
 diff --git a/src/daemon.c b/src/daemon.c
-index 01afd07..811a790 100644
+index 01afd07..88e132e 100644
 --- a/src/daemon.c
 +++ b/src/daemon.c
-@@ -1330,18 +1330,18 @@ save_autologin (Daemon      *daemon,
+@@ -1279,11 +1279,10 @@ load_autologin (Daemon      *daemon,
+ {
+         GKeyFile *keyfile;
+         GError *local_error;
+-        gchar *string;
+ 
+         keyfile = g_key_file_new ();
+         if (!g_key_file_load_from_file (keyfile,
+-                                        PATH_GDM_CUSTOM,
++                                        "/etc/sddm.conf",
+                                         G_KEY_FILE_KEEP_COMMENTS,
+                                         error)) {
+                 g_key_file_free (keyfile);
+@@ -1291,27 +1290,17 @@ load_autologin (Daemon      *daemon,
+         }
+ 
+         local_error = NULL;
+-        string = g_key_file_get_string (keyfile, "daemon", "AutomaticLoginEnable", &local_error);
++        *name = g_key_file_get_string (keyfile, "Autologin", "User", &local_error);
+         if (local_error) {
+                 g_propagate_error (error, local_error);
+                 g_key_file_free (keyfile);
+-                g_free (string);
++                *enabled = FALSE;
+                 return FALSE;
+         }
+-        if (string != NULL && (g_ascii_strcasecmp (string, "true") == 0 || strcmp (string, "1") == 0)) {
++        if (*name && strcmp(*name, "") != 0) 
+                 *enabled = TRUE;
+-        }
+-        else {
++        else 
+                 *enabled = FALSE;
+-        }
+-        g_free (string);
+-
+-        *name = g_key_file_get_string (keyfile, "daemon", "AutomaticLogin", &local_error);
+-        if (local_error) {
+-                g_propagate_error (error, local_error);
+-                g_key_file_free (keyfile);
+-                return FALSE;
+-        }
+ 
+         g_key_file_free (keyfile);
+ 
+@@ -1330,18 +1319,18 @@ save_autologin (Daemon      *daemon,
  
          keyfile = g_key_file_new ();
          if (!g_key_file_load_from_file (keyfile,
