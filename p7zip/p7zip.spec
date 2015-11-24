@@ -1,9 +1,8 @@
 Summary: Very high compression ratio file archiver
 Name: p7zip
 Version: 15.09
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2 and (LGPLv2+ or CPL) and Commercial
-Group: Applications/Archiving
 URL: http://p7zip.sourceforge.net/
 Source0: http://downloads.sf.net/p7zip/p7zip_%{version}_src_all.tar.bz2
 Patch0: p7zip-cmake.patch
@@ -24,7 +23,6 @@ compression ratio. The original version can be found at http://www.7-zip.org/.
 
 %package plugins
 Summary: Additional plugins for p7zip
-Group: Applications/Archiving
 
 %description plugins
 Additional plugins that can be used with 7z to extend its abilities.
@@ -95,6 +93,9 @@ make install \
 
 
 %changelog
+* Tue Nov 24 2015 Cjacker <cjacker@foxmail.com> - 15.09-3
+- Remove group from spec
+
 * Mon Nov 16 2015 Cjacker <cjacker@foxmail.com> - 15.09-2
 - Update to 15.09
 
