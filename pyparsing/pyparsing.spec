@@ -3,8 +3,7 @@
 Summary:        An object-oriented approach to text processing
 Name:           pyparsing
 Version:        2.0.6
-Release:        2%{?dist}
-Group:          Development/Libraries
+Release:        3%{?dist}
 License:        MIT
 URL:            http://pyparsing.wikispaces.com/
 Source0:        http://downloads.sourceforge.net/pyparsing/pyparsing-%{version}.tar.gz
@@ -23,7 +22,6 @@ definitions for any number of text parsing applications.
 
 %package        doc
 Summary:        Documentation for pyparsing
-Group:          Development/Libraries
 
 %description    doc
 The package contains documentation for pyparsing.
@@ -31,7 +29,6 @@ The package contains documentation for pyparsing.
 %if 0%{?with_python3}
 %package     -n python3-pyparsing
 Summary:        An object-oriented approach to text processing (Python 3 version)
-Group:          Development/Libraries
 
 %description -n python3-pyparsing
 pyparsing is a module that can be used to easily and directly configure syntax
@@ -79,6 +76,9 @@ dos2unix -k CHANGES LICENSE README
 %doc CHANGES README HowToUsePyparsing.html docs examples htmldoc
 
 %changelog
+* Tue Nov 24 2015 Cjacker <cjacker@foxmail.com> - 2.0.6-3
+- Remove group from spec
+
 * Mon Nov 23 2015 Cjacker <cjacker@foxmail.com> - 2.0.6-2
 - Update
 
