@@ -1,5 +1,5 @@
 Name:           gphoto2
-Version:        2.5.8
+Version:        2.5.9
 Release:        2
 Summary:        Software for accessing digital cameras
 License:        GPLv2+
@@ -8,7 +8,7 @@ Source0:        http://downloads.sourceforge.net/gphoto/%{name}-%{version}.tar.b
 
 BuildRequires:  libgphoto2-devel >= %{version}, gettext
 BuildRequires:  libjpeg-devel, readline-devel
-BuildRequires:  libtool
+BuildRequires:  libtool, sharutils
 BuildRequires:  libltdl-devel, popt-devel
 BuildRequires:  libexif-devel
 
@@ -46,6 +46,9 @@ rm $RPM_BUILD_ROOT%{_docdir}/%{name}/test-hook.sh
 
 
 %changelog
+* Tue Nov 24 2015 Cjacker <cjacker@foxmail.com> - 2.5.9-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.5.8-2
 - Rebuild for new 4.0 release.
 
