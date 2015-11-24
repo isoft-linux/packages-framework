@@ -1,18 +1,24 @@
 %global udevdir %(pkg-config --variable=udevdir udev)
 Name:           libgphoto2
-Version:        2.5.8
+Version:        2.5.9
 Release:        2
 Summary:        Library for accessing digital cameras
 License:        GPLv2+ and GPLv2
 URL:            http://www.gphoto.org/
 Source0:        http://downloads.sourceforge.net/gphoto/libgphoto2-%{version}.tar.bz2
+Patch1:         gphoto2-pkgcfg.patch
+Patch2:         gphoto2-storage.patch
+Patch3:         gphoto2-device-return.patch
 
 BuildRequires:  libusbx-devel
-BuildRequires:  libjpeg-devel
-BuildRequires:  pkgconfig
-BuildRequires:  libltdl-devel, popt-devel
+BuildRequires:  lockdev-devel
 BuildRequires:  libexif-devel
+BuildRequires:  libjpeg-devel
+BuildRequires:  pkgconfig, sharutils
+BuildRequires:  libtool-ltdl-devel, popt-devel
 BuildRequires:  gd-devel
+BuildRequires:  systemd
+Requires:       lockdev
 
 %description
 libgphoto2 is a library that can be used by applications to access
@@ -40,16 +46,19 @@ use libgphoto2.
 
 %prep
 %setup -q 
+%patch1 -p1 -b .pkgcfg
+%patch2 -p1 -b .storage
+%patch3 -p1 -b .device-return
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing "
 
 %configure \
-	udevscriptdir='%{udevdir}' \
-	--with-drivers=all \
-	--with-doc-dir=%{_docdir}/%{name} \
-	--disable-static \
-	--disable-rpath \
+    udevscriptdir='%{udevdir}' \
+    --with-drivers=all \
+    --with-doc-dir=%{_docdir}/%{name} \
+    --disable-static \
+    --disable-rpath \
     --with-gd \
     --with-libxml2
 
@@ -115,6 +124,9 @@ cat libgphoto2*.lang >> %{name}.lang
 %{_mandir}/man3/*
 
 %changelog
+* Tue Nov 24 2015 Cjacker <cjacker@foxmail.com> - 2.5.9-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.5.8-2
 - Rebuild for new 4.0 release.
 
