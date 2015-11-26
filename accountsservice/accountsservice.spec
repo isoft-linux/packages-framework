@@ -1,6 +1,6 @@
 Name:           accountsservice
 Version:        0.6.40
-Release:        5
+Release:        6
 Summary:        D-Bus interfaces for querying and manipulating user account information
 
 License:        GPLv3+
@@ -111,6 +111,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_datadir}/gtk-doc/html/libaccountsservice/*
 
 %changelog
+* Tue Nov 24 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn>
+- Fix get autologin property for sddm issue.
+
 * Wed Nov 11 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn>
 - Administrator group set as firstboot.
 
