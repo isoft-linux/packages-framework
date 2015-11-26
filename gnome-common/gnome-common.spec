@@ -1,6 +1,6 @@
 Name:           gnome-common
 Version:        3.18.0
-Release:        2
+Release:        3
 Summary:        Useful things common to building gnome packages from scratch
 
 BuildArch:      noarch
@@ -14,6 +14,7 @@ Source0:        http://download.gnome.org/sources/%{name}/3.10/%{name}-%{version
 # and auto-inject those requirements.
 Requires: automake
 Requires: autoconf
+Requires: autoconf-archive
 Requires: libtool
 Requires: gettext
 Requires: pkgconfig
@@ -36,12 +37,19 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 
+#already in autoconf-archive
+rm -rf %{buildroot}%{_datadir}/aclocal/ax_check_enable_debug.m4
+rm -rf %{buildroot}%{_datadir}/aclocal/ax_code_coverage.m4 
+
 %files
 %{_bindir}/*
 %{_datadir}/aclocal/*
 #%{_datadir}/%{name}
 
 %changelog
+* Thu Nov 26 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-3
+- Rebuild, avoid conflicts with autoconf-archive
+
 * Sun Oct 25 2015 Cjacker <cjacker@foxmail.com> - 3.18.0-2
 - Rebuild for new 4.0 release
 
