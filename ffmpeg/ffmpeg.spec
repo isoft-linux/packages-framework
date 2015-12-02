@@ -8,7 +8,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.8.1
-Release: 8 
+Release: 9 
 License: GPLv3
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0: ffmpeg-fix-ffplay-crash-Xorg-with-intel-driver.patch
@@ -33,6 +33,7 @@ BuildRequires: libX11-devel libXv-devel libXext-devel
 BuildRequires: openjpeg-devel
 BuildRequires: libbluray-devel
 BuildRequires: libmfx-devel
+BuildRequires: lame-devel
 
 BuildRequires: libdc1394-devel libraw1394-devel
 BuildRequires: wavpack-devel
@@ -133,13 +134,13 @@ Development headers, libraries and pkgconfig files for ffmpeg.
         --enable-libass \
         --enable-libfribidi \
         --enable-libfreetype \
+	--enable-libmp3lame \
 	--disable-static \
 	--disable-libcelt \
 	--disable-libiec61883 \
 	--disable-libmodplug \
 	--disable-libopencv \
 	--disable-avisynth \
-	--disable-libmp3lame \
 	--disable-stripping \
     	--enable-doc \
     	--extra-cflags="-fPIC" 
@@ -211,6 +212,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Dec 02 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-9
+- Enable lame
+
 * Thu Nov 12 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-8
 - Disable build with SDL, add an option to control it
 
