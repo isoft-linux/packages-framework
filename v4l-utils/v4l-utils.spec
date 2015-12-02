@@ -1,5 +1,5 @@
 Name:           v4l-utils
-Version:        1.6.3
+Version:        1.8.1
 Release:        5%{?dist}
 Summary:        Utilities for video4linux and DVB devices
 # libdvbv5, dvbv5 utils, ir-keytable and v4l2-sysfs-path are GPLv2 only
