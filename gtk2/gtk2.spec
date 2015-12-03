@@ -16,10 +16,11 @@
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 Name: gtk2
 Version: %{base_version}
-Release: 17
+Release: 18
 License: LGPLv2+
 Source: http://download.gnome.org/sources/gtk+/2.11/gtk+-%{version}.tar.xz
 Source1: gtk+2.0_2.24.24-0ubuntu1.debian.tar.xz
+Source2: gtkrc
 
 # Biarch changes
 Patch0: gtk-fix-gcc-warning.patch
@@ -164,6 +165,7 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT        \
              RUN_QUERY_IMMODULES_TEST=false \
              RUN_QUERY_LOADER_TEST=false 
+install -Dm 644 %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/gtk-2.0/gtkrc
 
 %find_lang gtk20
 %find_lang gtk20-properties
@@ -268,6 +270,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/gail-libgail-util
 %{_includedir}/gail*
 %changelog
+* Thu Dec 03 2015 xiaotian.wu@i-soft.com.cn - 2.24.28-18
+- Add gtkrc for default gtk theme and icon theme.
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.24.28-17
 - Rebuild for new 4.0 release.
 
