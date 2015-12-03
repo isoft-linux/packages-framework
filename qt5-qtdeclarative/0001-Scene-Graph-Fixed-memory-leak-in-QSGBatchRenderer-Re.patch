@@ -1,0 +1,43 @@
+From 19f54b2d2539171f682bcf32cdc7983294355e02 Mon Sep 17 00:00:00 2001
+From: Martin Banky <Martin.Banky@gmail.com>
+Date: Thu, 15 Oct 2015 23:07:32 -0700
+Subject: [PATCH] Scene Graph: Fixed memory leak in
+ QSGBatchRenderer::Renderer::map()
+
+In the uncommon case (m_context->hasBrokenIndexBufferObjects()
+|| m_visualizeMode != VisualizeNothing) of mapping a buffer, malloc is
+called without first freeing the previous malloc.
+
+Regression was introduced with:
+    qt5 commit: 9347499e78f03710eaf24af3c1e7ac650d0ef81d
+    qtdeclarative commit: a371bac3fba73f92aaa63a68d8ab1ae81a1d1031
+
+[ChangeLog][QtQuick][Scene Graph] Fixed memory leak in
+QSGBatchRenderer::Renderer::map()
+
+Task-number: QTBUG-48799
+Change-Id: I5ef4b7301d390463845aeb192851f86655962499
+---
+ src/quick/scenegraph/coreapi/qsgbatchrenderer.cpp | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/quick/scenegraph/coreapi/qsgbatchrenderer.cpp b/src/quick/scenegraph/coreapi/qsgbatchrenderer.cpp
+index 60ada14..75923d7 100644
+--- a/src/quick/scenegraph/coreapi/qsgbatchrenderer.cpp
++++ b/src/quick/scenegraph/coreapi/qsgbatchrenderer.cpp
+@@ -902,7 +902,11 @@ void Renderer::map(Buffer *buffer, int byteSize, bool isIndexBuf)
+             pool.resize(byteSize);
+         buffer->data = pool.data();
+     } else {
+-        buffer->data = (char *) malloc(byteSize);
++        if (buffer->size != byteSize) {
++            if (buffer->data)
++                free(buffer->data);
++            buffer->data = (char *) malloc(byteSize);
++        }
+     }
+     buffer->size = byteSize;
+ 
+-- 
+2.6.0
+

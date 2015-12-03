@@ -1,6 +1,6 @@
 Name: qt5-qtdeclarative
 Version: 5.5.1
-Release: 4 
+Release: 5 
 Summary: QtDeclarative component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -10,6 +10,7 @@ Source0: qtdeclarative-opensource-src-%{version}.tar.xz
 Patch0: qtdeclarative-fix-crash-when-switch-between-multiple-screens.patch
 Patch1: qtdeclarative-possible-to-change-shadereffect-again.patch
 Patch2: qtdeclarative-qquickitem-delect-loop-in-keynatigation-chain.patch
+Patch3: 0001-Scene-Graph-Fixed-memory-leak-in-QSGBatchRenderer-Re.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtxmlpatterns-devel >= %{version}
@@ -40,6 +41,7 @@ developing applications that use %{name}.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 qmake-qt5
@@ -116,6 +118,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Thu Dec 03 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-5
+- Fix QTBUG-48799, memleak issue
+
 * Sat Nov 07 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-4
 - fix QTBUG-45991, QTBUG-48856, QTBUG-47229
 
