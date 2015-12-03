@@ -9,6 +9,9 @@ Source0: http://xorg.freedesktop.org/archive/individual/app/intel-gpu-tools-%{ve
 Patch0: intel-gpu-tools-wrong-doc.patch
 BuildRequires: libdrm-devel cairo-devel libpciaccess-devel python3 swig xorg-x11-util-macros
 BuildRequires: systemd-devel libXrandr-devel libXext-devel libXv-devel 
+
+BuildRequires: bison flex pkgconfig
+
 %description
 %{summary}
 
