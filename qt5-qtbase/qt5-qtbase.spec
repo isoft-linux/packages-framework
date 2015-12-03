@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 13
+Release: 14
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -58,6 +58,11 @@ Patch61: qtbase-revert-89777.patch
 #https://bugreports.qt.io/browse/QTBUG-49061
 #it also should fix kmozillahelper segfault issue
 Patch62: qtbase-unload-plugin-QTBUG-49061.patch
+
+#fix QTBUG-47272
+Patch63: qtbase-fix-QTBUG-47272.patch
+
+Patch64: qtbase-fix-QTBUG-49363-49399.patch
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -168,6 +173,8 @@ developing applications that use %{name}.
 %patch61 -p1
 
 %patch62 -p1
+%patch63 -p1
+%patch64 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -315,6 +322,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Thu Dec 03 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-14
+- Fix QTBUG-47272, QTBUG-49363, 49399
+
 * Mon Nov 16 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-13
 - Should fix kmozillahelper segfault issue
 

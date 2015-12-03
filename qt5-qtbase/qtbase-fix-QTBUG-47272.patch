@@ -1,0 +1,28 @@
+Parent:     b21c2198 (Call setFocus() if it is a QAxHostWidget which is in a new active window)
+Author:     Andy Shaw <andy.shaw@theqtcompany.com>
+AuthorDate: 2015-11-12 10:02:13 +0100
+Commit:     Andy Shaw <andy.shaw@theqtcompany.com>
+CommitDate: 2015-11-23 12:22:19 +0000
+
+If the paper value is greater than DMPAPER_LAST then it is a custom size
+
+Ideally all printer drivers would add beyond DMPAPER_USER for their custom
+sizes. However some printer drivers add beyond DMPAPER_LAST instead so we
+need to check if the value is past DMPAPER_LAST and consider those as a
+custom size.
+
+Task-number: QTBUG-47272
+Change-Id: I1bcb01c08fe605cc484769b0301cfcd7b8f66157
+Reviewed-by: Friedemann Kleint <Friedemann.Kleint@theqtcompany.com>
+diff -Nur qtbase-opensource-src-5.5.1/src/printsupport/kernel/qprintengine_win.cpp qtbase-opensource-src-5.5.1n/src/printsupport/kernel/qprintengine_win.cpp
+--- qtbase-opensource-src-5.5.1/src/printsupport/kernel/qprintengine_win.cpp	2015-10-13 12:35:32.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/printsupport/kernel/qprintengine_win.cpp	2015-12-03 08:34:23.235984452 +0800
+@@ -1632,7 +1632,7 @@
+ 
+     // Update orientation first as is needed to obtain printable margins when changing page size
+     m_pageLayout.setOrientation(devMode->dmOrientation == DMORIENT_LANDSCAPE ? QPageLayout::Landscape : QPageLayout::Portrait);
+-    if (devMode->dmPaperSize >= DMPAPER_USER) {
++    if (devMode->dmPaperSize >= DMPAPER_LAST) {
+         // Is a custom size
+         QPageSize pageSize = QPageSize(QSizeF(devMode->dmPaperWidth / 10.0f, devMode->dmPaperLength / 10.0f),
+                                        QPageSize::Millimeter);
