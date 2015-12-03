@@ -1,5 +1,5 @@
 Name: intel-gpu-tools
-Version: 1.12
+Version: 1.13
 Release: 2
 Summary: Tools for development and testing of the Intel DRM driver
 
@@ -7,8 +7,8 @@ License: MIT
 URL: http://cgit.freedesktop.org/xorg/app/intel-gpu-tools/	
 Source0: http://xorg.freedesktop.org/archive/individual/app/intel-gpu-tools-%{version}.tar.bz2
 Patch0: intel-gpu-tools-wrong-doc.patch
-BuildRequires:  libdrm-devel cairo-devel libpciaccess-devel python3 swig xorg-x11-util-macros
-
+BuildRequires: libdrm-devel cairo-devel libpciaccess-devel python3 swig xorg-x11-util-macros
+BuildRequires: systemd-devel libXrandr-devel libXext-devel libXv-devel 
 %description
 %{summary}
 
@@ -44,6 +44,9 @@ make install DESTDIR=%{buildroot}
 %{_mandir}/man1/*
 
 %changelog
+* Thu Dec 03 2015 Cjacker <cjacker@foxmail.com> - 1.13-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.12-2
 - Rebuild for new 4.0 release.
 
