@@ -16,7 +16,7 @@
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 Name: gtk2
 Version: %{base_version}
-Release: 18
+Release: 19
 License: LGPLv2+
 Source: http://download.gnome.org/sources/gtk+/2.11/gtk+-%{version}.tar.xz
 Source1: gtk+2.0_2.24.24-0ubuntu1.debian.tar.xz
@@ -43,6 +43,7 @@ BuildRequires: libXcursor-devel
 BuildRequires: libXfixes-devel
 BuildRequires: libXinerama-devel
 BuildRequires: gdk-pixbuf2-devel 
+BuildRequires: pkgconfig(gobject-introspection-1.0)
 # for patch 2
 #BuildRequires: gamin-devel
 
@@ -234,6 +235,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/themes/Raleigh
 %dir %{_sysconfdir}/gtk-2.0
 %{_sysconfdir}/gtk-2.0/im-multipress.conf
+%{_sysconfdir}/gtk-2.0/gtkrc
 %{_libdir}/girepository-?.?/*.typelib
 
 %files devel
@@ -270,6 +272,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/gail-libgail-util
 %{_includedir}/gail*
 %changelog
+* Thu Dec 03 2015 xiaotian.wu@i-soft.com.cn - 2.24.28-19
+- Add gir build request to fix build on koji.
+
 * Thu Dec 03 2015 xiaotian.wu@i-soft.com.cn - 2.24.28-18
 - Add gtkrc for default gtk theme and icon theme.
 
