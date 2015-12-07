@@ -60,6 +60,9 @@ Requires:      python-docutils
 Requires:      python-jinja2
 Requires:      python-pygments
 Requires:      python-sphinx_rtd_theme
+Requires:      python-sphinx-theme-alabaster
+Requires:      python-sphinx-theme-better
+
 %description
 Sphinx is a tool that makes it easy to create intelligent and
 beautiful documentation for Python projects (or other documents
@@ -96,6 +99,8 @@ Requires:      python3-docutils
 Requires:      python3-jinja2
 Requires:      python3-pygments
 Requires:      python3-sphinx_rtd_theme
+Requires:      python3-sphinx-theme-alabaster
+Requires:      python3-sphinx-theme-better
 
 %description -n python3-sphinx
 Sphinx is a tool that makes it easy to create intelligent and
