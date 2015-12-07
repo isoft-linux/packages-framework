@@ -10,7 +10,7 @@
 
 Name:           python-nose
 Version:        1.3.7
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Discovery-based unittest extension for Python
 
 License:        LGPLv2+ and Public Domain
@@ -29,6 +29,7 @@ BuildRequires: python-setuptools
 BuildRequires: dos2unix
 BuildRequires:  python-coverage >= 3.4-1
 Requires:       python-setuptools
+Requires:       python-funcsigs
 
 %description
 nose extends the test loading and running features of unittest, making
@@ -173,6 +174,9 @@ rm -rf %{buildroot}
 %endif # with_docs
 
 %changelog
+* Mon Dec 07 2015 Cjacker <cjacker@foxmail.com> - 1.3.7-5
+- Fix requires
+
 * Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.3.7-4
 - Rebuild with python 3.5
 
