@@ -16,6 +16,7 @@ BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  python-unittest2
 BuildRequires:  python-pbr
+BuildRequires:  python-nose
 #test/runtime need.
 Requires: python-funcsigs
 Requires: python-pbr
@@ -25,6 +26,7 @@ BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-pbr
 BuildRequires:  python3-unittest2
+BuildRequires:  python3-nose
 %endif
 
 
