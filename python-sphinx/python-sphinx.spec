@@ -28,6 +28,7 @@ BuildRequires: python-jinja2
 BuildRequires: python-pygments
 BuildRequires: python-sphinx-theme-alabaster
 BuildRequires: python-sphinx_rtd_theme 
+BuildRequires: python-six
 # for testing
 BuildRequires: python-nose
 BuildRequires: gettext
@@ -35,7 +36,7 @@ BuildRequires: texinfo
 BuildRequires: python-sqlalchemy
 BuildRequires: python-whoosh
 BuildRequires: python-snowballstemmer
-BuildRequires: python-six
+BuildRequires: python-mock
 
 %if 0%{?with_python3}
 BuildRequires: python3-devel
@@ -50,6 +51,7 @@ BuildRequires: python3-snowballstemmer
 BuildRequires: python3-sphinx-theme-alabaster
 BuildRequires: python3-sphinx_rtd_theme 
 BuildRequires: python3-six
+BuildRequires: python3-mock
 %endif # with_python3
 
 Requires:      python-docutils
