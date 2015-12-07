@@ -5,7 +5,7 @@
 
 Name:       python-sphinx
 Version:    1.3.1
-Release:    5%{?dist}
+Release:    6%{?dist}
 Summary:    Python documentation generator
 
 
@@ -285,6 +285,9 @@ popd
 
 
 %changelog
+* Mon Dec 07 2015 Cjacker <cjacker@foxmail.com> - 1.3.1-6
+- Add more theme requires
+
 * Mon Dec 07 2015 Cjacker <cjacker@foxmail.com> - 1.3.1-5
 - Fix Requires
 
