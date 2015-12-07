@@ -51,7 +51,9 @@ BuildRequires: python3-snowballstemmer
 BuildRequires: python3-sphinx-theme-alabaster
 BuildRequires: python3-sphinx_rtd_theme 
 BuildRequires: python3-six
+#for test
 BuildRequires: python3-mock
+BuildRequires: python3-babel
 %endif # with_python3
 
 Requires:      python-docutils
