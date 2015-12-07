@@ -3,7 +3,7 @@
 
 Name:           python-mock
 Version:        1.3.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        A Python Mocking and Patching Library for Testing
 
 License:        BSD
@@ -17,6 +17,7 @@ BuildRequires:  python-setuptools
 BuildRequires:  python-unittest2
 #test/runtime need.
 Requires: python-funcsigs
+Requires: python-pbr
 
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
@@ -33,7 +34,8 @@ needed attributes in the normal way.
 
 %if 0%{?with_python3}
 %package -n python3-mock
-Summary:        A Python Mocking and Patching Library for Testing
+Summary: A Python Mocking and Patching Library for Testing
+Requires: python3-pbr
 
 %description -n python3-mock
 Mock is a Python module that provides a core mock class. It removes the need
@@ -98,6 +100,9 @@ popd
 
 
 %changelog
+* Mon Dec 07 2015 Cjacker <cjacker@foxmail.com> - 1.3.0-8
+- Fix requires
+
 * Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.0.1-7
 - Rebuild with python 3.5
 
