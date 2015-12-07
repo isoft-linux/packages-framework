@@ -34,6 +34,7 @@ BuildRequires: texinfo
 BuildRequires: python-sqlalchemy
 BuildRequires: python-whoosh
 BuildRequires: python-snowballstemmer
+BuildRequires: python-six
 
 %if 0%{?with_python3}
 BuildRequires: python3-devel
@@ -46,6 +47,7 @@ BuildRequires: python3-sqlalchemy
 BuildRequires: python3-whoosh
 BuildRequires: python3-snowballstemmer
 BuildRequires: python3-sphinx-theme-alabaster
+BuildRequires: python3-six
 %endif # with_python3
 
 Requires:      python-docutils
