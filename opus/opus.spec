@@ -1,14 +1,11 @@
 Name:          opus
 Version:       1.1.1
-Release:       0.4.beta%{?dist}
+Release:       3%{?dist}
 Summary:       An audio codec for use in low-delay speech and audio communication
 
 License:       BSD
 URL:           http://www.opus-codec.org/
-Source0:       http://downloads.xiph.org/releases/%{name}/%{name}-%{version}-beta.tar.gz
-# This is the final IETF Working Group RFC
-Source1:       http://tools.ietf.org/rfc/rfc6716.txt 
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0:       http://downloads.xiph.org/releases/%{name}/%{name}-%{version}.tar.gz
 BuildRequires: doxygen
 
 %description
@@ -25,8 +22,7 @@ Requires: opus = %{version}-%{release}
 Files for development with opus.
 
 %prep
-%setup -q -n %{name}-%{version}-beta
-cp %{SOURCE1} .
+%setup -q -n %{name}-%{version}
 
 %build
 %configure --enable-custom-modes --disable-static
@@ -59,7 +55,7 @@ rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root,-)
-%doc README doc/html rfc6716.txt
+%doc README doc/html
 %{_includedir}/opus
 %{_libdir}/libopus.so
 %{_libdir}/pkgconfig/opus.pc
@@ -67,6 +63,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man3/opus_*.3.gz
 
 %changelog
+* Sat Dec 05 2015 Cjacker <cjacker@foxmail.com> - 1.1.1-3
+- Update to 1.1.1 official release
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.1.1-0.4.beta
 - Rebuild for new 4.0 release.
 
