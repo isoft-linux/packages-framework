@@ -15,6 +15,7 @@ BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  python-unittest2
+BuildRequires:  python-pbr
 #test/runtime need.
 Requires: python-funcsigs
 Requires: python-pbr
@@ -22,6 +23,8 @@ Requires: python-pbr
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
+BuildRequires:  python3-pbr
+BuildRequires:  python3-unittest2
 %endif
 
 
