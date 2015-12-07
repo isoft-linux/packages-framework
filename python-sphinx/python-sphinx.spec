@@ -5,7 +5,7 @@
 
 Name:       python-sphinx
 Version:    1.3.1
-Release:    7%{?dist}
+Release:    8%{?dist}
 Summary:    Python documentation generator
 
 
@@ -63,6 +63,7 @@ Requires:      python-sphinx_rtd_theme
 Requires:      python-sphinx-theme-alabaster
 Requires:      python-sphinx-theme-better
 Requires:      python-snowballstemmer
+Requires:      python-docutils
 
 %description
 Sphinx is a tool that makes it easy to create intelligent and
@@ -103,6 +104,7 @@ Requires:      python3-sphinx_rtd_theme
 Requires:      python3-sphinx-theme-alabaster
 Requires:      python3-sphinx-theme-better
 Requires:      python3-snowballstemmer
+Requires:      python3-docutils
 
 %description -n python3-sphinx
 Sphinx is a tool that makes it easy to create intelligent and
@@ -287,6 +289,9 @@ popd
 
 
 %changelog
+* Mon Dec 07 2015 Cjacker <cjacker@foxmail.com> - 1.3.1-8
+- Require python-docutils
+
 * Mon Dec 07 2015 Cjacker <cjacker@foxmail.com> - 1.3.1-7
 - Fix requires
 
