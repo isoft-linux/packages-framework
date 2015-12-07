@@ -27,6 +27,7 @@ BuildRequires: python-docutils
 BuildRequires: python-jinja2
 BuildRequires: python-pygments
 BuildRequires: python-sphinx-theme-alabaster
+BuildRequires: python-sphinx_rtd_theme 
 # for testing
 BuildRequires: python-nose
 BuildRequires: gettext
@@ -47,6 +48,7 @@ BuildRequires: python3-sqlalchemy
 BuildRequires: python3-whoosh
 BuildRequires: python3-snowballstemmer
 BuildRequires: python3-sphinx-theme-alabaster
+BuildRequires: python3-sphinx_rtd_theme 
 BuildRequires: python3-six
 %endif # with_python3
 
