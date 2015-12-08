@@ -3,16 +3,30 @@
 %define gst_majorminor  1.0
 
 Name: %{gstreamer}-vaapi
-Version: 0.6.0
-Release: 4 
+Version: 0.7.0
+Release: 2 
 Summary: VA-API support to GStreamer
 License: LGPL
 URL: http://freedesktop.org/wiki/Software/vaapi
 Source: http://www.freedesktop.org/software/vaapi/releases/gstreamer-vaapi/gstreamer-vaapi-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Requires: %{gstreamer} >= 0.9.7
-BuildRequires: %{gstreamer}-devel >= 0.9.7
+BuildRequires:  glib2-devel >= 2.28
+BuildRequires:  %{gstreamer}-devel >= 1.0.0
+BuildRequires:  %{gstreamer}-plugins-base-devel >= 1.0.0
+BuildRequires:  %{gstreamer}-plugins-bad-devel >= 1.0.0
+BuildRequires:  libva-devel >= 1.1.0
+BuildRequires:  libdrm-devel
+BuildRequires:  libudev-devel
+BuildRequires:  libGL-devel
+BuildRequires:  pkgconfig(egl)
+BuildRequires:  libvpx-devel
+BuildRequires:  pkgconfig(xrandr)
+BuildRequires:  pkgconfig(xrender)
+
+BuildRequires:  wayland-devel
+BuildRequires:  pkgconfig(wayland-client) >= 1
+BuildRequires:  pkgconfig(wayland-scanner) >= 1
+BuildRequires:  pkgconfig(wayland-server) >= 1
 
 %description
 gstreamer-vaapi consists in a collection of VA-API based plugins for
@@ -46,13 +60,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %changelog
+* Tue Dec 08 2015 Cjacker <cjacker@foxmail.com> - 0.7.0-2
+- Update, VP9 decoder
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.6.0-4
 - Rebuild for new 4.0 release.
 
 * Sat Sep 26 2015 Cjacker <cjacker@foxmail.com>
 - rebuild with libva-1.6.1 and gstreamer-1.6.0
 
-* Fri Jul 16 2015 Cjacker <cjacker@foxmail.com>
+* Thu Jul 16 2015 Cjacker <cjacker@foxmail.com>
 - update to 0.6.0
 
 * Tue Dec 10 2013 Cjacker <cjacker@gmail.com>
