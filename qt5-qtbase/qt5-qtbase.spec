@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 14
+Release: 15
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -63,6 +63,10 @@ Patch62: qtbase-unload-plugin-QTBUG-49061.patch
 Patch63: qtbase-fix-QTBUG-47272.patch
 
 Patch64: qtbase-fix-QTBUG-49363-49399.patch
+
+Patch65: qtbase-fix-QTBUG-18722.patch 
+Patch66: qtbase-fix-QTBUG-46887.patch 
+Patch67: qtbase-fix-QTBUG-48393.patch
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -322,6 +326,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Tue Dec 08 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-15
+- Fix QTBUG-18722,QTBUG-46887,QTBUG-48393
+
 * Thu Dec 03 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-14
 - Fix QTBUG-47272, QTBUG-49363, 49399
 

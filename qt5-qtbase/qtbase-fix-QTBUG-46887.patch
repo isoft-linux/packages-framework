@@ -1,0 +1,25 @@
+Parent:     c7fa644c (QFileDialog: preserve window state after delayed widget dialog creation)
+Author:     Oliver Wolff <oliver.wolff@theqtcompany.com>
+AuthorDate: 2015-09-22 14:39:52 +0200
+Commit:     Oliver Wolff <oliver.wolff@theqtcompany.com>
+CommitDate: 2015-09-22 13:24:40 +0000
+
+Fixed pageLayout, pageSize, pageOrientation, pageMargins for QPdfWriter
+
+Task-number: QTBUG-46887
+Change-Id: I8f1497a8b7ff13213879de01fcdfcabfdd471874
+Reviewed-by: Gunnar Sletta <gunnar@sletta.org>
+Reviewed-by: Friedemann Kleint <Friedemann.Kleint@theqtcompany.com>
+diff -Nur qtbase-opensource-src-5.5.1/src/gui/painting/qpdfwriter.cpp qtbase-opensource-src-5.5.1n/src/gui/painting/qpdfwriter.cpp
+--- qtbase-opensource-src-5.5.1/src/gui/painting/qpdfwriter.cpp	2015-10-13 12:35:30.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/gui/painting/qpdfwriter.cpp	2015-12-08 12:43:26.497583688 +0800
+@@ -151,7 +151,8 @@
+   Constructs a PDF writer that will write the pdf to \a device.
+   */
+ QPdfWriter::QPdfWriter(QIODevice *device)
+-    : QObject(*new QPdfWriterPrivate)
++    : QObject(*new QPdfWriterPrivate),
++      QPagedPaintDevice(new QPdfPagedPaintDevicePrivate(d_func()))
+ {
+     Q_D(QPdfWriter);
+ 

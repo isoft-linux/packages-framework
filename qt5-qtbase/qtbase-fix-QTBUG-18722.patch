@@ -1,0 +1,28 @@
+Parent:     c28bc5f1 (QNativeSocketEngine: fix SO_REUSEPORT problems on Linux)
+Author:     Markus Goetz <markus@woboq.com>
+AuthorDate: 2015-09-22 14:26:24 -0400
+Commit:     Markus Goetz (Woboq GmbH) <markus@woboq.com>
+CommitDate: 2015-09-22 20:06:55 +0000
+
+QNAM: Assign proper channel before sslErrors() emission
+
+There can be a race condition where another channel connects
+and gets the sslErrors() from the socket first. Then the
+QSslConfiguration from the wrong socket (the default
+channel 0's socket) was used.
+
+Task-number: QTBUG-18722
+Change-Id: Ibbfa48c27f181563745daf540fa792a57cc09682
+Reviewed-by: Richard J. Moore <rich@kde.org>
+diff -Nur qtbase-opensource-src-5.5.1/src/network/access/qhttpnetworkconnectionchannel.cpp qtbase-opensource-src-5.5.1n/src/network/access/qhttpnetworkconnectionchannel.cpp
+--- qtbase-opensource-src-5.5.1/src/network/access/qhttpnetworkconnectionchannel.cpp	2015-10-13 12:35:28.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/network/access/qhttpnetworkconnectionchannel.cpp	2015-12-08 12:50:11.506601998 +0800
+@@ -1066,6 +1066,8 @@
+     connection->d_func()->pauseConnection();
+     if (pendingEncrypt && !reply)
+         connection->d_func()->dequeueRequest(socket);
++    if (reply) // a reply was actually dequeued.
++        reply->d_func()->connectionChannel = this; // set correct channel like in sendRequest() and queueRequest();
+     if (connection->connectionType() == QHttpNetworkConnection::ConnectionTypeHTTP) {
+         if (reply)
+             emit reply->sslErrors(errors);

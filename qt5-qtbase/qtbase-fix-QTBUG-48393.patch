@@ -1,0 +1,55 @@
+Parent:     363e6e3d (fix error message)
+Author:     Richard Moe Gustavsen <richard.gustavsen@theqtcompany.com>
+AuthorDate: 2015-09-16 15:18:24 +0200
+Commit:     Richard Moe Gustavsen <richard.gustavsen@theqtcompany.com>
+CommitDate: 2015-09-22 11:50:58 +0000
+
+QFileDialog: preserve window state after delayed widget dialog creation
+
+The widget UI for a QFileDialog is sometimes created lazily as a fallback
+when the dialog is about to show (the reson being that the platform reports
+that is has native dialogs, but fails showing it, perhaps because of
+unsupported configuration). In that case, the widget setup code will resize
+the dialog to default sizes, and as such, wipe out any explicitly set
+geometry or window states.
+
+This is especially visible on iOS, since there we show all windows
+maximized by default. If the fallback triggers, the dialog will
+loose the maximized state and be shown partially outside the
+screen without a way to close it.
+
+This patch will make sure that even if the widgets are created late, we
+still respect any geometry or window states set by the application.
+
+Note: The bug became visible after: 6468cf4e
+
+Change-Id: Ib2b87cd24e959c547208aa1cf76d683b9cbc283a
+Reviewed-by: Gabriel de Dietrich <gabriel.dedietrich@theqtcompany.com>
+diff -Nur qtbase-opensource-src-5.5.1/src/widgets/dialogs/qfiledialog.cpp qtbase-opensource-src-5.5.1n/src/widgets/dialogs/qfiledialog.cpp
+--- qtbase-opensource-src-5.5.1/src/widgets/dialogs/qfiledialog.cpp	2015-10-13 12:35:23.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/widgets/dialogs/qfiledialog.cpp	2015-12-08 12:47:29.081594655 +0800
+@@ -2806,6 +2806,14 @@
+     if (qFileDialogUi)
+         return;
+     Q_Q(QFileDialog);
++
++    // This function is sometimes called late (e.g as a fallback from setVisible). In that case we
++    // need to ensure that the following UI code (setupUI in particular) doesn't reset any explicitl
++
++    // set window state or geometry.
++    QSize preSize = q->testAttribute(Qt::WA_Resized) ? q->size() : QSize();
++    Qt::WindowStates preState = q->windowState();
++
+     model = new QFileSystemModel(q);
+     model->setFilter(options->filter());
+     model->setObjectName(QLatin1String("qt_filesystem_model"));
+@@ -2967,7 +2975,8 @@
+     lineEdit()->selectAll();
+     _q_updateOkButton();
+     retranslateStrings();
+-    q->resize(q->sizeHint());
++    q->resize(preSize.isValid() ? preSize : q->sizeHint());
++    q->setWindowState(preState);
+ }
+ 
+ void QFileDialogPrivate::_q_showHeader(QAction *action)
