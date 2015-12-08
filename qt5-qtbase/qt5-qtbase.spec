@@ -179,7 +179,9 @@ developing applications that use %{name}.
 %patch62 -p1
 %patch63 -p1
 %patch64 -p1
-
+%patch65 -p1
+%patch66 -p1
+%patch67 -p1
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
 
