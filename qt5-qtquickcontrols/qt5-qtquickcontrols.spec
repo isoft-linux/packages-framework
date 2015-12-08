@@ -1,6 +1,6 @@
 Name: qt5-qtquickcontrols 
 Version: 5.5.1
-Release: 5 
+Release: 6 
 Summary: QucikControls Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -15,6 +15,8 @@ Patch1: qtquickcontrols-manually-edit-to-fix-broken-inheritance-qtbug-49189.patc
 #Another revert happend in qtbase.
 Patch2: qtquickcontrols-revert-94265.patch
 Patch3: qtquickcontrols-revert-menu-position.patch
+
+Patch4: fix-QTBUG-45984.patch
  
 BuildRequires: qt5-qtdeclarative-devel >= %{version}
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
@@ -45,6 +47,7 @@ developing applications that use %{name}.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 qmake-qt5
@@ -73,6 +76,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Dec 08 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-6
+- Fix QTBUG-45984
+
 * Thu Nov 12 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-5
 - Revert some commit to fix kcmshell5 kwineffects popup menu position issue.
 

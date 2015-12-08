@@ -1,0 +1,24 @@
+Parent:     ded73ee2 (Fix TreeView missing visualization of expander image on insert or remove)
+Author:     Joni Poikelin <joni.poikelin@theqtcompany.com>
+AuthorDate: 2015-05-11 20:42:04 +0300
+Commit:     Joni Poikelin <joni.poikelin@theqtcompany.com>
+CommitDate: 2015-05-12 14:29:51 +0300
+
+Fix division by zero in ScrollView scrollbar handle
+diff -Nur qtquickcontrols-opensource-src-5.5.1/src/controls/Styles/Base/ScrollViewStyle.qml qtquickcontrols-opensource-src-5.5.1n/src/controls/Styles/Base/ScrollViewStyle.qml
+--- qtquickcontrols-opensource-src-5.5.1/src/controls/Styles/Base/ScrollViewStyle.qml	2015-10-13 12:35:06.000000000 +0800
++++ qtquickcontrols-opensource-src-5.5.1n/src/controls/Styles/Base/ScrollViewStyle.qml	2015-12-08 12:40:47.145576484 +0800
+@@ -375,10 +375,11 @@
+             id: handleControl
+             height: __styleData.horizontal ? implicitHeight : extent
+             width: __styleData.horizontal ? extent : implicitWidth
++            visible: range > 0
+             anchors.top: bg.top
+             anchors.left: bg.left
+-            anchors.topMargin: __styleData.horizontal ? 0 : -handleOverlap + (2 * begin * (bg.height + (2 * handleOverlap) - extent) + range) / (2 * range)
+-            anchors.leftMargin: __styleData.horizontal ? -handleOverlap + (2 * begin * (bg.width + (2 * handleOverlap) - extent) + range) / (2 * range) : 0
++            anchors.topMargin: __styleData.horizontal || range === 0 ? 0 : -handleOverlap + (2 * begin * (bg.height + (2 * handleOverlap) - extent) + range) / (2 * range)
++            anchors.leftMargin: __styleData.horizontal && range !== 0 ? -handleOverlap + (2 * begin * (bg.width + (2 * handleOverlap) - extent) + range) / (2 * range) : 0
+             sourceComponent: handle
+             property QtObject styleData: QtObject {
+                 readonly property bool hovered: activeControl === "handle"
