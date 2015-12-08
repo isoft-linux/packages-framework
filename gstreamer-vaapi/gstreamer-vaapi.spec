@@ -20,6 +20,7 @@ BuildRequires:  libudev-devel
 BuildRequires:  libGL-devel
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  libvpx-devel
+BuildRequires:  yasm
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xrender)
 
