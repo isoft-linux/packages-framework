@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 15
+Release: 16
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -67,6 +67,9 @@ Patch64: qtbase-fix-QTBUG-49363-49399.patch
 Patch65: qtbase-fix-QTBUG-18722.patch 
 Patch66: qtbase-fix-QTBUG-46887.patch 
 Patch67: qtbase-fix-QTBUG-48393.patch
+
+# Fix QWidget::setWindowRole() QTBUG-45484
+Patch68: qwidget-set-window-role.patch
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -182,6 +185,7 @@ developing applications that use %{name}.
 %patch65 -p1
 %patch66 -p1
 %patch67 -p1
+%patch68 -p1
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
 
@@ -328,6 +332,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Wed Dec 09 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.5.1-16
+- Fix QWidget::setWindowRole() QTBUG-45484
+
 * Tue Dec 08 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-15
 - Fix QTBUG-18722,QTBUG-46887,QTBUG-48393
 
