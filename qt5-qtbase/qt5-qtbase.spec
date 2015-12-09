@@ -69,6 +69,7 @@ Patch66: qtbase-fix-QTBUG-46887.patch
 Patch67: qtbase-fix-QTBUG-48393.patch
 
 # Fix QWidget::setWindowRole() QTBUG-45484
+# try to fix KDEBUG-341930
 Patch68: qwidget-set-window-role.patch
 
 # All these macros should match contents of SOURCE10: 

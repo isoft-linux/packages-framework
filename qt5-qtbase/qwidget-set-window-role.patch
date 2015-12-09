@@ -101,10 +101,18 @@ index a379a6f..15d5c1b 100644
      uint visualId() const;
  
 diff --git a/src/widgets/kernel/qwidget.cpp b/src/widgets/kernel/qwidget.cpp
-index 49da4d1..bd00f29 100644
+index 49da4d1..e290057 100644
 --- a/src/widgets/kernel/qwidget.cpp
 +++ b/src/widgets/kernel/qwidget.cpp
-@@ -1458,6 +1458,9 @@ void QWidgetPrivate::create_sys(WId window, bool initializeWindow, bool destroyO
+@@ -100,6 +100,7 @@
+ 
+ #include "qwindowcontainer_p.h"
+ 
++#include "QtPlatformHeaders/qxcbwindowfunctions.h"
+ 
+ // widget/widget data creation count
+ //#define QWIDGET_EXTRA_DEBUG
+@@ -1458,6 +1459,9 @@ void QWidgetPrivate::create_sys(WId window, bool initializeWindow, bool destroyO
  
      data.window_flags = win->flags();
  
@@ -114,7 +122,7 @@ index 49da4d1..bd00f29 100644
      QBackingStore *store = q->backingStore();
  
      if (!store) {
-@@ -6267,13 +6270,11 @@ QString QWidget::windowRole() const
+@@ -6267,13 +6271,11 @@ QString QWidget::windowRole() const
  */
  void QWidget::setWindowRole(const QString &role)
  {
