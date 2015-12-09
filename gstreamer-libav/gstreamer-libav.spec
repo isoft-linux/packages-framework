@@ -16,6 +16,7 @@ Requires: %{gstreamer} >= 0.9.7
 BuildRequires: %{gstreamer}-devel >= 0.9.7
 BuildRequires: %{gstreamer}-plugins-base-devel >= 0.9.7
 BuildRequires: bzip2-devel xz-devel zlib-devel
+BuildRequires: orc-devel
 
 %description
 GStreamer is a streaming-media framework, based on graphs of filters which
