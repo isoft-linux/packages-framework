@@ -1,30 +1,36 @@
-%define majorminor  1.0
-%define gstreamer   gstreamer
+%define majorminor 1.0
+%define gstreamer gstreamer
 
-%define gst_minver  1.0 
+%define gst_minver 1.0 
 
-Name: 		%{gstreamer}-plugins-ugly
-Version: 	1.6.0
-Release: 	2
-Summary: 	GStreamer streaming media framework "ugly" plug-ins
+Name: %{gstreamer}-plugins-ugly
+Version: 1.6.1
+Release: 2
+Summary: GStreamer streaming media framework "ugly" plug-ins
 
-License: 	LGPL
-URL:		http://gstreamer.freedesktop.org/
-Vendor:         GStreamer Backpackers Team <package@gstreamer.freedesktop.org>
-Source:         http://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-%{version}.tar.xz
+License: LGPL
+URL: http://gstreamer.freedesktop.org/
 
-Requires: 	%{gstreamer} >= %{gst_minver}
-BuildRequires: 	%{gstreamer}-devel >= %{gst_minver}
-BuildRequires:  libmad-devel
-BuildRequires:  x264-devel
-BuildRequires:  mpeg2dec-devel
-BuildRequires:  a52dec-devel
-BuildRequires:  libcdio-devel
-Provides:       gstreamer-sid = %{version}-%{release}
-Provides:       gstreamer-mad = %{version}-%{release}
-Provides:       gstreamer-a52dec = %{version}-%{release}
-Provides:       gstreamer-dvdread = %{version}-%{release}
-Provides:       gstreamer-mpeg2dec = %{version}-%{release}
+Source0: http://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-%{version}.tar.xz
+
+BuildRequires: %{gstreamer}-devel >= %{gst_minver}
+BuildRequires: %{gstreamer}-plugins-base-devel >= %{gst_minver}
+BuildRequires: check
+BuildRequires: gettext-devel
+BuildRequires: libXt-devel
+BuildRequires: gtk-doc
+BuildRequires: gobject-introspection-devel
+
+BuildRequires: libmad-devel
+BuildRequires: x264-devel
+BuildRequires: mpeg2dec-devel
+BuildRequires: a52dec-devel
+BuildRequires: libcdio-devel
+BuildRequires: libmad-devel
+BuildRequires: libdvdread-devel
+BuildRequires: orc-devel
+
+BuildRequires: chrpath
 
 %description
 GStreamer is a streaming media framework, based on graphs of elements which
@@ -36,32 +42,15 @@ gstreamer-plugins-good because:
 - the license of the library is not LGPL
 - there are possible licensing issues with the code.
 
-# %package devel
-# Summary:        Development files for GStreamer Ugly Plugins
-# Group:          Development/Libraries
-#
-# Requires:       %{name} = %{version}-%{release}
-#
-# %description devel
-# GStreamer is a streaming media framework, based on graphs of elements which
-# operate on media data.
-#
-# This package contains well-written plug-ins that can't be shipped in
-# gstreamer-plugins-good because:
-# - the license is not LGPL
-# - the license of the library is not LGPL
-# - there are possible licensing issues with the code.
-# 
-# This package contains development files and documentation.
-
 %prep
 %setup -q -n gst-plugins-ugly-%{version}
+
 %build
 %configure \
-    --disable-gtk-doc 
+ --disable-gtk-doc 
 
 make %{?_smp_mflags}
-                                                                                
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -76,10 +65,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang gst-plugins-ugly-%{majorminor}
 
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files -f gst-plugins-ugly-%{majorminor}.lang
 %defattr(-, root, root, -)
 %{_libdir}/gstreamer-%{majorminor}/*.so
@@ -88,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Dec 09 2015 Cjacker <cjacker@foxmail.com> - 1.6.1-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
 - Rebuild for new 4.0 release.
 
