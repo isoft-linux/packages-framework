@@ -1,8 +1,8 @@
 diff --git a/src/platformheaders/xcbfunctions/qxcbwindowfunctions.h b/src/platformheaders/xcbfunctions/qxcbwindowfunctions.h
-index ae05cf5..e02af1f 100644
+index ae05cf5..28fde6b 100644
 --- a/src/platformheaders/xcbfunctions/qxcbwindowfunctions.h
 +++ b/src/platformheaders/xcbfunctions/qxcbwindowfunctions.h
-@@ -83,6 +83,14 @@ public:
+@@ -83,6 +83,16 @@ public:
              return func(window);
          return UINT_MAX;
      }
@@ -12,13 +12,15 @@ index ae05cf5..e02af1f 100644
 +
 +    static void setWmWindowRole(QWindow *window, const QByteArray &role)
 +    {
-+        return QPlatformHeaderHelper::callPlatformFunction<void, SetWmWindowRole, QWindow *, const QByteArray &>(setWmWindowRoleIdentifier(), window, role);
++		SetWmWindowRole func = reinterpret_cast<SetWmWindowRole>(QGuiApplication::platformFunction(setWmWindowRoleIdentifier()));
++        if (func)
++            func(window, role);
 +    }
  };
  
  
 diff --git a/src/plugins/platforms/xcb/qxcbnativeinterface.cpp b/src/plugins/platforms/xcb/qxcbnativeinterface.cpp
-index 8bf9003..0e114ed 100644
+index 8bf9003..3928da3 100644
 --- a/src/plugins/platforms/xcb/qxcbnativeinterface.cpp
 +++ b/src/plugins/platforms/xcb/qxcbnativeinterface.cpp
 @@ -395,6 +395,9 @@ QFunctionPointer QXcbNativeInterface::platformFunction(const QByteArray &functio
@@ -26,7 +28,7 @@ index 8bf9003..0e114ed 100644
          return QFunctionPointer(QXcbWindowFunctions::VisualId(QXcbWindow::visualIdStatic));
      }
 +    if (function == QXcbWindowFunctions::setWmWindowRoleIdentifier()) {
-+        return QFunctionPointer(QXcbWindowFunctions::SetWmWindowRole(QXcbWindow::setWmWindowRoleStatic));
++        return QFunctionPointer(QXcbWindow::setWmWindowRoleStatic);
 +    }
      return Q_NULLPTR;
  }
