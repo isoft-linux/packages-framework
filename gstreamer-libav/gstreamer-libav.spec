@@ -1,21 +1,21 @@
-%define majorminor  1.0
-%define gstreamer   gstreamer
-%define gst_majorminor  1.0
+%define majorminor 1.0
+%define gstreamer gstreamer
+%define gst_majorminor 1.0
 
-Name: 		%{gstreamer}-libav
-Version: 	1.6.0
-Release:	2	
-Summary: 	GStreamer Streaming-media framework plug-in using libav (FFmpeg).
-License: 	LGPL
-URL:		http://gstreamer.net/
-Vendor:		GStreamer Backpackers Team <package@gstreamer.net>
-Source:		http://gstreamer.freedesktop.org/src/gst-ffmpeg/gst-ffmpeg/gst-libav-%{version}.tar.xz
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Name: %{gstreamer}-libav
+Version: 1.6.1
+Release: 2
+Summary: GStreamer Streaming-media framework plug-in using libav (FFmpeg).
+License: LGPL
+URL: http://gstreamer.net/
+Source0: http://gstreamer.freedesktop.org/src/gst-ffmpeg/gst-ffmpeg/gst-libav-%{version}.tar.xz
 
-Requires:  	%{gstreamer} >= 0.9.7
-BuildRequires: 	%{gstreamer}-devel >= 0.9.7
-BuildRequires: 	%{gstreamer}-plugins-base-devel >= 0.9.7
-BuildRequires: orc-devel
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+Requires: %{gstreamer} >= 0.9.7
+BuildRequires: %{gstreamer}-devel >= 0.9.7
+BuildRequires: %{gstreamer}-plugins-base-devel >= 0.9.7
+BuildRequires: bzip2-devel xz-devel zlib-devel
 
 %description
 GStreamer is a streaming-media framework, based on graphs of filters which
@@ -40,14 +40,10 @@ export CFLAGS="$CFLAGS -fno-strict-aliasing"
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
 %makeinstall
+
 rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{gst_majorminor}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{gst_majorminor}/*.a
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-, root, root, -)
@@ -55,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Wed Dec 09 2015 Cjacker <cjacker@foxmail.com> - 1.6.1-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
 - Rebuild for new 4.0 release.
 
