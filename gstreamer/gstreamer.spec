@@ -1,56 +1,60 @@
-%define		gstreamer	gstreamer
-%define		majorminor	1.0
+%define gstreamer gstreamer
+%define majorminor 1.0
 
-%define 	_glib2		2.32.0
+%define _glib2 2.32.0
 
-Name: 		%{gstreamer}
-Version: 	1.6.0
-Release: 	2
-Summary: 	GStreamer streaming media framework runtime
+Name: %{gstreamer}
+Version: 1.6.1
+Release: 2 
+Summary: GStreamer streaming media framework runtime
 
-License: 	LGPL
-URL:		http://gstreamer.freedesktop.org/
-Source: 	http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+License: LGPL
+URL: http://gstreamer.freedesktop.org/
+Source: http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires: 	glib2-devel >= %{_glib2}
-BuildRequires: 	bison
-BuildRequires: 	flex
-BuildRequires: 	m4
-#BuildRequires: 	gtk-doc >= 1.3
-BuildRequires:	gettext
+BuildRequires: glib2-devel
+BuildRequires: libxml2-devel
+BuildRequires: gobject-introspection-devel
+BuildRequires: bison
+BuildRequires: flex
+BuildRequires: m4
+BuildRequires: check-devel
+BuildRequires: gtk-doc >= 1.3
+BuildRequires: gettext
+BuildRequires: pkgconfig
 
-# because AM_PROG_LIBTOOL was used in configure.ac
-BuildRequires:	gcc
+BuildRequires: chrpath
 
 ### documentation requirements
-#BuildRequires:  python2
-#BuildRequires:  openjade
-#BuildRequires:	libxslt
-#BuildRequires:  docbook-style-dsssl
-#BuildRequires:  docbook-style-xsl
-#BuildRequires:  docbook-utils
+BuildRequires: python2
+BuildRequires: openjade
+BuildRequires: libxslt
+BuildRequires: docbook-style-dsssl
+BuildRequires: docbook-style-xsl
+BuildRequires: docbook-utils
+BuildRequires: ghostscript
 
 %description
 GStreamer is a streaming media framework, based on graphs of filters which
 operate on media data. Applications using this library can do anything
 from real-time sound processing to playing videos, and just about anything
-else media-related.  Its plugin-based architecture means that new data
+else media-related. Its plugin-based architecture means that new data
 types or processing capabilities can be added simply by installing new 
 plugins.
 
 %package devel
-Summary: 	Libraries/include files for GStreamer streaming media framework
+Summary: Libraries/include files for GStreamer streaming media framework
 
-Requires: 	%{name} = %{version}-%{release}
-Requires: 	glib2-devel >= %{_glib2}
+Requires: %{name} = %{version}-%{release}
+Requires: glib2-devel >= %{_glib2}
 
 %description devel
 GStreamer is a streaming media framework, based on graphs of filters which
 operate on media data. Applications using this library can do anything
 from real-time sound processing to playing videos, and just about anything
-else media-related.  Its plugin-based architecture means that new data
-types or processing capabilities can be added simply by installing new   
+else media-related. Its plugin-based architecture means that new data
+types or processing capabilities can be added simply by installing new 
 plugins.
 
 This package contains the libraries and includes files necessary to develop
@@ -62,16 +66,16 @@ documentation.
 
 %build
 %configure \
-  --with-package-name='gstreamer package' \
-  --with-package-origin='http://gstreamer.freedesktop.org' \
-  --disable-debug \
-  --disable-gtk-doc \
-  --disable-docbook \
-  --enable-introspection=yes
+    --with-package-name='gstreamer package' \
+    --with-package-origin='http://gstreamer.freedesktop.org' \
+    --disable-debug \
+    --disable-gtk-doc \
+    --disable-docbook \
+    --enable-introspection=yes
 
 make %{?_smp_mflags}
 
-%install  
+%install 
 rm -rf $RPM_BUILD_ROOT
 
 # Install doc temporarily in order to be included later by rpm
@@ -93,11 +97,7 @@ ln -sf %{_libdir}/gstreamer-1.0/include/gst/gstconfig.h .
 popd
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %post -p /sbin/ldconfig
-
 %postun -p /sbin/ldconfig
 
 %files -f gstreamer-%{majorminor}.lang
@@ -128,6 +128,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Wed Dec 09 2015 Cjacker <cjacker@foxmail.com> - 1.6.1-2
+- Update to 1.6.1
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
 - Rebuild for new 4.0 release.
 
