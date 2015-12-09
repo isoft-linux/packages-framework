@@ -21,25 +21,45 @@ Requires: %{gstreamer} >= %{gst_minver}
 BuildRequires: %{gstreamer}-devel >= %{gst_minver}
 BuildRequires: %{gstreamer}-plugins-base-devel >= %{gstpb_minver}
 
-BuildRequires: gettext-devel
-BuildRequires: gtk-doc
+BuildRequires:  check
+BuildRequires:  gettext-devel
+BuildRequires:  libXt-devel
+BuildRequires:  gtk-doc
+BuildRequires:  gobject-introspection-devel
 
-BuildRequires: bzip2-devel
-BuildRequires: jasper-devel
-BuildRequires: librsvg2-devel
-BuildRequires: openssl-devel
-BuildRequires: orc-devel
+BuildRequires:  bzip2-devel
+BuildRequires:  gsm-devel
+BuildRequires:  jasper-devel
+BuildRequires:  libdvdnav-devel
+BuildRequires:  libexif-devel
+BuildRequires:  libmpcdec-devel
+BuildRequires:  liboil-devel
+BuildRequires:  librsvg2-devel
+BuildRequires:  libsndfile-devel
+BuildRequires:  mesa-libGL-devel
+BuildRequires:  mesa-libGLU-devel
+BuildRequires:  openssl-devel
+BuildRequires:  orc-devel
+BuildRequires:  wavpack-devel
+BuildRequires:  opus-devel
+BuildRequires:  nettle-devel
+BuildRequires:  libgcrypt-devel
+BuildRequires:  libwayland-client-devel
+BuildRequires:  gnutls-devel
+BuildRequires:  pkgconfig(gudev-1.0)
+BuildRequires:  pkgconfig(libusb-1.0)
+BuildRequires:  gtk3-devel >= 3.4
+BuildRequires:  bluez-libs-devel >= 5.0
+BuildRequires:  libwebp-devel
 
-BuildRequires: mp4v2-devel
-BuildRequires: faac-devel
-BuildRequires: faad2-devel
-BuildRequires: libsndfile-devel
-BuildRequires: fribidi-devel
-BuildRequires: enca-devel
-BuildRequires: libass-devel
-BuildRequires: libdvdread-devel
-BuildRequires: libdvdnav-devel
-BuildRequires: libdc1394-devel
+BuildRequires:  chrpath
+
+BuildRequires:  libass-devel
+BuildRequires:  libcurl-devel
+BuildRequires:  libvdpau-devel
+BuildRequires:  openal-devel
+BuildRequires:  openjpeg-devel
+BuildRequires:  OpenEXR-devel
 
 %description
 gstreamer-plugins-bad contains plug-ins that aren't
@@ -60,7 +80,6 @@ aren't tested well enough, or the code is not of good enough quality.
 
 %prep
 %setup -q -n gst-plugins-bad-%{version}
-#%patch100 -p1
 
 %build
 %configure \
