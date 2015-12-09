@@ -6,8 +6,8 @@
 
 Summary: GStreamer streaming media framework "bad" plug-ins
 Name: %{gstreamer}-plugins-bad
-Version: 1.6.0
-Release: 2
+Version: 1.6.1
+Release: 2 
 # The freeze and nfs plugins are LGPLv2 (only)
 License: LGPLv2+ and LGPLv2
 URL: http://gstreamer.freedesktop.org/
@@ -130,6 +130,9 @@ rm -rf %{buildroot}
 %{_datadir}/gir-?.?/*.gir
 
 %changelog
+* Wed Dec 09 2015 Cjacker <cjacker@foxmail.com> - 1.6.1-2
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.6.0-2
 - Rebuild for new 4.0 release.
 
