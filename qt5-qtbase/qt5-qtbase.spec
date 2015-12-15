@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.5.1
-Release: 16
+Release: 17
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -71,6 +71,10 @@ Patch67: qtbase-fix-QTBUG-48393.patch
 # Fix QWidget::setWindowRole() QTBUG-45484
 # try to fix KDEBUG-341930
 Patch68: qwidget-set-window-role.patch
+
+# Don't close windows when requested to save application state QTBUG-49667
+# KDEBUG-354724
+Patch69: restore-windows-when-requested-save-application-state.patch
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -187,6 +191,7 @@ developing applications that use %{name}.
 %patch66 -p1
 %patch67 -p1
 %patch68 -p1
+%patch69 -p1
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
 
@@ -333,6 +338,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Tue Dec 15 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.5.1-17
+- Don't close windows when requested to save application state. QTBUG-49667, KDEBUG-354724
+
 * Wed Dec 09 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.5.1-16
 - Fix QWidget::setWindowRole() QTBUG-45484
 
