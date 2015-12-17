@@ -3,12 +3,12 @@
 #Patch0 used to fix ffplay crash Xorg issue.
 #But not fix ffplay resize segfault issue.
 #So, add this option to enable or disable build with SDL.
-%define withsdl 0
+%define withsdl 1 
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.8.1
-Release: 9 
+Version: 2.8.3
+Release: 2
 License: GPLv3
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0: ffmpeg-fix-ffplay-crash-Xorg-with-intel-driver.patch
@@ -93,57 +93,57 @@ Development headers, libraries and pkgconfig files for ffmpeg.
 
 %build
 ./configure \
-	--prefix=%{_prefix} \
-	--libdir=%{_libdir} \
-	--shlibdir=%{_libdir} \
-	--mandir=%{_mandir} \
-	--enable-shared \
-	--enable-runtime-cpudetect \
-	--enable-libbluray \
-	--enable-libcdio \
+    --prefix=%{_prefix} \
+    --libdir=%{_libdir} \
+    --shlibdir=%{_libdir} \
+    --mandir=%{_mandir} \
+    --enable-shared \
+    --enable-runtime-cpudetect \
+    --enable-libbluray \
+    --enable-libcdio \
 %if %{withsdl}
-	--enable-sdl \
+    --enable-sdl \
 %else
-        --disable-sdl \
+    --disable-sdl \
 %endif
-	--enable-libdc1394 \
-	--enable-libpulse \
-	--enable-libspeex \
-	--enable-libvpx \
-	--enable-libwavpack \
-	--enable-openal \
-	--enable-gpl \
-	--enable-version3 \
-	--enable-nonfree \
-	--enable-postproc \
-	--enable-avfilter \
-	--enable-pthreads \
-	--enable-x11grab \
-	--enable-libopenjpeg \
-	--enable-libfaac \
-	--enable-libtheora \
-	--enable-libvorbis \
-	--enable-libx264 \
-	--enable-libx265 \
-	--enable-libxvid \
-    	--enable-vaapi \
-    	--enable-vdpau \
-	--enable-libmfx \
-        --enable-libv4l2 \
-        --enable-fontconfig \
-        --enable-libass \
-        --enable-libfribidi \
-        --enable-libfreetype \
-	--enable-libmp3lame \
-	--disable-static \
-	--disable-libcelt \
-	--disable-libiec61883 \
-	--disable-libmodplug \
-	--disable-libopencv \
-	--disable-avisynth \
-	--disable-stripping \
-    	--enable-doc \
-    	--extra-cflags="-fPIC" 
+    --enable-libdc1394 \
+    --enable-libpulse \
+    --enable-libspeex \
+    --enable-libvpx \
+    --enable-libwavpack \
+    --enable-openal \
+    --enable-gpl \
+    --enable-version3 \
+    --enable-nonfree \
+    --enable-postproc \
+    --enable-avfilter \
+    --enable-pthreads \
+    --enable-x11grab \
+    --enable-libopenjpeg \
+    --enable-libfaac \
+    --enable-libtheora \
+    --enable-libvorbis \
+    --enable-libx264 \
+    --enable-libx265 \
+    --enable-libxvid \
+    --enable-vaapi \
+    --enable-vdpau \
+    --enable-libmfx \
+    --enable-libv4l2 \
+    --enable-fontconfig \
+    --enable-libass \
+    --enable-libfribidi \
+    --enable-libfreetype \
+    --enable-libmp3lame \
+    --disable-static \
+    --disable-libcelt \
+    --disable-libiec61883 \
+    --disable-libmodplug \
+    --disable-libopencv \
+    --disable-avisynth \
+    --disable-stripping \
+    --enable-doc \
+    --extra-cflags="-fPIC" 
     
 
 #--disable-symver
@@ -212,6 +212,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Dec 17 2015 Cjacker <cjacker@foxmail.com> - 2.8.3-2
+- Update
+
 * Wed Dec 02 2015 Cjacker <cjacker@foxmail.com> - 2.8.1-9
 - Enable lame
 
