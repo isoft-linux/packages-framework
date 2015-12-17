@@ -4,11 +4,13 @@
 
 Name: %{gstreamer}-vaapi
 Version: 0.7.0
-Release: 2 
+Release: 3 
 Summary: VA-API support to GStreamer
 License: LGPL
 URL: http://freedesktop.org/wiki/Software/vaapi
-Source: http://www.freedesktop.org/software/vaapi/releases/gstreamer-vaapi/gstreamer-vaapi-%{version}.tar.bz2
+Source0: http://www.freedesktop.org/software/vaapi/releases/gstreamer-vaapi/gstreamer-vaapi-%{version}.tar.bz2
+
+Patch0: gstreamer-vaapi-fix-glx-pkgconfig.patch
 
 BuildRequires:  glib2-devel >= 2.28
 BuildRequires:  %{gstreamer}-devel >= 1.0.0
@@ -35,6 +37,7 @@ GStreamer and helper libraries.
 
 %prep
 %setup -q -n gstreamer-vaapi-%{version}
+%patch0 -p1
 
 %build
 %configure
@@ -61,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %changelog
+* Thu Dec 17 2015 Cjacker <cjacker@foxmail.com> - 0.7.0-3
+- Fix glx pkgconfig
+
 * Tue Dec 08 2015 Cjacker <cjacker@foxmail.com> - 0.7.0-2
 - Update, VP9 decoder
 

@@ -1,0 +1,12 @@
+diff -Nur gstreamer-vaapi-0.7.0/pkgconfig/gstreamer-vaapi-glx.pc.in gstreamer-vaapi-0.7.0n/pkgconfig/gstreamer-vaapi-glx.pc.in
+--- gstreamer-vaapi-0.7.0/pkgconfig/gstreamer-vaapi-glx.pc.in	2015-12-07 18:36:41.000000000 +0800
++++ gstreamer-vaapi-0.7.0n/pkgconfig/gstreamer-vaapi-glx.pc.in	2015-12-16 22:55:23.486357521 +0800
+@@ -6,7 +6,7 @@
+ 
+ Name: GStreamer VA-API (GLX) Plugins Libraries
+ Description: Streaming media framework, VA-API (GLX) plugins libraries
+-Requires: gstreamer-vaapi-@GST_PKG_VERSION@ @LIBVA_GLX_PKGNAME@
++Requires: gstreamer-vaapi-@GST_PKG_VERSION@
+ Version: @VERSION@
+ Libs: -L${libdir} -lgstvaapi-glx-@GST_API_VERSION@
+ Cflags: -I${includedir}
