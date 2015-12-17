@@ -1,24 +1,18 @@
-%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
-%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
-%{!?python_version: %global python_version %(%{__python} -c "from distutils.sysconfig import get_python_version; print(get_python_version())")}
-
 Name: libtdb
-Version: 1.3.0
-Release: 2 
+Version: 1.3.8
+Release: 2%{?dist}
 Summary: The tdb library
 License: LGPLv3+
 URL: http://tdb.samba.org/
 Source: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz
-Patch0: 0001-tdb-include-include-stdbool.h-in-tdb.h.patch
 
 BuildRequires: autoconf
 BuildRequires: libxslt
 BuildRequires: docbook-style-xsl
-BuildRequires: python-devel
+BuildRequires: python2-devel
+BuildRequires: python3-devel
 
 Provides: bundled(libreplace)
-
-# Patches
 
 %description
 A library that implements a trivial database.
@@ -45,13 +39,21 @@ Requires: libtdb = %{version}-%{release}
 %description -n python-tdb
 Python bindings for libtdb
 
+%package -n python3-tdb
+Summary: Python3 bindings for the Tdb library
+Requires: libtdb = %{version}-%{release}
+
+%description -n python3-tdb
+Python3 bindings for libtdb
+
 %prep
 %setup -q -n tdb-%{version}
-%patch0 -p1
+
 %build
 %configure --disable-rpath \
            --bundled-libraries=NONE \
-           --builtin-libraries=replace
+           --builtin-libraries=replace \
+           --extra-python=%{__python3}
 make %{?_smp_mflags} V=1
 
 %install
@@ -65,8 +67,15 @@ find $RPM_BUILD_ROOT -name "*.so*" -exec chmod -c +x {} \;
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/libtdb.a
 
-%clean
-rm -rf $RPM_BUILD_ROOT
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
+%post -n python-tdb -p /sbin/ldconfig
+%postun -n python-tdb -p /sbin/ldconfig
+
+%post -n python3-tdb -p /sbin/ldconfig
+%postun -n python3-tdb -p /sbin/ldconfig
+
 
 %files
 %defattr(-,root,root,-)
@@ -79,30 +88,29 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libtdb.so
 %{_libdir}/pkgconfig/tdb.pc
 
-#%files -n tdb-tools
-#%defattr(-,root,root,-)
-#%{_bindir}/tdbbackup
-#%{_bindir}/tdbdump
-#%{_bindir}/tdbtool
-#%{_bindir}/tdbrestore
-#%{_mandir}/man8/tdbbackup.8*
-#%{_mandir}/man8/tdbdump.8*
-#%{_mandir}/man8/tdbtool.8*
-#%{_mandir}/man8/tdbrestore.8*
+%files -n tdb-tools
+%defattr(-,root,root,-)
+%{_bindir}/tdbbackup
+%{_bindir}/tdbdump
+%{_bindir}/tdbtool
+%{_bindir}/tdbrestore
+%{_mandir}/man8/tdbbackup.8*
+%{_mandir}/man8/tdbdump.8*
+%{_mandir}/man8/tdbtool.8*
+%{_mandir}/man8/tdbrestore.8*
 
 %files -n python-tdb
 %defattr(-,root,root,-)
 %{python_sitearch}/tdb.so
+%{python_sitearch}/_tdb_text.py*
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
-%post -n python-tdb -p /sbin/ldconfig
-
-%postun -n python-tdb -p /sbin/ldconfig
+%files -n python3-tdb
+%defattr(-,root,root,-)
+%{python3_sitearch}/__pycache__/_tdb_text.cpython*.py[co]
+%{python3_sitearch}/tdb.cpython*.so
+%{python3_sitearch}/_tdb_text.py
 
 %changelog
-* Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.3.0-2
-- Rebuild for new 4.0 release.
+* Wed Dec 16 2015 Cjacker <cjacker@foxmail.com> - 1.3.8-2
+- Initial build
 
