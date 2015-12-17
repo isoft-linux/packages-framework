@@ -1,7 +1,7 @@
 Summary: A cross-platform multimedia library
 Name: SDL
 Version: 1.2.15
-Release: 10
+Release: 11
 Source0: %{name}-%{version}.tar.gz
 Patch0: SDL-1.2.10-GrabNotViewable.patch  
 Patch1: SDL-1.2.15-const_XData32.patch
@@ -17,6 +17,12 @@ Patch6:     SDL-1.2.15-no-default-backing-store.patch
 # rh1126136, in upstream after 1.2.15
 Patch7:     SDL-1.2.15-SDL_EnableUNICODE_drops_keyboard_events.patch
 Patch8: SDL-remove-esd.patch
+
+Patch9: X11_KeyToUnicode.patch
+Patch10: sdl-1.2.14-disable-mmx.patch
+Patch11: sdl-1.2.14-fix-mouse-clicking.patch
+
+Patch12: libsdl-1.2.15-resizing.patch
 
 URL: http://www.libsdl.org/
 License: LGPLv2+
@@ -79,6 +85,10 @@ static SDL applications.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
 
 %build
 aclocal
@@ -132,6 +142,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Dec 17 2015 Cjacker <cjacker@foxmail.com> - 1.2.15-11
+- Rebuild
+
 * Tue Nov 10 2015 Cjacker <cjacker@foxmail.com> - 1.2.15-10
 - Rebuild
 
