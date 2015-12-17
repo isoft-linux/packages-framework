@@ -25,9 +25,11 @@ BuildRequires:  libvpx-devel
 BuildRequires:  yasm
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xrender)
+BuildRequires:  pkgconfig(wayland-egl)
 
 BuildRequires:  wayland-devel
 BuildRequires:  pkgconfig(wayland-client) >= 1
+BuildRequires:  pkgconfig(wayland-cursor) >= 1
 BuildRequires:  pkgconfig(wayland-scanner) >= 1
 BuildRequires:  pkgconfig(wayland-server) >= 1
 
