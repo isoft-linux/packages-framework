@@ -1,13 +1,13 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
-Name:           samba
-Version:        4.3.0
-Release:        3 
-Summary:        Server and Client software to interoperate with Windows machines
-License:        GPLv3+ and LGPLv3+
-URL:            http://www.samba.org/
+Name: samba
+Version: 4.3.0
+Release: 4 
+Summary: Server and Client software to interoperate with Windows machines
+License: GPLv3+ and LGPLv3+
+URL:     http://www.samba.org/
 
-Source0:        http://samba.org/samba/ftp/stable/samba-%{version}.tar.gz
+Source0: http://samba.org/samba/ftp/stable/samba-%{version}.tar.gz
 
 Source1: samba.log
 Source4: smb.conf.default
@@ -43,6 +43,27 @@ BuildRequires: python-devel
 BuildRequires: readline-devel
 BuildRequires: sed
 BuildRequires: zlib-devel >= 1.2.3
+
+%global libtalloc_version 2.1.3
+BuildRequires: libtalloc-devel >= %{libtalloc_version}
+BuildRequires: pytalloc-devel >= %{libtalloc_version}
+
+%global libtevent_version 0.9.25
+BuildRequires: libtevent-devel >= %{libtevent_version}
+BuildRequires: python-tevent >= %{libtevent_version}
+
+%global libldb_version 1.1.21
+
+BuildRequires: libldb-devel >= %{libldb_version}
+BuildRequires: pyldb-devel >= %{libldb_version}
+
+%global libtdb_version 1.3.7
+
+BuildRequires: libtdb-devel >= %{libtdb_version}
+BuildRequires: python-tdb >= %{libtdb_version}
+
+BuildRequires: ldb-tools
+
 #for manpage
 
 BuildRequires: libxslt
@@ -108,6 +129,7 @@ develop programs that link against the SMB client library in the Samba suite.
         --with-pammodulesdir=%{_libdir}/security \
         --with-lockdir=/var/lib/samba \
         --with-cachedir=/var/lib/samba \
+        --bundled-libraries=heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,!tevent,!pytevent,!tdb,!pytdb,!ldb,!pyldb,!pyldb-util \
         --with-pam \
         --with-pam_smbpass \
         --enable-cups  \
@@ -331,7 +353,6 @@ rm -rf %{buildroot}
 %dir %{_libdir}/samba
 %{_libdir}/samba/*.so.*
 %{_libdir}/samba/*.so
-
 %{_libdir}/winbind_krb5_locator.so
 
 %files -n libsmbclient
@@ -348,6 +369,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Dec 16 2015 Cjacker <cjacker@foxmail.com> - 4.3.0-4
+- Build with external talloc/tevent/tdb/ldb
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.3.0-3
 - Rebuild for new 4.0 release.
 
