@@ -1,0 +1,57 @@
+Decrease the cache if necessary when adding a new font
+
+It was possible for the cache to increase too quickly since it was
+relying on the timer to decrease which caused problems with FreeType.
+So by checking if it will be increased to be over the limit first before
+adding the new font, we can decrease it earlier in preparation.
+Task-number: QTBUG-47812
+Task-number: QTBUG-49535
+Change-Id: Iedc042d8903949140aa8c5257a9d54cde31a51be
+Reviewed-by: Eskil Abrahamsen Blomfeldt <eskil.abrahamsen-blomfeldt@theqtcompany.com>
+diff -Nur qtbase-opensource-src-5.5.1/src/gui/text/qfont.cpp qtbase-opensource-src-5.5.1n/src/gui/text/qfont.cpp
+--- qtbase-opensource-src-5.5.1/src/gui/text/qfont.cpp	2015-10-13 12:35:30.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/gui/text/qfont.cpp	2015-12-18 11:07:50.835204400 +0800
+@@ -2793,6 +2793,10 @@
+     Q_ASSERT(!engineDataCache.contains(def));
+ 
+     engineData->ref.ref();
++    // Decrease now rather than waiting
++    if (total_cost > min_cost * 2)
++        decreaseCache();
++
+     engineDataCache.insert(def, engineData);
+     increaseCost(sizeof(QFontEngineData));
+ }
+@@ -2832,6 +2836,9 @@
+ #endif
+ 
+     engine->ref.ref();
++    // Decrease now rather than waiting
++    if (total_cost > min_cost * 2)
++        decreaseCache();
+ 
+     Engine data(engine);
+     data.timestamp = ++current_timestamp;
+@@ -2892,7 +2899,11 @@
+ 
+         return;
+     }
++    decreaseCache();
++}
+ 
++void QFontCache::decreaseCache()
++{
+     // go through the cache and count up everything in use
+     uint in_use_cost = 0;
+ 
+diff -Nur qtbase-opensource-src-5.5.1/src/gui/text/qfont_p.h qtbase-opensource-src-5.5.1n/src/gui/text/qfont_p.h
+--- qtbase-opensource-src-5.5.1/src/gui/text/qfont_p.h	2015-10-13 12:35:30.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/gui/text/qfont_p.h	2015-12-18 11:08:12.421204013 +0800
+@@ -276,6 +276,7 @@
+     void increaseCost(uint cost);
+     void decreaseCost(uint cost);
+     void timerEvent(QTimerEvent *event) Q_DECL_OVERRIDE;
++    void decreaseCache();
+ 
+     static const uint min_cost;
+     uint total_cost, max_cost;
