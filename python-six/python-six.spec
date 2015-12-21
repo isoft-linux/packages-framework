@@ -2,8 +2,8 @@
 %global __python3 python3
 
 Name:           python-six
-Version:        1.9.0
-Release:        4%{?dist}
+Version:        1.10.0
+Release:        2%{?dist}
 Summary:        Python 2 and 3 compatibility utilities
 
 License:        MIT
@@ -14,11 +14,13 @@ BuildArch:      noarch
 BuildRequires:  python2-devel
 # For use by selftests:
 BuildRequires:  pytest
+BuildRequires:  python-pluggy
 #BuildRequires:  tkinter
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
 # For use by selftests:
 BuildRequires:  python3-pytest
+BuildRequires:  python3-pluggy
 #BuildRequires:  python3-tkinter
 %endif
 
@@ -89,6 +91,9 @@ popd
 
 
 %changelog
+* Mon Dec 21 2015 Cjacker <cjacker@foxmail.com> - 1.10.0-2
+- Update
+
 * Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 1.9.0-4
 - Rebuild with python 3.5
 
