@@ -1,0 +1,131 @@
+diff -Nur qtbase-opensource-src-5.5.1/src/corelib/kernel/qcore_unix.cpp qtbase-opensource-src-5.5.1n/src/corelib/kernel/qcore_unix.cpp
+--- qtbase-opensource-src-5.5.1/src/corelib/kernel/qcore_unix.cpp	2015-12-21 15:52:06.570258524 +0800
++++ qtbase-opensource-src-5.5.1n/src/corelib/kernel/qcore_unix.cpp	2015-12-21 15:52:55.723261198 +0800
+@@ -102,45 +102,6 @@
+     }
+ }
+ 
+-int qt_select_msecs(int nfds, fd_set *fdread, fd_set *fdwrite, int timeout)
+-{
+-    if (timeout < 0)
+-        return qt_safe_select(nfds, fdread, fdwrite, 0, 0);
+-
+-    struct timespec tv;
+-    tv.tv_sec = timeout / 1000;
+-    tv.tv_nsec = (timeout % 1000) * 1000 * 1000;
+-    return qt_safe_select(nfds, fdread, fdwrite, 0, &tv);
+-}
+-
+-#ifdef Q_OS_BLACKBERRY
+-// The BlackBerry event dispatcher uses bps_get_event. Unfortunately, already registered
+-// socket notifiers are disabled by a call to select. This is to rearm the standard streams.
+-int bb_select(QList<QSocketNotifier *> socketNotifiers, int nfds, fd_set *fdread, fd_set *fdwrite,
+-              int timeout)
+-{
+-    QList<bool> socketNotifiersEnabled;
+-    socketNotifiersEnabled.reserve(socketNotifiers.count());
+-    for (int a = 0; a < socketNotifiers.count(); ++a) {
+-        if (socketNotifiers.at(a) && socketNotifiers.at(a)->isEnabled()) {
+-            socketNotifiersEnabled.append(true);
+-            socketNotifiers.at(a)->setEnabled(false);
+-        } else {
+-            socketNotifiersEnabled.append(false);
+-        }
+-    }
+-
+-    const int ret = qt_select_msecs(nfds, fdread, fdwrite, timeout);
+-
+-    for (int a = 0; a < socketNotifiers.count(); ++a) {
+-        if (socketNotifiersEnabled.at(a) == true)
+-            socketNotifiers.at(a)->setEnabled(true);
+-    }
+-
+-    return ret;
+-}
+-#endif // Q_OS_BLACKBERRY
+-
+ #ifndef Q_OS_VXWORKS
+ 
+ int qt_safe_poll(struct pollfd *fds, int nfds, int timeout_ms, bool retry_eintr)
+diff -Nur qtbase-opensource-src-5.5.1/src/corelib/kernel/qcore_unix_p.h qtbase-opensource-src-5.5.1n/src/corelib/kernel/qcore_unix_p.h
+--- qtbase-opensource-src-5.5.1/src/corelib/kernel/qcore_unix_p.h	2015-12-21 15:52:06.571258524 +0800
++++ qtbase-opensource-src-5.5.1n/src/corelib/kernel/qcore_unix_p.h	2015-12-21 15:53:09.043261922 +0800
+@@ -337,14 +337,6 @@
+ Q_CORE_EXPORT int qt_safe_select(int nfds, fd_set *fdread, fd_set *fdwrite, fd_set *fdexcept,
+                                  const struct timespec *tv);
+ 
+-int qt_select_msecs(int nfds, fd_set *fdread, fd_set *fdwrite, int timeout);
+-
+-#ifdef Q_OS_BLACKBERRY
+-class QSocketNotifier;
+-Q_CORE_EXPORT int bb_select(QList<QSocketNotifier *> socketNotifiers, int nfds, fd_set *fdread,
+-                            fd_set *fdwrite, int timeout);
+-#endif // Q_OS_BLACKBERRY
+-
+ #ifdef Q_OS_VXWORKS
+ // Poll emulation for VxWorks.  Provided by <poll.h> on other systems.
+ 
+diff -Nur qtbase-opensource-src-5.5.1/src/network/socket/qnativesocketengine_unix.cpp qtbase-opensource-src-5.5.1n/src/network/socket/qnativesocketengine_unix.cpp
+--- qtbase-opensource-src-5.5.1/src/network/socket/qnativesocketengine_unix.cpp	2015-12-21 15:52:06.571258524 +0800
++++ qtbase-opensource-src-5.5.1n/src/network/socket/qnativesocketengine_unix.cpp	2015-12-21 15:53:35.402263356 +0800
+@@ -1101,53 +1101,6 @@
+     return qint64(r);
+ }
+ 
+-#ifdef Q_OS_BLACKBERRY
+-int QNativeSocketEnginePrivate::nativeSelect(int timeout, bool selectForRead) const
+-{
+-    fd_set fds;
+-    FD_ZERO(&fds);
+-    FD_SET(socketDescriptor, &fds);
+-
+-    int retval;
+-    QList<QSocketNotifier *> notifiers;
+-    if (selectForRead) {
+-        notifiers << readNotifier;
+-        retval = bb_select(notifiers, socketDescriptor + 1, &fds, 0, timeout);
+-    } else {
+-        notifiers << writeNotifier;
+-        retval = bb_select(notifiers, socketDescriptor + 1, 0, &fds, timeout);
+-    }
+-
+-    return retval;
+-}
+-
+-int QNativeSocketEnginePrivate::nativeSelect(int timeout, bool checkRead, bool checkWrite,
+-                       bool *selectForRead, bool *selectForWrite) const
+-{
+-    fd_set fdread;
+-    FD_ZERO(&fdread);
+-    if (checkRead)
+-        FD_SET(socketDescriptor, &fdread);
+-
+-    fd_set fdwrite;
+-    FD_ZERO(&fdwrite);
+-    if (checkWrite)
+-        FD_SET(socketDescriptor, &fdwrite);
+-
+-    QList<QSocketNotifier *> notifiers;
+-    notifiers << readNotifier << writeNotifier;
+-    int ret = bb_select(notifiers, socketDescriptor + 1, &fdread, &fdwrite, timeout);
+-
+-    if (ret <= 0)
+-        return ret;
+-    *selectForRead = FD_ISSET(socketDescriptor, &fdread);
+-    *selectForWrite = FD_ISSET(socketDescriptor, &fdwrite);
+-
+-    return ret;
+-}
+-
+-#else // not Q_OS_BLACKBERRY:
+-
+ int QNativeSocketEnginePrivate::nativeSelect(int timeout, bool selectForRead) const
+ {
+     struct pollfd fd;
+@@ -1185,6 +1138,5 @@
+     *selectForWrite = w;
+     return ret;
+ }
+-#endif // Q_OS_BLACKBERRY
+ 
+ QT_END_NAMESPACE

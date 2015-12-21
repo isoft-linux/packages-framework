@@ -1,0 +1,694 @@
+diff -Nur qtbase-opensource-src-5.5.1/src/corelib/io/qprocess_unix.cpp qtbase-opensource-src-5.5.1n/src/corelib/io/qprocess_unix.cpp
+--- qtbase-opensource-src-5.5.1/src/corelib/io/qprocess_unix.cpp	2015-10-13 12:35:31.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/corelib/io/qprocess_unix.cpp	2015-12-21 15:20:17.678154686 +0800
+@@ -115,11 +115,83 @@
+ // so we will use 512
+ static const int errorBufferMax = 512;
+ 
+-static inline void add_fd(int &nfds, int fd, fd_set *fdset)
++class QProcessFDSet {
++    QProcessPrivate *process;
++    pollfd fds[5];
++
++    static size_t size()
++    {
++        return sizeof(fds) / sizeof(fds[0]);
++    }
++
++public:
++    explicit QProcessFDSet(QProcessPrivate *proc);
++
++    int poll(int timeout);
++    pollfd &death() { return fds[0]; }
++    pollfd &started() { return fds[1]; }
++    pollfd &stdout() { return fds[2]; }
++    pollfd &stderr() { return fds[3]; }
++    pollfd &stdin() { return fds[4]; }
++};
++
++QProcessFDSet::QProcessFDSet(QProcessPrivate *proc)
++    : process(proc)
++{
++    for (size_t i = 0; i < size(); ++i) {
++        fds[i].fd = -1;
++        fds[i].events = POLLIN;
++    }
++    death().fd = proc->forkfd;//deathPipe[0];
++
++    if (proc->processState == QProcess::Starting)
++        started().fd = proc->childStartedPipe[0];
++
++    stdout().fd = proc->stdoutChannel.pipe[0];
++    stderr().fd = proc->stderrChannel.pipe[0];
++
++    if (!proc->stdinChannel.buffer.isEmpty()) {
++        stdin().fd = proc->stdinChannel.pipe[1];
++        stdin().events = POLLOUT;
++    }
++}
++
++int QProcessFDSet::poll(int timeout)
+ {
+-    FD_SET(fd, fdset);
+-    if ((fd) > nfds)
+-        nfds = fd;
++#ifdef Q_OS_BLACKBERRY
++    // The BlackBerry event dispatcher uses bps_get_event.
++    // Unfortunately, already registered socket notifiers are disabled
++    // by a call to poll. This is to rearm the standard streams.
++    bool stdoutEnabled = false;
++    bool stderrEnabled = false;
++    bool stdinEnabled = false;
++
++    if (process->stdoutChannel.notifier && process->stdoutChannel.notifier->isEnabled()) {
++        stdoutEnabled = true;
++        process->stdoutChannel.notifier->setEnabled(false);
++    }
++    if (process->stderrChannel.notifier && process->stderrChannel.notifier->isEnabled()) {
++        stderrEnabled = true;
++        process->stderrChannel.notifier->setEnabled(false);
++    }
++    if (process->stdinChannel.notifier && process->stdinChannel.notifier->isEnabled()) {
++        stdinEnabled = true;
++        process->stdinChannel.notifier->setEnabled(false);
++    }
++
++    const int ret = qt_safe_poll(fds, nfds, timeout_ms, retry_eintr);
++
++    if (stdoutEnabled)
++        process->stdoutChannel.notifier->setEnabled(true);
++    if (stderrEnabled)
++        process->stderrChannel.notifier->setEnabled(true);
++    if (stdinEnabled)
++        process->stdinChannel.notifier->setEnabled(true);
++
++    return ret;
++#else
++    return qt_safe_poll(fds, size(), timeout);
++#endif // Q_OS_BLACKBERRY
+ }
+ 
+ static int qt_create_pipe(int *pipe)
+@@ -815,11 +887,10 @@
+     qDebug("QProcessPrivate::waitForStarted(%d) waiting for child to start (fd = %d)", msecs,
+            childStartedPipe[0]);
+ #endif
+-
+-    fd_set fds;
+-    FD_ZERO(&fds);
+-    FD_SET(childStartedPipe[0], &fds);
+-    if (qt_select_msecs(childStartedPipe[0] + 1, &fds, 0, msecs) == 0) {
++    pollfd fd;
++    fd.fd = childStartedPipe[0];
++    fd.events = POLLIN;
++    if (qt_safe_poll(&fd, 1, msecs) == 0) {
+         processError = QProcess::Timedout;
+         q->setErrorString(QProcess::tr("Process operation timed out"));
+ #if defined (QPROCESS_DEBUG)
+@@ -861,32 +932,10 @@
+ #endif
+ 
+     forever {
+-        fd_set fdread;
+-        fd_set fdwrite;
+-
+-        FD_ZERO(&fdread);
+-        FD_ZERO(&fdwrite);
+-
+-        int nfds = forkfd;
+-        FD_SET(forkfd, &fdread);
+-
+-        if (processState == QProcess::Starting)
+-            add_fd(nfds, childStartedPipe[0], &fdread);
+-
+-        if (stdoutChannel.pipe[0] != -1)
+-            add_fd(nfds, stdoutChannel.pipe[0], &fdread);
+-        if (stderrChannel.pipe[0] != -1)
+-            add_fd(nfds, stderrChannel.pipe[0], &fdread);
+-
+-        if (!stdinChannel.buffer.isEmpty() && stdinChannel.pipe[1] != -1)
+-            add_fd(nfds, stdinChannel.pipe[1], &fdwrite);
+-
++        QProcessFDSet fdset(this);
+         int timeout = qt_subtract_from_timeout(msecs, stopWatch.elapsed());
+-#ifdef Q_OS_BLACKBERRY
+-        int ret = bb_select(notifiers, nfds + 1, &fdread, &fdwrite, timeout);
+-#else
+-        int ret = qt_select_msecs(nfds + 1, &fdread, &fdwrite, timeout);
+-#endif
++        int ret = fdset.poll(timeout);
++
+         if (ret < 0) {
+             break;
+         }
+@@ -896,18 +945,18 @@
+             return false;
+         }
+ 
+-        if (childStartedPipe[0] != -1 && FD_ISSET(childStartedPipe[0], &fdread)) {
++        if (qt_readable(fdset.started())) {
+             if (!_q_startupNotification())
+                 return false;
+         }
+ 
+         bool readyReadEmitted = false;
+-        if (stdoutChannel.pipe[0] != -1 && FD_ISSET(stdoutChannel.pipe[0], &fdread)) {
++        if (qt_readable(fdset.stdout())) {
+             bool canRead = _q_canReadStandardOutput();
+             if (processChannel == QProcess::StandardOutput && canRead)
+                 readyReadEmitted = true;
+         }
+-        if (stderrChannel.pipe[0] != -1 && FD_ISSET(stderrChannel.pipe[0], &fdread)) {
++        if (qt_readable(fdset.stderr())) {
+             bool canRead = _q_canReadStandardError();
+             if (processChannel == QProcess::StandardError && canRead)
+                 readyReadEmitted = true;
+@@ -915,10 +964,10 @@
+         if (readyReadEmitted)
+             return true;
+ 
+-        if (stdinChannel.pipe[1] != -1 && FD_ISSET(stdinChannel.pipe[1], &fdwrite))
++        if (qt_writable(fdset.stdin()))
+             _q_canWrite();
+ 
+-        if (forkfd == -1 || FD_ISSET(forkfd, &fdread)) {
++        if (qt_readable(fdset.death())) {
+             if (_q_processDied())
+                 return false;
+         }
+@@ -941,33 +990,10 @@
+ #endif
+ 
+     while (!stdinChannel.buffer.isEmpty()) {
+-        fd_set fdread;
+-        fd_set fdwrite;
+-
+-        FD_ZERO(&fdread);
+-        FD_ZERO(&fdwrite);
+-
+-        int nfds = forkfd;
+-        FD_SET(forkfd, &fdread);
+-
+-        if (processState == QProcess::Starting)
+-            add_fd(nfds, childStartedPipe[0], &fdread);
+-
+-        if (stdoutChannel.pipe[0] != -1)
+-            add_fd(nfds, stdoutChannel.pipe[0], &fdread);
+-        if (stderrChannel.pipe[0] != -1)
+-            add_fd(nfds, stderrChannel.pipe[0], &fdread);
+-
+-
+-        if (!stdinChannel.buffer.isEmpty() && stdinChannel.pipe[1] != -1)
+-            add_fd(nfds, stdinChannel.pipe[1], &fdwrite);
+-
++        QProcessFDSet fdset(this);
+         int timeout = qt_subtract_from_timeout(msecs, stopWatch.elapsed());
+-#ifdef Q_OS_BLACKBERRY
+-        int ret = bb_select(notifiers, nfds + 1, &fdread, &fdwrite, timeout);
+-#else
+-        int ret = qt_select_msecs(nfds + 1, &fdread, &fdwrite, timeout);
+-#endif
++        int ret = fdset.poll(timeout);
++
+         if (ret < 0) {
+             break;
+         }
+@@ -978,21 +1004,21 @@
+             return false;
+         }
+ 
+-        if (childStartedPipe[0] != -1 && FD_ISSET(childStartedPipe[0], &fdread)) {
++        if (qt_readable(fdset.started())) {
+             if (!_q_startupNotification())
+                 return false;
+         }
+ 
+-        if (stdinChannel.pipe[1] != -1 && FD_ISSET(stdinChannel.pipe[1], &fdwrite))
++        if (qt_writable(fdset.stdin()))
+             return _q_canWrite();
+ 
+-        if (stdoutChannel.pipe[0] != -1 && FD_ISSET(stdoutChannel.pipe[0], &fdread))
++        if (qt_readable(fdset.stdout()))
+             _q_canReadStandardOutput();
+ 
+-        if (stderrChannel.pipe[0] != -1 && FD_ISSET(stderrChannel.pipe[0], &fdread))
++        if (qt_readable(fdset.stderr()))
+             _q_canReadStandardError();
+ 
+-        if (forkfd == -1 || FD_ISSET(forkfd, &fdread)) {
++        if (qt_readable(fdset.death())) {
+             if (_q_processDied())
+                 return false;
+         }
+@@ -1016,33 +1042,10 @@
+ #endif
+ 
+     forever {
+-        fd_set fdread;
+-        fd_set fdwrite;
+-        int nfds = -1;
+-
+-        FD_ZERO(&fdread);
+-        FD_ZERO(&fdwrite);
+-
+-        if (processState == QProcess::Starting)
+-            add_fd(nfds, childStartedPipe[0], &fdread);
+-
+-        if (stdoutChannel.pipe[0] != -1)
+-            add_fd(nfds, stdoutChannel.pipe[0], &fdread);
+-        if (stderrChannel.pipe[0] != -1)
+-            add_fd(nfds, stderrChannel.pipe[0], &fdread);
+-
+-        if (processState == QProcess::Running && forkfd != -1)
+-            add_fd(nfds, forkfd, &fdread);
+-
+-        if (!stdinChannel.buffer.isEmpty() && stdinChannel.pipe[1] != -1)
+-            add_fd(nfds, stdinChannel.pipe[1], &fdwrite);
+-
++        QProcessFDSet fdset(this);
+         int timeout = qt_subtract_from_timeout(msecs, stopWatch.elapsed());
+-#ifdef Q_OS_BLACKBERRY
+-        int ret = bb_select(notifiers, nfds + 1, &fdread, &fdwrite, timeout);
+-#else
+-        int ret = qt_select_msecs(nfds + 1, &fdread, &fdwrite, timeout);
+-#endif
++        int ret = fdset.poll(timeout);
++
+         if (ret < 0) {
+             break;
+         }
+@@ -1052,20 +1055,21 @@
+             return false;
+         }
+ 
+-        if (childStartedPipe[0] != -1 && FD_ISSET(childStartedPipe[0], &fdread)) {
++        if (qt_readable(fdset.started())) {
+             if (!_q_startupNotification())
+                 return false;
+         }
+-        if (stdinChannel.pipe[1] != -1 && FD_ISSET(stdinChannel.pipe[1], &fdwrite))
++
++        if (qt_writable(fdset.stdin()))
+             _q_canWrite();
+ 
+-        if (stdoutChannel.pipe[0] != -1 && FD_ISSET(stdoutChannel.pipe[0], &fdread))
++        if (qt_readable(fdset.stdout()))
+             _q_canReadStandardOutput();
+ 
+-        if (stderrChannel.pipe[0] != -1 && FD_ISSET(stderrChannel.pipe[0], &fdread))
++        if (qt_readable(fdset.stderr()))
+             _q_canReadStandardError();
+ 
+-        if (forkfd == -1 || FD_ISSET(forkfd, &fdread)) {
++        if (qt_readable(fdset.death())) {
+             if (_q_processDied())
+                 return true;
+         }
+@@ -1075,10 +1079,10 @@
+ 
+ bool QProcessPrivate::waitForWrite(int msecs)
+ {
+-    fd_set fdwrite;
+-    FD_ZERO(&fdwrite);
+-    FD_SET(stdinChannel.pipe[1], &fdwrite);
+-    return qt_select_msecs(stdinChannel.pipe[1] + 1, 0, &fdwrite, msecs < 0 ? 0 : msecs) == 1;
++    pollfd fd;
++    fd.fd = stdinChannel.pipe[1];
++    fd.events = POLLIN;
++    return qt_safe_poll(&fd, 1, msecs);
+ }
+ 
+ void QProcessPrivate::findExitCode()
+diff -Nur qtbase-opensource-src-5.5.1/src/corelib/kernel/qcore_unix.cpp qtbase-opensource-src-5.5.1n/src/corelib/kernel/qcore_unix.cpp
+--- qtbase-opensource-src-5.5.1/src/corelib/kernel/qcore_unix.cpp	2015-10-13 12:35:31.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/corelib/kernel/qcore_unix.cpp	2015-12-21 15:04:30.973103189 +0800
+@@ -141,4 +141,163 @@
+ }
+ #endif // Q_OS_BLACKBERRY
+ 
++#ifndef Q_OS_VXWORKS
++
++int qt_safe_poll(struct pollfd *fds, int nfds, int timeout_ms, bool retry_eintr)
++{
++    if (nfds == 0)
++        return 0;
++    if (nfds < 0) {
++        errno = EINVAL;
++        return -1;
++    }
++
++    // Retry on ret == 0 if the deadline has not yet passed because
++    // Linux can return early from the syscall, without setting EINTR.
++    if (timeout_ms < 0) {
++        forever {
++            int ret = ::poll(fds, nfds, -1);
++            if (ret > 0)
++                return ret;
++            if (retry_eintr) {
++                if (ret == 0 || (ret == -1 && errno == EINTR))
++                    continue;
++                return -1;
++            }
++            if (ret == 0) {
++                errno = EINTR;
++                return -1;
++            }
++            return ret;
++        }
++    }
++
++    timespec previous = qt_gettime();
++    timespec deadline = previous;
++    deadline.tv_sec += timeout_ms / 1000;
++    deadline.tv_nsec += (timeout_ms % 1000) * 1000000;
++    if (deadline.tv_nsec >= 1000000000) {
++        ++deadline.tv_sec;
++        deadline.tv_nsec -= 1000000000;
++    }
++    int remaining = timeout_ms;
++
++    forever {
++        int ret = ::poll(fds, nfds, remaining);
++        if (ret > 0)
++            return ret;
++        timespec now = qt_gettime();
++        if ((now.tv_sec > deadline.tv_sec // past deadline
++             || (now.tv_sec == deadline.tv_sec
++                 && now.tv_nsec >= deadline.tv_nsec))
++            || (now.tv_sec < previous.tv_sec // time warp
++                || (now.tv_sec == previous.tv_sec
++                    && now.tv_nsec < previous.tv_nsec))
++            || (ret < 0 && (errno != EINTR || !retry_eintr))) { // other error
++            return ret;
++        }
++        if (ret == 0 && !retry_eintr) {
++            errno = EINTR;
++            return -1;
++        }
++        remaining = (deadline.tv_sec - now.tv_sec) * 1000
++                             + (deadline.tv_nsec - now.tv_nsec) / 1000000;
++        previous = now;
++    }
++}
++
++#else
++
++// Poll emulation for VxWorks.
++
++static int mark_bad_descriptors(pollfd *fds, int nfds)
++{
++    fd_set r;
++    FD_ZERO(&r);
++    struct timeval tv;
++    tv.tv_sec = 0;
++    tv.tv_usec = 0;
++    int ret = 0;
++
++    // Check each descriptor invidually for badness.
++    for (int i = 0; i < nfds; ++i) {
++        pollfd &fd(fds[i]);
++        if (fd.fd >= 0) {
++            FD_SET(fd.fd, &r);
++            int ret = qt_safe_select(fd.fd + 1, &r, NULL, NULL, &tv);
++            FD_CLR(fd.fd, &r);
++            if (ret < 0 && errno == EBADF) {
++                fd.revents = POLLNVAL;
++                ++ret;
++            }
++        }
++    }
++    Q_ASSERT(ret > 0);
++    return ret;
++}
++
++int qt_safe_poll(pollfd *fds, int nfds, int timeout, bool retry_eintr)
++{
++    fd_set r, w;
++    FD_ZERO(&r);
++    FD_ZERO(&w);
++    int maxfd = -1;
++
++    // Extract the watched descriptors.
++    for (int i = 0; i < nfds; ++i) {
++        pollfd &fd(fds[i]);
++        if (fd.fd >= 0 && fd.fd < FD_SETSIZE) {
++            if (fd.events & POLLIN) {
++                FD_SET(fd.fd, &r);
++                if (fd.fd > maxfd)
++                    maxfd = fd.fd;
++            }
++            if (fd.events & POLLOUT) {
++                FD_SET(fd.fd, &w);
++                if (fd.fd > maxfd)
++                    maxfd = fd.fd;
++            }
++        }
++    }
++
++    // If timeout is negative, wait indefinitely for activity.
++    timespec tv;
++    timespec *ptv;
++    if (timeout >= 0) {
++        tv.tv_sec = timeout / 1000;
++        tv.tv_nsec = (timeout % 1000) * 1000000;
++        ptv = &tv;
++    } else
++        ptv = NULL;
++
++    int ret;
++    if (retry_eintr)
++        ret = qt_safe_select(maxfd + 1, &r, &w, NULL, ptv);
++    else
++        ret = ::select(maxfd + 1, &r, &w, NULL, ptv);
++    if (ret < 0 && errno == EBADF)
++        return mark_bad_descriptors(fds, nfds);
++    if (ret <= 0)
++        return ret;
++
++    // Set the revents flags.
++    ret = 0;
++    for (int i = 0; i < nfds; ++i) {
++        pollfd &fd(fds[i]);
++        fd.revents = 0;
++        if (fd.fd >= 0 && fd.fd < FD_SETSIZE) {
++            if ((fd.events & POLLIN) && FD_ISSET(fd.fd, &r))
++                fd.revents |= POLLIN;
++            if ((fd.events & POLLOUT) && FD_ISSET(fd.fd, &w))
++                fd.revents |= POLLOUT;
++            if (fd.revents)
++                ++ret;
++        }
++    }
++    Q_ASSERT(ret > 0);
++    return ret;
++}
++
++#endif // Q_OS_VXWORKS
++
+ QT_END_NAMESPACE
+diff -Nur qtbase-opensource-src-5.5.1/src/corelib/kernel/qcore_unix_p.h qtbase-opensource-src-5.5.1n/src/corelib/kernel/qcore_unix_p.h
+--- qtbase-opensource-src-5.5.1/src/corelib/kernel/qcore_unix_p.h	2015-10-13 12:35:31.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/corelib/kernel/qcore_unix_p.h	2015-12-21 15:04:30.974103189 +0800
+@@ -63,6 +63,8 @@
+ 
+ #if defined(Q_OS_VXWORKS)
+ #  include <ioLib.h>
++#else
++#  include <poll.h>
+ #endif
+ 
+ struct sockaddr;
+@@ -343,6 +345,36 @@
+                             fd_set *fdwrite, int timeout);
+ #endif // Q_OS_BLACKBERRY
+ 
++#ifdef Q_OS_VXWORKS
++// Poll emulation for VxWorks.  Provided by <poll.h> on other systems.
++
++struct pollfd {
++  int fd;
++  short events;
++  short revents;
++};
++
++#define POLLIN 1
++#define POLLOUT 2
++#define POLLERR 4
++#define POLLHUP 8
++#define POLLNVAL 16
++#endif
++
++inline bool qt_readable(const pollfd &fd)
++{
++  return fd.fd >= 0 && (fd.revents & (POLLIN | POLLHUP | POLLERR | POLLNVAL)) != 0;
++}
++
++inline bool qt_writable(const pollfd &fd)
++{
++  return fd.fd >= 0 && (fd.revents & (POLLOUT | POLLHUP | POLLERR | POLLNVAL)) != 0;
++}
++
++// Deprecated due to FD_SETSIZE limitation, use qt_safe_poll instead.
++Q_CORE_EXPORT int qt_safe_poll(pollfd *fds, int nfds, int timeout,
++                               bool retry_eintr = true);
++
+ // according to X/OPEN we have to define semun ourselves
+ // we use prefix as on some systems sem.h will have it
+ struct semid_ds;
+diff -Nur qtbase-opensource-src-5.5.1/src/network/socket/qlocalserver_unix.cpp qtbase-opensource-src-5.5.1n/src/network/socket/qlocalserver_unix.cpp
+--- qtbase-opensource-src-5.5.1/src/network/socket/qlocalserver_unix.cpp	2015-10-13 12:35:28.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/network/socket/qlocalserver_unix.cpp	2015-12-21 15:04:30.974103189 +0800
+@@ -277,16 +277,11 @@
+ 
+ void QLocalServerPrivate::waitForNewConnection(int msec, bool *timedOut)
+ {
+-    fd_set readfds;
+-    FD_ZERO(&readfds);
+-    FD_SET(listenSocket, &readfds);
++    struct pollfd fd;
++    fd.fd = listenSocket;
++    fd.events = POLLIN;
+ 
+-    struct timespec timeout;
+-    timeout.tv_sec = msec / 1000;
+-    timeout.tv_nsec = (msec % 1000) * 1000 * 1000;
+-
+-    int result = -1;
+-    result = qt_safe_select(listenSocket + 1, &readfds, 0, 0, (msec == -1) ? 0 : &timeout);
++    int result = qt_safe_poll(&fd, 1, msec);
+     if (-1 == result) {
+         setError(QLatin1String("QLocalServer::waitForNewConnection"));
+         closeServer();
+diff -Nur qtbase-opensource-src-5.5.1/src/network/socket/qlocalsocket_unix.cpp qtbase-opensource-src-5.5.1n/src/network/socket/qlocalsocket_unix.cpp
+--- qtbase-opensource-src-5.5.1/src/network/socket/qlocalsocket_unix.cpp	2015-10-13 12:35:28.000000000 +0800
++++ qtbase-opensource-src-5.5.1n/src/network/socket/qlocalsocket_unix.cpp	2015-12-21 15:04:30.974103189 +0800
+@@ -48,10 +48,6 @@
+ #include <qdebug.h>
+ #include <qelapsedtimer.h>
+ 
+-#ifdef Q_OS_VXWORKS
+-#  include <selectLib.h>
+-#endif
+-
+ #define QT_CONNECT_TIMEOUT 30000
+ 
+ QT_BEGIN_NAMESPACE
+@@ -509,25 +505,16 @@
+     if (state() != ConnectingState)
+         return (state() == ConnectedState);
+ 
+-    fd_set fds;
+-    FD_ZERO(&fds);
+-    FD_SET(d->connectingSocket, &fds);
+-
+-    timeval timeout;
+-    timeout.tv_sec = msec / 1000;
+-    timeout.tv_usec = (msec % 1000) * 1000;
+-
+-    // timeout can not be 0 or else select will return an error.
+-    if (0 == msec)
+-        timeout.tv_usec = 1000;
++    pollfd fd;
++    fd.fd = d->connectingSocket;
++    fd.events = POLLIN | POLLOUT;
+ 
+-    int result = -1;
+-    // on Linux timeout will be updated by select, but _not_ on other systems.
++    int result;
+     QElapsedTimer timer;
++    int remaining = msec > 0 ? msec : 1000;
+     timer.start();
+-    while (state() == ConnectingState
+-           && (-1 == msec || timer.elapsed() < msec)) {
+-        result = ::select(d->connectingSocket + 1, &fds, 0, 0, &timeout);
++    while (state() == ConnectingState) {
++        result = qt_safe_poll(&fd, 1, remaining, /* retry_eintr */ false);
+         if (-1 == result && errno != EINTR) {
+             d->errorOccurred( QLocalSocket::UnknownSocketError,
+                     QLatin1String("QLocalSocket::waitForConnected"));
+@@ -535,6 +522,11 @@
+         }
+         if (result > 0)
+             d->_q_connectToSocket();
++        if (msec >= 0) {
++            remaining = timer.elapsed() - msec;
++            if (remaining < 0)
++                break;
++        }
+     }
+ 
+     return (state() == ConnectedState);
+diff -Nur qtbase-opensource-src-5.5.1/src/network/socket/qnativesocketengine_unix.cpp qtbase-opensource-src-5.5.1n/src/network/socket/qnativesocketengine_unix.cpp
+--- qtbase-opensource-src-5.5.1/src/network/socket/qnativesocketengine_unix.cpp	2015-12-21 15:02:47.448097557 +0800
++++ qtbase-opensource-src-5.5.1n/src/network/socket/qnativesocketengine_unix.cpp	2015-12-21 15:04:30.974103189 +0800
+@@ -1150,48 +1150,39 @@
+ 
+ int QNativeSocketEnginePrivate::nativeSelect(int timeout, bool selectForRead) const
+ {
+-    fd_set fds;
+-    FD_ZERO(&fds);
+-    FD_SET(socketDescriptor, &fds);
+-
+-    struct timespec tv;
+-    tv.tv_sec = timeout / 1000;
+-    tv.tv_nsec = (timeout % 1000) * 1000 * 1000;
+-
+-    int retval;
++    struct pollfd fd;
++    fd.fd = socketDescriptor;
+     if (selectForRead)
+-        retval = qt_safe_select(socketDescriptor + 1, &fds, 0, 0, timeout < 0 ? 0 : &tv);
++        fd.events = POLLIN;
+     else
+-        retval = qt_safe_select(socketDescriptor + 1, 0, &fds, 0, timeout < 0 ? 0 : &tv);
+-
+-    return retval;
++        fd.events = POLLOUT;
++    return qt_safe_poll(&fd, 1, timeout);
+ }
+ 
+ int QNativeSocketEnginePrivate::nativeSelect(int timeout, bool checkRead, bool checkWrite,
+                        bool *selectForRead, bool *selectForWrite) const
+ {
+-    fd_set fdread;
+-    FD_ZERO(&fdread);
++    struct pollfd fd;
++    fd.fd = socketDescriptor;
+     if (checkRead)
+-        FD_SET(socketDescriptor, &fdread);
+-
+-    fd_set fdwrite;
+-    FD_ZERO(&fdwrite);
++        fd.events =  POLLIN;
++    else
++        fd.events = 0;
+     if (checkWrite)
+-        FD_SET(socketDescriptor, &fdwrite);
+-
+-    struct timespec tv;
+-    tv.tv_sec = timeout / 1000;
+-    tv.tv_nsec = (timeout % 1000) * 1000 * 1000;
+-
+-    int ret;
+-    ret = qt_safe_select(socketDescriptor + 1, &fdread, &fdwrite, 0, timeout < 0 ? 0 : &tv);
+-
++        fd.events |= POLLOUT;
++    int ret = qt_safe_poll(&fd, 1, timeout);
+     if (ret <= 0)
+         return ret;
+-    *selectForRead = FD_ISSET(socketDescriptor, &fdread);
+-    *selectForWrite = FD_ISSET(socketDescriptor, &fdwrite);
+-
++    bool r = (fd.revents & (POLLIN | POLLHUP | POLLERR)) != 0;
++    bool w = (fd.revents & (POLLOUT | POLLHUP | POLLERR)) != 0;
++    // Emulate the return value from select(2).
++    ret = 0;
++    if (r)
++        ++ret;
++    if (w)
++        ++ret;
++    *selectForRead = r;
++    *selectForWrite = w;
+     return ret;
+ }
+ #endif // Q_OS_BLACKBERRY
