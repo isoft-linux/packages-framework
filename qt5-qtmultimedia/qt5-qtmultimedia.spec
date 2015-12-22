@@ -1,8 +1,6 @@
-#NOTE, gstreamer-0.10 support is disabled, since we do not ship old gstreamer
-
 Name: qt5-qtmultimedia 
 Version: 5.5.1
-Release: 4 
+Release: 5 
 Summary: Multimedia Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -52,7 +50,7 @@ developing applications that use %{name}.
 
 %build
 #without git_build, some private header will have problems.
-qmake-qt5 CONFIG+=git_build
+qmake-qt5 CONFIG+=git_build GST_VERSION=1.0
 
 make %{?_smp_mflags}
 make docs
@@ -94,6 +92,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Dec 22 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-5
+- Enable gstreamer 1.0
+
 * Mon Nov 23 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-4
 - Fix QTBUG 49461
 
