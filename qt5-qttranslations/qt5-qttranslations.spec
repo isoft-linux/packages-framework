@@ -8,7 +8,7 @@ License: LGPLv2 with exceptions or GPLv3 with exceptions
 URL: http://qt-project.org 
 Source0: qttranslations-opensource-src-%{version}.tar.xz 
 
-Source1: qt_zh_CN.ts 
+Patch0: qt_zh_CN.patch 
 
 BuildRequires: qt5-qtbase-devel 
 Requires: qt5-qtbase
@@ -20,7 +20,7 @@ Translations of Qt
 
 %prep
 %setup -q -n qttranslations-opensource-src-%{version}
-cp %{SOURCE1} translations/qt_zh_CN.ts
+%patch0 -p1 
 
 %build
 qmake-qt5

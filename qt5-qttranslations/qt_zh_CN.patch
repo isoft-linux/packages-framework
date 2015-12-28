@@ -1,0 +1,73 @@
+diff -Naur qttranslations-opensource-src-5.5.1.old/translations/qt_zh_CN.ts qttranslations-opensource-src-5.5.1/translations/qt_zh_CN.ts
+--- qttranslations-opensource-src-5.5.1.old/translations/qt_zh_CN.ts	2015-12-28 17:53:02.818211033 +0800
++++ qttranslations-opensource-src-5.5.1/translations/qt_zh_CN.ts	2015-12-28 17:53:48.673431301 +0800
+@@ -1055,6 +1055,10 @@
+         <source>Select color</source>
+         <translation type="obsolete">选择颜色</translation>
+     </message>
++    <message>        
++    <source>&amp;Pick Screen Color</source>
++    <translation>选择屏幕颜色&amp;</translation>
++    </message> 
+ </context>
+ <context>
+     <name>QComboBox</name>
+@@ -4346,6 +4350,16 @@
+     </message>
+     <message>
+         <location/>
++        <source>Page Set:</source>
++        <translation>页面设置:</translation>
++    </message>
++    <message>
++        <location/>
++        <source>Current Page</source>
++        <translation>当前页面</translation>
++    </message>
++    <message>
++        <location/>
+         <source>to</source>
+         <translation>到</translation>
+     </message>
+@@ -6394,6 +6408,41 @@
+         <translation>*</translation>
+     </message>
+ </context>
++<context>    
++    <name>QWidgetTextControl</name>
++    <message>
++        <source>&amp;Undo</source>
++        <translation>&amp;撤销</translation>
++    </message>       
++    <message>
++        <source>&amp;Redo</source>
++        <translation>&amp;恢复</translation>
++    </message>       
++    <message>
++        <source>Cu&amp;t</source>
++        <translation>剪切&amp;</translation>
++    </message>       
++    <message>
++        <source>&amp;Copy</source>
++        <translation>&amp;复制</translation>
++    </message>       
++    <message>
++        <source>Copy &amp;Link Location</source>
++        <translation>复制链接&apos;&amp;</translation>
++    </message>       
++    <message>
++        <source>&amp;Paste</source>
++        <translation>&amp;粘贴</translation>
++    </message>       
++    <message>
++        <source>Delete</source>
++        <translation>删除</translation>
++    </message>       
++    <message>
++        <source>Select All</source>
++        <translation>删除全部</translation>
++    </message>
++</context>  
+ <context>
+     <name>QWizard</name>
+     <message>
