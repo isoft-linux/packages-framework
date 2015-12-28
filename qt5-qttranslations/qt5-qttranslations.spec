@@ -11,6 +11,7 @@ Source0: qttranslations-opensource-src-%{version}.tar.xz
 Patch0: qt_zh_CN.patch 
 
 BuildRequires: qt5-qtbase-devel 
+BuildRequires: qt5-qttools-devel 
 Requires: qt5-qtbase
 
 BuildArch: noarch
