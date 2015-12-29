@@ -53,7 +53,7 @@ diff -Naur qttranslations-opensource-src-5.5.1.old/translations/qt_zh_CN.ts qttr
 +    </message>       
 +    <message>
 +        <source>Copy &amp;Link Location</source>
-+        <translation>复制链接&apos;&amp;</translation>
++        <translation>复制链接&amp;</translation>
 +    </message>       
 +    <message>
 +        <source>&amp;Paste</source>
