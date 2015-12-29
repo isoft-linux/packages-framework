@@ -39,6 +39,7 @@ BuildRequires:  libcap-devel
 BuildRequires:  avahi-devel
 BuildRequires:  libsamplerate-devel
 BuildRequires:  libspeex-devel
+BuildRequires:  json-c-devel libsndfile-devel bluez-libs-devel dbus-devel libspeexdsp-devel orc-devel libtdb-devel
 
 Obsoletes:      pulseaudio-devel
 Obsoletes:      pulseaudio-core-libs
