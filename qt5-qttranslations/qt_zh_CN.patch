@@ -1,6 +1,6 @@
 diff -Naur qttranslations-opensource-src-5.5.1.old/translations/qt_zh_CN.ts qttranslations-opensource-src-5.5.1/translations/qt_zh_CN.ts
---- qttranslations-opensource-src-5.5.1.old/translations/qt_zh_CN.ts	2015-12-28 17:53:02.818211033 +0800
-+++ qttranslations-opensource-src-5.5.1/translations/qt_zh_CN.ts	2015-12-28 17:53:48.673431301 +0800
+--- qttranslations-opensource-src-5.5.1.old/translations/qt_zh_CN.ts	2015-12-29 10:46:10.344075627 +0800
++++ qttranslations-opensource-src-5.5.1/translations/qt_zh_CN.ts	2015-12-29 10:46:40.351195115 +0800
 @@ -1055,6 +1055,10 @@
          <source>Select color</source>
          <translation type="obsolete">选择颜色</translation>
@@ -29,10 +29,182 @@ diff -Naur qttranslations-opensource-src-5.5.1.old/translations/qt_zh_CN.ts qttr
          <source>to</source>
          <translation>到</translation>
      </message>
-@@ -6394,6 +6408,41 @@
-         <translation>*</translation>
+@@ -6395,6 +6409,214 @@
      </message>
  </context>
+ <context>
++    <name>QPageSetupWidget</name>
++    <message>
++        <source>Page Layout</source>
++        <translation>页面布局</translation>
++    </message>
++    <message>
++        <source>Page order:</source>
++        <translation>页面顺序:</translation>
++    </message>
++    <message>
++        <source>Pages per sheet:</source>
++        <translation>每张页数:</translation>
++    </message>
++</context>
++<context>
++    <name>QPrintDialog</name>
++    <message>
++        <source>Left to Right, Top to Bottom</source>
++        <translation>从左到右,从上到下</translation>
++    </message>
++    <message>
++        <source>Left to Right, Bottom to Top</source>
++        <translation>从左到右,从下到上</translation>
++    </message>
++    <message>
++        <source>Right to Left, Bottom to Top</source>
++        <translation>从右到左,从下到上</translation>
++    </message>
++    <message>
++        <source>Right to Left, Top to Bottom</source>
++        <translation>从右到左,从上到下</translation>
++    </message>
++    <message>
++        <source>Bottom to Top, Left to Right</source>
++        <translation>从下到上,从左到右</translation>
++    </message>
++    <message>
++        <source>Bottom to Top, Right to Left</source>
++        <translation>从下到上,从右到左</translation>
++    </message>
++    <message>
++        <source>Top to Bottom, Left to Right</source>
++        <translation>从上到下,从左到右</translation>
++    </message>
++    <message>
++        <source>Top to Bottom, Right to Left</source>
++        <translation>从上到下,从右到左</translation>
++    </message>
++    <message>
++        <source>All Pages</source>
++        <translation>全部页面</translation>
++    </message>
++    <message>
++        <source>Odd Pages</source>
++        <translation>奇数页面</translation>
++    </message>
++    <message>
++        <source>Even Pages</source>
++        <translation>偶数页面</translation>
++    </message>
++</context>
++<context>
++    <name>QPrintPropertiesDialog</name>
++    <message>
++        <source>Job Options</source>
++        <translation>任务选项</translation>
++    </message>
++</context>
++<context>
++    <name>QCupsJobWidget</name>
++    <message>
++        <source>Job</source>
++        <translation>任务</translation>
++    </message>
++    <message>
++        <source>Job Control</source>
++        <translation>任务管理</translation>
++    </message>
++    <message>
++        <source>Scheduled printing:</source>
++        <translation>打印安排:</translation>
++    </message>
++    <message>
++        <source>Billing information:</source>
++        <translation>任务信息:</translation>
++    </message>
++    <message>
++        <source>Job priority:</source>
++        <translation>任务优先级:</translation>
++    </message>
++    <message>
++        <source>Banner Pages</source>
++        <translation>页面标语</translation>
++    </message>
++    <message>
++        <source>End:</source>
++        <comment>Banner page at end</comment>
++        <translation>末尾:</translation>
++    </message>
++    <message>
++        <source>Start:</source>
++        <comment>Banner page at start</comment>
++        <translation>开头:</translation>
++    </message>
++    <message>
++        <source>Print Immediately</source>
++        <translation>马上打印</translation>
++    </message>
++    <message>
++        <source>Hold Indefinitely</source>
++        <translation>无期限</translation>
++    </message>
++    <message>
++        <source>Day (06:00 to 17:59)</source>
++        <translation>白天 (06:00 到 17:59)</translation>
++    </message>
++    <message>
++        <source>Night (18:00 to 05:59)</source>
++        <translation>夜晚 (18:00 到 05:59)</translation>
++    </message>
++    <message>
++        <source>Second Shift (16:00 to 23:59)</source>
++        <translation>当天夜晚 (16:00 到 23:59)</translation>
++    </message>
++    <message>
++        <source>Third Shift (00:00 to 07:59)</source>
++        <translation>当天白天 (00:00 到 07:59)</translation>
++    </message>
++    <message>
++        <source>Weekend (Saturday to Sunday)</source>
++        <translation>周末 (星期六 到 星期日)</translation>
++    </message>
++    <message>
++        <source>Specific Time</source>
++        <translation>特定的时间</translation>
++    </message>
++    <message>
++        <source>None</source>
++        <comment>CUPS Banner page</comment>
++        <translation>无</translation>
++    </message>
++    <message>
++        <source>Standard</source>
++        <comment>CUPS Banner page</comment>
++        <translation>标准</translation>
++    </message>
++    <message>
++        <source>Unclassified</source>
++        <comment>CUPS Banner page</comment>
++        <translation>不保密</translation>
++    </message>
++    <message>
++        <source>Confidential</source>
++        <comment>CUPS Banner page</comment>
++        <translation>保密</translation>
++    </message>
++    <message>
++        <source>Classified</source>
++        <comment>CUPS Banner page</comment>
++        <translation>分类</translation>
++    </message>
++    <message>
++        <source>Secret</source>
++        <comment>CUPS Banner page</comment>
++        <translation>机密</translation>
++    </message>
++    <message>
++        <source>Top Secret</source>
++        <comment>CUPS Banner page</comment>
++        <translation>最高机密</translation>
++    </message>
++</context>
 +<context>    
 +    <name>QWidgetTextControl</name>
 +    <message>
@@ -68,6 +240,7 @@ diff -Naur qttranslations-opensource-src-5.5.1.old/translations/qt_zh_CN.ts qttr
 +        <translation>删除全部</translation>
 +    </message>
 +</context>  
- <context>
++<context>
      <name>QWizard</name>
      <message>
+         <location filename="../src/gui/dialogs/qwizard.cpp" line="+637"/>
