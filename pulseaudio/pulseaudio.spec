@@ -1,7 +1,7 @@
 Name:           pulseaudio
 Summary:        Improved Linux Sound Server
 Version:        7.1
-Release:        3 
+Release:        4 
 License:        LGPLv2+
 
 Source0: http://freedesktop.org/software/pulseaudio/releases/pulseaudio-%{version}.tar.xz
@@ -9,6 +9,7 @@ Source0: http://freedesktop.org/software/pulseaudio/releases/pulseaudio-%{versio
 # include a fallback to manual launch when autospawn fails, like when
 # user disables autospawn, or logging in as root
 Patch1: pulseaudio-autostart.patch
+Patch2: fix-locale-dir.patch
 
 URL:            http://pulseaudio.org/
 BuildRequires:  json-c
@@ -156,6 +157,7 @@ This package contains command line utilities for the PulseAudio sound server.
 %setup -q
 
 %patch1 -p1 -b .autostart
+%patch2 -p1
 
 sed -i.no_consolekit -e \
   's/^load-module module-console-kit/#load-module module-console-kit/' \
@@ -163,7 +165,7 @@ sed -i.no_consolekit -e \
 
 
 %build
-if [ ! -f configure ]; then ./autogen.sh; fi
+autoreconf
 
 %configure \
     --disable-static \
@@ -454,6 +456,9 @@ exit 0
 
 
 %changelog
+* Tue Dec 29 2015 xiaotian.wu@i-soft.com.cn - 7.1-4
+- fix path error of locale message mo file.
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 7.0-3
 - Rebuild for new 4.0 release.
 

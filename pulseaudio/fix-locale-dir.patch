@@ -1,0 +1,13 @@
+Index: pulseaudio-7.1/configure.ac
+===================================================================
+--- pulseaudio-7.1.orig/configure.ac
++++ pulseaudio-7.1/configure.ac
+@@ -109,7 +109,7 @@ GETTEXT_PACKAGE=pulseaudio
+ AC_SUBST([GETTEXT_PACKAGE])
+ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Gettext package])
+ 
+-pulselocaledir='${prefix}/${DATADIRNAME}/locale'
++pulselocaledir='${datadir}/locale'
+ AX_DEFINE_DIR(PULSE_LOCALEDIR, pulselocaledir, [Gettext locale dir])
+ else
+ # workaround till an intltool m4 bug is fixed upstream
