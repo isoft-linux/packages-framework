@@ -15,7 +15,7 @@ Summary: CUPS printing system
 Name: cups
 Epoch: 1
 Version: 2.1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2
 Url: http://www.cups.org/
 Source0: http://www.cups.org/software/%{VERSION}/cups-%{VERSION}-source.tar.bz2
@@ -64,6 +64,8 @@ Patch36: cups-web-devices-timeout.patch
 Patch37: cups-synconclose.patch
 
 Patch100: cups-lspp.patch
+
+Patch101: localization-ppd-option.patch
 
 Requires: %{name}-filesystem = %{epoch}:%{version}-%{release}
 Requires: %{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
@@ -260,6 +262,8 @@ Sends IPP requests to the specified URI and tests and/or displays the results.
 # LSPP support.
 %patch100 -p1 -b .lspp
 %endif
+
+%patch101 -p1
 
 sed -i -e '1iMaxLogSize 0' conf/cupsd.conf.in
 
@@ -619,6 +623,9 @@ rm -f %{cups_serverbin}/backend/smb
 %{_mandir}/man5/ipptoolfile.5.gz
 
 %changelog
+* Wed Dec 30 2015 xiaotian.wu@i-soft.com.cn - 1:2.1.0-3
+- localization ppd option.patch to fix bug 13114
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1:2.1.0-2
 - Rebuild for new 4.0 release.
 
