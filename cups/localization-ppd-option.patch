@@ -1,8 +1,7 @@
-Index: cups-2.1.0/cups/ppd.c
-===================================================================
---- cups-2.1.0.orig/cups/ppd.c
-+++ cups-2.1.0/cups/ppd.c
-@@ -1314,9 +1314,26 @@ _ppdOpen(
+diff -Naur cups-2.1.0.old/cups/ppd.c cups-2.1.0/cups/ppd.c
+--- cups-2.1.0.old/cups/ppd.c	2015-12-31 10:11:41.636139258 +0800
++++ cups-2.1.0/cups/ppd.c	2015-12-31 10:10:27.890140514 +0800
+@@ -1314,9 +1314,34 @@
  	  break;
  	}
  
@@ -26,16 +25,23 @@ Index: cups-2.1.0/cups/ppd.c
 +            strlcpy(option->text, _cupsLangString(cupsLangDefault(), _("Print Quality")), sizeof(option->text));
 +        else if (!strcmp(text, "Duplexer Installed"))
 +            strlcpy(option->text, _cupsLangString(cupsLangDefault(), _("Duplexer Installed")), sizeof(option->text));
++        else if (!strcmp(text, "General"))
++            strlcpy(option->text, _cupsLangString(cupsLangDefault(), _("General")), sizeof(option->text));
++        else if (!strcmp(text, "Installable Options"))
++            strlcpy(option->text, _cupsLangString(cupsLangDefault(), _("Installable Options")), sizeof(option->text));
++        else if (!strcmp(text, "Not Installed"))
++            strlcpy(option->text, _cupsLangString(cupsLangDefault(), _("Not Installed")), sizeof(option->text));
++        else if (!strcmp(text, "Installed"))
++            strlcpy(option->text, _cupsLangString(cupsLangDefault(), _("Installed")), sizeof(option->text));
 +        else
 +            strlcpy(option->text, text, sizeof(option->text));
 +      }
        else
        {
          if (!strcmp(name, "PageSize"))
-Index: cups-2.1.0/locale/cups_zh_CN.po
-===================================================================
---- /dev/null
-+++ cups-2.1.0/locale/cups_zh_CN.po
+diff -Naur cups-2.1.0.old/locale/cups_zh_CN.po cups-2.1.0/locale/cups_zh_CN.po
+--- cups-2.1.0.old/locale/cups_zh_CN.po	1970-01-01 08:00:00.000000000 +0800
++++ cups-2.1.0/locale/cups_zh_CN.po	2015-12-31 10:06:05.255534492 +0800
 @@ -0,0 +1,7406 @@
 +#
 +# "$Id$"
@@ -116,7 +122,7 @@ Index: cups-2.1.0/locale/cups_zh_CN.po
 +
 +#: systemv/lpstat.c:1875 systemv/lpstat.c:1998
 +msgid "\tDefault page size:"
-+msgstr ""
++msgstr "默认页面大小"
 +
 +#: systemv/lpstat.c:1874 systemv/lpstat.c:1997
 +msgid "\tDefault pitch:"
@@ -3562,7 +3568,7 @@ Index: cups-2.1.0/locale/cups_zh_CN.po
 +
 +#: ppdc/sample.c:274
 +msgid "Color Mode"
-+msgstr ""
++msgstr "颜色模式"
 +
 +#: berkeley/lpc.c:196
 +msgid ""
@@ -4109,7 +4115,7 @@ Index: cups-2.1.0/locale/cups_zh_CN.po
 +
 +#: cups/ppd.c:700 cups/ppd.c:1258
 +msgid "General"
-+msgstr ""
++msgstr "基本"
 +
 +#: ppdc/sample.c:251
 +msgid "Generic"
@@ -4264,11 +4270,11 @@ Index: cups-2.1.0/locale/cups_zh_CN.po
 +
 +#: ppdc/sample.c:266
 +msgid "Installable Options"
-+msgstr ""
++msgstr "可选安装设置"
 +
 +#: ppdc/sample.c:269
 +msgid "Installed"
-+msgstr ""
++msgstr "安装"
 +
 +#: ppdc/sample.c:288
 +msgid "IntelliBar Label Printer"
@@ -4516,7 +4522,7 @@ Index: cups-2.1.0/locale/cups_zh_CN.po
 +
 +#: ppdc/sample.c:260
 +msgid "Manual Feed"
-+msgstr ""
++msgstr "手动送纸"
 +
 +#: cups/ppd.c:747 cups/ppd.c:1313
 +msgid "Media Size"
@@ -4541,7 +4547,7 @@ Index: cups-2.1.0/locale/cups_zh_CN.po
 +msgstr "输出模式"
 +
 +msgid "Duplexer Installed"
-+msgstr ""
++msgstr "双工打印"
 +
 +msgid "Double-Sided Printing"
 +msgstr "双面打印"
@@ -4836,7 +4842,7 @@ Index: cups-2.1.0/locale/cups_zh_CN.po
 +
 +#: ppdc/sample.c:268
 +msgid "Not Installed"
-+msgstr ""
++msgstr "不安装"
 +
 +#: cups/http-support.c:1359
 +msgid "Not Modified"
@@ -5196,7 +5202,7 @@ Index: cups-2.1.0/locale/cups_zh_CN.po
 +
 +#: cups/ppd.c:755 cups/ppd.c:1321 ppdc/sample.c:231
 +msgid "Resolution"
-+msgstr ""
++msgstr "分辨率"
 +
 +#: cgi-bin/classes.c:157
 +msgid "Resume Class"
