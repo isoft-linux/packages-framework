@@ -1,6 +1,6 @@
 Name:           accountsservice
 Version:        0.6.40
-Release:        6
+Release:        7
 Summary:        D-Bus interfaces for querying and manipulating user account information
 
 License:        GPLv3+
@@ -12,6 +12,9 @@ Source0:        http://www.freedesktop.org/software/accountsservice/accountsserv
 Patch0: 0001-sddm-autologin.patch
 # Administrator group set as firstboot
 Patch1: 0002-admin-group.patch
+# chown -R username:username $HOME when useradd
+# Because QA will create several users, delete one, then create the same one again!
+Patch2: 0003-useradd-chown.patch
 
 BuildRequires:  glib2-devel
 BuildRequires:  dbus-glib-devel
@@ -57,6 +60,7 @@ of these interfaces, based on the useradd, usermod and userdel commands.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %configure
@@ -111,6 +115,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_datadir}/gtk-doc/html/libaccountsservice/*
 
 %changelog
+* Thu Jan 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn>
+- Fix useradd $HOME wrong ownership issue.
+
 * Tue Nov 24 2015 Leslie Zhai <xiang.zhai@i-soft.com.cn>
 - Fix get autologin property for sddm issue.
 
