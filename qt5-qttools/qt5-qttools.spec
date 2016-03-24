@@ -1,6 +1,6 @@
 Name: qt5-qttools 
 Version: 5.6.0
-Release: 1
+Release: 2
 Summary: Various tools of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -10,9 +10,12 @@ Source0: qttools-opensource-src-%{version}.tar.xz
 #call qmake-qt5, not qmake directly.
 Patch0: qttools-opensource-src-5.2.0-qmake-qt5.patch
 
-BuildRequires: qt5-qtbase-devel >= %{version}
-BuildRequires: qt5-qtwebkit-devel >= %{version}
-BuildRequires: qt5-qtdeclarative-devel >= %{version}
+BuildRequires: qt5-qtbase-devel
+#>= %{version}
+BuildRequires: qt5-qtwebkit-devel
+#>= %{version}
+BuildRequires: qt5-qtdeclarative-devel
+#>= %{version}
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
@@ -41,7 +44,7 @@ developing applications that use %{name}.
 %build
 qmake-qt5
 make %{?_smp_mflags}
-make docs
+#make docs
 
 %install
 rm -rf %{buildroot}
@@ -120,6 +123,9 @@ fi
 %exclude %{_bindir}/qdbus*
 
 %changelog
+* Thu Mar 24 2016 <sulit> <sulitsrc@gmail.com> - 5.6.0-2
+- modify buildrequire and comment the make doc
+
 * Thu Mar 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
 
