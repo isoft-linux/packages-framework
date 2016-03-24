@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
-Version: 5.5.1
-Release: 20
+Version: 5.6.0
+Release: 1
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -17,72 +17,6 @@ Source10: qt5.macros
 
 #setup PATH to find qt5 utility
 Source20: qt5-path.sh
-
-# fix QTBUG-35459 (too low entityCharacterLimit=1024 for CVE-2013-4549)
-Patch1: qtbase-opensource-src-5.3.2-QTBUG-35459.patch
-
-# unconditionally enable freetype lcdfilter support
-Patch2: qtbase-opensource-src-5.2.0-enable_ft_lcdfilter.patch
-
-# hack out largely useless (to users) warnings about qdbusconnection
-# (often in kde apps), keep an eye on https://git.reviewboard.kde.org/r/103699/
-Patch3: qtbase-opensource-src-5.5.1-qdbusconnection_no_debug.patch
-
-# Qt5 application crashes when connecting/disconnecting displays
-# https://bugzilla.redhat.com/show_bug.cgi?id=1083664
-Patch10: qtbase-opensource-src-5.5-disconnect_displays.patch
-
-# Followup https://codereview.qt-project.org/#/c/138201/ adapted for 5.5
-# XCB screen connection and disconnection bug fix
-Patch11: 138201.patch
-
-#Already upstream, will be in 5.5.2
-#https://bugreports.qt.io/browse/QTBUG-48350
-Patch13: qtbase-fix-comparison-qbytearray-and-qstring.patch
-Patch14: qtbase-fix-qlinedit-visibility-handling-of-side-widgets.patch
-Patch15: qtbase-fix_reuse_address_problem_qtbug-47011.patch
-Patch16: qtbase-report-correct-networkaccessibility-qtbug-46323.patch
-Patch17: qtbase-fix-qimage-DPM-value-with-some-orientations.patch
-
-#Already reported, https://bugreports.qt.io/browse/QTBUG-45812
-Patch30: qt5-qtbase-fix-chromium-and-other-application-dnd.patch
-
-#Wrong, but we do that!!
-Patch60: qtbase-do-not-exit-when-error-happened.patch
-
-#revert: https://codereview.qt-project.org/#/c/89777/
-#This is partial fix of "kcmshell5 kwineffects popup menu wrong position" issue.
-#another two revert happened in qtquickcontrols
-Patch61: qtbase-revert-89777.patch
-
-#https://bugreports.qt.io/browse/QTBUG-49061
-#it also should fix kmozillahelper segfault issue
-Patch62: qtbase-unload-plugin-QTBUG-49061.patch
-
-#fix QTBUG-47272
-Patch63: qtbase-fix-QTBUG-47272.patch
-
-Patch64: qtbase-fix-QTBUG-49363-49399.patch
-
-Patch65: qtbase-fix-QTBUG-18722.patch 
-Patch66: qtbase-fix-QTBUG-46887.patch 
-Patch67: qtbase-fix-QTBUG-48393.patch
-
-# Fix QWidget::setWindowRole() QTBUG-45484
-# try to fix KDEBUG-341930
-Patch68: qwidget-set-window-role.patch
-
-# Don't close windows when requested to save application state QTBUG-49667
-# KDEBUG-354724
-#Patch69: restore-windows-when-requested-save-application-state.patch
-
-Patch70: qtbase-fix-QTBUG-47812-49395.patch
-
-
-#https://bugreports.qt.io/browse/QTBUG-27195
-#this is rebased on qt-5.5.1
-Patch71: qt5-poll.patch
-Patch72: qtbase-poll-remove-bb-select.patch
 
 # All these macros should match contents of SOURCE10: 
 %define qtdir %{_libdir}/qt5
@@ -174,34 +108,6 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtbase-opensource-src-%{version}
-
-%patch1 -p1 
-%patch2 -p1
-%patch3 -p1
-
-%patch10 -p1
-%patch11 -p1
-
-%patch14 -p1
-%patch15 -p1
-%patch16 -p1
-%patch17 -p1
-
-%patch30 -p1
-
-%patch60 -p1
-%patch61 -p1
-
-%patch62 -p1
-%patch63 -p1
-%patch64 -p1
-%patch65 -p1
-%patch66 -p1
-%patch67 -p1
-%patch68 -p1
-%patch70 -p1
-%patch71 -p1
-%patch72 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -349,6 +255,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
+* Thu Mar 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
+- Release 5.6.0
+
 * Mon Dec 21 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-20
 - Add poll support, hope to fix trash hang issue
 
