@@ -19,11 +19,14 @@ Source10: qt5.macros
 Source20: qt5-path.sh
 
 # All these macros should match contents of SOURCE10: 
+%define bootstrap   1
 %define qtdir %{_libdir}/qt5
 %define qt5_prefix %{_libdir}/qt5
 %define qt5_bindir %{_libdir}/qt5/bin
 %define qt5_datadir %{_datadir}/qt5
-#%define qt5_docdir %{_docdir}/qt5
+%if !%{bootstrap}
+%define qt5_docdir %{_docdir}/qt5
+%endif
 %define qt5_headerdir %{_libdir}/qt5/include
 %define qt5_libdir %{_libdir}
 %define qt5_plugindir %{qt5_prefix}/plugins
@@ -82,7 +85,7 @@ BuildRequires: tslib-devel
 #by Cjacker.
 
 #for absolute path qdoc
-#BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtbase-devel
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build without doc and install it, then buld qttools without doc and install it, 
@@ -90,7 +93,9 @@ BuildRequires: tslib-devel
 #then rebuild these two rpm package.
 
 #for qhelpgenerator
+%if !%{bootstrap}
 BuildRequires: qt5-qttools-devel
+%endif
 
 %description
 Base components of Qt
@@ -131,7 +136,9 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -prefix %{qt5_prefix} \
  -bindir %{qt5_bindir} \
  -datadir %{qt5_datadir} \
- #-docdir %{qt5_docdir} \
+%if !%{bootstrap}
+ -docdir %{qt5_docdir} \
+%endif
  -headerdir %{qt5_headerdir} \
  -libdir %{qt5_libdir} \
  -plugindir %{qt5_plugindir} \
@@ -182,13 +189,17 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
 
 
 make %{?_smp_mflags}
-#make docs
+%if !%{bootstrap}
+make docs
+%endif
 
 %install
 rm -rf %{buildroot}
 
 make install INSTALL_ROOT=%{buildroot}
-#make install_docs INSTALL_ROOT=%{buildroot}
+%if !%{bootstrap}
+make install_docs INSTALL_ROOT=%{buildroot}
+%endif
 
 #fake debug library
 pushd %{buildroot}%{qt5_libdir}
@@ -252,7 +263,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_libdir}/qt5/examples
 %{_libdir}/qt5/include
 %{_libdir}/qt5/mkspecs
-#%{_docdir}/qt5
+%if !%{bootstrap}
+%{_docdir}/qt5
+%endif
 
 %changelog
 * Thu Mar 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-2
