@@ -78,8 +78,6 @@ BuildRequires: libproxy-devel
 BuildRequires: mtdev-devel
 BuildRequires: tslib-devel
 
-BuildRequires: valgrind
-
 #wired but needed, if we want to build docs, we need qdoc in qt5-qtbase-devel
 #by Cjacker.
 
