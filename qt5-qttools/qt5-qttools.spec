@@ -50,7 +50,7 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 
 make install INSTALL_ROOT=%{buildroot}
-make install_docs INSTALL_ROOT=%{buildroot}
+#make install_docs INSTALL_ROOT=%{buildroot}
 
 # hardlink files to %{_bindir}, add -qt5 postfix to not conflict
 mkdir %{buildroot}%{_bindir}
@@ -119,12 +119,13 @@ fi
 %{_libdir}/qt5/examples/*
 %{_libdir}/qt5/include/*
 %{_libdir}/qt5/mkspecs/modules/*.pri
-%{_docdir}/qt5/*
+#%{_docdir}/qt5/*
 %exclude %{_bindir}/qdbus*
 
 %changelog
 * Thu Mar 24 2016 <sulit> <sulitsrc@gmail.com> - 5.6.0-2
 - modify buildrequire and comment the make doc
+- comment file doc
 
 * Thu Mar 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
