@@ -23,7 +23,7 @@ Source20: qt5-path.sh
 %define qt5_prefix %{_libdir}/qt5
 %define qt5_bindir %{_libdir}/qt5/bin
 %define qt5_datadir %{_datadir}/qt5
-%define qt5_docdir %{_docdir}/qt5
+#%define qt5_docdir %{_docdir}/qt5
 %define qt5_headerdir %{_libdir}/qt5/include
 %define qt5_libdir %{_libdir}
 %define qt5_plugindir %{qt5_prefix}/plugins
@@ -82,7 +82,7 @@ BuildRequires: tslib-devel
 #by Cjacker.
 
 #for absolute path qdoc
-BuildRequires: qt5-qtbase-devel
+#BuildRequires: qt5-qtbase-devel
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build without doc and install it, then buld qttools without doc and install it, 
@@ -131,7 +131,7 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -prefix %{qt5_prefix} \
  -bindir %{qt5_bindir} \
  -datadir %{qt5_datadir} \
- -docdir %{qt5_docdir} \
+ #-docdir %{qt5_docdir} \
  -headerdir %{qt5_headerdir} \
  -libdir %{qt5_libdir} \
  -plugindir %{qt5_plugindir} \
@@ -182,13 +182,13 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
 
 
 make %{?_smp_mflags}
-make docs
+#make docs
 
 %install
 rm -rf %{buildroot}
 
 make install INSTALL_ROOT=%{buildroot}
-make install_docs INSTALL_ROOT=%{buildroot}
+#make install_docs INSTALL_ROOT=%{buildroot}
 
 #fake debug library
 pushd %{buildroot}%{qt5_libdir}
@@ -252,11 +252,12 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_libdir}/qt5/examples
 %{_libdir}/qt5/include
 %{_libdir}/qt5/mkspecs
-%{_docdir}/qt5
+#%{_docdir}/qt5
 
 %changelog
 * Thu Mar 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-2
 - Release 5.6.0
+- first build
 
 * Mon Dec 21 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-20
 - Add poll support, hope to fix trash hang issue
