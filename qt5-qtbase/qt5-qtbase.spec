@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.6.0
-Release: 1
+Release: 2
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -77,6 +77,9 @@ BuildRequires: libproxy-devel
 
 BuildRequires: mtdev-devel
 BuildRequires: tslib-devel
+
+BuildRequires: valgrind
+BuildRequires: qt5-qdoc
 
 #wired but needed, if we want to build docs, we need qdoc in qt5-qtbase-devel
 #by Cjacker.
@@ -255,7 +258,7 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %{_docdir}/qt5
 
 %changelog
-* Thu Mar 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
+* Thu Mar 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-2
 - Release 5.6.0
 
 * Mon Dec 21 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-20
