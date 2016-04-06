@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.6.0
-Release: 4
+Release: 5
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -19,7 +19,7 @@ Source10: qt5.macros
 Source20: qt5-path.sh
 
 # All these macros should match contents of SOURCE10: 
-%define bootstrap   1
+%define bootstrap   0
 %define qtdir %{_libdir}/qt5
 %define qt5_prefix %{_libdir}/qt5
 %define qt5_bindir %{_libdir}/qt5/bin
@@ -268,7 +268,7 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
-* Wed Apr 6 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-4
+* Wed Apr 6 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-5
 - qdoc
 
 * Thu Mar 24 2016 sulit <sulitsrc@gmail.com> - 5.6.0-3
