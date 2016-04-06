@@ -24,6 +24,7 @@ BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libinput)
 BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(tslib-0.0)
 BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  pkgconfig(mtdev)
 
