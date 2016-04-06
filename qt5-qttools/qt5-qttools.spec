@@ -1,6 +1,6 @@
 Name: qt5-qttools 
 Version: 5.6.0
-Release: 4
+Release: 5
 Summary: Various tools of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -10,12 +10,9 @@ Source0: qttools-opensource-src-%{version}.tar.xz
 #call qmake-qt5, not qmake directly.
 Patch0: qttools-opensource-src-5.2.0-qmake-qt5.patch
 
-BuildRequires: qt5-qtbase-devel
-#>= %{version}
-BuildRequires: qt5-qtwebkit-devel
-#>= %{version}
-BuildRequires: qt5-qtdeclarative-devel
-#>= %{version}
+BuildRequires: qt5-qtbase-devel >= %{version}
+BuildRequires: qt5-qtwebkit-devel >= %{version}
+BuildRequires: qt5-qtdeclarative-devel >= %{version}
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
@@ -44,13 +41,13 @@ developing applications that use %{name}.
 %build
 qmake-qt5
 make %{?_smp_mflags}
-#make docs
+make docs
 
 %install
 rm -rf %{buildroot}
 
 make install INSTALL_ROOT=%{buildroot}
-#make install_docs INSTALL_ROOT=%{buildroot}
+make install_docs INSTALL_ROOT=%{buildroot}
 
 # hardlink files to %{_bindir}, add -qt5 postfix to not conflict
 mkdir %{buildroot}%{_bindir}
@@ -119,10 +116,13 @@ fi
 %{_libdir}/qt5/examples/*
 %{_libdir}/qt5/include/*
 %{_libdir}/qt5/mkspecs/modules/*.pri
-#%{_docdir}/qt5/*
+%{_docdir}/qt5/*
 %exclude %{_bindir}/qdbus*
 
 %changelog
+* Wed Apr 06 2016 sulit <sulitsrc@gmail.com> - 5.6.0-5
+- qt5-qttools second build
+
 * Wed Apr 6 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-4
 - qdoc
 
