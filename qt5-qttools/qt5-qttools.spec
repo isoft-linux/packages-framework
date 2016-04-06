@@ -1,6 +1,6 @@
 Name: qt5-qttools 
 Version: 5.6.0
-Release: 3
+Release: 4
 Summary: Various tools of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -67,7 +67,7 @@ for i in * ; do
  esac
 done
 popd
-
+ln -s %{buildroot}%{_bindir}/qdoc %{buildroot}%{_qt5_bindir}/qdoc
 
 
 #fake debug library
@@ -90,6 +90,7 @@ fi
 %files
 %{_bindir}/qdbus*
 %{_bindir}/qtplugininfo
+%{_libdir}/qt5/bin/qdoc
 %{_libdir}/qt5/bin/qtplugininfo
 %{_libdir}/qt5/bin/qdbus*
 %{_libdir}/qt5/bin/qdbusviewer*
@@ -123,6 +124,9 @@ fi
 %exclude %{_bindir}/qdbus*
 
 %changelog
+* Wed Apr 6 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-4
+- qdoc
+
 * Thu Mar 24 2016 <sulit> <sulitsrc@gmail.com> - 5.6.0-3
 - redo first build
 
