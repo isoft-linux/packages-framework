@@ -1,6 +1,6 @@
 Name: qt5-qtwebengine 
-Version: 5.5.1
-Release: 2 
+Version: 5.6.0
+Release: 1
 Summary: QtWebengine Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -141,6 +141,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Wed Apr 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
+- Release 5.6.0
+
 * Sat Oct 24 2015 builder - 5.5.1-2
 - Rebuild for new 4.0 release.
 
