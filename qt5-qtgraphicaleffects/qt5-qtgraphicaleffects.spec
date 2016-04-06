@@ -10,6 +10,7 @@ URL: http://qt-project.org
 Source0: qtgraphicaleffects-opensource-src-%{version}.tar.xz 
 
 BuildRequires: qt5-qtbase-devel >= %{version}
+BuildRequires: qt5-qtdeclarative-devel >= %{version}
 BuildRequires: libmng-devel
 BuildRequires: libtiff-devel
 
