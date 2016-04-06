@@ -64,9 +64,9 @@ fi
 
 %files
 %{_libdir}/*.so.*
-%{_libdir}/qt5/qml/*
+#%{_libdir}/qt5/qml/*
 %{_libdir}/qt5/plugins/position/*.so
-%{_libdir}/qt5/plugins/geoservices/*.so
+#%{_libdir}/qt5/plugins/geoservices/*.so
 
 
 %files devel

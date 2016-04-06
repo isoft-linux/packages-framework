@@ -1,6 +1,6 @@
 Name: qt5-qtsensors 
-Version: 5.5.1
-Release: 3 
+Version: 5.6.0
+Release: 1
 Summary: Sensors Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -77,6 +77,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Wed Apr 6 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
+- Release 5.6.0
+
 * Sat Oct 24 2015 builder - 5.5.1-3
 - Rebuild for new 4.0 release.
 
