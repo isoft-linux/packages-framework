@@ -1,14 +1,12 @@
 Name: qt5-qtmultimedia 
-Version: 5.5.1
-Release: 5 
+Version: 5.6.0
+Release: 1
 Summary: Multimedia Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
 
 URL: http://qt-project.org 
 Source0: qtmultimedia-opensource-src-%{version}.tar.xz
-
-Patch0: qtmultimedia-fix-QTBUG-49461.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtdeclarative-devel >= %{version} 
@@ -46,7 +44,6 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtmultimedia-opensource-src-%{version}
-%patch0 -p1
 
 %build
 #without git_build, some private header will have problems.
@@ -92,6 +89,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Wed Apr 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
+- Release 5.6.0
+
 * Tue Dec 22 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-5
 - Enable gstreamer 1.0
 
