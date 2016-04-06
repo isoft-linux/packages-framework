@@ -66,9 +66,9 @@ fi
 
 %files
 %{_libdir}/*.so.*
-%{_libdir}/qt5/qml/QtWebChannel/libdeclarative_webchannel.so
-%{_libdir}/qt5/qml/QtWebChannel/plugins.qmltypes
-%{_libdir}/qt5/qml/QtWebChannel/qmldir
+#%{_libdir}/qt5/qml/QtWebChannel/libdeclarative_webchannel.so
+#%{_libdir}/qt5/qml/QtWebChannel/plugins.qmltypes
+#%{_libdir}/qt5/qml/QtWebChannel/qmldir
 
 
 %files devel
