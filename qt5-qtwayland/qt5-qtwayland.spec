@@ -23,6 +23,10 @@ BuildRequires:  pkgconfig(xcomposite)
 BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libinput)
+BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(tslib)
+BuildRequires:  pkgconfig(fontconfig)
+BuildRequires:  pkgconfig(mtdev)
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
