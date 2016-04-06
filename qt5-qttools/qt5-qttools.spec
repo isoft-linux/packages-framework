@@ -67,7 +67,6 @@ for i in * ; do
  esac
 done
 popd
-ln -s %{buildroot}%{_bindir}/qdoc %{buildroot}%{_qt5_bindir}/qdoc
 
 
 #fake debug library
