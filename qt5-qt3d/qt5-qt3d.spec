@@ -11,6 +11,7 @@ Source0: qt3d-opensource-src-%{version}.tar.xz
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtdeclarative-devel >= %{version}
 BuildRequires: mesa-libGL-devel 
+BuildRequires: pkgconfig(zlib)
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
