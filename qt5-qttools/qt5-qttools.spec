@@ -11,8 +11,11 @@ Source0: qttools-opensource-src-%{version}.tar.xz
 Patch0: qttools-opensource-src-5.2.0-qmake-qt5.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
-BuildRequires: qt5-qtwebkit-devel >= %{version}
-BuildRequires: qt5-qtdeclarative-devel >= %{version}
+#BuildRequires: qt5-qtwebkit-devel >= %{version}
+#BuildRequires: qt5-qtdeclarative-devel >= %{version}
+# don't require version for the being
+BuildRequires: qt5-qtwebkit-devel
+BuildRequires: qt5-qtdeclarative-devel
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
@@ -122,6 +125,7 @@ fi
 %changelog
 * Wed Apr 06 2016 sulit <sulitsrc@gmail.com> - 5.6.0-5
 - qt5-qttools second build
+- don't require some requirebuild version for the being
 
 * Wed Apr 6 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-4
 - qdoc
