@@ -49,7 +49,7 @@ make install_docs INSTALL_ROOT=%{buildroot}
 
 
 %files
-%{_libdir}/qt5/qml/QtGraphicalEffects
+%{_libdir}/qt5/qml/*
 
 %files devel
 %{_docdir}/qt5/*

@@ -1,14 +1,12 @@
 Name: qt5-qttranslations 
-Version: 5.5.1
-Release: 5
+Version: 5.6.0
+Release: 1
 Summary: Translations of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
 
 URL: http://qt-project.org 
 Source0: qttranslations-opensource-src-%{version}.tar.xz 
-
-Patch0: qt_zh_CN.patch 
 
 BuildRequires: qt5-qtbase-devel 
 BuildRequires: qt5-qttools-devel 
@@ -21,7 +19,6 @@ Translations of Qt
 
 %prep
 %setup -q -n qttranslations-opensource-src-%{version}
-%patch0 -p1 
 
 %build
 qmake-qt5
@@ -38,6 +35,9 @@ make install INSTALL_ROOT=%{buildroot}
 %{_datadir}/qt5/translations/*.qm
 
 %changelog
+* Wed Apr 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
+- Release 5.6.0
+
 * Tue Dec 29 2015 kun.li@i-soft.com.cn - 5.5.1-5
 - update qt_zh_CN.ts
 
