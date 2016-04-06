@@ -107,11 +107,11 @@ make install INSTALL_ROOT=%{buildroot}
 make install_docs INSTALL_ROOT=%{buildroot}
 
 #fake debug library
-pushd %{buildroot}%{_qt5_libdir}
-for lib in libQt*.so ; do
- ln -s $lib $(basename $lib .so)_debug.so
-done
-popd
+#pushd %{buildroot}%{_qt5_libdir}
+#for lib in libQt*.so ; do
+# ln -s $lib $(basename $lib .so)_debug.so
+#done
+#popd
 
 
 if [ -d "examples/" ]; then
