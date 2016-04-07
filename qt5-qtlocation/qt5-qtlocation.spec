@@ -1,6 +1,6 @@
 Name: qt5-qtlocation 
 Version: 5.6.0
-Release: 1
+Release: 2
 Summary: Location Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -9,7 +9,7 @@ URL: http://qt-project.org
 Source0: qtlocation-opensource-src-%{version}.tar.xz 
 
 BuildRequires: qt5-qtbase-devel >= %{version}
-
+BuildRequires: qt5-qtdeclarative-devel >= %{version}
 BuildRequires: geoclue-devel gypsy-devel
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
@@ -64,9 +64,9 @@ fi
 
 %files
 %{_libdir}/*.so.*
-#%{_libdir}/qt5/qml/*
+%{_libdir}/qt5/qml/*
 %{_libdir}/qt5/plugins/position/*.so
-#%{_libdir}/qt5/plugins/geoservices/*.so
+%{_libdir}/qt5/plugins/geoservices/*.so
 
 
 %files devel
@@ -80,7 +80,10 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
-* Wed Apr 6 2016 Leslie Zhai - 5.6.0-1
+* Thu Apr 07 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-2
+- missing files
+
+* Wed Apr 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
 
 * Sat Oct 24 2015 builder - 5.5.1-3
