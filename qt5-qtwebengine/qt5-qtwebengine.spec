@@ -1,6 +1,6 @@
 Name: qt5-qtwebengine 
 Version: 5.6.0
-Release: 1
+Release: 2
 Summary: QtWebengine Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -70,7 +70,7 @@ BuildRequires: pkgconfig(speex)
 BuildRequires: perl perl(version) perl(Digest::MD5) perl(Text::ParseWords)
 BuildRequires: ruby
 BuildRequires: python-devel
-
+BuildRequires: pkgconfig(xscrnsaver)
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
 #after qtbase build, then buld qttools, we can generate docs.
@@ -141,6 +141,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Thu Apr 07 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-2
+- missing files
+
 * Wed Apr 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
 
