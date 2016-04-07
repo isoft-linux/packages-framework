@@ -1,6 +1,6 @@
 Name: qt5-qtwebchannel 
 Version: 5.6.0
-Release: 1
+Release: 2
 Summary: Webchannel Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -66,9 +66,7 @@ fi
 
 %files
 %{_libdir}/*.so.*
-#%{_libdir}/qt5/qml/QtWebChannel/libdeclarative_webchannel.so
-#%{_libdir}/qt5/qml/QtWebChannel/plugins.qmltypes
-#%{_libdir}/qt5/qml/QtWebChannel/qmldir
+%{_libdir}/qt5/qml/QtWebChannel/*
 
 
 %files devel
@@ -82,7 +80,10 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
-* Wed Apr 6 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
+* Thu Apr 07 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-2
+- missing files
+
+* Wed Apr 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
 
 * Sat Oct 24 2015 builder - 5.5.1-3
