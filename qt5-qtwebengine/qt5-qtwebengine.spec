@@ -125,9 +125,9 @@ fi
 %{_libdir}/*.so.*
 %{_libdir}/qt5/libexec/*
 %{_libdir}/qt5/qml/*
-%{_libdir}/qt5/plugins/qtwebengine/libffmpegsumo.so
-%{_datadir}/qt5/icudtl.dat
-%{_datadir}/qt5/qtwebengine_resources*.pak
+#%{_libdir}/qt5/plugins/qtwebengine/libffmpegsumo.so
+%{_datadir}/qt5/resources/icudtl.dat
+%{_datadir}/qt5/resources/qtwebengine_resources*.pak
 %{_datadir}/qt5/translations/qtwebengine_locales/
 
 %files devel
