@@ -9,7 +9,7 @@ URL: http://qt-project.org
 Source0: qtwebchannel-opensource-src-%{version}.tar.xz 
 
 BuildRequires: qt5-qtbase-devel >= %{version}
-BuildRequires: qt5-qtdeclarative >= %{version} 
+BuildRequires: qt5-qtdeclarative-devel >= %{version}
 
 
 #for the first time to build qt5, qhelpgenerator will missing, the doc build will fail.
