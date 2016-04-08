@@ -28,7 +28,6 @@ BuildRequires: qt5-qtdeclarative-devel >= %{version}
 BuildRequires: qt5-qtlocation-devel >= %{version}
 BuildRequires: qt5-qtsensors-devel >= %{version}
 BuildRequires: qt5-qtwebchannel-devel >= %{version}
-BuildRequires: qt5-qtwebkit-devel
 
 BuildRequires: bison
 BuildRequires: flex
