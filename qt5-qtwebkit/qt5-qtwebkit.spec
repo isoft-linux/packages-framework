@@ -23,6 +23,8 @@ Patch7: 0001-Add-ARM-64-support.patch
 # truly madly deeply no rpath please, kthxbye
 Patch8: qtwebkit-opensource-src-5.2.1-no_rpath.patch
 
+Patch9: qt5-webkit-pthread.patch
+
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtdeclarative-devel >= %{version}
 BuildRequires: qt5-qtlocation-devel >= %{version}
@@ -85,8 +87,11 @@ developing applications that use %{name}.
 %patch4 -p1 -b .save_memory
 %patch7 -p1 -b .aarch64
 %patch8 -p1 -b .no_rpath
+%patch9 -p1 -b .pthread
 
 %build
+# WTF... http://lists.qt-project.org/pipermail/development/2016-March/025362.html
+mkdir %{buildroot}/.git
 qmake-qt5
 
 make %{?_smp_mflags}
