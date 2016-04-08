@@ -8,6 +8,21 @@ License: LGPLv2 with exceptions or GPLv3 with exceptions
 URL: http://qt-project.org 
 Source0: qtwebkit-opensource-src-%{version}.tar.xz 
 
+# Search /usr/lib{,64}/mozilla/plugins-wrapped for browser plugins too
+Patch1: qtwebkit-opensource-src-5.2.0-pluginpath.patch
+
+# smaller debuginfo s/-g/-g1/ (debian uses -gstabs) to avoid 4gb size limit
+Patch3: qtwebkit-opensource-src-5.0.1-debuginfo.patch
+
+# tweak linker flags to minimize memory usage on "small" platforms
+Patch4: qtwebkit-opensource-src-5.2.0-save_memory.patch
+
+# Add AArch64 support
+Patch7: 0001-Add-ARM-64-support.patch
+
+# truly madly deeply no rpath please, kthxbye
+Patch8: qtwebkit-opensource-src-5.2.1-no_rpath.patch
+
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtdeclarative-devel >= %{version}
 BuildRequires: qt5-qtlocation-devel >= %{version}
@@ -64,6 +79,12 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtwebkit-opensource-src-%{version}
+
+%patch1 -p1 -b .pluginpath
+%patch3 -p1 -b .debuginfo
+%patch4 -p1 -b .save_memory
+%patch7 -p1 -b .aarch64
+%patch8 -p1 -b .no_rpath
 
 %build
 qmake-qt5
