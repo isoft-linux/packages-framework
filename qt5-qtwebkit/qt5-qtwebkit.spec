@@ -91,7 +91,7 @@ developing applications that use %{name}.
 
 %build
 # WTF... http://lists.qt-project.org/pipermail/development/2016-March/025362.html
-mkdir %{buildroot}/.git
+mkdir .git
 qmake-qt5
 
 make %{?_smp_mflags}
