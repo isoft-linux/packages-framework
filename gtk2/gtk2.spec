@@ -10,13 +10,13 @@
 %define cairo_version %{cairo_base_version}-1
 %define libpng_version 2:1.2.2-16
 
-%define base_version 2.24.28
+%define base_version 2.24.30
 %define bin_version 2.10.0
 
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 Name: gtk2
 Version: %{base_version}
-Release: 19
+Release: 2
 License: LGPLv2+
 Source: http://download.gnome.org/sources/gtk+/2.11/gtk+-%{version}.tar.xz
 Source1: gtk+2.0_2.24.24-0ubuntu1.debian.tar.xz
@@ -132,7 +132,6 @@ cat debian/patches/062_dnd_menubar.patch|patch -p1
 cat debian/patches/063_treeview_almost_fixed.patch|patch -p1
 cat debian/patches/071_no_offscreen_widgets_grabbing.patch|patch -p1
 cat debian/patches/093_gtk3_gtkimage_fallbacks_use.patch|patch -p1
-cat debian/patches/095_git_menus_scrolling.patch|patch -p1
 cat debian/patches/096_git_gtkprintsettings.patch|patch -p1
 cat debian/patches/097_statusicon_image_fallback.patch|patch -p1
 cat debian/patches/099_printer_filename_fix.patch|patch -p1
@@ -272,6 +271,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc/html/gail-libgail-util
 %{_includedir}/gail*
 %changelog
+* Mon Apr 11 2016 sulit <sulitsrc@gmail.com> - 2.24.30-2
+- update to release 2.24.30
+
 * Thu Dec 03 2015 xiaotian.wu@i-soft.com.cn - 2.24.28-19
 - Add gir build request to fix build on koji.
 
