@@ -1,0 +1,24 @@
+diff --git a/src/gui/kernel/qwindow.cpp b/src/gui/kernel/qwindow.cpp
+index 68bcbde..f883181 100644
+--- a/src/gui/kernel/qwindow.cpp
++++ b/src/gui/kernel/qwindow.cpp
+@@ -373,15 +373,14 @@ void QWindowPrivate::setTopLevelScreen(QScreen *newScreen, bool recreate)
+         return;
+     }
+     if (newScreen != topLevelScreen) {
+-        const bool shouldRecreate = recreate && windowRecreationRequired(newScreen);
+-        const bool shouldShow = visibilityOnDestroy && !topLevelScreen;
++        const bool shouldRecreate = recreate;
+         if (shouldRecreate && platformWindow)
+             q->destroy();
+         connectToScreen(newScreen);
+-        if (shouldShow)
+-            q->setVisible(true);
+-        else if (newScreen && shouldRecreate)
++        if (newScreen && shouldRecreate) {
+             create(true);
++            q->setVisible(visibilityOnDestroy);
++        }
+         emitScreenChangedRecursion(newScreen);
+     }
+ }
