@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.6.0
-Release: 5
+Release: 6
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -17,6 +17,8 @@ Source10: qt5.macros
 
 #setup PATH to find qt5 utility
 Source20: qt5-path.sh
+
+Patch61: qtbase-revert-89777.patch
 
 # All these macros should match contents of SOURCE10: 
 %define bootstrap   0
@@ -113,6 +115,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtbase-opensource-src-%{version}
+%patch61 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -268,6 +271,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
+* Thu Apr 14 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-6
+- Add combo popup wrong position REVERT patch.
+
 * Wed Apr 6 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-5
 - qdoc
 
