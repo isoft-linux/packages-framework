@@ -10,7 +10,7 @@
 %define gobject_introspection_base_version 0.10.1 
 %define gobject_introspection_version %{gobject_introspection_base_version}-1
 
-%define base_version 3.20.0
+%define base_version 3.20.3
 %define bin_version 3.0.0
 
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
