@@ -10,13 +10,13 @@
 %define gobject_introspection_base_version 0.10.1 
 %define gobject_introspection_version %{gobject_introspection_base_version}-1
 
-%define base_version 3.18.4
+%define base_version 3.20.0
 %define bin_version 3.0.0
 
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 Name: gtk3
 Version: %{base_version}
-Release: 2 
+Release: 3
 License: LGPLv2+
 URL: http://www.gtk.org
 Source: http://download.gnome.org/sources/gtk+/3.0/gtk+-%{version}.tar.xz
@@ -255,6 +255,9 @@ glib-compile-schemas /usr/share/glib-2.0/schemas >/dev/null 2>&1 ||:
 %{_includedir}/gail*
 
 %changelog
+* Tue Apr 12 2016 sulit <sulitsrc@gmail.com> - 3.18.4-3
+- update gtk3 to release 3.20.0
+
 * Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 3.18.4-2
 - Update
 
