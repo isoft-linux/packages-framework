@@ -9,7 +9,17 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/phodav/2.0/phodav-2.0.tar.xz
 
 Patch0:  put_forbidden_when_readonly.patch
 
-BuildRequires:  libsoup-devel	
+BuildRequires: libsoup-devel	
+BuildRequires: intltool
+BuildRequires: pkgconfig, gnutls-devel
+BuildRequires: glib2-devel
+BuildRequires: glib-networking
+BuildRequires: pkgconfig(gobject-introspection-1.0)
+BuildRequires: pkgconfig(libxml-2.0)
+BuildRequires: pkgconfig(sqlite3)
+BuildRequires: vala-tools
+BuildRequires: vala-devel
+
 Requires:	libsoup
 Requires:   lib%{name} = %{version}-%{release}
 
