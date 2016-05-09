@@ -7,7 +7,7 @@
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.8.3
+Version: 2.8.7
 Release: 2
 License: GPLv3
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
@@ -212,6 +212,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon May 09 2016 sulit <sulitsrc@gmail.com> - 2.8.7-2
+- update to official release 2.8.7
+
 * Thu Dec 17 2015 Cjacker <cjacker@foxmail.com> - 2.8.3-2
 - Update
 
