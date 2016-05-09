@@ -1,9 +1,9 @@
-%global VER 6.9.1
-%global Patchlevel 3
+%global VER 6.9.4
+%global Patchlevel 0
 
 Name:		ImageMagick
 Version:		%{VER}.%{Patchlevel}
-Release:		0.beta.3%{?dist}.3
+Release:		0.beta.3%{?dist}.1
 Summary:		An X application for displaying and manipulating images
 License:		ImageMagick
 Url:			http://www.imagemagick.org/
@@ -302,6 +302,9 @@ rm -rf %{buildroot}
 %doc PerlMagick/demo/ PerlMagick/Changelog PerlMagick/README.txt
 
 %changelog
+* Mon May 09 2016 sulit <sulitsrc@gmail.com> - 6.9.4.0-0.beta.3.1
+- update to release 6.9.4-0, the release contains fixing CVE-2016-3714
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 6.9.1.3-0.beta.3.3
 - Rebuild for new 4.0 release.
 
