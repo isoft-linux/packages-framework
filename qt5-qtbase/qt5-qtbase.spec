@@ -113,7 +113,7 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n qtbase-opensource-src-%{version}
+%setup -q -n qtbase-opensource-src-%{version}-beta
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -162,7 +162,7 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -system-zlib \
  -xcursor \
  -xfixes \
- -xinerama \
+ #-xinerama \
  -xshape \
  -xrandr \
  -xrender \
@@ -181,7 +181,7 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -no-sql-tds \
  -plugin-sql-sqlite \
  -system-sqlite \
- -c++11 \
+ #-c++11 \
  -xcb \
  -system-xcb \
  -system-freetype \
