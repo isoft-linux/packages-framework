@@ -1,6 +1,6 @@
 Name:		phodav
 Version:	2.0
-Release:	4
+Release:	5
 Summary:	phodav is a WebDav server implementation using libsoup (RFC 4918). 
 
 License:	GPL
@@ -77,6 +77,9 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/udev/rules.d/70-spice-webdavd.rules
 
 %changelog
+* Fri May 06 2016 WangMing <ming.wang@i-soft.com.cn> - 2.0-3
+- Update release number so that it is same as version v4.
+
 * Fri May 06 2016 WangMing <ming.wang@i-soft.com.cn> - 2.0-3
 - Make Put operation forbidden when readonly.
 
