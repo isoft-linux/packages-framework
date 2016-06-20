@@ -61,6 +61,7 @@ BuildRequires: pkgconfig(wayland-client) >= %{wayland_version}
 BuildRequires: pkgconfig(wayland-cursor) >= %{wayland_version}
 BuildRequires: pkgconfig(wayland-egl) >= %{wayland_version}
 BuildRequires: pkgconfig(xkbcommon)
+BuildRequires: wayland-protocols
 
 
 # required for icon themes apis to work
