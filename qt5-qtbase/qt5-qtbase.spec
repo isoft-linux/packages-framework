@@ -163,9 +163,9 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -xcursor \
  -xfixes \
 #-xinerama \
- -xshape \
- -xrandr \
- -xrender \
+#-xshape \
+#-xrandr \
+#-xrender \
  -xkb \
  -xinput2 \
  -glib \
@@ -181,7 +181,7 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -no-sql-tds \
  -plugin-sql-sqlite \
  -system-sqlite \
-#-c++11 \
+ -c++std c++11 \
  -xcb \
  -system-xcb \
  -system-freetype \
