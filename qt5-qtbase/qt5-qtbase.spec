@@ -7,7 +7,7 @@ License: LGPLv2 with exceptions or GPLv3 with exceptions
 
 URL: http://qt-project.org
 
-Source0: qtbase-opensource-src-%{version}-beta.tar.xz 
+Source0: qtbase-opensource-src-%{version}.tar.xz 
 
 # xinitrc script to check for OpenGL 1 only drivers and automatically set
 # QT_XCB_FORCE_SOFTWARE_OPENGL for them
@@ -113,7 +113,7 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n qtbase-opensource-src-%{version}-beta
+%setup -q -n qtbase-opensource-src-%{version}
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -162,7 +162,7 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -system-zlib \
  -xcursor \
  -xfixes \
- #-xinerama \
+#-xinerama \
  -xshape \
  -xrandr \
  -xrender \
@@ -181,7 +181,7 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -no-sql-tds \
  -plugin-sql-sqlite \
  -system-sqlite \
- #-c++11 \
+#-c++11 \
  -xcb \
  -system-xcb \
  -system-freetype \
@@ -269,6 +269,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
+* Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
+- 5.7.0
+
 * Tue May 10 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-beta-1
 - 5.7.0-beta-1
 
