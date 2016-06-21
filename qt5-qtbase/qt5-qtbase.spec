@@ -162,10 +162,6 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -system-zlib \
  -xcursor \
  -xfixes \
-#-xinerama \
-#-xshape \
-#-xrandr \
-#-xrender \
  -xkb \
  -xinput2 \
  -glib \
@@ -186,8 +182,6 @@ sed -i -e 's|^\(QMAKE_STRIP.*=\).*$|\1|g' mkspecs/common/linux.conf
  -system-xcb \
  -system-freetype \
  -system-harfbuzz
-
-
 
 make %{?_smp_mflags}
 %if !%{bootstrap}
