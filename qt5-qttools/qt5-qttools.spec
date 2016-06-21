@@ -1,6 +1,6 @@
 Name: qt5-qttools 
-Version: 5.6.0
-Release: 5
+Version: 5.7.0
+Release: 1
 Summary: Various tools of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -123,6 +123,9 @@ fi
 %exclude %{_bindir}/qdbus*
 
 %changelog
+* Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
+- 5.7.0
+
 * Wed Apr 06 2016 sulit <sulitsrc@gmail.com> - 5.6.0-5
 - qt5-qttools second build
 - don't require some requirebuild version for the being
