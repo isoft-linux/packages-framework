@@ -1,5 +1,5 @@
 Name: qt5-qtxmlpatterns
-Version: 5.6.0
+Version: 5.7.0
 Release: 1
 Summary: QtXmlpatterns component
 
@@ -94,6 +94,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
+- 5.7.0
+
 * Thu Mar 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
 
