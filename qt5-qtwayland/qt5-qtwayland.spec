@@ -1,5 +1,5 @@
 Name: qt5-qtwayland 
-Version: 5.6.0
+Version: 5.7.0
 Release: 1
 Summary: Wayland backend of Qt
 
@@ -100,6 +100,9 @@ fi
 %{_libdir}/qt5/mkspecs/modules/*.pri
 
 %changelog
+* Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
+- 5.7.0
+
 * Wed Apr 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
 
