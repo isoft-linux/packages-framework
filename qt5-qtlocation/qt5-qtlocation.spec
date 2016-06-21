@@ -1,6 +1,6 @@
 Name: qt5-qtlocation 
-Version: 5.6.0
-Release: 2
+Version: 5.7.0
+Release: 1
 Summary: Location Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -80,6 +80,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
+- 5.7.0
+
 * Thu Apr 07 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-2
 - missing files
 
