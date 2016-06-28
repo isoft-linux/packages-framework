@@ -1,6 +1,6 @@
 Name: qt5-qtwebengine 
 Version: 5.7.0
-Release: 1
+Release: 2
 Summary: QtWebengine Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -125,10 +125,9 @@ fi
 %{_libdir}/*.so.*
 %{_libdir}/qt5/libexec/*
 %{_libdir}/qt5/qml/*
-#%{_libdir}/qt5/plugins/qtwebengine/libffmpegsumo.so
-%{_datadir}/qt5/resources/icudtl.dat
-%{_datadir}/qt5/resources/qtwebengine_resources*.pak
+%{_datadir}/qt5/resources/
 %{_datadir}/qt5/translations/qtwebengine_locales/
+%{_libdir}/qt5/plugins/designer/libqwebengineview.so
 
 %files devel
 %{_libdir}/cmake/*
@@ -141,6 +140,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Jun 28 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-2
+- Add unpacking files.
+
 * Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
 - 5.7.0
 
