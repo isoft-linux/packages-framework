@@ -115,7 +115,7 @@ fi
 
 %changelog
 * Wed Jun 29 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-2
-- Fix crash when trying to call a property of the scope or context object.
+- Try to fix crash when trying to call a property of the scope or context object.
 
 * Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
 - 5.7.0
