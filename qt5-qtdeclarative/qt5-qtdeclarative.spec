@@ -1,12 +1,15 @@
 Name: qt5-qtdeclarative
 Version: 5.7.0
-Release: 1
+Release: 2
 Summary: QtDeclarative component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
 
 URL: http://qt-project.org 
 Source0: qtdeclarative-opensource-src-%{version}.tar.xz 
+
+# https://codereview.qt-project.org/#/c/157520/
+Patch0: 0002-Fix-crash-when-trying-to-call-a-property-of-the-scope-or-context-object.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtxmlpatterns-devel >= %{version}
@@ -34,6 +37,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtdeclarative-opensource-src-%{version}
+%patch0 -p1
 
 %build
 qmake-qt5
@@ -110,6 +114,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Wed Jun 29 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-2
+- Fix crash when trying to call a property of the scope or context object.
+
 * Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
 - 5.7.0
 
