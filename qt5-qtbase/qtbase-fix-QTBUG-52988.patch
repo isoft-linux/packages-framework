@@ -1,0 +1,100 @@
+diff --git a/src/dbus/qdbusconnection.cpp b/src/dbus/qdbusconnection.cpp
+index bd25d8a..6c79a9c 100644
+--- a/src/dbus/qdbusconnection.cpp
++++ b/src/dbus/qdbusconnection.cpp
+@@ -443,7 +443,7 @@ void QDBusConnectionManager::createServer(const QString &address, void *server)
+ */
+ QDBusConnection::QDBusConnection(const QString &name)
+ {
+-    if (name.isEmpty()) {
++    if (name.isEmpty() || _q_manager.isDestroyed()) {
+         d = 0;
+     } else {
+         QMutexLocker locker(&_q_manager()->mutex);
+@@ -508,7 +508,7 @@ QDBusConnection &QDBusConnection::operator=(const QDBusConnection &other)
+ */
+ QDBusConnection QDBusConnection::connectToBus(BusType type, const QString &name)
+ {
+-    if (!qdbus_loadLibDBus()) {
++    if (_q_manager.isDestroyed() || !qdbus_loadLibDBus()) {
+         QDBusConnectionPrivate *d = 0;
+         return QDBusConnection(d);
+     }
+@@ -522,7 +522,7 @@ QDBusConnection QDBusConnection::connectToBus(BusType type, const QString &name)
+ QDBusConnection QDBusConnection::connectToBus(const QString &address,
+                                               const QString &name)
+ {
+-    if (!qdbus_loadLibDBus()) {
++    if (_q_manager.isDestroyed() || !qdbus_loadLibDBus()) {
+         QDBusConnectionPrivate *d = 0;
+         return QDBusConnection(d);
+     }
+@@ -537,7 +537,7 @@ QDBusConnection QDBusConnection::connectToBus(const QString &address,
+ QDBusConnection QDBusConnection::connectToPeer(const QString &address,
+                                                const QString &name)
+ {
+-    if (!qdbus_loadLibDBus()) {
++    if (_q_manager.isDestroyed() || !qdbus_loadLibDBus()) {
+         QDBusConnectionPrivate *d = 0;
+         return QDBusConnection(d);
+     }
+@@ -1192,6 +1192,8 @@ bool QDBusConnection::unregisterService(const QString &serviceName)
+ */
+ QDBusConnection QDBusConnection::sessionBus()
+ {
++    if (_q_manager.isDestroyed())
++        return QDBusConnection(Q_NULLPTR);
+     return QDBusConnection(_q_manager()->busConnection(SessionBus));
+ }
+ 
+@@ -1204,6 +1206,8 @@ QDBusConnection QDBusConnection::sessionBus()
+ */
+ QDBusConnection QDBusConnection::systemBus()
+ {
++    if (_q_manager.isDestroyed())
++        return QDBusConnection(Q_NULLPTR);
+     return QDBusConnection(_q_manager()->busConnection(SystemBus));
+ }
+ 
+diff --git a/src/dbus/qdbusintegrator.cpp b/src/dbus/qdbusintegrator.cpp
+index 54418c2..397660b 100644
+--- a/src/dbus/qdbusintegrator.cpp
++++ b/src/dbus/qdbusintegrator.cpp
+@@ -299,6 +299,9 @@ static void qDBusNewConnection(DBusServer *server, DBusConnection *connection, v
+     Q_ASSERT(connection);
+     Q_ASSERT(data);
+ 
++    if (!QDBusConnectionManager::instance())
++        return;
++
+     // keep the connection alive
+     q_dbus_connection_ref(connection);
+     QDBusConnectionPrivate *serverConnection = static_cast<QDBusConnectionPrivate *>(data);
+diff --git a/src/dbus/qdbusserver.cpp b/src/dbus/qdbusserver.cpp
+index a242ad9..04f4925 100644
+--- a/src/dbus/qdbusserver.cpp
++++ b/src/dbus/qdbusserver.cpp
+@@ -68,6 +68,10 @@ QDBusServer::QDBusServer(const QString &address, QObject *parent)
+     if (!qdbus_loadLibDBus())
+         return;
+ 
++    QDBusConnectionManager *instance = QDBusConnectionManager::instance();
++    if (!instance)
++        return;
++
+     emit QDBusConnectionManager::instance()->serverRequested(address, this);
+     QObject::connect(d, SIGNAL(newServerConnection(QDBusConnectionPrivate*)),
+                      this, SLOT(_q_newConnection(QDBusConnectionPrivate*)), Qt::QueuedConnection);
+@@ -93,7 +97,11 @@ QDBusServer::QDBusServer(QObject *parent)
+         return;
+     }
+ 
+-    emit QDBusConnectionManager::instance()->serverRequested(address, this);
++    QDBusConnectionManager *instance = QDBusConnectionManager::instance();
++    if (!instance)
++        return;
++
++    emit instance->serverRequested(address, this);
+     QObject::connect(d, SIGNAL(newServerConnection(QDBusConnectionPrivate*)),
+                      this, SLOT(_q_newConnection(QDBusConnectionPrivate*)), Qt::QueuedConnection);
+ }
