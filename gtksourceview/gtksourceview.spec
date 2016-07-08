@@ -1,5 +1,5 @@
-%define glib2_version 2.13.6
-%define gtk3_version 3.6.0
+%define glib2_version 2.48
+%define gtk3_version 3.20
 
 %define po_package gtksourceview-3.0
 
@@ -11,11 +11,16 @@ License: LGPLv2+ and GPLv2+
 URL: http://gtksourceview.sourceforge.net/ 
 Source0: http://download.gnome.org/sources/gtksourceview/3.6/gtksourceview-%{version}.tar.xz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
-BuildRequires: libxml2-devel
-BuildRequires: glib2-devel >= %{glib2_version}
-BuildRequires: gtk3-devel >= %{gtk3_version}
-BuildRequires: intltool >= 0.35
 BuildRequires: gettext 
+BuildRequires: pkgconfig(gdk-pixbuf-2.0)
+BuildRequires: pkgconfig(gladeui-2.0)
+BuildRequires: pkgconfig(gobject-introspection-1.0)
+BuildRequires: pkgconfig(glib-2.0) >= %{glib2_version}
+BuildRequires: pkgconfig(gtk+-3.0) >= %{gtk3_version}
+BuildRequires: pkgconfig(libxml-2.0)
+BuildRequires: pkgconfig(pango)
+BuildRequires: itstool
+BuildRequires: vala-tools
 
 %description
 GtkSourceView is a text widget that extends the standard GTK+
@@ -37,13 +42,15 @@ applications which use GtkSourceView
 %setup -q -n gtksourceview-%{version}
 
 %build
-%configure --disable-gtk-doc --disable-static
+%configure --disable-gtk-doc --disable-static --enable-glade-catalog
 
 make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT DATADIRNAME=share
+# remove unwanted files
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang %{po_package}
 
@@ -58,6 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README AUTHORS COPYING NEWS MAINTAINERS 
 %{_datadir}/gtksourceview-3.0
 %{_libdir}/*.so.*
+%{_libdir}/girepository-1.0/GtkSource-3.0.typelib
 
 %files devel
 %defattr(-,root,root,-)
@@ -65,6 +73,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gtk-doc
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/*.so
+%{_datadir}/gir-1.0/GtkSource-3.0.gir
+%dir %{_datadir}/glade
+%dir %{_datadir}/glade/catalogs
+%{_datadir}/glade/catalogs/gtksourceview.xml
 
 %changelog
 * Fri Jul 08 2016 zhouyang <yang.zhou@i-soft.com.cn> - 3.21.2-1
