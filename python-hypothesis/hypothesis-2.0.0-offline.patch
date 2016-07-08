@@ -1,0 +1,10 @@
+--- hypothesis-2.0.0/docs/conf.py.offline	2016-01-11 00:47:23.000000000 +0700
++++ hypothesis-2.0.0/docs/conf.py	2016-02-14 10:50:58.790136352 +0700
+@@ -33,7 +33,6 @@
+ extensions = [
+     'sphinx.ext.autodoc',
+     'sphinx.ext.viewcode',
+-    'sphinx.ext.intersphinx',
+ ]
+ 
+ templates_path = ['_templates']
