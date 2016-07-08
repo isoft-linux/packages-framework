@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.7.0
-Release: 2
+Release: 5
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -18,6 +18,16 @@ Source10: qt5.macros
 
 #setup PATH to find qt5 utility
 Source20: qt5-path.sh
+
+# Segfault in QDBusConnectionPrivate::closeConnection -> QObject::disconnect on exit
+# https://codereview.qt-project.org/#/c/161056/
+Patch101: qtbase-fix-QTBUG-52988.patch
+# https://codereview.qt-project.org/#/c/157488/
+Patch103: Merge-the-QDBusMetaType-custom-information-to-QDBusConnectionManager.patch
+
+# QString static finalization SEGFAULT with use of QStringLiteral
+# https://codereview.qt-project.org/#/c/140750/
+Patch102: qtbase-fix-QTBUG-49061.patch
 
 # All these macros should match contents of SOURCE10: 
 %define bootstrap   0
@@ -114,6 +124,9 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtbase-opensource-src-%{version}
+%patch101 -p1
+%patch103 -p1
+%patch102 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -263,6 +276,13 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
+* Fri Jul 08 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-5
+- Fix QTBUG-49061.
+- Merge the QDBusMetaType's custom information to QDBusConnectionManager.
+
+* Wed Jul 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-3
+- Fix QTBUG-52988.
+
 * Thu Jun 30 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-2
 - Rebuild with gcc-6.1.0
 

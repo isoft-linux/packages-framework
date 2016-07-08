@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           gsettings-desktop-schemas
-Version:        3.18.1
-Release:        2
+Version:        3.21.2
+Release:        1
 Summary:        A collection of GSettings schemas
 
 License:        LGPLv2+
@@ -67,6 +67,9 @@ fi
 %{_datadir}/gir-1.0/GDesktopEnums-3.0.gir
 
 %changelog
+* Fri Jul 08 2016 zhouyang <yang.zhou@i-soft.com.cn> - 3.21.2-1
+- Update
+
 * Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 3.18.1-2
 - Update
 
