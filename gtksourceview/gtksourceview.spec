@@ -6,7 +6,7 @@
 Summary: A library for viewing source files
 Name: gtksourceview
 Version: 3.21.2
-Release: 1
+Release: 2
 License: LGPLv2+ and GPLv2+
 URL: http://gtksourceview.sourceforge.net/ 
 Source0: http://download.gnome.org/sources/gtksourceview/3.6/gtksourceview-%{version}.tar.xz
@@ -79,6 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glade/catalogs/gtksourceview.xml
 
 %changelog
+* Fri Jul 08 2016 zhouyang <yang.zhou@i-soft.com.cn> - 3.21.2-2
+- Update ,Update,Add GtkSource-3.0.gir supported
+
 * Fri Jul 08 2016 zhouyang <yang.zhou@i-soft.com.cn> - 3.21.2-1
 - Update
 
