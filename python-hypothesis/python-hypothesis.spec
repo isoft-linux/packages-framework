@@ -6,7 +6,7 @@
 
 Name:           python-%{srcname}
 Version:        3.4.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A library for property based testing
 
 License:        MPLv2.0
@@ -115,5 +115,8 @@ READTHEDOCS=True sphinx-build -b man docs docs/_build/man
 %endif
 
 %changelog
+* Fri Jul 08 2016 xiaotian.wu@i-soft.com.cn - 3.4.0-2
+- rebuilt
+
 * Fri Jul 08 2016 xiaotian.wu@i-soft.com.cn - 3.4.0-1
 - init
