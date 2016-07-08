@@ -1,0 +1,94 @@
+diff -Nur phodav-2.0/libphodav/chezdav.c phodav-2.0-n/libphodav/chezdav.c
+--- phodav-2.0/libphodav/chezdav.c	2015-02-14 08:53:21.000000000 +0800
++++ phodav-2.0-n/libphodav/chezdav.c	2016-05-06 13:05:07.475743184 +0800
+@@ -276,7 +276,7 @@
+ #endif
+ 
+   SoupServer *server = phodav_server_get_soup_server (dav);
+-  if (!soup_server_listen_local (server, port, 0, &error)) {
++  if (!soup_server_listen_all (server, port, 0, &error)) {
+     my_error (_ ("Listen failed: %s\n"), error->message);
+   }
+ 
+diff -Nur phodav-2.0/libphodav/phodav-method-get.c phodav-2.0-n/libphodav/phodav-method-get.c
+--- phodav-2.0/libphodav/phodav-method-get.c	2015-02-06 09:23:52.000000000 +0800
++++ phodav-2.0-n/libphodav/phodav-method-get.c	2016-05-06 13:05:14.162743183 +0800
+@@ -83,6 +83,16 @@
+ }
+ 
+ static gint
++method_get_server_info (SoupMessage *msg, GFile *file,
++                        GCancellable *cancellable, GError **err)
++{
++    soup_message_set_response (msg, "text/html; charset=utf-8",
++                               SOUP_MEMORY_STATIC,
++                               "phodav", 6);
++    return SOUP_STATUS_OK;
++}
++
++static gint
+ method_get (SoupMessage *msg, GFile *file,
+             GCancellable *cancellable, GError **err)
+ {
+@@ -183,9 +193,16 @@
+   GCancellable *cancellable = handler_get_cancellable (handler);
+   gint status;
+ 
+-  file = g_file_get_child (handler_get_file (handler), path + 1);
+-  status = method_get (msg, file, cancellable, err);
+-  g_object_unref (file);
++  if (g_strcmp0 (path, "/.server-info") == 0)
++    {
++        status = method_get_server_info (msg, file, cancellable, err);
++    }
++  else
++    {
++      file = g_file_get_child (handler_get_file (handler), path + 1);
++      status = method_get (msg, file, cancellable, err);
++      g_object_unref (file);
++    }
+ 
+   return status;
+ }
+diff -Nur phodav-2.0/libphodav/phodav-server.c phodav-2.0-n/libphodav/phodav-server.c
+--- phodav-2.0/libphodav/phodav-server.c	2015-02-14 07:58:57.000000000 +0800
++++ phodav-2.0-n/libphodav/phodav-server.c	2016-05-06 13:08:15.201743162 +0800
+@@ -36,6 +36,9 @@
+  * PhodavServer implements a simple WebDAV server.
+  */
+ 
++static const char *response_forbidden = "<html><head><title>403 Forbidden</title></head>" \
++    "<body>PUT request is forbidden to Phodav server.</body></html>\n";
++
+ struct _PhodavServer
+ {
+   GObject       parent;
+@@ -393,6 +396,17 @@
+ }
+ 
+ static void
++method_put_forbidden (SoupMessage *msg)
++{
++  soup_message_set_response (msg, "application/xml",
++                             SOUP_MEMORY_STATIC,
++                             (gchar *) response_forbidden, strlen (response_forbidden));
++
++  soup_message_body_set_accumulate (msg->request_body, FALSE);
++  soup_message_set_status (msg, SOUP_STATUS_FORBIDDEN);
++}
++
++static void
+ got_headers (SoupMessage *msg,
+              gpointer     user_data)
+ {
+@@ -401,7 +415,9 @@
+   const gchar *path = uri->path;
+   GError *err = NULL;
+ 
+-  if (msg->method == SOUP_METHOD_PUT)
++  if (self->readonly && msg->method == SOUP_METHOD_PUT)
++    method_put_forbidden (msg);
++  else if (msg->method == SOUP_METHOD_PUT)
+     phodav_method_put (self->root_handler, msg, path, &err);
+ 
+   if (err)
