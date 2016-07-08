@@ -2,8 +2,8 @@
 %global with_wayland 1 
 
 Name:          clutter
-Version:       1.24.2
-Release:       2
+Version:       1.26.0
+Release:       1
 Summary:       Open Source software library for creating rich graphical user interfaces
 
 License:       LGPLv2+
@@ -113,6 +113,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_datadir}/gtk-doc/html/clutter
 
 %changelog
+* Fri Jul 08 2016 zhouyang <yang.zhou@i-soft.com.cn> - 1.26.0-1
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.24.2-2
 - Rebuild for new 4.0 release.
 
