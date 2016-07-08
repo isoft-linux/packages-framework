@@ -1,6 +1,6 @@
 Name: qt5-qtdeclarative
 Version: 5.7.0
-Release: 6
+Release: 7
 Summary: QtDeclarative component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
