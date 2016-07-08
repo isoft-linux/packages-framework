@@ -1,0 +1,22 @@
+diff --git a/src/qml/jsruntime/qv4runtime.cpp b/src/qml/jsruntime/qv4runtime.cpp
+index 0e10f76..9fadbdd 100644
+--- a/src/qml/jsruntime/qv4runtime.cpp
++++ b/src/qml/jsruntime/qv4runtime.cpp
+@@ -1011,7 +1011,7 @@ ReturnedValue Runtime::callProperty(ExecutionEngine *engine, int nameIndex, Call
+     if (!baseObject) {
+         Q_ASSERT(!callData->thisObject.isEmpty());
+         if (callData->thisObject.isNullOrUndefined()) {
+-            QString message = QStringLiteral("Cannot call method '%1' of %2").arg(name->toQString()).arg(callData->thisObject.toQStringNoThrow());
++            QString message = QStringLiteral("Cannot call method '%1'").arg(name->toQString());
+             return engine->throwTypeError(message);
+         }
+ 
+@@ -1023,7 +1023,7 @@ ReturnedValue Runtime::callProperty(ExecutionEngine *engine, int nameIndex, Call
+ 
+     ScopedFunctionObject o(scope, baseObject->get(name));
+     if (!o) {
+-        QString error = QStringLiteral("Property '%1' of object %2 is not a function").arg(name->toQString(), callData->thisObject.toQStringNoThrow());
++        QString error = QStringLiteral("Property '%1' of scope object is not a function").arg(name->toQString());
+         return engine->throwTypeError(error);
+     }
+ 

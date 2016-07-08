@@ -1,6 +1,6 @@
 Name: qt5-qtdeclarative
 Version: 5.7.0
-Release: 5
+Release: 6
 Summary: QtDeclarative component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -8,8 +8,9 @@ License: LGPLv2 with exceptions or GPLv3 with exceptions
 URL: http://qt-project.org 
 Source0: qtdeclarative-opensource-src-%{version}.tar.xz 
 
+# QTBUG-52340
 # https://codereview.qt-project.org/#/c/157520/
-Patch0: 0002-Fix-crash-when-trying-to-call-a-property-of-the-scope-or-context-object.patch
+Patch0: qtdeclarative-fix-QTBUG-52340.patch
 
 # QTBUG-52057
 Patch1: qt5-declarative-gcc6.patch
@@ -40,7 +41,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtdeclarative-opensource-src-%{version}
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
 
 %build
@@ -118,6 +119,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Fri Jul 08 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-6
+- Fix QTBUG-52340.
+
 * Fri Jul 1 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-5
 - Rebuild for gcc-6.1.0
 
