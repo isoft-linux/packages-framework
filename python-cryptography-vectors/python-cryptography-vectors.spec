@@ -4,8 +4,8 @@
 %global pymodname cryptography_vectors
 
 Name:               python-%{modname}
-Version:            0.8.2
-Release:            3%{?dist}
+Version:            1.3.1
+Release:            1%{?dist}
 Summary:            Test vectors for the cryptography package
 
 License:            ASL 2.0 or BSD
@@ -25,9 +25,30 @@ The only purpose of this package is to be a building requirement for
 python-cryptography, otherwise it has no use. Don’t install it unless
 you really know what you are doing.
 
+%package -n  python2-%{modname}
+Group:          Development/Libraries
+Summary:        Test vectors for the cryptography package
+Obsoletes:      python-cryptography-vectors <= %{version}-%{release}
+
+%if 0%{?with_python3}
+%{?python_provide:%python_provide python2-%{modname}}
+%else
+Provides:       python-%{modname}
+%endif
+
+%description -n python2-%{modname}
+Test vectors for the cryptography package.
+
+The only purpose of this package is to be a building requirement for
+python-cryptography, otherwise it has no use. Don’t install it unless
+you really know what you are doing.
+
 %if 0%{?with_python3}
 %package -n  python3-%{modname}
+Group:          Development/Libraries
 Summary:        Test vectors for the cryptography package
+
+%{?python_provide:%python_provide python3-%{modname}}
 
 %description -n python3-%{modname}
 Test vectors for the cryptography package.
@@ -62,7 +83,7 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
 %{__python3} setup.py test
 %endif
 
-%files
+%files -n python2-%{modname}
 %doc LICENSE
 %{python2_sitelib}/%{pymodname}/
 %{python2_sitelib}/%{pymodname}-%{version}*
@@ -74,8 +95,10 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
 %{python3_sitelib}/%{pymodname}-%{version}*
 %endif
 
-
 %changelog
+* Fri Jul 08 2016 xiaotian.wu@i-soft.com.cn - 1.3.1-1
+- update to 1.3.1
+
 * Thu Nov 05 2015 Cjacker <cjacker@foxmail.com> - 0.8.2-3
 - Rebuild with python 3.5
 
