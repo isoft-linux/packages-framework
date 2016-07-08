@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.7.0
-Release: 4
+Release: 5
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -22,6 +22,8 @@ Source20: qt5-path.sh
 # Segfault in QDBusConnectionPrivate::closeConnection -> QObject::disconnect on exit
 # https://codereview.qt-project.org/#/c/161056/
 Patch101: qtbase-fix-QTBUG-52988.patch
+# https://codereview.qt-project.org/#/c/157488/
+Patch103: Merge-the-QDBusMetaType-custom-information-to-QDBusConnectionManager.patch
 
 # QString static finalization SEGFAULT with use of QStringLiteral
 # https://codereview.qt-project.org/#/c/140750/
@@ -123,6 +125,7 @@ developing applications that use %{name}.
 %prep
 %setup -q -n qtbase-opensource-src-%{version}
 %patch101 -p1
+%patch103 -p1
 %patch102 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
@@ -273,8 +276,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
-* Fri Jul 08 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-4
+* Fri Jul 08 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-5
 - Fix QTBUG-49061.
+- Merge the QDBusMetaType's custom information to QDBusConnectionManager.
 
 * Wed Jul 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-3
 - Fix QTBUG-52988.
