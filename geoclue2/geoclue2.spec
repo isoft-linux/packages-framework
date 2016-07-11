@@ -1,6 +1,6 @@
 Name:           geoclue2
 Version:        2.4.3
-Release:        2
+Release:        3
 Summary:        Geolocation service
 
 License:        GPLv2+
@@ -137,6 +137,9 @@ exit 0
 %{_datadir}/applications/geoclue-where-am-i.desktop
 
 %changelog
+* Mon Jul 11 2016 zhouyang <yang.zhou@i-soft.com.cn> - 2.4.3-3
+- Update
+
 * Mon Jul 11 2016 zhouyang <yang.zhou@i-soft.com.cn> - 2.4.3-2
 - Update
 
