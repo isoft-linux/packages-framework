@@ -117,6 +117,7 @@ exit 0
 %files devel
 %{_datadir}/dbus-1/interfaces/org.freedesktop.GeoClue2*.xml
 %{_libdir}/pkgconfig/geoclue-2.0.pc
+%{_libdir}/pkgconfig/libgeoclue-2.0.pc
 %{_includedir}/libgeoclue-2.0/gclue-client.h
 %{_includedir}/libgeoclue-2.0/gclue-enum-types.h
 %{_includedir}/libgeoclue-2.0/gclue-enums.h
