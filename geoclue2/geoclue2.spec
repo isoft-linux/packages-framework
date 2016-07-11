@@ -1,6 +1,6 @@
 Name:           geoclue2
-Version:        2.2.0
-Release:        3%{?dist}
+Version:        2.4.3
+Release:        2
 Summary:        Geolocation service
 
 License:        GPLv2+
@@ -14,6 +14,8 @@ BuildRequires:  json-glib-devel
 BuildRequires:  libsoup-devel
 BuildRequires:  ModemManager-devel
 BuildRequires:  systemd
+BuildRequires:  pkgconfig(avahi-client)
+BuildRequires:  pkgconfig(avahi-glib)
 Requires(pre):  shadow-utils
 Requires(post): systemd
 Requires(preun): systemd
@@ -115,6 +117,17 @@ exit 0
 %files devel
 %{_datadir}/dbus-1/interfaces/org.freedesktop.GeoClue2*.xml
 %{_libdir}/pkgconfig/geoclue-2.0.pc
+%{_includedir}/libgeoclue-2.0/gclue-client.h
+%{_includedir}/libgeoclue-2.0/gclue-enum-types.h
+%{_includedir}/libgeoclue-2.0/gclue-enums.h
+%{_includedir}/libgeoclue-2.0/gclue-helpers.h
+%{_includedir}/libgeoclue-2.0/gclue-location.h
+%{_includedir}/libgeoclue-2.0/gclue-manager.h
+%{_includedir}/libgeoclue-2.0/gclue-simple.h
+%{_includedir}/libgeoclue-2.0/geoclue.h
+%{_libdir}/libgeoclue-2.so
+%{_libdir}/libgeoclue-2.so.0
+%{_libdir}/libgeoclue-2.so.0.0.0
 
 %files demos
 %{_libexecdir}/geoclue-2.0/demos/where-am-i
@@ -123,6 +136,12 @@ exit 0
 %{_datadir}/applications/geoclue-where-am-i.desktop
 
 %changelog
+* Mon Jul 11 2016 zhouyang <yang.zhou@i-soft.com.cn> - 2.4.3-2
+- Update
+
+* Mon Jul 11 2016 zhouyang <yang.zhou@i-soft.com.cn> - 2.4.3-1
+- Update
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.2.0-3
 - Rebuild for new 4.0 release.
 
