@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.7.0
-Release: 5
+Release: 6
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -28,6 +28,9 @@ Patch103: Merge-the-QDBusMetaType-custom-information-to-QDBusConnectionManager.p
 # QString static finalization SEGFAULT with use of QStringLiteral
 # https://codereview.qt-project.org/#/c/140750/
 Patch102: qtbase-fix-QTBUG-49061.patch
+
+# QTBUG-54926
+Patch104: standardkey-delete.patch
 
 # All these macros should match contents of SOURCE10: 
 %define bootstrap   0
@@ -127,6 +130,7 @@ developing applications that use %{name}.
 %patch101 -p1
 %patch103 -p1
 %patch102 -p1
+%patch104 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
 RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS | sed 's|-fexceptions||g'`
@@ -276,6 +280,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
+* Mon Jul 25 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-6
+- Fix QTBUG-54926.
+
 * Fri Jul 08 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-5
 - Fix QTBUG-49061.
 - Merge the QDBusMetaType's custom information to QDBusConnectionManager.

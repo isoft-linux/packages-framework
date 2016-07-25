@@ -1,0 +1,18 @@
+diff --git a/src/gui/kernel/qplatformtheme.cpp b/src/gui/kernel/qplatformtheme.cpp
+index 7f74959..1693faa 100644
+--- a/src/gui/kernel/qplatformtheme.cpp
++++ b/src/gui/kernel/qplatformtheme.cpp
+@@ -178,11 +178,11 @@ const QKeyBinding QPlatformThemePrivate::keyBindings[] = {
+     {QKeySequence::Close,                   0,          Qt::CTRL | Qt::Key_W,                   KB_Win | KB_X11},
+     {QKeySequence::Save,                    1,          Qt::CTRL | Qt::Key_S,                   KB_All},
+     {QKeySequence::New,                     1,          Qt::CTRL | Qt::Key_N,                   KB_All},
+-    {QKeySequence::Delete,                  0,          Qt::CTRL | Qt::Key_D,                   KB_X11}, //emacs (line edit only)
++    {QKeySequence::Delete,                  0,          Qt::SHIFT | Qt::Key_Delete,                   KB_X11}, //emacs (line edit only)
+     {QKeySequence::Delete,                  1,          Qt::Key_Delete,                         KB_All},
+     {QKeySequence::Delete,                  0,          Qt::META | Qt::Key_D,                   KB_Mac},
+     {QKeySequence::Cut,                     1,          Qt::CTRL | Qt::Key_X,                   KB_All},
+-    {QKeySequence::Cut,                     0,          Qt::SHIFT | Qt::Key_Delete,             KB_Win | KB_X11}, //## Check if this should work on mac
++    {QKeySequence::Cut,                     0,          Qt::SHIFT | Qt::Key_Delete,             KB_Win}, //## Check if this should work on mac
+     {QKeySequence::Cut,                     0,          Qt::Key_F20,                            KB_X11}, //Cut on sun keyboards
+     {QKeySequence::Cut,                     0,          Qt::META | Qt::Key_K,                   KB_Mac},
+     {QKeySequence::Copy,                    0,          Qt::CTRL | Qt::Key_Insert,              KB_X11 | KB_Win},
