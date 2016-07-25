@@ -1,7 +1,7 @@
 Summary: A utility for retrieving files using the HTTP or FTP protocols
 Name: wget
-Version: 1.16.3
-Release: 3%{?dist}
+Version: 1.18
+Release: 2%{?dist}
 License: GPLv3+
 Url: http://www.gnu.org/software/wget/
 Source: ftp://ftp.gnu.org/gnu/wget/wget-%{version}.tar.xz
@@ -11,6 +11,7 @@ Patch3: wget-1.16-dont-run-failing-test.patch
 
 Provides: webclient
 BuildRequires: openssl-devel, pkgconfig, gettext, autoconf, libidn-devel, libuuid-devel
+BuildRequires: texinfo
 
 %description
 GNU Wget is a file retrieval utility which can use either the HTTP or
@@ -64,6 +65,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wget
 
 %changelog
+* Fri Jul 08 2016 sulit <sulitsrc@gmail.com> - 1.18-2
+- upgrade wget to 1.18 for fix wget url may be redirected
+- add texinfo BuildRequires
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.16.3-3
 - Rebuild for new 4.0 release.
 

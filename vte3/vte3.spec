@@ -1,7 +1,7 @@
 %define api_version 2.91
 Name: vte3
-Version: 0.43.0
-Release: 2 
+Version: 0.44.2
+Release: 1 
 Summary: A terminal emulator
 License: LGPLv2+
 Source: http://download.gnome.org/sources/vte/0.28/vte-%{version}.tar.xz
@@ -62,7 +62,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc COPYING HACKING NEWS README
 %doc src/iso2022.txt
-%doc doc/utmpwtmp.txt doc/boxes.txt doc/openi18n/UTF-8.txt doc/openi18n/wrap.txt
 %{_sysconfdir}/profile.d/vte.sh
 %{_libdir}/*.so.*
 %{_libdir}/girepository-1.0/Vte-%{api_version}.typelib
@@ -78,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/vte-%{api_version}.vapi
 
 %changelog
+* Tue Jul 12 2016 zhouyang <yang.zhou@i-soft.com.cn> - 0.44.2-1
+- Update
+
 * Fri Nov 13 2015 Cjacker <cjacker@foxmail.com> - 0.43.0-2
 - Update
 
