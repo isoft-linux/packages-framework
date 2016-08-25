@@ -1,5 +1,5 @@
 Name: qt5-qtwebkit
-Version: 5.6.0
+Version: 5.7.0
 Release: 1
 Summary: QtWebKit component
 
@@ -23,7 +23,7 @@ Patch7: 0001-Add-ARM-64-support.patch
 # truly madly deeply no rpath please, kthxbye
 Patch8: qtwebkit-opensource-src-5.2.1-no_rpath.patch
 
-Patch9: qt5-webkit-pthread.patch
+#Patch9: qt5-webkit-pthread.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtdeclarative-devel >= %{version}
@@ -87,7 +87,7 @@ developing applications that use %{name}.
 %patch4 -p1 -b .save_memory
 %patch7 -p1 -b .aarch64
 %patch8 -p1 -b .no_rpath
-%patch9 -p1 -b .pthread
+#%patch9 -p1 -b .pthread
 
 %build
 # WTF... http://lists.qt-project.org/pipermail/development/2016-March/025362.html
@@ -134,6 +134,9 @@ sed -i -e 's:-L/home[^ ]\+::g' $RPM_BUILD_ROOT%{_libdir}/pkgconfig/*.pc
 %{_docdir}/qt5/*
 
 %changelog
+* Thu Aug 25 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
+- 5.7.0
+
 * Fri Apr 08 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
 
