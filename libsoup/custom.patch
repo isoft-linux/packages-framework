@@ -1,0 +1,80 @@
+diff -Nur libsoup-2.52.2-n/libsoup/soup-auth-domain-digest.c libsoup-2.52.2/libsoup/soup-auth-domain-digest.c
+--- libsoup-2.52.2-n/libsoup/soup-auth-domain-digest.c	2016-10-19 10:08:28.343315179 +0800
++++ libsoup-2.52.2/libsoup/soup-auth-domain-digest.c	2016-10-19 09:52:47.406331304 +0800
+@@ -297,6 +297,8 @@
+ 			accept = check_hex_urp (domain, msg, params,
+ 						username, hex_urp);
+ 			g_free (hex_urp);
++		} else if (g_strcmp0 (username, "guest") == 0) {
++			accept = TRUE;
+ 		} else
+ 			accept = FALSE;
+ 	} else {
+diff -Nur libsoup-2.52.2-n/libsoup/soup-server.c libsoup-2.52.2/libsoup/soup-server.c
+--- libsoup-2.52.2-n/libsoup/soup-server.c	2016-10-19 10:08:28.343315179 +0800
++++ libsoup-2.52.2/libsoup/soup-server.c	2016-10-19 09:52:46.865331314 +0800
+@@ -125,6 +125,7 @@
+ 	REQUEST_READ,
+ 	REQUEST_FINISHED,
+ 	REQUEST_ABORTED,
++	GOT_HEADERS_WITH_AUTH,
+ 	LAST_SIGNAL
+ };
+ 
+@@ -637,6 +638,35 @@
+ 			      SOUP_TYPE_MESSAGE,
+ 			      SOUP_TYPE_CLIENT_CONTEXT);
+ 
++	/**
++	 * SoupServer::got-headers-with-auth:
++	 * @server: the server
++	 * @message: the new message
++	 * @client: the client context
++	 *
++	 * Emitted when the server got headers.
++	 * @message will be completely blank; not even the
++	 * Request-Line will have been read yet. About the only thing
++	 * you can usefully do with it is connect to its signals.
++	 *
++	 * If the request is read successfully, this will eventually
++	 * be followed by a #SoupServer::request_read signal. If a
++	 * response is then sent, the request processing will end with
++	 * a #SoupServer::request_finished signal. If a network error
++	 * occurs, the processing will instead end with
++	 * #SoupServer::GOT_HEADERS.
++	 **/
++	signals[GOT_HEADERS_WITH_AUTH] =
++		g_signal_new ("got-headers-with-auth",
++			      G_OBJECT_CLASS_TYPE (object_class),
++			      G_SIGNAL_RUN_FIRST,
++			      G_STRUCT_OFFSET (SoupServerClass, got_headers_with_auth),
++			      NULL, NULL,
++			      NULL,
++			      G_TYPE_NONE, 2,
++			      SOUP_TYPE_MESSAGE,
++			      SOUP_TYPE_CLIENT_CONTEXT);
++
+ 	/* properties */
+ 	/**
+ 	 * SoupServer:port:
+@@ -1329,6 +1359,8 @@
+ 			if (auth_user) {
+ 				client->auth_domain = g_object_ref (domain);
+ 				client->auth_user = auth_user;
++				g_signal_emit (server, signals[GOT_HEADERS_WITH_AUTH], 0,
++                               msg, client);
+ 				return;
+ 			}
+ 
+diff -Nur libsoup-2.52.2-n/libsoup/soup-server.h libsoup-2.52.2/libsoup/soup-server.h
+--- libsoup-2.52.2-n/libsoup/soup-server.h	2016-10-19 10:08:28.343315179 +0800
++++ libsoup-2.52.2/libsoup/soup-server.h	2016-10-19 09:52:47.564331302 +0800
+@@ -47,6 +47,8 @@
+ 				  SoupClientContext *client);
+ 	void (*request_aborted)  (SoupServer *server, SoupMessage *msg,
+ 				  SoupClientContext *client);
++	void (*got_headers_with_auth)  (SoupServer *server, SoupMessage *msg,
++				  SoupClientContext *client);
+ 
+ 	/* Padding for future expansion */
+ 	void (*_libsoup_reserved1) (void);
