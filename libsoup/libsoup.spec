@@ -1,10 +1,13 @@
 Summary: Soup, an HTTP library implementation
 Name: libsoup
-Version: 2.52.2
-Release: 3
+Version: 2.56.0
+Release: 1
 License: LGPL
 Source0: ftp://ftp.gnome.org/pub/gnome/sources/libsoup/2.2/%{name}-%{version}.tar.xz
 URL:  ftp://ftp.gnome.org/pub/gnome/sources/libsoup/
+
+Patch0:  nocheck-digest-for-guest.patch
+Patch1:  emit-signal-with-auth.patch
 
 Requires: glib2 >= 2.0, libxml2, gnutls
 Requires: glib-networking
@@ -12,6 +15,7 @@ BuildRequires: pkgconfig, gnutls-devel
 BuildRequires: glib2-devel
 BuildRequires: glib-networking
 BuildRequires: intltool
+BuildRequires: krb5-devel >= 1.11
 BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: pkgconfig(libxml-2.0)
 BuildRequires: pkgconfig(sqlite3)
@@ -39,6 +43,8 @@ you to develop applications that use the libsoup library.
 
 %prep
 %setup -q
+patch0 -p1
+patch1 -p1
 
 %build
 %configure --disable-gtk-doc
@@ -80,6 +86,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/libsoup-2.4.vapi
 
 %changelog
+* Wed Oct 19 2016 x <ming.wang@i-soft.com.cn> - 2.56.0-1
+- Update to 2.56.0, release number 1. 
+- Patch0: No check digest for guest.
+- Patch1: Emit signal with auth information when got headers.
+
 * Wed Oct 19 2016 x <ming.wang@i-soft.com.cn> - 2.52.2-3
 - No check digest for guest.
 - Emit signal with auth information when got headers.
