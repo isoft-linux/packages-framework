@@ -1,0 +1,792 @@
+diff -Nur phodav-2.0/libphodav/chezdav.c phodav-2.0-n/libphodav/chezdav.c
+--- phodav-2.0/libphodav/chezdav.c	2015-02-14 08:53:21.000000000 +0800
++++ phodav-2.0-n/libphodav/chezdav.c	2016-10-19 16:23:19.168929749 +0800
+@@ -36,6 +36,7 @@
+ #endif
+ 
+ #include "libphodav/phodav.h"
++#include "libphodav/phodav-permission.h"
+ 
+ static PhodavServer *dav;
+ static gint verbose;
+@@ -157,33 +158,161 @@
+ }
+ #endif // WITH_AVAHI
+ 
++gchar *permissiondir = NULL;
+ gchar *htdigest = NULL;
++GHashTable *digesthash = NULL;
++static DavPermission *permission = NULL;
+ 
+-static gchar *
+-digest_auth_callback (SoupAuthDomain *auth_domain, SoupMessage *msg,
+-                      const char *username, gpointer data)
++static gboolean
++permission_proxy (const gchar *path, const gchar *user)
+ {
+-  gchar *digest = NULL;;
++  gchar entry[256];
++  int n = 0;
++
++  if (g_strcmp0 (path, "/") == 0)
++    return FALSE;
++
++  if (!permission)
++    permission = dav_permission_new (permissiondir);
++
++  memset (entry, 0, 256);
++  path++;
++  while (*path && *path != '/')
++    entry[n++] = *path++;
++
++  return dav_entry_writeable (permission, entry, user);
++}
++
++static void
++update_permission(void)
++{
++  if (permission)
++    dav_permission_free (permission);
++
++  permission = dav_permission_new (permissiondir);
++}
++
++static void
++digest_table_from_file (const gchar *file)
++{
++  GError *error = NULL;
++  gchar *contents = NULL;
++  gchar *copy = NULL;
+   gchar *line = NULL;
+-  gchar *eol = NULL;
++  gchar *name = NULL;
++  gchar *realm = NULL;
++  gchar *digest = NULL;
++
++  if (digesthash)
++    g_hash_table_destroy (digesthash);
++
++  digesthash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+ 
+-  for (line = htdigest; line && *line; line = eol ? eol + 1 : NULL)
++  if (g_file_get_contents(file, &contents, NULL, &error) == FALSE)
++    return;
++
++  copy = contents;
++
++  while (*copy)
++  {
++    line = copy;
++    while (*copy && *copy != '\n')
++      copy++;
++
++    if (*copy)
++      *copy++ = 0;
++
++    name = NULL;
++    realm = NULL;
++    digest = NULL;
++
++    while (*line)
+     {
+-      gchar **strv = g_strsplit (line, ":", -1);
+-      eol = strchr (line, '\n');
+-      if (eol)
+-        *eol = '\0';
++      if (!name)
++        name = line;
++      else if (!realm)
++        realm = line;
++      else if (!digest)
++        digest = line;
++
++      while (*line && *line != ':')
++        line++;
+ 
+-      if (!(strv[0] && strv[1] && strv[2])) {
+-        g_warn_if_reached ();
+-      } else if (g_strcmp0 (strv[0], username) == 0)
+-        digest = g_strdup (strv[2]);
++      if (*line)
++        *line++ = 0;
++    }
+ 
+-      g_strfreev (strv);
++    if (g_strcmp0 (name, "guest") == 0)
++        continue;
+ 
+-      if (digest)
+-        break;
++    if (name && digest)
++        g_hash_table_insert (digesthash, g_strdup(name), g_strdup(digest));
++  }
++
++  g_free (contents);
++  return;
++}
++
++static gboolean
++access_able (const gchar *path, const gchar *user)
++{
++
++  gchar entry[256];
++  int n = 0;
++
++  if (g_strcmp0 (path, "/") == 0)
++    {
++      return TRUE;
++    }
++  else if (g_strcmp0 (path, "/.update-permission") == 0)
++    {
++      update_permission();
++      return FALSE;
+     }
++  else if (g_strcmp0 (path, "/.update-digest") == 0)
++    {
++      digest_table_from_file(htdigest);
++      return FALSE;
++    }
++
++  if (!permission)
++    permission = dav_permission_new (permissiondir);
++
++  memset (entry, 0, 256);
++  path++;
++  while (*path && *path != '/')
++    entry[n++] = *path++;
++
++  return dav_entry_accesseable (permission, entry, user);
++}
++
++static gchar *
++digest_auth_callback (SoupAuthDomain *auth_domain, SoupMessage *msg,
++                      const char *username, gpointer data)
++{
++  gchar *digest = NULL;;
++//  gchar *line = NULL;
++//  gchar *eol = NULL;
++
++//  for (line = htdigest; line && *line; line = eol ? eol + 1 : NULL)
++//    {
++//      gchar **strv = g_strsplit (line, ":", -1);
++//      eol = strchr (line, '\n');
++//      if (eol)
++//        *eol = '\0';
++
++//      if (!(strv[0] && strv[1] && strv[2])) {
++//        g_warn_if_reached ();
++//      } else if (g_strcmp0 (strv[0], username) == 0)
++//        digest = g_strdup (strv[2]);
++
++//      g_strfreev (strv);
++
++//      if (digest)
++//        break;
++//    }
++
++  digest = g_strdup (g_hash_table_lookup (digesthash, username));
+ 
+   return digest;
+ }
+@@ -204,6 +333,7 @@
+     { "path", 'P', 0, G_OPTION_ARG_FILENAME, &path, N_ ("Path to export"), NULL },
+     { "htdigest", 'd', 0, G_OPTION_ARG_FILENAME, &htdigest, N_ ("Path to htdigest file"), NULL },
+     { "readonly", 'r', 0, G_OPTION_ARG_NONE, &readonly, N_ ("Read-only access"), NULL },
++    { "user_permission", 'u', 0, G_OPTION_ARG_STRING, &permissiondir, N_ ("User's permission"), NULL },
+     { NULL }
+   };
+ 
+@@ -252,8 +382,10 @@
+       gchar *realm;
+       SoupServer *server;
+ 
+-      if (!g_file_get_contents (htdigest, &htdigest, NULL, &error))
+-        my_error (_ ("failed to open htdigest: %s\n"), error->message);
++      digest_table_from_file(htdigest);
++
++//      if (!g_file_get_contents (htdigest, &htdigest, NULL, &error))
++//        my_error (_ ("failed to open htdigest: %s\n"), error->message);
+ 
+       realm = get_realm ();
+       auth = soup_auth_domain_digest_new (SOUP_AUTH_DOMAIN_REALM, realm,
+@@ -267,6 +399,11 @@
+       g_object_unref (auth);
+   }
+ 
++  if (permissiondir)
++    {
++       phodav_server_set_permission_proxy (dav, permission_proxy);
++       phodav_server_set_access_constraint (dav, access_able);
++    }
+ 
+ #ifdef WITH_AVAHI
+   mdns_client = ga_client_new (GA_CLIENT_FLAG_NO_FLAGS);
+@@ -276,7 +413,7 @@
+ #endif
+ 
+   SoupServer *server = phodav_server_get_soup_server (dav);
+-  if (!soup_server_listen_local (server, port, 0, &error)) {
++  if (!soup_server_listen_all (server, port, 0, &error)) {
+     my_error (_ ("Listen failed: %s\n"), error->message);
+   }
+ 
+diff -Nur phodav-2.0/libphodav/phodav-method-get.c phodav-2.0-n/libphodav/phodav-method-get.c
+--- phodav-2.0/libphodav/phodav-method-get.c	2015-02-06 09:23:52.000000000 +0800
++++ phodav-2.0-n/libphodav/phodav-method-get.c	2016-10-19 16:23:19.167929749 +0800
+@@ -83,6 +83,16 @@
+ }
+ 
+ static gint
++method_get_server_info (SoupMessage *msg, GFile *file,
++                        GCancellable *cancellable, GError **err)
++{
++    soup_message_set_response (msg, "text/html; charset=utf-8",
++                               SOUP_MEMORY_STATIC,
++                               "phodav", 6);
++    return SOUP_STATUS_OK;
++}
++
++static gint
+ method_get (SoupMessage *msg, GFile *file,
+             GCancellable *cancellable, GError **err)
+ {
+@@ -183,9 +193,16 @@
+   GCancellable *cancellable = handler_get_cancellable (handler);
+   gint status;
+ 
+-  file = g_file_get_child (handler_get_file (handler), path + 1);
+-  status = method_get (msg, file, cancellable, err);
+-  g_object_unref (file);
++  if (g_strcmp0 (path, "/.server-info") == 0)
++    {
++      status = method_get_server_info (msg, file, cancellable, err);
++    }
++  else
++    {
++      file = g_file_get_child (handler_get_file (handler), path + 1);
++      status = method_get (msg, file, cancellable, err);
++      g_object_unref (file);
++    }
+ 
+   return status;
+ }
+diff -Nur phodav-2.0/libphodav/phodav-permission.c phodav-2.0-n/libphodav/phodav-permission.c
+--- phodav-2.0/libphodav/phodav-permission.c	1970-01-01 08:00:00.000000000 +0800
++++ phodav-2.0-n/libphodav/phodav-permission.c	2016-10-19 16:23:19.168929749 +0800
+@@ -0,0 +1,165 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2; -*- */
++/*
++ * Copyright (C) 2014 Red Hat, Inc.
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "phodav-permission.h"
++
++typedef union _EqualPointer
++{
++    guint equalint;
++    gpointer equalvalue;
++} EqualPointer;
++
++static GHashTable *
++users_permission_from_file (const gchar *file)
++{
++    GError *error = NULL;
++    gchar *contents = NULL;
++    gchar *copy = NULL;
++    gchar *line = NULL;
++    gchar *name = NULL;
++    gchar *pms = NULL;
++    gchar *remark = NULL;
++    GHashTable *table = NULL;
++
++    table = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
++
++    if (g_file_get_contents (file, &contents, NULL, &error) == FALSE)
++        return table;
++
++    copy = contents;
++    while (*copy)
++    {
++        line = copy;
++        while (*copy && *copy != '\n')
++            copy++;
++
++        if (*copy)
++            *copy++ = 0;
++
++        name = NULL;
++        pms = NULL;
++        remark = NULL;
++
++        while (*line)
++        {
++            if (!name)
++                name = line;
++            else if (!pms)
++                pms = line;
++            else if (!remark)
++                remark = line;
++
++            while (*line && *line != ':')
++                line++;
++
++            if (*line)
++              *line++ = 0;
++        }
++
++        EqualPointer v;
++        v.equalint = g_strcmp0 (pms, "0") == 0 ? 0 : 1;
++
++        g_hash_table_insert (table, g_strdup (name), v.equalvalue);
++    }
++
++    g_free (contents);
++
++    return table;
++}
++
++DavPermission *
++dav_permission_new (const gchar *directory)
++{
++    const gchar *file = NULL;
++    DavPermission *self = NULL;
++    GDir *dir = NULL;
++
++    self = g_slice_new (DavPermission);
++    self->dir = g_strdup (directory);
++    self->entrys = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
++                                          (GDestroyNotify) g_hash_table_destroy);
++
++    dir = g_dir_open (directory, 0, NULL);
++
++    if (!dir)
++        return self;
++
++    while ((file = g_dir_read_name (dir)))
++    {
++        gchar *p = g_strconcat (directory, "/", file, NULL);
++        g_hash_table_insert (self->entrys, g_strdup (file), users_permission_from_file (p));
++        g_free (p);
++    }
++
++    return self;
++}
++
++void
++dav_permission_free (DavPermission *permission)
++{
++    if (permission)
++    {
++        g_free (permission->dir);
++        g_hash_table_destroy (permission->entrys);
++    }
++
++    return;
++}
++
++gboolean
++dav_entry_writeable (DavPermission *permission,
++                     const gchar   *entry,
++                     const gchar   *user)
++{
++    gboolean ok = FALSE;
++
++    if (!permission)
++        return ok;
++
++    GHashTable *table = g_hash_table_lookup (permission->entrys, entry);
++
++    if (table)
++    {
++        EqualPointer p;
++        p.equalvalue = g_hash_table_lookup (table, user);
++        ok = p.equalint;
++    }
++
++    return ok;
++}
++
++gboolean
++dav_entry_accesseable  (DavPermission *permission,
++                        const gchar   *entry,
++                        const gchar   *user)
++{
++    gboolean ok = FALSE;
++
++    if (!permission)
++        return ok;
++
++    GHashTable *table = g_hash_table_lookup (permission->entrys, entry);
++
++    if (table)
++    {
++        GList *users = g_hash_table_get_keys (table);
++        ok = g_list_find_custom (users, user, (GCompareFunc) g_strcmp0) ? TRUE : FALSE;
++    }
++
++    return ok;
++}
+diff -Nur phodav-2.0/libphodav/phodav-permission.h phodav-2.0-n/libphodav/phodav-permission.h
+--- phodav-2.0/libphodav/phodav-permission.h	1970-01-01 08:00:00.000000000 +0800
++++ phodav-2.0-n/libphodav/phodav-permission.h	2016-10-19 16:23:19.168929749 +0800
+@@ -0,0 +1,45 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2; -*- */
++/*
++ * Copyright (C) 2014 Red Hat, Inc.
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
++ */
++#ifndef __PHODAV_PERMISSION_H__
++#define __PHODAV_PERMISSION_H__
++
++#include <gio/gio.h>
++
++G_BEGIN_DECLS
++
++typedef struct _DavPermission
++{
++  gchar      *dir;
++  GHashTable *entrys;
++} DavPermission;
++
++DavPermission *  dav_permission_new      (const gchar *directory);
++
++void             dav_permission_free     (DavPermission *permission);
++
++gboolean         dav_entry_writeable  (DavPermission *permission,
++                                       const gchar   *entry,
++                                       const gchar   *user);
++
++gboolean         dav_entry_accesseable  (DavPermission *permission,
++                                         const gchar   *entry,
++                                         const gchar   *user);
++
++G_END_DECLS
++
++#endif /* __PHODAV_PERMISSION_H__ */
+diff -Nur phodav-2.0/libphodav/phodav-server.c phodav-2.0-n/libphodav/phodav-server.c
+--- phodav-2.0/libphodav/phodav-server.c	2015-02-14 07:58:57.000000000 +0800
++++ phodav-2.0-n/libphodav/phodav-server.c	2016-10-19 16:23:19.168929749 +0800
+@@ -36,6 +36,9 @@
+  * PhodavServer implements a simple WebDAV server.
+  */
+ 
++static const char *response_forbidden = "<html><head><title>403 Forbidden</title></head>" \
++    "<body>PUT request is forbidden to Phodav server.</body></html>\n";
++
+ struct _PhodavServer
+ {
+   GObject       parent;
+@@ -48,6 +51,8 @@
+   PathHandler  *root_handler; /* weak ref */
+   GHashTable   *paths;
+   gboolean      readonly;
++  phodav_permisison_proxy permission;
++  phodav_access_constraint accessable;
+ };
+ 
+ struct _PhodavServerClass
+@@ -77,6 +82,11 @@
+                              SoupClientContext *client,
+                              gpointer           user_data);
+ 
++static void got_headers_with_auth (SoupServer        *server,
++                                   SoupMessage       *message,
++                                   SoupClientContext *client,
++                                   gpointer           user_data);
++
+ Path *
+ server_get_path (PhodavServer *self, const gchar *_path)
+ {
+@@ -149,6 +159,8 @@
+ 
+   self->paths = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                        NULL, (GDestroyNotify) path_unref);
++  self->permission = NULL;
++  self->accessable = NULL;
+ }
+ 
+ static void
+@@ -180,6 +192,7 @@
+   update_root_handler (self);
+ 
+   g_signal_connect (self->server, "request-started", G_CALLBACK (request_started), self);
++  g_signal_connect (self->server, "got-headers-with-auth", G_CALLBACK (got_headers_with_auth), self);
+ 
+   /* Chain up to the parent class */
+   if (G_OBJECT_CLASS (phodav_server_parent_class)->constructed)
+@@ -393,6 +406,17 @@
+ }
+ 
+ static void
++method_put_forbidden (SoupMessage *msg)
++{
++  soup_message_set_response (msg, "application/xml",
++                             SOUP_MEMORY_STATIC,
++                             (gchar *) response_forbidden, strlen (response_forbidden));
++
++  soup_message_body_set_accumulate (msg->request_body, FALSE);
++  soup_message_set_status (msg, SOUP_STATUS_FORBIDDEN);
++}
++
++static void
+ got_headers (SoupMessage *msg,
+              gpointer     user_data)
+ {
+@@ -401,7 +425,9 @@
+   const gchar *path = uri->path;
+   GError *err = NULL;
+ 
+-  if (msg->method == SOUP_METHOD_PUT)
++  if (self->readonly && msg->method == SOUP_METHOD_PUT)
++    method_put_forbidden (msg);
++  else if (msg->method == SOUP_METHOD_PUT)
+     phodav_method_put (self->root_handler, msg, path, &err);
+ 
+   if (err)
+@@ -412,6 +438,35 @@
+ }
+ 
+ static void
++got_headers_with_auth (SoupServer      *server,
++                       SoupMessage       *message,
++                       SoupClientContext *context,
++                       gpointer           user_data)
++{
++  PhodavServer *self = user_data;
++  SoupURI *uri = soup_message_get_uri (message);
++  const gchar *path = uri->path;
++  gboolean pms_result = FALSE;
++  GError *err = NULL;
++
++  if (!self->permission)
++      return;
++
++  pms_result = self->permission(path, soup_client_context_get_auth_user(context));
++
++  if ((self->readonly || !pms_result) && message->method == SOUP_METHOD_PUT)
++    method_put_forbidden (message);
++  else if (message->method == SOUP_METHOD_PUT)
++    phodav_method_put (self->root_handler, message, path, &err);
++
++  if (err)
++    {
++      g_warning ("error: %s", err->message);
++      g_clear_error (&err);
++    }
++}
++
++static void
+ request_started (SoupServer        *server,
+                  SoupMessage       *message,
+                  SoupClientContext *client,
+@@ -419,7 +474,8 @@
+ {
+   PhodavServer *self = user_data;
+ 
+-  g_signal_connect (message, "got-headers", G_CALLBACK (got_headers), self);
++  if (!self->permission)
++    g_signal_connect (message, "got-headers", G_CALLBACK (got_headers), self);
+ }
+ 
+ static void
+@@ -432,6 +488,11 @@
+   gint status = SOUP_STATUS_NOT_IMPLEMENTED;
+   SoupURI *uri = soup_message_get_uri (msg);
+   GHashTable *params;
++  char *user = NULL;
++  gboolean accessable = TRUE;
++  gboolean writeable = FALSE;
++
++  user = soup_client_context_get_auth_user(context);
+ 
+   g_debug ("%s %s HTTP/1.%d %s %s", msg->method, path, soup_message_get_http_version (msg),
+            soup_message_headers_get_one (msg->request_headers, "X-Litmus") ? : "",
+@@ -454,45 +515,57 @@
+                                          "text/xml", params);
+   g_hash_table_destroy (params);
+ 
+-  if (handler->self->readonly &&
+-      (msg->method == SOUP_METHOD_PROPPATCH ||
+-       msg->method == SOUP_METHOD_MKCOL ||
+-       msg->method == SOUP_METHOD_DELETE ||
+-       msg->method == SOUP_METHOD_MOVE ||
+-       msg->method == SOUP_METHOD_COPY ||
+-       msg->method == SOUP_METHOD_LOCK))
+-      status = SOUP_STATUS_FORBIDDEN;
+-  else if (msg->method == SOUP_METHOD_OPTIONS)
+-    {
+-      soup_message_headers_append (msg->response_headers, "DAV", "1,2");
++  if (g_strcmp0 (path, "/.server-info") != 0 &&
++      handler->self->accessable && !(handler->self->accessable (path, user)))
++    accessable = FALSE;
++
++  if (accessable)
++    {
++      if (handler->self->permission && handler->self->permission(path, user))
++        writeable = TRUE;
++
++      if ((handler->self->readonly || !writeable) &&
++          (msg->method == SOUP_METHOD_PROPPATCH ||
++           msg->method == SOUP_METHOD_MKCOL ||
++           msg->method == SOUP_METHOD_DELETE ||
++           msg->method == SOUP_METHOD_MOVE ||
++           msg->method == SOUP_METHOD_COPY ||
++           msg->method == SOUP_METHOD_LOCK))
++          status = SOUP_STATUS_FORBIDDEN;
++      else if (msg->method == SOUP_METHOD_OPTIONS)
++        {
++          soup_message_headers_append (msg->response_headers, "DAV", "1,2");
+ 
+-      /* according to http://code.google.com/p/sabredav/wiki/Windows */
+-      soup_message_headers_append (msg->response_headers, "MS-Author-Via", "DAV");
++          /* according to http://code.google.com/p/sabredav/wiki/Windows */
++          soup_message_headers_append (msg->response_headers, "MS-Author-Via", "DAV");
+ 
+-      soup_message_headers_append (msg->response_headers, "Allow",
+-                                   "GET, HEAD, PUT, PROPFIND, PROPPATCH, MKCOL, DELETE, MOVE, COPY, LOCK, UNLOCK");
+-      status = SOUP_STATUS_OK;
+-    }
+-  else if (msg->method == SOUP_METHOD_GET ||
+-           msg->method == SOUP_METHOD_HEAD)
+-    status = phodav_method_get (handler, msg, path, &err);
+-  else if (msg->method == SOUP_METHOD_PROPFIND)
+-    status = phodav_method_propfind (handler, msg, path, &err);
+-  else if (msg->method == SOUP_METHOD_PROPPATCH)
+-    status = phodav_method_proppatch (handler, msg, path, &err);
+-  else if (msg->method == SOUP_METHOD_MKCOL)
+-    status = phodav_method_mkcol (handler, msg, path, &err);
+-  else if (msg->method == SOUP_METHOD_DELETE)
+-    status = phodav_method_delete (handler, msg, path, &err);
+-  else if (msg->method == SOUP_METHOD_MOVE ||
+-           msg->method == SOUP_METHOD_COPY)
+-    status = phodav_method_movecopy (handler, msg, path, &err);
+-  else if (msg->method == SOUP_METHOD_LOCK)
+-    status = phodav_method_lock (handler, msg, path, &err);
+-  else if (msg->method == SOUP_METHOD_UNLOCK)
+-    status = phodav_method_unlock (handler, msg, path, &err);
++          soup_message_headers_append (msg->response_headers, "Allow",
++                                       "GET, HEAD, PUT, PROPFIND, PROPPATCH, MKCOL, DELETE, MOVE, COPY, LOCK, UNLOCK");
++          status = SOUP_STATUS_OK;
++        }
++      else if (msg->method == SOUP_METHOD_GET ||
++               msg->method == SOUP_METHOD_HEAD)
++        status = phodav_method_get (handler, msg, path, &err);
++      else if (msg->method == SOUP_METHOD_PROPFIND)
++        status = phodav_method_propfind (handler, msg, path, &err);
++      else if (msg->method == SOUP_METHOD_PROPPATCH)
++        status = phodav_method_proppatch (handler, msg, path, &err);
++      else if (msg->method == SOUP_METHOD_MKCOL)
++        status = phodav_method_mkcol (handler, msg, path, &err);
++      else if (msg->method == SOUP_METHOD_DELETE)
++        status = phodav_method_delete (handler, msg, path, &err);
++      else if (msg->method == SOUP_METHOD_MOVE ||
++               msg->method == SOUP_METHOD_COPY)
++        status = phodav_method_movecopy (handler, msg, path, &err);
++      else if (msg->method == SOUP_METHOD_LOCK)
++        status = phodav_method_lock (handler, msg, path, &err);
++      else if (msg->method == SOUP_METHOD_UNLOCK)
++        status = phodav_method_unlock (handler, msg, path, &err);
++      else
++        g_warn_if_reached ();
++    }
+   else
+-    g_warn_if_reached ();
++      status = SOUP_STATUS_FORBIDDEN;
+ 
+   soup_message_set_status (msg, status);
+ 
+@@ -520,6 +593,35 @@
+   return self->server;
+ }
+ 
++
++/**
++ * phodav_server_set_permission_proxy:
++ * @server: a %PhodavServer
++ *
++ * Set permission proxy
++ *
++ * Returns: void
++ **/
++void  phodav_server_set_permission_proxy (PhodavServer            *self,
++                                          phodav_permisison_proxy  proxy)
++{
++  self->permission = proxy;
++}
++
++/**
++ * phodav_server_set_access_constraint:
++ * @server: a %PhodavServer
++ *
++ * Set access constraint
++ *
++ * Returns: void
++ **/
++void phodav_server_set_access_constraint (PhodavServer             *self,
++                                          phodav_access_constraint  func)
++{
++    self->accessable = func;
++}
++
+ /**
+  * phodav_server_new:
+  * @root: (allow-none): Root path.
+diff -Nur phodav-2.0/libphodav.syms phodav-2.0-n/libphodav.syms
+--- phodav-2.0/libphodav.syms	2015-02-06 09:23:49.000000000 +0800
++++ phodav-2.0-n/libphodav.syms	2016-10-19 16:23:19.170929749 +0800
+@@ -4,6 +4,8 @@
+         phodav_server_get_soup_server;
+         phodav_server_get_type;
+         phodav_server_new;
++        phodav_server_set_permission_proxy;
++        phodav_server_set_access_constraint;
+         phodav_server_quit;
+         phodav_server_run;
+     local:
+diff -Nur phodav-2.0/Makefile.am phodav-2.0-n/Makefile.am
+--- phodav-2.0/Makefile.am	2015-02-07 06:55:36.000000000 +0800
++++ phodav-2.0-n/Makefile.am	2016-10-19 16:23:19.169929749 +0800
+@@ -122,7 +122,9 @@
+ 
+ .PHONY: msi
+ 
+-chezdav_SOURCES = libphodav/chezdav.c
++chezdav_SOURCES = libphodav/chezdav.c \
++                  libphodav/phodav-permission.c \
++                  $(NULL)
+ 
+ chezdav_CFLAGS =		\
+ 	-I.			\
+@@ -135,6 +137,7 @@
+ 	libphodav-2.0.la	\
+ 	$(GLIB_LIBS)		\
+ 	$(GIO_LIBS)		\
++	$(SOUP_LIBS)		\
+ 	$(AVAHI_LIBS)		\
+ 	$(NULL)
+ 
