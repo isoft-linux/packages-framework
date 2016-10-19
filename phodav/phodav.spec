@@ -78,6 +78,7 @@ make install DESTDIR=%{buildroot}
 - Load permission of multi user from a file.
 - Load digest of multi user from a file.
 - I update patch to source, but there is a patch named custom.patch for reference.
+- Attention that Makefile.in also changed in patch.
 
 * Fri May 06 2016 WangMing <ming.wang@i-soft.com.cn> - 2.0-5
 - Update release number so that it is same as version v4.

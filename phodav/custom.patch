@@ -1,11 +1,11 @@
 diff -Nur phodav-2.0/libphodav/chezdav.c phodav-2.0-n/libphodav/chezdav.c
 --- phodav-2.0/libphodav/chezdav.c	2015-02-14 08:53:21.000000000 +0800
-+++ phodav-2.0-n/libphodav/chezdav.c	2016-10-19 16:23:19.168929749 +0800
++++ phodav-2.0-n/libphodav/chezdav.c	2016-10-19 18:57:35.266771125 +0800
 @@ -36,6 +36,7 @@
  #endif
  
  #include "libphodav/phodav.h"
-+#include "libphodav/phodav-permission.h"
++#include "phodav-permission.h"
  
  static PhodavServer *dav;
  static gint verbose;
@@ -794,19 +794,20 @@ diff -Nur phodav-2.0/libphodav.syms phodav-2.0-n/libphodav.syms
      local:
 diff -Nur phodav-2.0/Makefile.am phodav-2.0-n/Makefile.am
 --- phodav-2.0/Makefile.am	2015-02-07 06:55:36.000000000 +0800
-+++ phodav-2.0-n/Makefile.am	2016-10-19 16:23:19.169929749 +0800
-@@ -122,7 +122,9 @@
++++ phodav-2.0-n/Makefile.am	2016-10-19 19:35:20.689732302 +0800
+@@ -122,7 +122,10 @@
  
  .PHONY: msi
  
 -chezdav_SOURCES = libphodav/chezdav.c
-+chezdav_SOURCES = libphodav/chezdav.c \
-+                  libphodav/phodav-permission.c \
-+                  $(NULL)
++chezdav_SOURCES = libphodav/phodav-permission.c \
++		  libphodav/phodav-permission.h \
++		  libphodav/chezdav.c \
++		  $(NULL)
  
  chezdav_CFLAGS =		\
  	-I.			\
-@@ -135,6 +137,7 @@
+@@ -135,6 +138,7 @@
  	libphodav-2.0.la	\
  	$(GLIB_LIBS)		\
  	$(GIO_LIBS)		\
@@ -814,3 +815,80 @@ diff -Nur phodav-2.0/Makefile.am phodav-2.0-n/Makefile.am
  	$(AVAHI_LIBS)		\
  	$(NULL)
  
+diff -Nur phodav-2.0/Makefile.in phodav-2.0-n/Makefile.in
+--- phodav-2.0/Makefile.in	2015-02-21 07:24:53.000000000 +0800
++++ phodav-2.0-n/Makefile.in	2016-10-19 20:31:43.072674337 +0800
+@@ -176,10 +176,12 @@
+ 	$(libphodav_2_0_la_CFLAGS) $(CFLAGS) \
+ 	$(libphodav_2_0_la_LDFLAGS) $(LDFLAGS) -o $@
+ PROGRAMS = $(bin_PROGRAMS) $(sbin_PROGRAMS)
+-am_chezdav_OBJECTS = libphodav/chezdav-chezdav.$(OBJEXT)
++am_chezdav_OBJECTS = libphodav/chezdav-phodav-permission.$(OBJEXT) \
++	libphodav/chezdav-chezdav.$(OBJEXT) $(am__objects_1)
+ chezdav_OBJECTS = $(am_chezdav_OBJECTS)
+ chezdav_DEPENDENCIES = libphodav-2.0.la $(am__DEPENDENCIES_1) \
+-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
++	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
++	$(am__DEPENDENCIES_1)
+ chezdav_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(chezdav_CFLAGS) \
+ 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+@@ -570,7 +572,11 @@
+ MSI = chezdav-$(WIXL_ARCH)-$(VERSION)$(BUILDID).msi \
+ 	spice-webdavd-$(WIXL_ARCH)-$(VERSION)$(BUILDID).msi
+ CLEANFILES = $(MSI)
+-chezdav_SOURCES = libphodav/chezdav.c
++chezdav_SOURCES = libphodav/phodav-permission.c \
++		  libphodav/phodav-permission.h \
++		  libphodav/chezdav.c \
++		  $(NULL)
++
+ chezdav_CFLAGS = \
+ 	-I.			\
+ 	$(GIO_CFLAGS)		\
+@@ -582,6 +588,7 @@
+ 	libphodav-2.0.la	\
+ 	$(GLIB_LIBS)		\
+ 	$(GIO_LIBS)		\
++	$(SOUP_LIBS)		\
+ 	$(AVAHI_LIBS)		\
+ 	$(NULL)
+ 
+@@ -837,6 +844,8 @@
+ 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
+ 	echo " rm -f" $$list; \
+ 	rm -f $$list
++libphodav/chezdav-phodav-permission.$(OBJEXT):  \
++	libphodav/$(am__dirstamp) libphodav/$(DEPDIR)/$(am__dirstamp)
+ libphodav/chezdav-chezdav.$(OBJEXT): libphodav/$(am__dirstamp) \
+ 	libphodav/$(DEPDIR)/$(am__dirstamp)
+ 
+@@ -866,6 +875,7 @@
+ 	-rm -f *.tab.c
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@libphodav/$(DEPDIR)/chezdav-chezdav.Po@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@libphodav/$(DEPDIR)/chezdav-phodav-permission.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@libphodav/$(DEPDIR)/libphodav_2_0_la-guuid.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@libphodav/$(DEPDIR)/libphodav_2_0_la-phodav-if.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@libphodav/$(DEPDIR)/libphodav_2_0_la-phodav-lock.Plo@am__quote@
+@@ -1020,6 +1030,20 @@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libphodav_2_0_la_CFLAGS) $(CFLAGS) -c -o libphodav/libphodav_2_0_la-phodav-utils.lo `test -f 'libphodav/phodav-utils.c' || echo '$(srcdir)/'`libphodav/phodav-utils.c
+ 
++libphodav/chezdav-phodav-permission.o: libphodav/phodav-permission.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chezdav_CFLAGS) $(CFLAGS) -MT libphodav/chezdav-phodav-permission.o -MD -MP -MF libphodav/$(DEPDIR)/chezdav-phodav-permission.Tpo -c -o libphodav/chezdav-phodav-permission.o `test -f 'libphodav/phodav-permission.c' || echo '$(srcdir)/'`libphodav/phodav-permission.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) libphodav/$(DEPDIR)/chezdav-phodav-permission.Tpo libphodav/$(DEPDIR)/chezdav-phodav-permission.Po
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='libphodav/phodav-permission.c' object='libphodav/chezdav-phodav-permission.o' libtool=no @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chezdav_CFLAGS) $(CFLAGS) -c -o libphodav/chezdav-phodav-permission.o `test -f 'libphodav/phodav-permission.c' || echo '$(srcdir)/'`libphodav/phodav-permission.c
++
++libphodav/chezdav-phodav-permission.obj: libphodav/phodav-permission.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chezdav_CFLAGS) $(CFLAGS) -MT libphodav/chezdav-phodav-permission.obj -MD -MP -MF libphodav/$(DEPDIR)/chezdav-phodav-permission.Tpo -c -o libphodav/chezdav-phodav-permission.obj `if test -f 'libphodav/phodav-permission.c'; then $(CYGPATH_W) 'libphodav/phodav-permission.c'; else $(CYGPATH_W) '$(srcdir)/libphodav/phodav-permission.c'; fi`
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) libphodav/$(DEPDIR)/chezdav-phodav-permission.Tpo libphodav/$(DEPDIR)/chezdav-phodav-permission.Po
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='libphodav/phodav-permission.c' object='libphodav/chezdav-phodav-permission.obj' libtool=no @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chezdav_CFLAGS) $(CFLAGS) -c -o libphodav/chezdav-phodav-permission.obj `if test -f 'libphodav/phodav-permission.c'; then $(CYGPATH_W) 'libphodav/phodav-permission.c'; else $(CYGPATH_W) '$(srcdir)/libphodav/phodav-permission.c'; fi`
++
+ libphodav/chezdav-chezdav.o: libphodav/chezdav.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chezdav_CFLAGS) $(CFLAGS) -MT libphodav/chezdav-chezdav.o -MD -MP -MF libphodav/$(DEPDIR)/chezdav-chezdav.Tpo -c -o libphodav/chezdav-chezdav.o `test -f 'libphodav/chezdav.c' || echo '$(srcdir)/'`libphodav/chezdav.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) libphodav/$(DEPDIR)/chezdav-chezdav.Tpo libphodav/$(DEPDIR)/chezdav-chezdav.Po
