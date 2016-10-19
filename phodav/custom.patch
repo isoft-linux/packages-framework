@@ -756,6 +756,30 @@ diff -Nur phodav-2.0/libphodav/phodav-server.c phodav-2.0-n/libphodav/phodav-ser
  /**
   * phodav_server_new:
   * @root: (allow-none): Root path.
+diff -Nur phodav-2.0/libphodav/phodav-server.h phodav-2.0-n/libphodav/phodav-server.h
+--- phodav-2.0/libphodav/phodav-server.h	2015-02-07 07:00:30.000000000 +0800
++++ phodav-2.0-n/libphodav/phodav-server.h	2016-10-19 17:17:07.372874426 +0800
+@@ -21,6 +21,9 @@
+ #include <glib-object.h>
+ #include <libsoup/soup.h>
+ 
++typedef gboolean (*phodav_permisison_proxy) (const gchar *entry, const gchar *user);
++typedef gboolean (*phodav_access_constraint) (const gchar *entry, const gchar *user);
++
+ G_BEGIN_DECLS
+ 
+ #define PHODAV_TYPE_SERVER            (phodav_server_get_type ())
+@@ -37,6 +40,10 @@
+ 
+ PhodavServer *  phodav_server_new             (const gchar *root);
+ SoupServer *    phodav_server_get_soup_server (PhodavServer *server);
++void            phodav_server_set_permission_proxy (PhodavServer            *server,
++                                                    phodav_permisison_proxy  proxy);
++void            phodav_server_set_access_constraint (PhodavServer             *server,
++                                                     phodav_access_constraint  proxy);
+ 
+ G_END_DECLS
+ 
 diff -Nur phodav-2.0/libphodav.syms phodav-2.0-n/libphodav.syms
 --- phodav-2.0/libphodav.syms	2015-02-06 09:23:49.000000000 +0800
 +++ phodav-2.0-n/libphodav.syms	2016-10-19 16:23:19.170929749 +0800
