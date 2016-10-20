@@ -7,8 +7,6 @@ License:	GPL
 URL:		https://wiki.gnome.org/phodav
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/phodav/2.0/phodav-2.0.tar.xz
 
-Patch0:  put_forbidden_when_readonly.patch
-
 BuildRequires:  systemd-devel
 BuildRequires:  systemd-units
 BuildRequires:  libsoup-devel
@@ -45,7 +43,6 @@ Spice webdavd
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %configure
