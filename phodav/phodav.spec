@@ -77,7 +77,7 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/udev/rules.d/70-spice-webdavd.rules
 
 %changelog
-* Wed Oct 20 2016 x <ming.wang@i-soft.com.cn> - 2.0-7
+* Thu Oct 20 2016 x <ming.wang@i-soft.com.cn> - 2.0-7
 - Load permission of multi user from a file.
 - Load digest of multi user from a file.
 - I update patch to source, but there is a patch named custom.patch for reference.
