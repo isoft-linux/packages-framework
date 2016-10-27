@@ -1,0 +1,12 @@
+Binary files phodav-2.0/.git/index and phodav-2.0-n/.git/index differ
+diff -Nur phodav-2.0/libphodav/chezdav.c phodav-2.0-n/libphodav/chezdav.c
+--- phodav-2.0/libphodav/chezdav.c	2016-10-27 11:26:51.070704822 +0800
++++ phodav-2.0-n/libphodav/chezdav.c	2016-10-27 11:26:41.406704823 +0800
+@@ -207,6 +207,7 @@
+     g_hash_table_destroy (digesthash);
+ 
+   digesthash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
++  g_hash_table_insert (digesthash, g_strdup("guest"), g_strdup("xxxxabcdxxxxabcdxxxxabcdxxxxabcd"));
+ 
+   if (g_file_get_contents(file, &contents, NULL, &error) == FALSE)
+     return;

@@ -1,11 +1,13 @@
 Name:		phodav
 Version:	2.0
-Release:	6
+Release:	8
 Summary:	phodav is a WebDav server implementation using libsoup (RFC 4918). 
 
 License:	GPL
 URL:		https://wiki.gnome.org/phodav
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/phodav/2.0/phodav-2.0.tar.xz
+
+Patch0:         set-specific-digest-for-guest.patch
 
 BuildRequires:  systemd-devel
 BuildRequires:  systemd-units
@@ -43,6 +45,7 @@ Spice webdavd
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %configure
@@ -74,6 +77,9 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/udev/rules.d/70-spice-webdavd.rules
 
 %changelog
+* Thu Oct 27 2016 x <ming.wang@i-soft.com.cn> - 2.0-8
+- Set specific digest for guest.
+
 * Thu Oct 20 2016 x <ming.wang@i-soft.com.cn> - 2.0-6
 - Load permission of multi user from a file.
 - Load digest of multi user from a file.
