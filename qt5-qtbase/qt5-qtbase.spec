@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.7.0
-Release: 7
+Release: 8
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -127,9 +127,9 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtbase-opensource-src-%{version}
-#%patch101 -p1
-#%patch103 -p1
-#%patch102 -p1
+%patch101 -p1
+%patch103 -p1
+%patch102 -p1
 %patch104 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
@@ -280,6 +280,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
+* Thu Nov 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-8
+- 5.7.0-8
+
 * Mon Nov 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-7
 - Drop dbus related patches.
 
