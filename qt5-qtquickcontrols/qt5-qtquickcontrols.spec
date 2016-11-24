@@ -1,6 +1,6 @@
 Name: qt5-qtquickcontrols 
 Version: 5.7.0
-Release: 1
+Release: 2
 Summary: QucikControls Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -61,6 +61,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Thu Nov 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-2
+- 5.7.0-2
+
 * Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
 - 5.7.0
 
