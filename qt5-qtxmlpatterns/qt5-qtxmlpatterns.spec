@@ -1,6 +1,6 @@
 Name: qt5-qtxmlpatterns
 Version: 5.7.0
-Release: 2
+Release: 3
 Summary: QtXmlpatterns component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -94,6 +94,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Thu Nov 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-3
+- 5.7.0-3 rebuild with gcc-6.2.0
+
 * Thu Jun 30 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-2
 - Rebuild with gcc-6.1.0
 
