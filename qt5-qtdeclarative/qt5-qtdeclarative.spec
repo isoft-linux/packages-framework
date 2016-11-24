@@ -1,6 +1,6 @@
 Name: qt5-qtdeclarative
 Version: 5.7.0
-Release: 7
+Release: 8
 Summary: QtDeclarative component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -119,6 +119,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Thu Nov 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-8
+- 5.7.0-8
+
 * Fri Jul 08 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-6
 - Fix QTBUG-52340.
 
