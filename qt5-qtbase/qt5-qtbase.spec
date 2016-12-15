@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
-Version: 5.7.0
-Release: 8
+Version: 5.7.1
+Release: 1
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -18,16 +18,6 @@ Source10: qt5.macros
 
 #setup PATH to find qt5 utility
 Source20: qt5-path.sh
-
-# Segfault in QDBusConnectionPrivate::closeConnection -> QObject::disconnect on exit
-# https://codereview.qt-project.org/#/c/161056/
-Patch101: qtbase-fix-QTBUG-52988.patch
-# https://codereview.qt-project.org/#/c/157488/
-Patch103: Merge-the-QDBusMetaType-custom-information-to-QDBusConnectionManager.patch
-
-# QString static finalization SEGFAULT with use of QStringLiteral
-# https://codereview.qt-project.org/#/c/140750/
-Patch102: qtbase-fix-QTBUG-49061.patch
 
 # QTBUG-54926
 Patch104: standardkey-delete.patch
@@ -127,9 +117,6 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtbase-opensource-src-%{version}
-%patch101 -p1
-%patch103 -p1
-%patch102 -p1
 %patch104 -p1
 
 # drop -fexceptions from $RPM_OPT_FLAGS
@@ -280,6 +267,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
+* Thu Dec 15 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.1-1
+- 5.7.1-1
+
 * Thu Nov 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-8
 - 5.7.0-8
 
