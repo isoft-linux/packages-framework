@@ -1,6 +1,6 @@
 Name: qt5-qtdeclarative
-Version: 5.7.0
-Release: 8
+Version: 5.7.1
+Release: 1
 Summary: QtDeclarative component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -11,9 +11,6 @@ Source0: qtdeclarative-opensource-src-%{version}.tar.xz
 # QTBUG-52340
 # https://codereview.qt-project.org/#/c/157520/
 Patch0: qtdeclarative-fix-QTBUG-52340.patch
-
-# QTBUG-52057
-Patch1: qt5-declarative-gcc6.patch
 
 BuildRequires: qt5-qtbase-devel >= %{version}
 BuildRequires: qt5-qtxmlpatterns-devel >= %{version}
@@ -42,7 +39,6 @@ developing applications that use %{name}.
 %prep
 %setup -q -n qtdeclarative-opensource-src-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 qmake-qt5
@@ -119,6 +115,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Fri Dec 16 2016 sulit - 5.7.1-1
+- upgrade qt5-qtdeclarative to 5.7.1
+
 * Thu Nov 24 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-8
 - 5.7.0-8
 
