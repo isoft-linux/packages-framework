@@ -1,6 +1,6 @@
 Name: qt5-qtwebkit
-Version: 5.7.0
-Release: 2
+Version: 5.7.1
+Release: 1
 Summary: QtWebKit component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -134,6 +134,9 @@ sed -i -e 's:-L/home[^ ]\+::g' $RPM_BUILD_ROOT%{_libdir}/pkgconfig/*.pc
 %{_docdir}/qt5/*
 
 %changelog
+* Fri Dec 16 2016 sulit - 5.7.1-1
+- upgrade qt5-qtwebkit to 5.7.1
+
 * Fri Nov 25 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-2
 - 5.7.0-2
 
