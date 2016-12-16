@@ -2,7 +2,7 @@
 Summary:            Advanced IP routing and network device configuration tools
 Name:               iproute
 Version:            4.2.0
-Release:            3%{?dist}
+Release:            4%{?dist}
 URL:                http://kernel.org/pub/linux/utils/net/%{name}2/
 Source0:            http://kernel.org/pub/linux/utils/net/%{name}2/%{name}2-%{version}.tar.xz
 Source1:            cbq-0000.example
@@ -147,6 +147,9 @@ done
 %{_includedir}/libnetlink.h
 
 %changelog
+* Fri Dec 16 2016 sulit - 4.2.0-4
+- rebuild iproute
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 4.2.0-3
 - Rebuild for new 4.0 release.
 
