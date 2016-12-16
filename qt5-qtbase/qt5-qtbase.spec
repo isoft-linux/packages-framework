@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.7.1
-Release: 1
+Release: 2
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -109,6 +109,7 @@ Summary: Development files for %{name}
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig(gl)
 Requires: pkgconfig(egl)
+Requires: libicu
 #Requires: pkgconfig(glesv2)
 
 %description devel
@@ -267,6 +268,9 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
+* Fri Dec 16 2016 sulit - 5.7.1-2
+- add requires libicu
+
 * Thu Dec 15 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.1-1
 - 5.7.1-1
 
