@@ -1,6 +1,6 @@
 Name:           harfbuzz
-Version:        1.1.0
-Release:        7
+Version:        1.3.4
+Release:        1
 Summary:        Text shaping library
 
 License:        MIT
@@ -82,6 +82,9 @@ make check ||:
 %{_libdir}/libharfbuzz-icu.so.*
 
 %changelog
+* Fri Dec 16 2016 sulit - 1.3.4-1
+- upgrade harfbuzz to 1.3.4
+
 * Fri Dec 16 2016 sulit - 1.1.0-7
 - rebuild harfbuzz
 
