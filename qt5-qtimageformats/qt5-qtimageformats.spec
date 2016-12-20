@@ -1,5 +1,5 @@
 Name: qt5-qtimageformats
-Version: 5.7.0
+Version: 5.7.1
 Release: 1
 Summary: Image Format Plugin of Qt
 
@@ -56,6 +56,9 @@ make install_docs INSTALL_ROOT=%{buildroot}
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-1
+- upgrade qt5-qtimageformats to 5.7.1
+
 * Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
 - 5.7.0
 
