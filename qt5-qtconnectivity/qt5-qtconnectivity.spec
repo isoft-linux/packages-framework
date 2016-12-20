@@ -1,6 +1,6 @@
 Name: qt5-qtconnectivity 
-Version: 5.5.1
-Release: 4 
+Version: 5.7.1
+Release: 1
 Summary: Connectivity Component of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -100,6 +100,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-1
+- upgrade qt5-qtconnectivity to 5.7.1
+
 * Sat Nov 07 2015 Cjacker <cjacker@foxmail.com> - 5.5.1-4
 - fix QTBUG 48481
 
