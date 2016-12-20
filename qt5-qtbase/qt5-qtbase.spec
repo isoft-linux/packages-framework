@@ -1,6 +1,6 @@
 Name: qt5-qtbase 
 Version: 5.7.1
-Release: 2
+Release: 4
 Summary: Base components of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -268,6 +268,12 @@ install -p -m755 -D %{SOURCE6} %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/10
 %endif
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-4
+- rebuild qt5-qtbase in koji
+
+* Mon Dec 19 2016 sulit - 5.7.1-3
+- rebuild qt5-qtbase
+
 * Fri Dec 16 2016 sulit - 5.7.1-2
 - add requires libicu
 
