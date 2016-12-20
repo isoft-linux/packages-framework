@@ -1,5 +1,5 @@
 Name: qt5-qttranslations 
-Version: 5.7.0
+Version: 5.7.1
 Release: 1
 Summary: Translations of Qt
 
@@ -35,6 +35,9 @@ make install INSTALL_ROOT=%{buildroot}
 %{_datadir}/qt5/translations/*.qm
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-1
+- upgrade qt5-qttranslations to 5.7.1
+
 * Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
 - 5.7.0
 
