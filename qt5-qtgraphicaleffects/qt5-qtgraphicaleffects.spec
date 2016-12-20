@@ -1,6 +1,6 @@
 %define debug_package %{nil}
 Name: qt5-qtgraphicaleffects
-Version: 5.7.0
+Version: 5.7.1
 Release: 1
 Summary: QtGraphicaleffects component
 
@@ -56,6 +56,9 @@ make install_docs INSTALL_ROOT=%{buildroot}
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-1
+- upgrade qt5-qtgraphicaleffects to 5.7.1
+
 * Tue Jun 21 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-1
 - 5.7.0
 
