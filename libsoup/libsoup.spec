@@ -81,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/libsoup-2.4.vapi
 
 %changelog
-* Tue Dec 20 2016 x - 2.56.0-3
+* Tue Dec 20 2016 x - 2.56.0-6
 - Decode path for chinese character so check digest success.
 
 * Thu Oct 27 2016 x <ming.wang@i-soft.com.cn> - 2.56.0-4
