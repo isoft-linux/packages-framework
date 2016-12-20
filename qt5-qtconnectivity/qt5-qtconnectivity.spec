@@ -7,8 +7,6 @@ License: LGPLv2 with exceptions or GPLv3 with exceptions
 
 URL: http://qt-project.org 
 Source0: qtconnectivity-opensource-src-%{version}.tar.xz 
-#QTBUG-48481
-Patch0: qtconnectivity-bluetooth-prevent-null.patch
 
 BuildRequires: qt5-qtdeclarative-devel
 BuildRequires: qt5-qtbase-devel >= %{version}
@@ -36,7 +34,6 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n qtconnectivity-opensource-src-%{version}
-%patch0 -p1
 
 %build
 qmake-qt5
