@@ -1,6 +1,6 @@
 Name: qt5-qttools 
 Version: 5.7.1
-Release: 1
+Release: 2
 Summary: Various tools of Qt
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -123,6 +123,9 @@ fi
 %exclude %{_bindir}/qdbus*
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-2
+- rebuild qt5-qttool in koji
+
 * Mon Dec 19 2016 sulit - 5.7.1-1
 - upgrade qt5-qttools to 5.7.1
 
