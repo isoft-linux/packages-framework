@@ -69,9 +69,10 @@ fi
 
 %files
 %{_libdir}/*.so.*
-%{_libdir}/qt5/plugins/sceneparsers/libgltfsceneparser.so
 %{_libdir}/qt5/qml/Qt3D/
 %{_libdir}/qt5/qml/QtQuick/*
+%dir %{_qt5_plugindir}/sceneparsers
+%{_qt5_plugindir}/sceneparsers/*
 
 %files devel
 %{_libdir}/cmake/*
