@@ -1,7 +1,7 @@
 Summary: Soup, an HTTP library implementation
 Name: libsoup
 Version: 2.56.0
-Release: 4
+Release: 5
 License: LGPL
 Source0: ftp://ftp.gnome.org/pub/gnome/sources/libsoup/2.2/%{name}-%{version}.tar.xz
 URL:  ftp://ftp.gnome.org/pub/gnome/sources/libsoup/
