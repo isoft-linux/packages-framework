@@ -1,6 +1,6 @@
 Name: qt5-qtwebsockets
-Version: 5.5.1
-Release: 3 
+Version: 5.7.1
+Release: 1
 Summary: QtWebsockets component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -79,6 +79,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-1
+- upgrade qt5-qtwebkit to 5.7.1
+
 * Sat Oct 24 2015 builder - 5.5.1-3
 - Rebuild for new 4.0 release.
 
