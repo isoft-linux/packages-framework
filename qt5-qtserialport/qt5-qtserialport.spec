@@ -1,5 +1,5 @@
 Name: qt5-qtserialport 
-Version: 5.6.0
+Version: 5.7.1
 Release: 1
 Summary: Serialport Component of Qt
 
@@ -68,6 +68,9 @@ popd
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-1
+- upgrade qt5-qtserialport to 5.7.1
+
 * Wed Apr 06 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.6.0-1
 - Release 5.6.0
 
