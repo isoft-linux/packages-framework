@@ -1,13 +1,10 @@
 Summary: Soup, an HTTP library implementation
 Name: libsoup
 Version: 2.56.0
-Release: 4
+Release: 6
 License: LGPL
 Source0: ftp://ftp.gnome.org/pub/gnome/sources/libsoup/2.2/%{name}-%{version}.tar.xz
 URL:  ftp://ftp.gnome.org/pub/gnome/sources/libsoup/
-
-Patch0:  auth-for-specific-digest.patch
-Patch1:  emit-signal-with-auth.patch
 
 Requires: glib2 >= 2.0, libxml2, gnutls
 Requires: glib-networking
@@ -43,8 +40,6 @@ you to develop applications that use the libsoup library.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
 %configure --disable-gtk-doc
@@ -86,11 +81,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/libsoup-2.4.vapi
 
 %changelog
+* Tue Dec 20 2016 x - 2.56.0-3
+- Decode path for chinese character so check digest success.
+
 * Thu Oct 27 2016 x <ming.wang@i-soft.com.cn> - 2.56.0-4
 - Authoricate for specific digest.
 
 * Wed Oct 19 2016 x <ming.wang@i-soft.com.cn> - 2.56.0-2
 - Update to 2.56.0, release number 2. 
+
+* Wed Oct 19 2016 x <ming.wang@i-soft.com.cn> - 2.56.0-1
+- Update to 2.56.0, release number 1. 
 - Patch0: No check digest for guest.
 - Patch1: Emit signal with auth information when got headers.
 
