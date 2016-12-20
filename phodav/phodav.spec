@@ -95,4 +95,3 @@ make install DESTDIR=%{buildroot}
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 2.0-2
 - Rebuild for new 4.0 release.
 
-
