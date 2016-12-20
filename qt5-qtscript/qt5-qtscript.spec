@@ -1,6 +1,6 @@
 Name: qt5-qtscript
-Version: 5.7.0
-Release: 2
+Version: 5.7.1
+Release: 1
 Summary: QtScript component
 
 License: LGPLv2 with exceptions or GPLv3 with exceptions 
@@ -74,6 +74,9 @@ fi
 %{_docdir}/qt5/*
 
 %changelog
+* Tue Dec 20 2016 sulit - 5.7.1-1
+- upgrade qt5-qtscript to 5.7.1
+
 * Fri Nov 25 2016 Leslie Zhai <xiang.zhai@i-soft.com.cn> - 5.7.0-2
 - 5.7.0-2
 
