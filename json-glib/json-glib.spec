@@ -11,6 +11,8 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.11/%{name}-%{version}.
 
 BuildRequires:	glib2-devel >= %{glib_ver}
 BuildRequires:	gobject-introspection-devel
+BuildRequires:	/usr/bin/xsltproc
+BuildRequires:	docbook-style-xsl
 
 
 %description
