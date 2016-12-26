@@ -1,8 +1,8 @@
 %define glib_ver 2.16
 
 Name:		json-glib
-Version:    1.0.4
-Release:	3
+Version:    1.2.2
+Release:	1
 Summary:	Library for JavaScript Object Notation format
 
 License:	LGPLv2+
@@ -85,6 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Dec 26 2016 sulit - 1.2.2-1
+- upgrade json-glib to 1.2.2
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0.4-3
 - Rebuild for new 4.0 release.
 
