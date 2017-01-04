@@ -1,14 +1,19 @@
 Summary: A graphics library for quick creation of PNG or JPEG images
 Name: gd
-Version: 2.1.1
-Release: 4
+Version: 2.2.3
+Release: 1
 License: BSD-style
 URL: http://libgd.github.io/ 
 Source0: https://github.com/libgd/libgd/releases/download/gd-%{version}/libgd-%{version}.tar.xz
 
 Source1: getver.pl
 
-Patch0: gd-2.1.1-libvpx-1.4.0.patch
+Patch2:        gd-2.2.3-tests.patch
+Patch3:        gd-2.2.3-overflow-in-gdImageWebpCtx.patch
+Patch4:        gd-2.2.3-dynamicGetbuf-negative-rlen.patch
+# TODO - created by one of upstream maintainers, but not in upstream yet
+# https://github.com/libgd/libgd/pull/353
+Patch5:        gd-2.2.x-fix-invalid-read-in-gdImageCreateFromTiffPtr.patch
 
 BuildRequires: freetype-devel
 BuildRequires: fontconfig-devel
@@ -63,7 +68,11 @@ files for gd, a graphics library for creating PNG and JPEG graphics.
 
 %prep
 %setup -q -n libgd-%{version}
-%patch0 -p1
+%patch2 -p1 -b .build
+%patch3 -p1 -b .gdImageWebpCtx
+%patch4 -p1 -b .dynamicGetbuf
+# Patch5 adds some non-text files (.tiff)
+patch -p1 --binary < %{PATCH5}
 
 #missing getver.pl
 cp %{SOURCE1} config
@@ -115,6 +124,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Jan 04 2017 sulit - 2.2.3-1
+- upgrade gd to 2.2.3
+
 * Thu Oct 29 2015 Cjacker <cjacker@foxmail.com> - 2.1.1-4
 - Rebuild
 
