@@ -1,7 +1,7 @@
 Name: libvpx
 Summary: VP8 Video Codec SDK
-Version: 1.4.0
-Release: 3 
+Version: 1.6.0
+Release: 1
 License: BSD
 Source0: http://webm.googlecode.com/files/%{name}-%{version}.tar.bz2
 Patch0: libvpx-do-NOT-use-clang-integrated-as.patch
@@ -78,6 +78,12 @@ rm -rf $RPM_BUILD_ROOT/usr/README
 %{_bindir}/*
 
 %changelog
+* Wed Jan 04 2017 sulit - 1.6.0-1
+- upgrade libvpx to 1.6.0
+
+* Tue Jan 03 2017 sulit - 1.6.0-0
+- upgrade libvpx to 1.6.0
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.4.0-3
 - Rebuild for new 4.0 release.
 
