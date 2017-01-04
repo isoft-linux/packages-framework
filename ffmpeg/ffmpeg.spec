@@ -7,11 +7,11 @@
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.8.7
-Release: 2
+Version: 3.2.2
+Release: 1
 License: GPLv3
-Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch0: ffmpeg-fix-ffplay-crash-Xorg-with-intel-driver.patch
+Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
+#Patch0: ffmpeg-fix-ffplay-crash-Xorg-with-intel-driver.patch
  
 URL: http://ffmpeg.sourceforge.net/
 BuildRequires: freetype-devel, zlib-devel, bzip2-devel xz-devel
@@ -89,7 +89,7 @@ Development headers, libraries and pkgconfig files for ffmpeg.
 
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 
 %build
 ./configure \
@@ -212,6 +212,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jan 04 2017 sulit - 3.2.2-1
+- upgrade ffmpeg to 3.2.2
+
 * Mon May 09 2016 sulit <sulitsrc@gmail.com> - 2.8.7-2
 - update to official release 2.8.7
 
