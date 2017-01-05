@@ -8,6 +8,7 @@ URL: http://www.videolan.org/developers/x265.html
 #hg clone http://hg.videolan.org/x265
 Source0: http://ftp.videolan.org/pub/videolan/%{name}/%{name}_%{version}.tar.gz
 BuildRequires: gettext
+BuildRequires: cmake
 %ifarch %{ix86}
 BuildRequires: nasm
 %endif
