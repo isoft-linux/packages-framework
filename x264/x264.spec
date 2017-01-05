@@ -1,9 +1,9 @@
-%define	snapshot 20150713
+%define	snapshot 20170104
 
 Summary: Library for encoding and decoding H264/AVC video streams
 Name: x264
 Version: 0
-Release: 0.9.%{snapshot}
+Release: 0.10.%{snapshot}
 License: GPL
 URL: http://developers.videolan.org/x264.html
 Source0: last_x264.tar.bz2
@@ -73,6 +73,9 @@ scratch.
 
 
 %changelog
+* Thu Jan 05 2017 sulit - 0-0.10.20170104
+- upgrade x264 to 20170104
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0-0.9.20150713
 - Rebuild for new 4.0 release.
 
