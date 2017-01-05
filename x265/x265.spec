@@ -1,12 +1,12 @@
-%define snapshot 20150714
+#%define snapshot 20150714
 Summary: Library for encoding H265/MPEG-H HEVC video streams
 Name: x265
-Version: 0
-Release: 0.2.%{snapshot}
+Version: 2.2
+Release: 1
 License: GPL
 URL: http://www.videolan.org/developers/x265.html
 #hg clone http://hg.videolan.org/x265
-Source0: x265.tar.gz
+Source0: http://ftp.videolan.org/pub/videolan/%{name}/%{name}_%{version}.tar.gz
 BuildRequires: gettext
 %ifarch %{ix86}
 BuildRequires: nasm
@@ -27,7 +27,7 @@ Requires: pkgconfig
 Development headers and libraries for the x265 library
 
 %prep
-%setup -q -n x265
+%setup -q -n %{name}_%{version}
 
 %build
 pushd build/linux
@@ -63,6 +63,9 @@ rm -rf %{buildroot}%{_libdir}/*.a
 
 
 %changelog
+* Thu Jan 05 2017 sulit - 2.2-1
+- upgrade x265 to 2.2
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0-0.2.20150714
 - Rebuild for new 4.0 release.
 
