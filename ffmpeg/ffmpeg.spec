@@ -3,12 +3,12 @@
 #Patch0 used to fix ffplay crash Xorg issue.
 #But not fix ffplay resize segfault issue.
 #So, add this option to enable or disable build with SDL.
-%define withsdl 1 
+%define withsdl 0
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 3.2.2
-Release: 1
+Release: 3
 License: GPLv3
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
 #Patch0: ffmpeg-fix-ffplay-crash-Xorg-with-intel-driver.patch
@@ -27,7 +27,6 @@ BuildRequires: libxcb-devel
 BuildRequires: libva-devel libvdpau-devel
 BuildRequires: libspeex-devel
 BuildRequires: pulseaudio-libs-devel
-BuildRequires: faac-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: libX11-devel libXv-devel libXext-devel
 BuildRequires: openjpeg-devel
@@ -44,7 +43,7 @@ BuildRequires: libass-devel
 
 #for ffplay
 %if %{withsdl}
-BuildRequires: SDL-devel
+BuildRequires: SDL2-devel
 %endif
 
 BuildRequires: doxygen
@@ -120,7 +119,6 @@ Development headers, libraries and pkgconfig files for ffmpeg.
     --enable-pthreads \
     --enable-x11grab \
     --enable-libopenjpeg \
-    --enable-libfaac \
     --enable-libtheora \
     --enable-libvorbis \
     --enable-libx264 \
@@ -207,13 +205,20 @@ rm -rf %{buildroot}
 %dir %{_docdir}/ffmpeg-devel
 %{_docdir}/ffmpeg-devel/*
 %{_datadir}/ffmpeg/examples/*
-%{_docdir}/ffmpeg-devel
 %{_mandir}/man3/*
 
 
 %changelog
+* Thu Jan 05 2017 sulit - 3.2.2-3
+- rebuild in koji
+
+* Thu Jan 05 2017 sulit - 3.2.2-2
+- rebuild
+
 * Wed Jan 04 2017 sulit - 3.2.2-1
 - upgrade ffmpeg to 3.2.2
+- disable sdl, because ffplay requires sdl2, drop dependence sdl,
+- sdl2 is in extra group now.
 
 * Mon May 09 2016 sulit <sulitsrc@gmail.com> - 2.8.7-2
 - update to official release 2.8.7
