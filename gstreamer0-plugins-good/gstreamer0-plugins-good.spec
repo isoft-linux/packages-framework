@@ -6,7 +6,7 @@
 
 Name:           %{gstreamer}-plugins-good
 Version:        0.10.31
-Release:        16%{?dist}
+Release:        17%{?dist}
 Summary:        GStreamer plug-ins with good code and licensing
 
 License:        LGPLv2+
@@ -248,6 +248,9 @@ export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
 gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gstreamer-%{majorminor}.schemas > /dev/null || :
 
 %changelog
+* Thu Jan 05 2017 sulit - 0.10.31-17
+- rebuild
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 0.10.31-16
 - Rebuild for new 4.0 release.
 
