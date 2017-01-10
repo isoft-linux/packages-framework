@@ -5,7 +5,7 @@
 
 Name: %{gstreamer}-plugins-ugly
 Version: 1.6.1
-Release: 2
+Release: 3
 Summary: GStreamer streaming media framework "ugly" plug-ins
 
 License: LGPL
@@ -73,6 +73,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 
 %changelog
+* Tue Jan 10 2017 sulit - 1.6.1-3
+- rebuild
+
 * Wed Dec 09 2015 Cjacker <cjacker@foxmail.com> - 1.6.1-2
 - Update
 
