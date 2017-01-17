@@ -1,7 +1,7 @@
 Summary: Bluetooth utilities
 Name: bluez
-Version: 5.34
-Release: 2
+Version: 5.43
+Release: 1
 License: GPLv2+
 URL: http://www.bluez.org/
 
@@ -217,6 +217,9 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/bluetooth/
 /lib/udev/rules.d/97-hid2hci.rules
 
 %changelog
+* Tue Jan 17 2017 sulit - 5.43-1
+- upgrade bluez to 5.43
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 5.34-2
 - Rebuild for new 4.0 release.
 

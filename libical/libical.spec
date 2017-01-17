@@ -1,7 +1,7 @@
 Summary:	Reference implementation of the iCalendar data type and serialization format
 Name:		libical
-Version:    1.0	
-Release:	5
+Version:    2.0.0
+Release:	1
 License:	LGPLv2 or MPLv1.1
 URL:		http://freeassociation.sourceforge.net/
 Source:		http://downloads.sourceforge.net/freeassociation/%{name}-%{version}.tar.gz
@@ -25,14 +25,16 @@ applications that use libical.
 %setup -q
 
 %build
-libtoolize -if
-./autogen.sh
-%configure --disable-static --enable-reentrant --with-backtrace
+mkdir %{_target} && cd %{_target}
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make %{?_smp_mflags}
+cd -
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make DESTDIR=$RPM_BUILD_ROOT INSTALL='install -p' install
+cd %{_target}
+%{make_install}
+cd -
 
 # Don't install any libtool .la files
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}*.la
@@ -46,29 +48,35 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc LICENSE README THANKS
+%doc LICENSE
 %{_libdir}/%{name}.so.*
 %{_libdir}/libicalss.so.*
 %{_libdir}/libicalvcal.so.*
+%{_libdir}/libical_cxx.so.*
+%{_libdir}/libicalss_cxx.so.*
 
 %files devel
 %defattr(-,root,root,-)
 %doc doc/UsingLibical.txt
-%{_includedir}/ical.h
 %{_libdir}/%{name}.so
 %{_libdir}/libicalss.so
 %{_libdir}/libicalvcal.so
+%{_libdir}/libical.a
+%{_libdir}/libical_cxx.a
+%{_libdir}/libical_cxx.so
+%{_libdir}/libicalss.a
+%{_libdir}/libicalss_cxx.a
+%{_libdir}/libicalss_cxx.so
+%{_libdir}/libicalvcal.a
 %{_libdir}/pkgconfig/libical.pc
 %dir %{_includedir}/%{name}
-%{_includedir}/%{name}/ical*.h
-%{_includedir}/%{name}/pvl.h
-%{_includedir}/%{name}/sspm.h
-%{_includedir}/%{name}/port.h
-%{_includedir}/%{name}/vcaltmp.h
-%{_includedir}/%{name}/vcc.h
-%{_includedir}/%{name}/vobject.h
+%{_includedir}/%{name}/*.h
+%{_libdir}/cmake/LibIcal/*.cmake
 
 %changelog
+* Tue Jan 17 2017 sulit - 2.0.0-1
+- upgrade libical to 2.0.0
+
 * Sat Oct 24 2015 Cjacker <cjacker@foxmail.com> - 1.0-5
 - Rebuild for new 4.0 release.
 
