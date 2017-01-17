@@ -6,7 +6,7 @@ License:	LGPLv2 or MPLv1.1
 URL:		http://freeassociation.sourceforge.net/
 Source:		http://downloads.sourceforge.net/freeassociation/%{name}-%{version}.tar.gz
 Requires:	tzdata
-BuildRequires:	bison, byacc, flex
+BuildRequires:	bison, byacc, flex, cmake
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
